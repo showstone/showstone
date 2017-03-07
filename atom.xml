@@ -193,6 +193,42 @@ System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTi
   </entry>
   
   <entry>
+    <title>maven常用镜像源</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
+<p>nexus镜像:</p>
+<pre><code>http://uk.maven.org/maven2/
+http://repo2.maven.org/maven2/
+http://mirrors.ibiblio.org/pub/mirrors/maven2/
+http://repository.jboss.org/nexus/content/groups/public
+</code></pre><p>以上内容均收集于互联网</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
+&lt;p&gt;nexus镜像:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
+http://repo2.maven.org/
+    
+    </summary>
+    
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
+    
+      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
+    
+      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title></title>
     <link href="http://showstone.net/uncategorized/2017/03/07/eleme-README/"/>
     <id>http://showstone.net/uncategorized/2017/03/07/eleme-README/</id>
@@ -219,34 +255,6 @@ System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTi
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>简洁之美 饿了么框架源码走读之vine http</title>
-    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
-    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
-    
-    
-      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
-    
-      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
-    
-      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
     
   </entry>
   
@@ -1078,38 +1086,30 @@ while (ite.hasNext()) {
   </entry>
   
   <entry>
-    <title>maven常用镜像源</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
+    <title>简洁之美 饿了么框架源码走读之vine http</title>
+    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
+    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
-<p>nexus镜像:</p>
-<pre><code>http://uk.maven.org/maven2/
-http://repo2.maven.org/maven2/
-http://mirrors.ibiblio.org/pub/mirrors/maven2/
-http://repository.jboss.org/nexus/content/groups/public
-</code></pre><p>以上内容均收集于互联网</p>
-]]></content>
-    
     <summary type="html">
-    
-      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
-&lt;p&gt;nexus镜像:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
-http://repo2.maven.org/
     
     </summary>
     
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
     
     
-      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
+      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
     
-      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
+      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
     
-      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
+    
+      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
     
   </entry>
   
