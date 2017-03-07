@@ -193,6 +193,54 @@ System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTi
   </entry>
   
   <entry>
+    <title>top命令详解</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
+<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
+<p>下面进行正题</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
+       [-F | -f]
+       [-h]
+       [-i &lt;interval&gt;]
+       [-l &lt;samples&gt;]
+       [-ncols &lt;columns&gt;]
+       [-o &lt;key&gt;] [-O &lt;skey&gt;]
+       [-R | -r]
+       [-S]
+       [-s &lt;delay&gt;]
+       [-n &lt;nprocs&gt;]
+       [-stats &lt;keys&gt;]
+       [-pid &lt;processid&gt;]
+       [-user &lt;username&gt;]
+       [-U &lt;username&gt;]
+       [-u]
+</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h2&gt;&lt;p&gt;最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.&lt;/p&gt;
+&lt;p&gt;需要用到的工具有:&lt;br&gt;系统资源:
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="software" scheme="http://showstone.net/tags/software/"/>
+    
+      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
+    
+      <category term="top" scheme="http://showstone.net/tags/top/"/>
+    
+  </entry>
+  
+  <entry>
     <title></title>
     <link href="http://showstone.net/uncategorized/2017/03/07/eleme-README/"/>
     <id>http://showstone.net/uncategorized/2017/03/07/eleme-README/</id>
@@ -219,45 +267,6 @@ System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTi
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis结构分析</title>
-    <link href="http://showstone.net/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/2017/03/07/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2015-07-23-mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>JDBC方式的几个缺点</li>
-<li>MyBatis的解决方法</li>
-<li><p>MyBatis的结构框架</p>
-<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;JDBC方式的几个缺点&lt;/li&gt;
-&lt;li&gt;MyBatis的解决方法&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;MyBatis的结构框架&lt;/p&gt;
-&lt;h2 id=&quot;JDBC方式的几个缺点&quot;&gt;&lt;a href=&quot;#JDBC方式的几个缺点&quot; class=&quot;headerlink&quot; title
-    
-    </summary>
-    
-      <category term="Mybatis源码分析" scheme="http://showstone.net/categories/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="MyBatsis" scheme="http://showstone.net/tags/mybatsis/"/>
-    
-      <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
@@ -1761,6 +1770,96 @@ git rebase --skip
   </entry>
   
   <entry>
+    <title>mybatis结构分析</title>
+    <link href="http://showstone.net/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/2017/03/07/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2015-07-23-mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>JDBC方式的几个缺点</li>
+<li>MyBatis的解决方法</li>
+<li><p>MyBatis的结构框架</p>
+<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;JDBC方式的几个缺点&lt;/li&gt;
+&lt;li&gt;MyBatis的解决方法&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MyBatis的结构框架&lt;/p&gt;
+&lt;h2 id=&quot;JDBC方式的几个缺点&quot;&gt;&lt;a href=&quot;#JDBC方式的几个缺点&quot; class=&quot;headerlink&quot; title
+    
+    </summary>
+    
+      <category term="Mybatis源码分析" scheme="http://showstone.net/categories/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="MyBatsis" scheme="http://showstone.net/tags/mybatsis/"/>
+    
+      <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>实用git命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
+</ul>
+<blockquote>
+<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
+</blockquote>
+<ul>
+<li>合并多次提交记录</li>
+</ul>
+<blockquote>
+<p> git rebase -i HEAD~2</p>
+</blockquote>
+<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
+<ul>
+<li>找回删除的分支</li>
+</ul>
+<blockquote>
+<p>git checkout new_branch_name commit_id</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
+    
+      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
+    
+      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>tmux使用方法</title>
     <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
@@ -1899,57 +1998,6 @@ set -g visual-activity on
   </entry>
   
   <entry>
-    <title>实用git命令</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
-</ul>
-<blockquote>
-<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
-</blockquote>
-<ul>
-<li>合并多次提交记录</li>
-</ul>
-<blockquote>
-<p> git rebase -i HEAD~2</p>
-</blockquote>
-<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
-<ul>
-<li>找回删除的分支</li>
-</ul>
-<blockquote>
-<p>git checkout new_branch_name commit_id</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
-    
-    </summary>
-    
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
-    
-    
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
-    
-      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
-    
-      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
-    
-      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>常用linux命令</title>
     <link href="http://showstone.net/software/2017/03/07/software-2016-01-18-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4/"/>
     <id>http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/</id>
@@ -1997,54 +2045,6 @@ set -g visual-activity on
       <category term="linux" scheme="http://showstone.net/tags/linux/"/>
     
       <category term="软件" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>top命令详解</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
-<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
-<p>下面进行正题</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
-       [-F | -f]
-       [-h]
-       [-i &lt;interval&gt;]
-       [-l &lt;samples&gt;]
-       [-ncols &lt;columns&gt;]
-       [-o &lt;key&gt;] [-O &lt;skey&gt;]
-       [-R | -r]
-       [-S]
-       [-s &lt;delay&gt;]
-       [-n &lt;nprocs&gt;]
-       [-stats &lt;keys&gt;]
-       [-pid &lt;processid&gt;]
-       [-user &lt;username&gt;]
-       [-U &lt;username&gt;]
-       [-u]
-</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h2&gt;&lt;p&gt;最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.&lt;/p&gt;
-&lt;p&gt;需要用到的工具有:&lt;br&gt;系统资源:
-    
-    </summary>
-    
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
-    
-    
-      <category term="software" scheme="http://showstone.net/tags/software/"/>
-    
-      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
-    
-      <category term="top" scheme="http://showstone.net/tags/top/"/>
     
   </entry>
   
