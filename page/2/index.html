@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://showstone.net"></form>
@@ -65,14 +65,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-java容器-2015-06-29-vector" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-软件配置-2015-08-24-编译vim以支持lua" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-29-vector/" class="article-date">
+    <a href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+    <a class="article-category-link" href="/categories/软件配置/">软件配置</a>
   </div>
 
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">Vector浅析</a>
+      <a class="article-title" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">编译vim以支持lua</a>
     </h1>
   
 
@@ -91,86 +91,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
-<p>Vector的类声明:     </p>
-<blockquote>
-<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
-</blockquote>
-<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
-<p>另外，查看iterator的源码</p>
-<pre><code>/**
- * Returns an iterator over the elements in this list in proper sequence.
- *
- * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
- *
- * @return an iterator over the elements in this list in proper sequence
- */
-public synchronized Iterator&lt;E&gt; iterator() {
-    return new Itr();
-}
-</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
-<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
-vector.add(&quot;abc&quot;);
-Iterator&lt;String&gt; ite = vector.iterator();
-vector.add(&quot;bcd&quot;);
-while (ite.hasNext()) {
-    System.out.println(ite.next());
-}
-</code></pre><p>运行结果：</p>
-<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
-    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
-    at java.util.Vector$Itr.next(Vector.java:1137)
-    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
-</code></pre>
+        <p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+<ol>
+<li><p>下载源代码</p>
+<pre><code>git clone https://github.com/vim/vim.git   
+cd vim
+</code></pre></li>
+<li><p>设置编译参数</p>
+<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
+<pre><code>./configure --with-features=huge --enable-rubyinterp \    
+--enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
+--enable-perlinterp --enable-multibyte --enable-sniff  \
+--enable-fontset --enable-cscope \    
+--disable-gui --prefix=/opt/local/vim  
+
+--with-features=huge：支持最大特性  
+--enable-rubyinterp：启用Vim对ruby的支持  
+--enable-pythoninterp：启用Vim对python的支持  
+--enable-luainterp：启用Vim对lua的支持  
+--with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
+--enable-perlinterp：启用Vim对perl的支持  
+--enable-multibyte：多字节支持 可以在Vim中输入中文  
+--enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+--enable-cscope：Vim对cscope支持  
+--disable-gui：不用编译生成图形界面版gvim  
+--prefix=/opt/local/vim：编译安装路径  
+</code></pre></li>
+<li><p>编译\安装</p>
+<pre><code>make    
+make install
+</code></pre></li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/" data-id="cizzc3lo8000kcxf9mzbsblyk" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" data-id="cizzc64s3001c6ff9e6v9cf1w" class="article-share-link">Delen</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vector/">vector</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-eleme-2016-01-12-vine-http" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/eleme/">eleme</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/">简洁之美 饿了么框架源码走读之vine http</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/" data-id="cizzc3lng0001cxf9vl1ayc1n" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eleme/">eleme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/走读/">走读</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/">lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
 
     </footer>
   </div>
@@ -522,10 +481,59 @@ static final int tableSizeFor(int cap) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/" data-id="cizzc3loc000pcxf9zqrnbott" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/" data-id="cizzc64rm000m6ff92bswkxd0" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mybatis源码分析-2015-07-23-mybatis源码分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/">mybatis结构分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>JDBC方式的几个缺点</li>
+<li>MyBatis的解决方法</li>
+<li><p>MyBatis的结构框架</p>
+<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" data-id="cizzc64ro000q6ff98gddgoli" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构/">结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
 
     </footer>
   </div>
@@ -781,7 +789,7 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/" data-id="cizzc3lod000rcxf9zt5jk30y" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/" data-id="cizzc64rp000s6ff9ekn2bk0m" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li></ul>
@@ -854,59 +862,10 @@ git rebase --skip
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" data-id="cizzc3log000ucxf9xjjc5vgv" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" data-id="cizzc64rr000v6ff92tex0hi1" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rebase/">rebase</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mybatis源码分析-2015-07-23-mybatis源码分析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/">mybatis结构分析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>JDBC方式的几个缺点</li>
-<li>MyBatis的解决方法</li>
-<li><p>MyBatis的结构框架</p>
-<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" data-id="cizzc3loi000xcxf9g6qjs6ce" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构/">结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
 
     </footer>
   </div>
@@ -964,7 +923,7 @@ git rebase --skip
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/" data-id="cizzc3lok0010cxf9vw7vcbgr" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/" data-id="cizzc64ru000y6ff9nuige9mj" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实用/">实用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
@@ -1119,7 +1078,7 @@ set -g visual-activity on
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/" data-id="cizzc3lom0012cxf9fcw67svr" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/" data-id="cizzc64rv00126ff9zud1ya1y" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/software/">software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
@@ -1182,10 +1141,73 @@ set -g visual-activity on
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/" data-id="cizzc3lor0016cxf9coe3r3oq" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/" data-id="cizzc64rx00156ff9zwk9tfuo" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件/">软件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-software-2016-03-24-new-top命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/software/2017/03/07/software-2016-03-24-new-top命令详解/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/software/">software</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/software/2017/03/07/software-2016-03-24-new-top命令详解/">top命令详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
+<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
+<p>下面进行正题</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
+       [-F | -f]
+       [-h]
+       [-i &lt;interval&gt;]
+       [-l &lt;samples&gt;]
+       [-ncols &lt;columns&gt;]
+       [-o &lt;key&gt;] [-O &lt;skey&gt;]
+       [-R | -r]
+       [-S]
+       [-s &lt;delay&gt;]
+       [-n &lt;nprocs&gt;]
+       [-stats &lt;keys&gt;]
+       [-pid &lt;processid&gt;]
+       [-user &lt;username&gt;]
+       [-U &lt;username&gt;]
+       [-u]
+</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/" data-id="cizzc64rz00196ff97f3su37e" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/software/">software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/top/">top</a></li></ul>
 
     </footer>
   </div>
@@ -1231,7 +1253,7 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cizzc3lou0019cxf9pnu95tb1" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cizzc64s6001f6ff9bggoqk2h" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/镜像/">镜像</a></li></ul>
@@ -1254,7 +1276,7 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">Java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eleme/">eleme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件配置/">软件配置</a></li></ul>
     </div>
@@ -1264,7 +1286,7 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eleme/">eleme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forward/">forward</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rebase/">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soa/">soa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/">software</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/top/">top</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vine/">vine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用/">实用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结构/">结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/走读/">走读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
     </div>
@@ -1283,7 +1305,7 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
@@ -1293,20 +1315,12 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
-          </li>
-        
-          <li>
-            <a href="/uncategorized/2017/03/07/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/software/2017/03/07/software-2016-03-24-new-top命令详解/">top命令详解</a>
+            <a href="/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/">CopyOnWriteArray浅析</a>
           </li>
         
           <li>
@@ -1315,6 +1329,14 @@ http://repository.jboss.org/nexus/content/groups/public
         
           <li>
             <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">JUnit主线程退出时所有的子线程也会结束</a>
+          </li>
+        
+          <li>
+            <a href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/">简洁之美 饿了么框架源码走读之vine http</a>
+          </li>
+        
+          <li>
+            <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
           </li>
         
       </ul>

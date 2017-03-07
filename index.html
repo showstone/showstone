@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://showstone.net"></form>
@@ -64,862 +64,6 @@
 </header>
       <div class="outer">
         <section id="main">
-  
-    <article id="post-java容器-2015-07-02-hashset浅析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>HashSet的特点与用法</li>
-<li>HashSet的数据结构</li>
-<li>HashSet的常用方法及实现</li>
-<li>TreeSet的简要说明</li>
-</ul>
-<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
-<p>以下摘取了一部分HashSet文档：   </p>
-<pre><code>...   
-
-* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
-* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
-* iteration order of the set; in particular, it does not guarantee that the
-* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
-* element.
-*
-* &lt;p&gt;This class offers constant time performance for the basic operations
-* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
-* assuming the hash function disperses the elements properly among the
-* buckets.  Iterating over this set requires time proportional to the sum of
-* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
-* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
-* buckets).  Thus, it&apos;s very important not to set the initial capacity too
-* high (or the load factor too low) if iteration performance is important.
-
-...    
-</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
-<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
-<pre><code>private transient HashMap&lt;E,Object&gt; map;
-
-// Dummy value to associate with an Object in the backing Map
-private static final Object PRESENT = new Object();
-
-/**
- * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
- * default initial capacity (16) and load factor (0.75).
- */
-public HashSet() {
-    map = new HashMap&lt;&gt;();
-}
-</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
-<li><p>add   </p>
-<pre><code>public boolean add(E e) {
-    return map.put(e, PRESENT)==null;
-}
-</code></pre></li>
-<li><p>remove   </p>
-<pre><code>public boolean remove(Object o) {
-    return map.remove(o)==PRESENT;
-}
-</code></pre></li>
-<li><p>contain</p>
-<pre><code>public boolean contains(Object o) {
-    return map.containsKey(o);
-}
-</code></pre></li>
-<li><p>构造函数</p>
-<p> 没什么好说的，直接上代码</p>
-<pre><code>public HashSet(int initialCapacity, float loadFactor) {
-    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
-}
-</code></pre></li>
-</ol>
-<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
-<pre><code>long startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-</code></pre><p>运行结果：</p>
-<blockquote>
-<p>开始时间:2647<br>开始时间:781</p>
-</blockquote>
-<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
-<pre><code>long startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    /*Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }*/
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-startTime = System.currentTimeMillis();
-for(int i=0;i&lt;1000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    /*Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }*/
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-</code></pre><p>运行结果：   </p>
-<blockquote>
-<p>开始时间:1142<br>开始时间:795</p>
-</blockquote>
-<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" data-id="cizzc3lo9000lcxf98pkbxutw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/uncategorized/2017/03/07/hello-world/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2017/03/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/hello-world/" data-id="cizzc3lmf0000cxf9ksd72v1s" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-software-2016-03-24-new-top命令详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/software/2017/03/07/software-2016-03-24-new-top命令详解/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/software/">software</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/software/2017/03/07/software-2016-03-24-new-top命令详解/">top命令详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
-<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
-<p>下面进行正题</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
-       [-F | -f]
-       [-h]
-       [-i &lt;interval&gt;]
-       [-l &lt;samples&gt;]
-       [-ncols &lt;columns&gt;]
-       [-o &lt;key&gt;] [-O &lt;skey&gt;]
-       [-R | -r]
-       [-S]
-       [-s &lt;delay&gt;]
-       [-n &lt;nprocs&gt;]
-       [-stats &lt;keys&gt;]
-       [-pid &lt;processid&gt;]
-       [-user &lt;username&gt;]
-       [-U &lt;username&gt;]
-       [-u]
-</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/" data-id="cizzc3low001dcxf9l98y2ggy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/software/">software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/top/">top</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-eleme-README" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/uncategorized/2017/03/07/eleme-README/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>计划:</p>
-<ol>
-<li>先写vine框架(http, mq, service),包括用法等  </li>
-<li>再写service的实现与封装  </li>
-<li>写日志/打点等实现  </li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cizzc3lnq0005cxf9pnthe4nv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-2015-10-31-junit退出时所有的子线程也会退出" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">JUnit主线程退出时所有的子线程也会结束</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cizzc3lns0006cxf9emt8zbzr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-2016-03-17-记一次redis报错JedisDataException" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cizzc3lnv0007cxf9hzq8sn4x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forward/">forward</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java容器-2015-06-24-arraylist" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/">ArrayList浅析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#ArrayList浅析</p>
-<ul>
-<li>ArrayList的作用、特点</li>
-<li>ArrayList的数据结构</li>
-<li>ArrayList的常用方法及实现</li>
-<li>ArrayList里需要注意的地方</li>
-</ul>
-<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
-<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
-<pre><code>默认的空数组
-/**
- * Constructs an empty list with an initial capacity of ten.
- */
-public ArrayList() {
-    super();
-    this.elementData = EMPTY_ELEMENTDATA;
-}
-
-private static final Object[] EMPTY_ELEMENTDATA = {};
-</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
-<p>加入元素之前，先确保有足够的空间</p>
-<pre><code>public boolean add(E e) {&lt;br/&gt;
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    elementData[size++] = e;
-    return true;
-}
-</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
-<pre><code>public void add(int index, E element) {
-    rangeCheckForAdd(index);
-
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    System.arraycopy(elementData, index, elementData, index + 1, size - index);
-    elementData[index] = element;
-    size++;
-}
-</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
-    Object[] a = c.toArray();
-    int numNew = a.length;
-    ensureCapacityInternal(size + numNew);  // Increments modCount
-    System.arraycopy(a, 0, elementData, size, numNew);
-    size += numNew;
-    return numNew != 0;
-}
-</code></pre><p>2.remove</p>
-<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
-<pre><code>public E remove(int index) {
-    rangeCheck(index);//简单地检查下标是否越界
-
-    modCount++;
-    E oldValue = elementData(index);
-
-    int numMoved = size - index - 1;
-    if (numMoved &gt; 0)
-        System.arraycopy(elementData, index+1, elementData, index,
-                         numMoved);
-    elementData[--size] = null; // clear to let GC do its work
-
-    return oldValue;
-}
-</code></pre><p>3.contain</p>
-<pre><code>public boolean contains(Object o) {
-    return indexOf(o) &gt;= 0;
-}
-
-public int indexOf(Object o) {
-    if (o == null) {
-        for (int i = 0; i &lt; size; i++)
-            if (elementData[i]==null)
-                return i;
-    } else {
-        for (int i = 0; i &lt; size; i++)
-            if (o.equals(elementData[i]))
-                return i;
-    }
-    return -1;
-}
-</code></pre><p>4.clone</p>
-<pre><code>public Object clone() {
-    try {
-        @SuppressWarnings(&quot;unchecked&quot;)
-            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
-        v.elementData = Arrays.copyOf(elementData, size);
-        v.modCount = 0;
-        return v;
-    } catch (CloneNotSupportedException e) {
-        // this shouldn&apos;t happen, since we are Cloneable
-        throw new InternalError();
-    }
-}
-</code></pre><p>5.iterator</p>
-<p>通过使用cursor和lastRet来进行标记</p>
-<pre><code>private class Itr implements Iterator&lt;E&gt; {
-    int cursor;       // index of next element to return
-    int lastRet = -1; // index of last element returned; -1 if no such
-    int expectedModCount = modCount;
-    ...
-}
-</code></pre><p>###ArrayList里需要注意的地方</p>
-<ul>
-<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
-</ul>
-<p>代码：</p>
-<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
-    subListRangeCheck(fromIndex, toIndex, size);
-    return new SubList(this, 0, fromIndex, toIndex);
-}
-
- private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
-    private final AbstractList&lt;E&gt; parent;
-    private final int parentOffset;
-    private final int offset;
-    int size;
-    ...
-}
-</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
-<ul>
-<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
-</ul>
-<p>代码</p>
-<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
-    return batchRemove(c, false);
-}
-
-private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
-    final Object[] elementData = this.elementData;
-    int r = 0, w = 0;
-    boolean modified = false;
-    try {
-        for (; r &lt; size; r++)
-            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
-                elementData[w++] = elementData[r];
-    } finally {
-        // Preserve behavioral compatibility with AbstractCollection,
-        // even if c.contains() throws.
-        if (r != size) {
-            System.arraycopy(elementData, r,
-                             elementData, w,
-                             size - r);
-            w += size - r;
-        }
-        if (w != size) {
-            // clear to let GC do its work
-            for (int i = w; i &lt; size; i++)
-                elementData[i] = null;
-            modCount += size - w;
-            size = w;
-            modified = true;
-        }
-    }
-    return modified;
-}
-</code></pre><ul>
-<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
-</ul>
-<blockquote>
-<p>protected transient int modCount = 0;</p>
-<p>private int size;</p>
-</blockquote>
-<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
-    long startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList();
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-    startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList(2000);
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-}
-</code></pre><p>运行结果:</p>
-<blockquote>
-<p>用时:607毫秒<br>用时:415毫秒</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cizzc3lo1000acxf9c7rrksdv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java容器-2015-06-24-java容器研究思路" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#容器的研究思路</p>
-<ul>
-<li>为什么研究容器<br><ul>
-<li>容器是JDK里的基础功能，平时使用得较多。</li>
-<li>容器相对简单，比较容易研究</li>
-<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
-</ul>
-</li>
-<li>容器是什么，要研究那些特性<ul>
-<li>容器是一段程序，是一系列的对象。</li>
-<li>作为程序，它由 数据结构+算法构成</li>
-<li>作为对象，它由 属性+方法构成</li>
-<li>作为类，它有自己的继承树</li>
-<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
-</ul>
-</li>
-<li>怎么去研究容器<ul>
-<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
-<li>如何去测试评估程序的特性</li>
-<li>程序的并发性能</li>
-<li>程序的极限性能</li>
-</ul>
-</li>
-</ul>
-<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
-<ul>
-<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
-<li>set<br><br>  HashSet, TreeSet</li>
-<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cizzc3lo3000ccxf98spyte9c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java容器-2015-06-24-linkedlist" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">LinkedList浅析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
-</ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
-<blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
-</blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
-}
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
-
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" data-id="cizzc3lo4000fcxf9k4kv96q0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
   
     <article id="post-java容器-2015-06-27-copyonwritearray浅析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1206,10 +350,872 @@ public int indexOf(E e, int index) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/" data-id="cizzc3lo6000hcxf9mcqsgfx3" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/" data-id="cizzc64rl000l6ff9az11ku4x" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-eleme-README" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/uncategorized/2017/03/07/eleme-README/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>计划:</p>
+<ol>
+<li>先写vine框架(http, mq, service),包括用法等  </li>
+<li>再写service的实现与封装  </li>
+<li>写日志/打点等实现  </li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cizzc64qm00016ff9dplvpjuo" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-2015-10-31-junit退出时所有的子线程也会退出" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">JUnit主线程退出时所有的子线程也会结束</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cizzc64qy00036ff9wc4uyarv" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-eleme-2016-01-12-vine-http" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/eleme/">eleme</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/">简洁之美 饿了么框架源码走读之vine http</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/" data-id="cizzc64r400066ff9udt6ohg4" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eleme/">eleme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/走读/">走读</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-06-24-java容器研究思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#容器的研究思路</p>
+<ul>
+<li>为什么研究容器<br><ul>
+<li>容器是JDK里的基础功能，平时使用得较多。</li>
+<li>容器相对简单，比较容易研究</li>
+<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
+</ul>
+</li>
+<li>容器是什么，要研究那些特性<ul>
+<li>容器是一段程序，是一系列的对象。</li>
+<li>作为程序，它由 数据结构+算法构成</li>
+<li>作为对象，它由 属性+方法构成</li>
+<li>作为类，它有自己的继承树</li>
+<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
+</ul>
+</li>
+<li>怎么去研究容器<ul>
+<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
+<li>如何去测试评估程序的特性</li>
+<li>程序的并发性能</li>
+<li>程序的极限性能</li>
+</ul>
+</li>
+</ul>
+<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
+<ul>
+<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
+<li>set<br><br>  HashSet, TreeSet</li>
+<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cizzc64r500076ff9evlim2ni" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-06-24-arraylist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/">ArrayList浅析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#ArrayList浅析</p>
+<ul>
+<li>ArrayList的作用、特点</li>
+<li>ArrayList的数据结构</li>
+<li>ArrayList的常用方法及实现</li>
+<li>ArrayList里需要注意的地方</li>
+</ul>
+<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
+<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
+<pre><code>默认的空数组
+/**
+ * Constructs an empty list with an initial capacity of ten.
+ */
+public ArrayList() {
+    super();
+    this.elementData = EMPTY_ELEMENTDATA;
+}
+
+private static final Object[] EMPTY_ELEMENTDATA = {};
+</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
+<p>加入元素之前，先确保有足够的空间</p>
+<pre><code>public boolean add(E e) {&lt;br/&gt;
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}
+</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
+<pre><code>public void add(int index, E element) {
+    rangeCheckForAdd(index);
+
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    System.arraycopy(elementData, index, elementData, index + 1, size - index);
+    elementData[index] = element;
+    size++;
+}
+</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
+    Object[] a = c.toArray();
+    int numNew = a.length;
+    ensureCapacityInternal(size + numNew);  // Increments modCount
+    System.arraycopy(a, 0, elementData, size, numNew);
+    size += numNew;
+    return numNew != 0;
+}
+</code></pre><p>2.remove</p>
+<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
+<pre><code>public E remove(int index) {
+    rangeCheck(index);//简单地检查下标是否越界
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}
+</code></pre><p>3.contain</p>
+<pre><code>public boolean contains(Object o) {
+    return indexOf(o) &gt;= 0;
+}
+
+public int indexOf(Object o) {
+    if (o == null) {
+        for (int i = 0; i &lt; size; i++)
+            if (elementData[i]==null)
+                return i;
+    } else {
+        for (int i = 0; i &lt; size; i++)
+            if (o.equals(elementData[i]))
+                return i;
+    }
+    return -1;
+}
+</code></pre><p>4.clone</p>
+<pre><code>public Object clone() {
+    try {
+        @SuppressWarnings(&quot;unchecked&quot;)
+            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
+        v.elementData = Arrays.copyOf(elementData, size);
+        v.modCount = 0;
+        return v;
+    } catch (CloneNotSupportedException e) {
+        // this shouldn&apos;t happen, since we are Cloneable
+        throw new InternalError();
+    }
+}
+</code></pre><p>5.iterator</p>
+<p>通过使用cursor和lastRet来进行标记</p>
+<pre><code>private class Itr implements Iterator&lt;E&gt; {
+    int cursor;       // index of next element to return
+    int lastRet = -1; // index of last element returned; -1 if no such
+    int expectedModCount = modCount;
+    ...
+}
+</code></pre><p>###ArrayList里需要注意的地方</p>
+<ul>
+<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
+</ul>
+<p>代码：</p>
+<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
+    subListRangeCheck(fromIndex, toIndex, size);
+    return new SubList(this, 0, fromIndex, toIndex);
+}
+
+ private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
+    private final AbstractList&lt;E&gt; parent;
+    private final int parentOffset;
+    private final int offset;
+    int size;
+    ...
+}
+</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
+<ul>
+<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
+</ul>
+<p>代码</p>
+<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
+    return batchRemove(c, false);
+}
+
+private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+    final Object[] elementData = this.elementData;
+    int r = 0, w = 0;
+    boolean modified = false;
+    try {
+        for (; r &lt; size; r++)
+            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
+                elementData[w++] = elementData[r];
+    } finally {
+        // Preserve behavioral compatibility with AbstractCollection,
+        // even if c.contains() throws.
+        if (r != size) {
+            System.arraycopy(elementData, r,
+                             elementData, w,
+                             size - r);
+            w += size - r;
+        }
+        if (w != size) {
+            // clear to let GC do its work
+            for (int i = w; i &lt; size; i++)
+                elementData[i] = null;
+            modCount += size - w;
+            size = w;
+            modified = true;
+        }
+    }
+    return modified;
+}
+</code></pre><ul>
+<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
+</ul>
+<blockquote>
+<p>protected transient int modCount = 0;</p>
+<p>private int size;</p>
+</blockquote>
+<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
+    long startTime = System.currentTimeMillis();
+    for(int i=0;i&lt;100000;i++){
+        ArrayList list = new ArrayList();
+        for(int num=0;num&lt;1000;num++){
+            list.add(&quot;object&quot;);
+        }
+    }
+    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
+    startTime = System.currentTimeMillis();
+    for(int i=0;i&lt;100000;i++){
+        ArrayList list = new ArrayList(2000);
+        for(int num=0;num&lt;1000;num++){
+            list.add(&quot;object&quot;);
+        }
+    }
+    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
+}
+</code></pre><p>运行结果:</p>
+<blockquote>
+<p>用时:607毫秒<br>用时:415毫秒</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cizzc64rb00086ff9sx3j4zba" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-2016-03-17-记一次redis报错JedisDataException" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cizzc64rd000b6ff9qmyzo8s8" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forward/">forward</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-06-24-linkedlist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">LinkedList浅析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
+<li>LinkedList的作用及特点</li>
+<li>LinkedList的数据结构</li>
+<li>LinkedList的常用方法</li>
+</ul>
+<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
+<li>LinkedList可作为链表或者双向队列来使用</li>
+<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
+</ul>
+<blockquote>
+<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
+</blockquote>
+<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
+<pre><code>public class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+{
+    transient int size = 0;
+
+    /**
+     * Pointer to first node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (first.prev == null &amp;&amp; first.item != null)
+     */
+    transient Node&lt;E&gt; first;
+
+    /**
+     * Pointer to last node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (last.next == null &amp;&amp; last.item != null)
+     */
+    transient Node&lt;E&gt; last;
+
+ ...
+
+}
+</code></pre><p>Node的定义</p>
+<pre><code>private static class Node&lt;E&gt; {
+    E item;
+    Node&lt;E&gt; next;
+    Node&lt;E&gt; prev;
+
+    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
+<pre><code>int size();
+boolean isEmpty();
+boolean contains(Object o);
+Iterator&lt;E&gt; iterator();
+Object[] toArray();
+&lt;T&gt; T[] toArray(T[] a);
+boolean add(E e);
+boolean remove(Object o);
+boolean containsAll(Collection&lt;?&gt; c);
+boolean addAll(Collection&lt;? extends E&gt; c);
+boolean addAll(int index, Collection&lt;? extends E&gt; c);
+boolean removeAll(Collection&lt;?&gt; c);
+boolean retainAll(Collection&lt;?&gt; c);
+default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
+default void sort(Comparator&lt;? super E&gt; c);
+void clear();
+boolean equals(Object o);
+int hashCode();
+E get(int index);
+E set(int index, E element);
+void add(int index, E element);
+E remove(int index);
+int indexOf(Object o);
+int lastIndexOf(Object o);
+ListIterator&lt;E&gt; listIterator();
+ListIterator&lt;E&gt; listIterator(int index);
+List&lt;E&gt; subList(int fromIndex, int toIndex);
+</code></pre><p>LinkedList自己的方法</p>
+<pre><code>void addFirst(E e);
+void addLast(E e);
+boolean offerFirst(E e);
+boolean offerLast(E e);
+E removeFirst();
+E removeLast();
+E pollFirst();
+E pollLast();
+E getFirst();
+E getLast();
+E peekFirst();
+E peekLast();
+boolean removeFirstOccurrence(Object o);
+boolean removeLastOccurrence(Object o);
+boolean add(E e);
+boolean offer(E e);
+E remove();
+E poll();
+E element();
+E peek();
+void push(E e);
+E pop();
+boolean remove(Object o);
+boolean contains(Object o);
+public int size();
+Iterator&lt;E&gt; iterator();
+Iterator&lt;E&gt; descendingIterator();
+</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" data-id="cizzc64rf000d6ff9wu10cal8" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-06-29-vector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-06-29-vector/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">Vector浅析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
+<p>Vector的类声明:     </p>
+<blockquote>
+<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
+</blockquote>
+<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
+<p>另外，查看iterator的源码</p>
+<pre><code>/**
+ * Returns an iterator over the elements in this list in proper sequence.
+ *
+ * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
+ *
+ * @return an iterator over the elements in this list in proper sequence
+ */
+public synchronized Iterator&lt;E&gt; iterator() {
+    return new Itr();
+}
+</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
+<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
+vector.add(&quot;abc&quot;);
+Iterator&lt;String&gt; ite = vector.iterator();
+vector.add(&quot;bcd&quot;);
+while (ite.hasNext()) {
+    System.out.println(ite.next());
+}
+</code></pre><p>运行结果：</p>
+<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
+    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
+    at java.util.Vector$Itr.next(Vector.java:1137)
+    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/" data-id="cizzc64ri000g6ff9o0mlokj0" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vector/">vector</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-07-02-hashset浅析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>HashSet的特点与用法</li>
+<li>HashSet的数据结构</li>
+<li>HashSet的常用方法及实现</li>
+<li>TreeSet的简要说明</li>
+</ul>
+<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
+<p>以下摘取了一部分HashSet文档：   </p>
+<pre><code>...   
+
+* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
+* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
+* iteration order of the set; in particular, it does not guarantee that the
+* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
+* element.
+*
+* &lt;p&gt;This class offers constant time performance for the basic operations
+* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
+* assuming the hash function disperses the elements properly among the
+* buckets.  Iterating over this set requires time proportional to the sum of
+* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
+* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
+* buckets).  Thus, it&apos;s very important not to set the initial capacity too
+* high (or the load factor too low) if iteration performance is important.
+
+...    
+</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
+<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
+<pre><code>private transient HashMap&lt;E,Object&gt; map;
+
+// Dummy value to associate with an Object in the backing Map
+private static final Object PRESENT = new Object();
+
+/**
+ * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
+ * default initial capacity (16) and load factor (0.75).
+ */
+public HashSet() {
+    map = new HashMap&lt;&gt;();
+}
+</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
+<li><p>add   </p>
+<pre><code>public boolean add(E e) {
+    return map.put(e, PRESENT)==null;
+}
+</code></pre></li>
+<li><p>remove   </p>
+<pre><code>public boolean remove(Object o) {
+    return map.remove(o)==PRESENT;
+}
+</code></pre></li>
+<li><p>contain</p>
+<pre><code>public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+</code></pre></li>
+<li><p>构造函数</p>
+<p> 没什么好说的，直接上代码</p>
+<pre><code>public HashSet(int initialCapacity, float loadFactor) {
+    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
+}
+</code></pre></li>
+</ol>
+<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：</p>
+<blockquote>
+<p>开始时间:2647<br>开始时间:781</p>
+</blockquote>
+<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;1000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：   </p>
+<blockquote>
+<p>开始时间:1142<br>开始时间:795</p>
+</blockquote>
+<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" data-id="cizzc64rk000h6ff92b891seq" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -1229,7 +1235,7 @@ public int indexOf(E e, int index) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">Java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eleme/">eleme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件配置/">软件配置</a></li></ul>
     </div>
@@ -1239,7 +1245,7 @@ public int indexOf(E e, int index) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eleme/">eleme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forward/">forward</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rebase/">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soa/">soa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/">software</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/top/">top</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vine/">vine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用/">实用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结构/">结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/走读/">走读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
     </div>
@@ -1258,7 +1264,7 @@ public int indexOf(E e, int index) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
@@ -1268,20 +1274,12 @@ public int indexOf(E e, int index) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
-          </li>
-        
-          <li>
-            <a href="/uncategorized/2017/03/07/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/software/2017/03/07/software-2016-03-24-new-top命令详解/">top命令详解</a>
+            <a href="/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/">CopyOnWriteArray浅析</a>
           </li>
         
           <li>
@@ -1290,6 +1288,14 @@ public int indexOf(E e, int index) {
         
           <li>
             <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">JUnit主线程退出时所有的子线程也会结束</a>
+          </li>
+        
+          <li>
+            <a href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/">简洁之美 饿了么框架源码走读之vine http</a>
+          </li>
+        
+          <li>
+            <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
           </li>
         
       </ul>
