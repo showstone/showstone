@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://showstone.net"></form>
@@ -65,14 +65,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-java容器-2015-07-05-hashmap" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java容器-2015-07-02-hashset浅析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/" class="article-date">
+    <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">Java容器</a>
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
   </div>
 
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/">HashMap浅析</a>
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
     </h1>
   
 
@@ -92,326 +92,135 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>HashMap的特点</li>
-<li>HashMap的数据结构</li>
-<li>HashMap的常用方法及实现</li>
+<li>HashSet的特点与用法</li>
+<li>HashSet的数据结构</li>
+<li>HashSet的常用方法及实现</li>
+<li>TreeSet的简要说明</li>
 </ul>
-<h2 id="HashMap的特点"><a href="#HashMap的特点" class="headerlink" title="HashMap的特点"></a>HashMap的特点</h2><ul>
-<li>HashMap内不存在相同的key(hashcode相等且key.equal()为true)</li>
-<li>HashMap的get、put等方法的基本为1（实际上初到hashcode值相同的key数目以及capacity等的影响）</li>
-<li>HashMap的遍历时间受capacity以及实际上的key/value对数目的影响</li>
-</ul>
-<h2 id="HashMap的数据结构"><a href="#HashMap的数据结构" class="headerlink" title="HashMap的数据结构"></a>HashMap的数据结构</h2><p>HashMap的数据保存在一个元素是链表的数组里。</p>
-<p><img src="/img/hashmap_structure.png" alt="HashMap的数据结构"><br>HashMap的数据结构(图片来自<a href="http://www.cnblogs.com/chenssy/p/3521565.html" target="_blank" rel="external">树上月</a>)   </p>
-<h2 id="HashMap的常用方法及实现"><a href="#HashMap的常用方法及实现" class="headerlink" title="HashMap的常用方法及实现"></a>HashMap的常用方法及实现</h2><p>HashMap里有以下几个参数比较重要</p>
-<pre><code>transient Node&lt;K,V&gt;[] table; //实际保存数据节点的位置
-transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
-transient int size; //key/map节点的数目
-transient int modCount;//修改map结构的次数,如put,remove等操作
-int threshold;//节点的大小
-final float loadFactor;//负载因子，当size大于 thre
-</code></pre><p>内部的数据结构:</p>
-<pre><code>static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-    final int hash;
-    final K key;
-    V value;
-    Node&lt;K,V&gt; next;
+<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
+<p>以下摘取了一部分HashSet文档：   </p>
+<pre><code>...   
 
-    Node(int hash, K key, V value, Node&lt;K,V&gt; next) {
-        this.hash = hash;
-        this.key = key;
-        this.value = value;
-        this.next = next;
-    }
+* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
+* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
+* iteration order of the set; in particular, it does not guarantee that the
+* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
+* element.
+*
+* &lt;p&gt;This class offers constant time performance for the basic operations
+* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
+* assuming the hash function disperses the elements properly among the
+* buckets.  Iterating over this set requires time proportional to the sum of
+* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
+* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
+* buckets).  Thus, it&apos;s very important not to set the initial capacity too
+* high (or the load factor too low) if iteration performance is important.
 
-    public final K getKey()        { return key; }
-    public final V getValue()      { return value; }
-    public final String toString() { return key + &quot;=&quot; + value; }
+...    
+</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
+<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
+<pre><code>private transient HashMap&lt;E,Object&gt; map;
 
-    public final int hashCode() {
-        return Objects.hashCode(key) ^ Objects.hashCode(value);
-    }
+// Dummy value to associate with an Object in the backing Map
+private static final Object PRESENT = new Object();
 
-    public final V setValue(V newValue) {
-        V oldValue = value;
-        value = newValue;
-        return oldValue;
-    }
-
-    public final boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (o instanceof Map.Entry) {
-            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
-            if (Objects.equals(key, e.getKey()) &amp;&amp;
-                Objects.equals(value, e.getValue()))
-                return true;
-        }
-        return false;
-    }
-}
-</code></pre><ol>
-<li><p>putVal()</p>
-<pre><code>/**
- * Implements Map.put and related methods
- *
- * @param hash hash for key
- * @param key the key
- * @param value the value to put
- * @param onlyIfAbsent if true, don&apos;t change existing value
- * @param evict if false, the table is in creation mode.
- * @return previous value, or null if none
+/**
+ * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
+ * default initial capacity (16) and load factor (0.75).
  */
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-               boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)//第一次添加元素
-        n = (tab = resize()).length;
-    // 通过(n-1) &amp; hash来给获取元素应该放在那一个链表中,这里是一个很好的设计
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    //当链表下的元素过多(&gt;8)时，会把链表变成红黑树,以优化查询效率
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
-                    break;
-                }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
-            }
-        }
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
-        }
-    }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
-    return null;
+public HashSet() {
+    map = new HashMap&lt;&gt;();
+}
+</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
+<li><p>add   </p>
+<pre><code>public boolean add(E e) {
+    return map.put(e, PRESENT)==null;
+}
+</code></pre></li>
+<li><p>remove   </p>
+<pre><code>public boolean remove(Object o) {
+    return map.remove(o)==PRESENT;
+}
+</code></pre></li>
+<li><p>contain</p>
+<pre><code>public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+</code></pre></li>
+<li><p>构造函数</p>
+<p> 没什么好说的，直接上代码</p>
+<pre><code>public HashSet(int initialCapacity, float loadFactor) {
+    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
 }
 </code></pre></li>
 </ol>
-<pre><code>&lt;b&gt;(n - 1) &amp; hash 来计算应该放置的节点&lt;/b&gt;   
-  首先，通过n一般是2的m次方，如8,16,32之类的，这时n-1后的值会是类似于 0..111 的值，通过求模，即可算出其应该于的位置。而且效率很高
-
-
-&lt;b&gt;treeifyBin(tab, hash)&lt;/b&gt;   
-  Java8针对链表中节点过多的情况进行了优化：当节点的数目大于等于 TREEIFY_THRESHOLD(8)时，会把链表换成树。当节点的数目小于UNTREEIFY_THRESHOLD(6)时，又会变回成链表。其中，链表到树会在put等添加节点时触发，而从树到链表只会在调用resize()时检查.
-</code></pre><ol>
-<li><p>remove()</p>
-<pre><code>final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
-                           boolean matchValue, boolean movable) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (p = tab[index = (n - 1) &amp; hash]) != null) {
-        Node&lt;K,V&gt; node = null, e; K k; V v;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            node = p;
-        else if ((e = p.next) != null) {
-            if (p instanceof TreeNode)
-                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
-            else {
-                do {
-                    if (e.hash == hash &amp;&amp;
-                        ((k = e.key) == key ||
-                         (key != null &amp;&amp; key.equals(k)))) {
-                        node = e;
-                        break;
-                    }
-                    p = e;
-                } while ((e = e.next) != null);
-            }
-        }
-        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
-                             (value != null &amp;&amp; value.equals(v)))) {
-            if (node instanceof TreeNode)
-                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
-            else if (node == p)
-                tab[index] = node.next;
-            else
-                p.next = node.next;
-            ++modCount;
-            --size;
-            afterNodeRemoval(node);
-            return node;
-        }
+<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
     }
-    return null;
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
 }
-</code></pre></li>
-<li><p>get</p>
-<pre><code>final Node&lt;K,V&gt; getNode(int hash, Object key) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (first = tab[(n - 1) &amp; hash]) != null) {
-        if (first.hash == hash &amp;&amp; // always check first node
-            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
-            return first;
-        if ((e = first.next) != null) {
-            if (first instanceof TreeNode)
-                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
-            do {
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    return e;
-            } while ((e = e.next) != null);
-        }
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
     }
-    return null;
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
 }
-</code></pre></li>
-<li><p>resize</p>
-<pre><code>final Node&lt;K,V&gt;[] resize() {
-    Node&lt;K,V&gt;[] oldTab = table;
-    int oldCap = (oldTab == null) ? 0 : oldTab.length;
-    int oldThr = threshold;
-    int newCap, newThr = 0;
-    if (oldCap &gt; 0) {
-        if (oldCap &gt;= MAXIMUM_CAPACITY) {
-            threshold = Integer.MAX_VALUE;
-            return oldTab;
-        }
-        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
-                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
-            newThr = oldThr &lt;&lt; 1; // double threshold
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：</p>
+<blockquote>
+<p>开始时间:2647<br>开始时间:781</p>
+</blockquote>
+<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
     }
-    else if (oldThr &gt; 0) // initial capacity was placed in threshold
-        newCap = oldThr;
-    else {               // zero initial threshold signifies using defaults
-        newCap = DEFAULT_INITIAL_CAPACITY;
-        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
-    }
-    if (newThr == 0) {
-        float ft = (float)newCap * loadFactor;
-        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
-                  (int)ft : Integer.MAX_VALUE);
-    }
-    threshold = newThr;
-    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
-        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
-    table = newTab;
-    if (oldTab != null) {
-        for (int j = 0; j &lt; oldCap; ++j) {
-            Node&lt;K,V&gt; e;
-            if ((e = oldTab[j]) != null) {
-                oldTab[j] = null;
-                if (e.next == null)
-                    newTab[e.hash &amp; (newCap - 1)] = e;
-                else if (e instanceof TreeNode)
-                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
-                else { // preserve order
-                    Node&lt;K,V&gt; loHead = null, loTail = null;
-                    Node&lt;K,V&gt; hiHead = null, hiTail = null;
-                    Node&lt;K,V&gt; next;
-                    do {
-                        next = e.next;
-                        if ((e.hash &amp; oldCap) == 0) {
-                            if (loTail == null)
-                                loHead = e;
-                            else
-                                loTail.next = e;
-                            loTail = e;
-                        }
-                        else {
-                            if (hiTail == null)
-                                hiHead = e;
-                            else
-                                hiTail.next = e;
-                            hiTail = e;
-                        }
-                    } while ((e = next) != null);
-                    if (loTail != null) {
-                        loTail.next = null;
-                        newTab[j] = loHead;
-                    }
-                    if (hiTail != null) {
-                        hiTail.next = null;
-                        newTab[j + oldCap] = hiHead;
-                    }
-                }
-            }
-        }
-    }
-    return newTab;
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
 }
-</code></pre></li>
-</ol>
-<h2 id="相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化"><a href="#相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化" class="headerlink" title="相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化"></a>相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化</h2><ul>
-<li><p>HashMap遍历时间为容器的初始容量加上真实的键值对</p>
-<pre><code>* &lt;p&gt;This implementation provides constant-time performance for the basic
-* operations (&lt;tt&gt;get&lt;/tt&gt; and &lt;tt&gt;put&lt;/tt&gt;), assuming the hash function
-* disperses the elements properly among the buckets.  Iteration over
-* collection views requires time proportional to the &quot;capacity&quot; of the
-* &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of buckets) plus its size (the number
-* of key-value mappings).  Thus, it&apos;s very important not to set the initial
-* capacity too high (or the load factor too low) if iteration performance is
-* important.
-</code></pre></li>
-<li><p>hashcode为何要左移16位</p>
-<pre><code>/**
- * Computes key.hashCode() and spreads (XORs) higher bits of hash
- * to lower.  Because the table uses power-of-two masking, sets of
- * hashes that vary only in bits above the current mask will
- * always collide. (Among known examples are sets of Float keys
- * holding consecutive whole numbers in small tables.)  So we
- * apply a transform that spreads the impact of higher bits
- * downward. There is a tradeoff between speed, utility, and
- * quality of bit-spreading. Because many common sets of hashes
- * are already reasonably distributed (so don&apos;t benefit from
- * spreading), and because we use trees to handle large sets of
- * collisions in bins, we just XOR some shifted bits in the
- * cheapest possible way to reduce systematic lossage, as well as
- * to incorporate impact of the highest bits that would otherwise
- * never be used in index calculations because of table bounds.
- */
-static final int hash(Object key) {
-    int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;1000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
 }
-</code></pre></li>
-<li><p>大于某个数的最小2的n次方的数</p>
-<pre><code>/**
- * Returns a power of two size for the given target capacity.
- */
-static final int tableSizeFor(int cap) {
-    int n = cap - 1;
-    n |= n &gt;&gt;&gt; 1;
-    n |= n &gt;&gt;&gt; 2;
-    n |= n &gt;&gt;&gt; 4;
-    n |= n &gt;&gt;&gt; 8;
-    n |= n &gt;&gt;&gt; 16;
-    return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
-}
-</code></pre></li>
-<li><p>红黑树的实现</p>
-</li>
-</ul>
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：   </p>
+<blockquote>
+<p>开始时间:1142<br>开始时间:795</p>
+</blockquote>
+<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/" data-id="cj5gcnw8j000la02s9ifj0685" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" data-id="cj6njfqta000luh2soh9dk3li" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -420,14 +229,14 @@ static final int tableSizeFor(int cap) {
 
 
   
-    <article id="post-java-2015-10-31-junit退出时所有的子线程也会退出" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-eleme-2016-01-12-vine-http" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" class="article-date">
+    <a href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
+    <a class="article-category-link" href="/categories/eleme/">eleme</a>
   </div>
 
   </div>
@@ -438,7 +247,7 @@ static final int tableSizeFor(int cap) {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">JUnit主线程退出时所有的子线程也会结束</a>
+      <a class="article-title" href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/">简洁之美 饿了么框架源码走读之vine http</a>
     </h1>
   
 
@@ -450,9 +259,11 @@ static final int tableSizeFor(int cap) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj5gcnw7p0002a02sb5creyiq" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/" data-id="cj6njfqs70002uh2sur1akp2i" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eleme/">eleme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/走读/">走读</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
+
     </footer>
   </div>
   
@@ -707,10 +518,132 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/" data-id="cj5gcnw8o000ra02s2fb6fhjz" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/" data-id="cj6njfqtf000ruh2sr5vc22zb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mybatis源码分析-2015-07-23-mybatis源码分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/">mybatis结构分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>JDBC方式的几个缺点</li>
+<li>MyBatis的解决方法</li>
+<li><p>MyBatis的结构框架</p>
+<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" data-id="cj6njfqti000uuh2s0cb5o5dx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构/">结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-software-2015-08-18-new-rebase导致commit丢失" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/software/">software</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">rebase导致commit丢失</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
+<pre><code>mkdir rebaselost
+cd rebaselost
+git init
+echo &quot;init content&quot; &gt; a
+git commit -m &apos;init content&apos;
+git checkout -b branch1
+echo &quot;branch1 content&quot; &gt; a
+git commit -m &apos;branch1&apos;
+git checkout master
+echo &quot;new master content&quot; &gt; a
+git commit -m &apos;master content&apos;
+echo &quot;new master content2&quot; &gt; a
+git commit -m &apos;master content2&apos;
+git checkout branch1
+git rebase master
+git rebase --skip
+</code></pre><p>期望的结果是:</p>
+<blockquote>
+<p> new master content2<br> branch1 content   </p>
+</blockquote>
+<p>实际的结果:</p>
+<blockquote>
+<p> new master content2</p>
+</blockquote>
+<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
+<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
+<blockquote>
+<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
+</blockquote>
+<p>要避免丢失,在冲突时编辑冲突即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" data-id="cj6njfqtq000yuh2s8pt4z9lf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rebase/">rebase</a></li></ul>
 
     </footer>
   </div>
@@ -862,132 +795,10 @@ set -g visual-activity on
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/" data-id="cj5gcnw8r000ua02shm64tcq0" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/" data-id="cj6njfqtu0012uh2skvn16y7m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/software/">software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mybatis源码分析-2015-07-23-mybatis源码分析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/">mybatis结构分析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>JDBC方式的几个缺点</li>
-<li>MyBatis的解决方法</li>
-<li><p>MyBatis的结构框架</p>
-<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" data-id="cj5gcnw8u000ya02s54hy1ogc" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构/">结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-software-2015-08-18-new-rebase导致commit丢失" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/software/">software</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">rebase导致commit丢失</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<pre><code>mkdir rebaselost
-cd rebaselost
-git init
-echo &quot;init content&quot; &gt; a
-git commit -m &apos;init content&apos;
-git checkout -b branch1
-echo &quot;branch1 content&quot; &gt; a
-git commit -m &apos;branch1&apos;
-git checkout master
-echo &quot;new master content&quot; &gt; a
-git commit -m &apos;master content&apos;
-echo &quot;new master content2&quot; &gt; a
-git commit -m &apos;master content2&apos;
-git checkout branch1
-git rebase master
-git rebase --skip
-</code></pre><p>期望的结果是:</p>
-<blockquote>
-<p> new master content2<br> branch1 content   </p>
-</blockquote>
-<p>实际的结果:</p>
-<blockquote>
-<p> new master content2</p>
-</blockquote>
-<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
-<blockquote>
-<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
-</blockquote>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" data-id="cj5gcnw8x0012a02sdoexr0ag" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rebase/">rebase</a></li></ul>
 
     </footer>
   </div>
@@ -1045,59 +856,10 @@ git rebase --skip
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/" data-id="cj5gcnw910015a02sh1owuihi" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/" data-id="cj6njfqtx0015uh2s05nhh1p8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实用/">实用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-软件配置-2015-07-24-maven常用镜像源" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/软件配置/">软件配置</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/">maven常用镜像源</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
-<p>nexus镜像:</p>
-<pre><code>http://uk.maven.org/maven2/
-http://repo2.maven.org/maven2/
-http://mirrors.ibiblio.org/pub/mirrors/maven2/
-http://repository.jboss.org/nexus/content/groups/public
-</code></pre><p>以上内容均收集于互联网</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cj5gcnw9e001la02sbj0ai99n" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/镜像/">镜像</a></li></ul>
 
     </footer>
   </div>
@@ -1157,7 +919,7 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/" data-id="cj5gcnw95001ca02sq7dh3j8y" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/" data-id="cj6njfqu00019uh2s9z7yz85z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件/">软件</a></li></ul>
@@ -1220,10 +982,83 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/" data-id="cj5gcnw98001fa02svbesed2a" class="article-share-link">Partager</a>
+      <a data-url="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/" data-id="cj6njfqu3001cuh2skmgf4alz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/software/">software</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/top/">top</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-软件配置-2015-08-24-编译vim以支持lua" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/软件配置/">软件配置</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">编译vim以支持lua</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+<ol>
+<li><p>下载源代码</p>
+<pre><code>git clone https://github.com/vim/vim.git   
+cd vim
+</code></pre></li>
+<li><p>设置编译参数</p>
+<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
+<pre><code>./configure --with-features=huge --enable-rubyinterp \    
+--enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
+--enable-perlinterp --enable-multibyte --enable-sniff  \
+--enable-fontset --enable-cscope \    
+--disable-gui --prefix=/opt/local/vim  
+
+--with-features=huge：支持最大特性  
+--enable-rubyinterp：启用Vim对ruby的支持  
+--enable-pythoninterp：启用Vim对python的支持  
+--enable-luainterp：启用Vim对lua的支持  
+--with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
+--enable-perlinterp：启用Vim对perl的支持  
+--enable-multibyte：多字节支持 可以在Vim中输入中文  
+--enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+--enable-cscope：Vim对cscope支持  
+--disable-gui：不用编译生成图形界面版gvim  
+--prefix=/opt/local/vim：编译安装路径  
+</code></pre></li>
+<li><p>编译\安装</p>
+<pre><code>make    
+make install
+</code></pre></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" data-id="cj6njfqui001nuh2swudra0v7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/">lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
 
     </footer>
   </div>
@@ -1243,9 +1078,9 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">Java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eleme/">eleme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件配置/">软件配置</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">Java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis源码分析/">Mybatis源码分析</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eleme/">eleme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java容器/">java容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小功能/">小功能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件配置/">软件配置</a></li></ul>
     </div>
   </div>
 
@@ -1253,9 +1088,9 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eleme/">eleme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forward/">forward</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rebase/">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soa/">soa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/">software</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/top/">top</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vine/">vine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/克制/">克制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用/">实用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间管理/">时间管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/精力管理/">精力管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结构/">结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/走读/">走读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eleme/">eleme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forward/">forward</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rebase/">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soa/">soa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/">software</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/top/">top</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vine/">vine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下载/">下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/克制/">克制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用/">实用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/导出/">导出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间管理/">时间管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/精力管理/">精力管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结构/">结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/走读/">走读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/超大excel/">超大excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
     </div>
   </div>
 
@@ -1263,9 +1098,9 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/arraylist/" style="font-size: 10px;">ArrayList</a> <a href="/tags/copyonwritearray/" style="font-size: 10px;">CopyOnWriteArray</a> <a href="/tags/hashmap/" style="font-size: 10px;">HashMap</a> <a href="/tags/hashset/" style="font-size: 10px;">HashSet</a> <a href="/tags/jedisdataexception/" style="font-size: 10px;">JedisDataException</a> <a href="/tags/linkedhashmap/" style="font-size: 10px;">LinkedHashMap</a> <a href="/tags/linkedlist/" style="font-size: 10px;">LinkedList</a> <a href="/tags/mybatsis/" style="font-size: 10px;">MyBatsis</a> <a href="/tags/proxy/" style="font-size: 10px;">Proxy</a> <a href="/tags/treeset/" style="font-size: 10px;">TreeSet</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/eleme/" style="font-size: 10px;">eleme</a> <a href="/tags/forward/" style="font-size: 10px;">forward</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/soa/" style="font-size: 10px;">soa</a> <a href="/tags/software/" style="font-size: 13.33px;">software</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/top/" style="font-size: 10px;">top</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vine/" style="font-size: 10px;">vine</a> <a href="/tags/克制/" style="font-size: 10px;">克制</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/实用/" style="font-size: 10px;">实用</a> <a href="/tags/容器/" style="font-size: 20px;">容器</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/时间管理/" style="font-size: 10px;">时间管理</a> <a href="/tags/框架/" style="font-size: 13.33px;">框架</a> <a href="/tags/源码/" style="font-size: 16.67px;">源码</a> <a href="/tags/简洁之美/" style="font-size: 10px;">简洁之美</a> <a href="/tags/精力管理/" style="font-size: 10px;">精力管理</a> <a href="/tags/结构/" style="font-size: 10px;">结构</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/走读/" style="font-size: 10px;">走读</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/软件配置/" style="font-size: 10px;">软件配置</a> <a href="/tags/镜像/" style="font-size: 10px;">镜像</a> <a href="/tags/饿了么/" style="font-size: 10px;">饿了么</a>
+      <a href="/tags/arraylist/" style="font-size: 10px;">ArrayList</a> <a href="/tags/copyonwritearray/" style="font-size: 10px;">CopyOnWriteArray</a> <a href="/tags/hashmap/" style="font-size: 10px;">HashMap</a> <a href="/tags/hashset/" style="font-size: 10px;">HashSet</a> <a href="/tags/jedisdataexception/" style="font-size: 10px;">JedisDataException</a> <a href="/tags/linkedhashmap/" style="font-size: 10px;">LinkedHashMap</a> <a href="/tags/linkedlist/" style="font-size: 10px;">LinkedList</a> <a href="/tags/mybatsis/" style="font-size: 10px;">MyBatsis</a> <a href="/tags/proxy/" style="font-size: 10px;">Proxy</a> <a href="/tags/treeset/" style="font-size: 10px;">TreeSet</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/eleme/" style="font-size: 10px;">eleme</a> <a href="/tags/forward/" style="font-size: 10px;">forward</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/soa/" style="font-size: 10px;">soa</a> <a href="/tags/software/" style="font-size: 13.33px;">software</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/top/" style="font-size: 10px;">top</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vine/" style="font-size: 10px;">vine</a> <a href="/tags/下载/" style="font-size: 10px;">下载</a> <a href="/tags/克制/" style="font-size: 10px;">克制</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/实用/" style="font-size: 10px;">实用</a> <a href="/tags/容器/" style="font-size: 20px;">容器</a> <a href="/tags/导出/" style="font-size: 10px;">导出</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/时间管理/" style="font-size: 10px;">时间管理</a> <a href="/tags/框架/" style="font-size: 13.33px;">框架</a> <a href="/tags/源码/" style="font-size: 16.67px;">源码</a> <a href="/tags/简洁之美/" style="font-size: 10px;">简洁之美</a> <a href="/tags/精力管理/" style="font-size: 10px;">精力管理</a> <a href="/tags/结构/" style="font-size: 10px;">结构</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/走读/" style="font-size: 10px;">走读</a> <a href="/tags/超大excel/" style="font-size: 10px;">超大excel</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/软件配置/" style="font-size: 10px;">软件配置</a> <a href="/tags/镜像/" style="font-size: 10px;">镜像</a> <a href="/tags/饿了么/" style="font-size: 10px;">饿了么</a>
     </div>
   </div>
 
@@ -1274,7 +1109,7 @@ http://repository.jboss.org/nexus/content/groups/public
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
   </div>
 
@@ -1282,24 +1117,24 @@ http://repository.jboss.org/nexus/content/groups/public
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/小功能/2017/08/22/小功能-2017-08-22-下载超大的excel/">下载超大的excel</a>
+          </li>
         
           <li>
             <a href="/java/2017/07/23/三瓜两爪-2017-07-23-克制/"> 克制</a>
           </li>
         
           <li>
-            <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
+            <a href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/">HashMap浅析</a>
           </li>
         
           <li>
-            <a href="/eleme/2017/03/07/eleme-2016-01-12-vine-http/">简洁之美 饿了么框架源码走读之vine http</a>
-          </li>
-        
-          <li>
-            <a href="/uncategorized/2017/03/07/eleme-README/">(no title)</a>
+            <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">JUnit主线程退出时所有的子线程也会结束</a>
           </li>
         
           <li>
@@ -1319,7 +1154,7 @@ http://repository.jboss.org/nexus/content/groups/public
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Shicheng Yuan<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
