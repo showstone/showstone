@@ -195,7 +195,7 @@
 <li>参考操作系统里的虚拟内存，用这个来突破 机器的内存限制。但是磁盘的性能很差，这样做的效率很低。</li>
 </ul>
 <p>这时，在 POI 的文档里发现了SXSSFWorkbook，其支持使用临时文件，可以用来生成超大 Excel 文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Since 3.8-beta3, POI provides a low-memory footprint SXSSF API built on top of XSSF.</div><div class="line"></div><div class="line">SXSSF is an API-compatible streaming extension of XSSF to be used when very large spreadsheets have to be produced, and heap space is limited. SXSSF achieves its low memory footprint by limiting access to the rows that are within a sliding window, while XSSF gives access to all rows in the document. Older rows that are no longer in the window become inaccessible, as they are written to the disk.</div><div class="line"></div><div class="line">In auto-flush mode the size of the access window can be specified, to hold a certain number of rows in memory. When that value is reached, the creation of an additional row causes the row with the lowest index to to be removed from the access window and written to disk. Or, the window size can be set to grow dynamically; it can be trimmed periodically by an explicit call to flushRows(int keepRows) as needed.</div><div class="line"></div><div class="line">Due to the streaming nature of the implementation, there are the following limitations when compared to XSSF:</div><div class="line"> * Only a limited number of rows are accessible at a point in time.</div><div class="line"> * Sheet.clone() is not supported.</div><div class="line"> * Formula evaluation is not supported</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Since 3.8-beta3, POI provides a low-memory footprint SXSSF API built on top of XSSF.</div><div class="line"></div><div class="line">SXSSF is an API-compatible streaming extension of XSSF to be used when very large</div><div class="line"> spreadsheets have to be produced, and heap space is limited. SXSSF achieves its</div><div class="line"> low memory footprint by limiting access to the rows that are within a sliding window,</div><div class="line"> while XSSF gives access to all rows in the document. Older rows that are no longer</div><div class="line"> in the window become inaccessible, as they are written to the disk.</div><div class="line"></div><div class="line">In auto-flush mode the size of the access window can be specified, to hold a certain</div><div class="line">number of rows in memory. When that value is reached, the creation of an additional</div><div class="line">row causes the row with the lowest index to to be removed from the access window and</div><div class="line">written to disk. Or, the window size can be set to grow dynamically; it can be trimmed</div><div class="line">periodically by an explicit call to flushRows(int keepRows) as needed.</div><div class="line"></div><div class="line">Due to the streaming nature of the implementation, there are the following</div><div class="line">limitations when compared to XSSF:</div><div class="line"> * Only a limited number of rows are accessible at a point in time.</div><div class="line"> * Sheet.clone() is not supported.</div><div class="line"> * Formula evaluation is not supported</div></pre></td></tr></table></figure>
 <p>以下是 SXSSFWorkbook的测试结果：</p>
 <p>使用缓存文件导出 excel</p>
 <table>
@@ -282,7 +282,7 @@
 <li>Note that SXSSF allocates temporary files that you must always clean up explicitly, by calling the dispose method.</li>
 <li>​</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SXSSF flushes sheet data in temporary files (a temp file per sheet) and the size of these temporary files can grow to a very large value. For example, for a 20 MB csv data the size of the temp xml becomes more than a gigabyte. If the size of the temp files is an issue, you can tell SXSSF to use gzip compression:</div><div class="line"></div><div class="line">  SXSSFWorkbook wb = new SXSSFWorkbook();</div><div class="line">  wb.setCompressTempFiles(true); // temp files will be gzipped</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">SXSSF flushes sheet data in temporary files (a temp file per sheet) and the size</div><div class="line">of these temporary files can grow to a very large value. For example, for a 20 MB</div><div class="line">csv data the size of the temp xml becomes more than a gigabyte. If the size of the</div><div class="line"> temp files is an issue, you can tell SXSSF to use gzip compression:</div><div class="line"></div><div class="line">  SXSSFWorkbook wb = new SXSSFWorkbook();</div><div class="line">  wb.setCompressTempFiles(true); // temp files will be gzipped</div></pre></td></tr></table></figure>
 <h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><h3 id="生成-csv"><a href="#生成-csv" class="headerlink" title="生成 csv"></a>生成 csv</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">private static void prcoessCSV(int rowsNum) throws Exception &#123;</div><div class="line">    try &#123;</div><div class="line">        long startTime = System.currentTimeMillis();</div><div class="line">        final int NUM_OF_ROWS = rowsNum;</div><div class="line">        final int NUM_OF_COLUMNS = 30;</div><div class="line"></div><div class="line"></div><div class="line">        File file = new File(&quot;ooxml-scatter-chart_&quot; + rowsNum + &quot;.csv&quot;);</div><div class="line">        BufferedWriter bf = new BufferedWriter(new FileWriter(file));</div><div class="line">        StringBuffer sb = new StringBuffer();</div><div class="line">        try &#123;</div><div class="line">            for (int rownum = 0; rownum &lt; NUM_OF_ROWS; rownum++) &#123;</div><div class="line">                for (int cellnum = 0; cellnum &lt; NUM_OF_COLUMNS; cellnum++) &#123;</div><div class="line">                    sb.append(Math.random());</div><div class="line">                    if ((cellnum + 1) != NUM_OF_COLUMNS) &#123;</div><div class="line">                        sb.append(&quot;,&quot;);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                sb.append(&quot;\n&quot;);</div><div class="line">                if (rownum % 10000 == 0) &#123;</div><div class="line">                    bf.write(sb.toString());</div><div class="line">                    sb = new StringBuffer();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            bf.close();</div><div class="line">        &#125; catch (Exception ex) &#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        long endTime = System.currentTimeMillis();</div><div class="line">        System.out.println(&quot;process &quot; + rowsNum + &quot; spent time:&quot; + (endTime - startTime));</div><div class="line"></div><div class="line">    &#125; catch (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        throw e;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="excel，不使用缓存"><a href="#excel，不使用缓存" class="headerlink" title="excel，不使用缓存"></a>excel，不使用缓存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">     long startTime = System.currentTimeMillis();</div><div class="line">     final int NUM_OF_ROWS = rowsNum;</div><div class="line">     final int NUM_OF_COLUMNS = 30;</div><div class="line"></div><div class="line"></div><div class="line">     Workbook wb = new XSSFWorkbook();</div><div class="line">     Sheet sheet = wb.createSheet(&quot;Sheet 1&quot;);</div><div class="line">     // Create a row and put some cells in it. Rows are 0 based.</div><div class="line">     Row row;</div><div class="line">     Cell cell;</div><div class="line">     for (int rowIndex = 0; rowIndex &lt; NUM_OF_ROWS; rowIndex++) &#123;</div><div class="line">         row = sheet.createRow(rowIndex);</div><div class="line">         for (int colIndex = 0; colIndex &lt; NUM_OF_COLUMNS; colIndex++) &#123;</div><div class="line">             cell = row.createCell(colIndex);</div><div class="line">             cell.setCellValue(Math.random());</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     // Write the output to a file</div><div class="line">     FileOutputStream out = new FileOutputStream(&quot;ooxml-scatter-chart_XSSF_&quot; + rowsNum + &quot;.xlsx&quot;);</div><div class="line">     wb.write(out);</div><div class="line">     out.close();</div><div class="line">     wb.close();</div><div class="line"></div><div class="line">     long endTime = System.currentTimeMillis();</div><div class="line">     System.out.println(&quot;process &quot; + rowsNum + &quot; spent time:&quot; + (endTime - startTime));</div><div class="line"></div><div class="line"> &#125; catch (Exception e) &#123;</div><div class="line">     e.printStackTrace();</div><div class="line">     throw e;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <h3 id="excel-使用缓存"><a href="#excel-使用缓存" class="headerlink" title="excel,使用缓存"></a>excel,使用缓存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">     long startTime = System.currentTimeMillis();</div><div class="line">     final int NUM_OF_ROWS = rowsNum;</div><div class="line">     final int NUM_OF_COLUMNS = 30;</div><div class="line"></div><div class="line">     SXSSFWorkbook wb = null;</div><div class="line">     try &#123;</div><div class="line">         wb = new SXSSFWorkbook();</div><div class="line">         wb.setCompressTempFiles(true); //压缩临时文件，很重要，否则磁盘很快就会被写满</div><div class="line">         Sheet sh = wb.createSheet();</div><div class="line">         int rowNum = 0;</div><div class="line">         for (int num = 0; num &lt; NUM_OF_ROWS; num++) &#123;</div><div class="line">             if (num % 100_0000 == 0) &#123;</div><div class="line">                 sh = wb.createSheet(&quot;sheet &quot; + num);</div><div class="line">                 rowNum = 0;</div><div class="line">             &#125;</div><div class="line">             rowNum++;</div><div class="line">             Row row = sh.createRow(rowNum);</div><div class="line">             for (int cellnum = 0; cellnum &lt; NUM_OF_COLUMNS; cellnum++) &#123;</div><div class="line">                 Cell cell = row.createCell(cellnum);</div><div class="line">                 cell.setCellValue(Math.random());</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         FileOutputStream out = new FileOutputStream(&quot;ooxml-scatter-chart_SXSSFW_&quot; + rowsNum + &quot;.xlsx&quot;);</div><div class="line">         wb.write(out);</div><div class="line">         out.close();</div><div class="line">     &#125; catch (Exception ex) &#123;</div><div class="line">         ex.printStackTrace();</div><div class="line">     &#125; finally &#123;</div><div class="line">         if (wb != null) &#123;</div><div class="line">             wb.dispose();// 删除临时文件，很重要，否则磁盘可能会被写满</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     long endTime = System.currentTimeMillis();</div><div class="line">     System.out.println(&quot;process &quot; + rowsNum + &quot; spent time:&quot; + (endTime - startTime));</div><div class="line"> &#125; catch (Exception e) &#123;</div><div class="line">     e.printStackTrace();</div><div class="line">     throw e;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
@@ -290,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/小功能/2017/08/22/小功能-2017-08-22-下载超大的excel/" data-id="cj6njfqub001huh2sc0c2bcpf" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/小功能/2017/08/22/小功能-2017-08-22-下载超大的excel/" data-id="cj6nk22qp0012gk2sroxvp9hx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/下载/">下载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/导出/">导出</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/超大excel/">超大excel</a></li></ul>
@@ -337,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java/2017/07/23/三瓜两爪-2017-07-23-克制/" data-id="cj6njfqu7001fuh2s3b49tp8g" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java/2017/07/23/三瓜两爪-2017-07-23-克制/" data-id="cj6nk22r4001ggk2sadezpp2l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/克制/">克制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/时间管理/">时间管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/精力管理/">精力管理</a></li></ul>
@@ -349,14 +349,14 @@
 
 
   
-    <article id="post-java容器-2015-07-05-hashmap" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java容器-2015-06-29-vector" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/" class="article-date">
+    <a href="/java容器/2017/03/07/java容器-2015-06-29-vector/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">Java容器</a>
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
   </div>
 
   </div>
@@ -367,7 +367,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/">HashMap浅析</a>
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">Vector浅析</a>
     </h1>
   
 
@@ -375,327 +375,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>HashMap的特点</li>
-<li>HashMap的数据结构</li>
-<li>HashMap的常用方法及实现</li>
-</ul>
-<h2 id="HashMap的特点"><a href="#HashMap的特点" class="headerlink" title="HashMap的特点"></a>HashMap的特点</h2><ul>
-<li>HashMap内不存在相同的key(hashcode相等且key.equal()为true)</li>
-<li>HashMap的get、put等方法的基本为1（实际上初到hashcode值相同的key数目以及capacity等的影响）</li>
-<li>HashMap的遍历时间受capacity以及实际上的key/value对数目的影响</li>
-</ul>
-<h2 id="HashMap的数据结构"><a href="#HashMap的数据结构" class="headerlink" title="HashMap的数据结构"></a>HashMap的数据结构</h2><p>HashMap的数据保存在一个元素是链表的数组里。</p>
-<p><img src="/img/hashmap_structure.png" alt="HashMap的数据结构"><br>HashMap的数据结构(图片来自<a href="http://www.cnblogs.com/chenssy/p/3521565.html" target="_blank" rel="external">树上月</a>)   </p>
-<h2 id="HashMap的常用方法及实现"><a href="#HashMap的常用方法及实现" class="headerlink" title="HashMap的常用方法及实现"></a>HashMap的常用方法及实现</h2><p>HashMap里有以下几个参数比较重要</p>
-<pre><code>transient Node&lt;K,V&gt;[] table; //实际保存数据节点的位置
-transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
-transient int size; //key/map节点的数目
-transient int modCount;//修改map结构的次数,如put,remove等操作
-int threshold;//节点的大小
-final float loadFactor;//负载因子，当size大于 thre
-</code></pre><p>内部的数据结构:</p>
-<pre><code>static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-    final int hash;
-    final K key;
-    V value;
-    Node&lt;K,V&gt; next;
-
-    Node(int hash, K key, V value, Node&lt;K,V&gt; next) {
-        this.hash = hash;
-        this.key = key;
-        this.value = value;
-        this.next = next;
-    }
-
-    public final K getKey()        { return key; }
-    public final V getValue()      { return value; }
-    public final String toString() { return key + &quot;=&quot; + value; }
-
-    public final int hashCode() {
-        return Objects.hashCode(key) ^ Objects.hashCode(value);
-    }
-
-    public final V setValue(V newValue) {
-        V oldValue = value;
-        value = newValue;
-        return oldValue;
-    }
-
-    public final boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (o instanceof Map.Entry) {
-            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
-            if (Objects.equals(key, e.getKey()) &amp;&amp;
-                Objects.equals(value, e.getValue()))
-                return true;
-        }
-        return false;
-    }
-}
-</code></pre><ol>
-<li><p>putVal()</p>
+        <p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
+<p>Vector的类声明:     </p>
+<blockquote>
+<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
+</blockquote>
+<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
+<p>另外，查看iterator的源码</p>
 <pre><code>/**
- * Implements Map.put and related methods
+ * Returns an iterator over the elements in this list in proper sequence.
  *
- * @param hash hash for key
- * @param key the key
- * @param value the value to put
- * @param onlyIfAbsent if true, don&apos;t change existing value
- * @param evict if false, the table is in creation mode.
- * @return previous value, or null if none
+ * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
+ *
+ * @return an iterator over the elements in this list in proper sequence
  */
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-               boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)//第一次添加元素
-        n = (tab = resize()).length;
-    // 通过(n-1) &amp; hash来给获取元素应该放在那一个链表中,这里是一个很好的设计
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    //当链表下的元素过多(&gt;8)时，会把链表变成红黑树,以优化查询效率
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
-                    break;
-                }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
-            }
-        }
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
-        }
-    }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
-    return null;
+public synchronized Iterator&lt;E&gt; iterator() {
+    return new Itr();
 }
-</code></pre></li>
-</ol>
-<pre><code>&lt;b&gt;(n - 1) &amp; hash 来计算应该放置的节点&lt;/b&gt;   
-  首先，通过n一般是2的m次方，如8,16,32之类的，这时n-1后的值会是类似于 0..111 的值，通过求模，即可算出其应该于的位置。而且效率很高
-
-
-&lt;b&gt;treeifyBin(tab, hash)&lt;/b&gt;   
-  Java8针对链表中节点过多的情况进行了优化：当节点的数目大于等于 TREEIFY_THRESHOLD(8)时，会把链表换成树。当节点的数目小于UNTREEIFY_THRESHOLD(6)时，又会变回成链表。其中，链表到树会在put等添加节点时触发，而从树到链表只会在调用resize()时检查.
-</code></pre><ol>
-<li><p>remove()</p>
-<pre><code>final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
-                           boolean matchValue, boolean movable) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (p = tab[index = (n - 1) &amp; hash]) != null) {
-        Node&lt;K,V&gt; node = null, e; K k; V v;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            node = p;
-        else if ((e = p.next) != null) {
-            if (p instanceof TreeNode)
-                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
-            else {
-                do {
-                    if (e.hash == hash &amp;&amp;
-                        ((k = e.key) == key ||
-                         (key != null &amp;&amp; key.equals(k)))) {
-                        node = e;
-                        break;
-                    }
-                    p = e;
-                } while ((e = e.next) != null);
-            }
-        }
-        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
-                             (value != null &amp;&amp; value.equals(v)))) {
-            if (node instanceof TreeNode)
-                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
-            else if (node == p)
-                tab[index] = node.next;
-            else
-                p.next = node.next;
-            ++modCount;
-            --size;
-            afterNodeRemoval(node);
-            return node;
-        }
-    }
-    return null;
+</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
+<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
+vector.add(&quot;abc&quot;);
+Iterator&lt;String&gt; ite = vector.iterator();
+vector.add(&quot;bcd&quot;);
+while (ite.hasNext()) {
+    System.out.println(ite.next());
 }
-</code></pre></li>
-<li><p>get</p>
-<pre><code>final Node&lt;K,V&gt; getNode(int hash, Object key) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (first = tab[(n - 1) &amp; hash]) != null) {
-        if (first.hash == hash &amp;&amp; // always check first node
-            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
-            return first;
-        if ((e = first.next) != null) {
-            if (first instanceof TreeNode)
-                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
-            do {
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    return e;
-            } while ((e = e.next) != null);
-        }
-    }
-    return null;
-}
-</code></pre></li>
-<li><p>resize</p>
-<pre><code>final Node&lt;K,V&gt;[] resize() {
-    Node&lt;K,V&gt;[] oldTab = table;
-    int oldCap = (oldTab == null) ? 0 : oldTab.length;
-    int oldThr = threshold;
-    int newCap, newThr = 0;
-    if (oldCap &gt; 0) {
-        if (oldCap &gt;= MAXIMUM_CAPACITY) {
-            threshold = Integer.MAX_VALUE;
-            return oldTab;
-        }
-        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
-                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
-            newThr = oldThr &lt;&lt; 1; // double threshold
-    }
-    else if (oldThr &gt; 0) // initial capacity was placed in threshold
-        newCap = oldThr;
-    else {               // zero initial threshold signifies using defaults
-        newCap = DEFAULT_INITIAL_CAPACITY;
-        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
-    }
-    if (newThr == 0) {
-        float ft = (float)newCap * loadFactor;
-        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
-                  (int)ft : Integer.MAX_VALUE);
-    }
-    threshold = newThr;
-    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
-        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
-    table = newTab;
-    if (oldTab != null) {
-        for (int j = 0; j &lt; oldCap; ++j) {
-            Node&lt;K,V&gt; e;
-            if ((e = oldTab[j]) != null) {
-                oldTab[j] = null;
-                if (e.next == null)
-                    newTab[e.hash &amp; (newCap - 1)] = e;
-                else if (e instanceof TreeNode)
-                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
-                else { // preserve order
-                    Node&lt;K,V&gt; loHead = null, loTail = null;
-                    Node&lt;K,V&gt; hiHead = null, hiTail = null;
-                    Node&lt;K,V&gt; next;
-                    do {
-                        next = e.next;
-                        if ((e.hash &amp; oldCap) == 0) {
-                            if (loTail == null)
-                                loHead = e;
-                            else
-                                loTail.next = e;
-                            loTail = e;
-                        }
-                        else {
-                            if (hiTail == null)
-                                hiHead = e;
-                            else
-                                hiTail.next = e;
-                            hiTail = e;
-                        }
-                    } while ((e = next) != null);
-                    if (loTail != null) {
-                        loTail.next = null;
-                        newTab[j] = loHead;
-                    }
-                    if (hiTail != null) {
-                        hiTail.next = null;
-                        newTab[j + oldCap] = hiHead;
-                    }
-                }
-            }
-        }
-    }
-    return newTab;
-}
-</code></pre></li>
-</ol>
-<h2 id="相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化"><a href="#相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化" class="headerlink" title="相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化"></a>相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化</h2><ul>
-<li><p>HashMap遍历时间为容器的初始容量加上真实的键值对</p>
-<pre><code>* &lt;p&gt;This implementation provides constant-time performance for the basic
-* operations (&lt;tt&gt;get&lt;/tt&gt; and &lt;tt&gt;put&lt;/tt&gt;), assuming the hash function
-* disperses the elements properly among the buckets.  Iteration over
-* collection views requires time proportional to the &quot;capacity&quot; of the
-* &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of buckets) plus its size (the number
-* of key-value mappings).  Thus, it&apos;s very important not to set the initial
-* capacity too high (or the load factor too low) if iteration performance is
-* important.
-</code></pre></li>
-<li><p>hashcode为何要左移16位</p>
-<pre><code>/**
- * Computes key.hashCode() and spreads (XORs) higher bits of hash
- * to lower.  Because the table uses power-of-two masking, sets of
- * hashes that vary only in bits above the current mask will
- * always collide. (Among known examples are sets of Float keys
- * holding consecutive whole numbers in small tables.)  So we
- * apply a transform that spreads the impact of higher bits
- * downward. There is a tradeoff between speed, utility, and
- * quality of bit-spreading. Because many common sets of hashes
- * are already reasonably distributed (so don&apos;t benefit from
- * spreading), and because we use trees to handle large sets of
- * collisions in bins, we just XOR some shifted bits in the
- * cheapest possible way to reduce systematic lossage, as well as
- * to incorporate impact of the highest bits that would otherwise
- * never be used in index calculations because of table bounds.
- */
-static final int hash(Object key) {
-    int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
-}
-</code></pre></li>
-<li><p>大于某个数的最小2的n次方的数</p>
-<pre><code>/**
- * Returns a power of two size for the given target capacity.
- */
-static final int tableSizeFor(int cap) {
-    int n = cap - 1;
-    n |= n &gt;&gt;&gt; 1;
-    n |= n &gt;&gt;&gt; 2;
-    n |= n &gt;&gt;&gt; 4;
-    n |= n &gt;&gt;&gt; 8;
-    n |= n &gt;&gt;&gt; 16;
-    return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
-}
-</code></pre></li>
-<li><p>红黑树的实现</p>
-</li>
-</ul>
-
+</code></pre><p>运行结果：</p>
+<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
+    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
+    at java.util.Vector$Itr.next(Vector.java:1137)
+    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/" data-id="cj6njfqtd000puh2szw6hyguu" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/" data-id="cj6nk22ps000mgk2salfob00q" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vector/">vector</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -734,7 +451,7 @@ static final int tableSizeFor(int cap) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj6njfqst0006uh2slbvn22n0" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj6nk22ox0006gk2s0p3sdtbk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -803,10 +520,229 @@ redis&gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cj6njfqsw0007uh2sj5rcqx83" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cj6nk22p00007gk2shq7jn52n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forward/">forward</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-06-24-java容器研究思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#容器的研究思路</p>
+<ul>
+<li>为什么研究容器<br><ul>
+<li>容器是JDK里的基础功能，平时使用得较多。</li>
+<li>容器相对简单，比较容易研究</li>
+<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
+</ul>
+</li>
+<li>容器是什么，要研究那些特性<ul>
+<li>容器是一段程序，是一系列的对象。</li>
+<li>作为程序，它由 数据结构+算法构成</li>
+<li>作为对象，它由 属性+方法构成</li>
+<li>作为类，它有自己的继承树</li>
+<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
+</ul>
+</li>
+<li>怎么去研究容器<ul>
+<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
+<li>如何去测试评估程序的特性</li>
+<li>程序的并发性能</li>
+<li>程序的极限性能</li>
+</ul>
+</li>
+</ul>
+<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
+<ul>
+<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
+<li>set<br><br>  HashSet, TreeSet</li>
+<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cj6nk22p70008gk2sbs5oxjnp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java容器-2015-06-24-linkedlist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">LinkedList浅析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
+<li>LinkedList的作用及特点</li>
+<li>LinkedList的数据结构</li>
+<li>LinkedList的常用方法</li>
+</ul>
+<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
+<li>LinkedList可作为链表或者双向队列来使用</li>
+<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
+</ul>
+<blockquote>
+<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
+</blockquote>
+<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
+<pre><code>public class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+{
+    transient int size = 0;
+
+    /**
+     * Pointer to first node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (first.prev == null &amp;&amp; first.item != null)
+     */
+    transient Node&lt;E&gt; first;
+
+    /**
+     * Pointer to last node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (last.next == null &amp;&amp; last.item != null)
+     */
+    transient Node&lt;E&gt; last;
+
+ ...
+
+}
+</code></pre><p>Node的定义</p>
+<pre><code>private static class Node&lt;E&gt; {
+    E item;
+    Node&lt;E&gt; next;
+    Node&lt;E&gt; prev;
+
+    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
+<pre><code>int size();
+boolean isEmpty();
+boolean contains(Object o);
+Iterator&lt;E&gt; iterator();
+Object[] toArray();
+&lt;T&gt; T[] toArray(T[] a);
+boolean add(E e);
+boolean remove(Object o);
+boolean containsAll(Collection&lt;?&gt; c);
+boolean addAll(Collection&lt;? extends E&gt; c);
+boolean addAll(int index, Collection&lt;? extends E&gt; c);
+boolean removeAll(Collection&lt;?&gt; c);
+boolean retainAll(Collection&lt;?&gt; c);
+default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
+default void sort(Comparator&lt;? super E&gt; c);
+void clear();
+boolean equals(Object o);
+int hashCode();
+E get(int index);
+E set(int index, E element);
+void add(int index, E element);
+E remove(int index);
+int indexOf(Object o);
+int lastIndexOf(Object o);
+ListIterator&lt;E&gt; listIterator();
+ListIterator&lt;E&gt; listIterator(int index);
+List&lt;E&gt; subList(int fromIndex, int toIndex);
+</code></pre><p>LinkedList自己的方法</p>
+<pre><code>void addFirst(E e);
+void addLast(E e);
+boolean offerFirst(E e);
+boolean offerLast(E e);
+E removeFirst();
+E removeLast();
+E pollFirst();
+E pollLast();
+E getFirst();
+E getLast();
+E peekFirst();
+E peekLast();
+boolean removeFirstOccurrence(Object o);
+boolean removeLastOccurrence(Object o);
+boolean add(E e);
+boolean offer(E e);
+E remove();
+E poll();
+E element();
+E peek();
+void push(E e);
+E pop();
+boolean remove(Object o);
+boolean contains(Object o);
+public int size();
+Iterator&lt;E&gt; iterator();
+Iterator&lt;E&gt; descendingIterator();
+</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" data-id="cj6nk22pb000bgk2sa30ds6pv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -1025,229 +961,10 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cj6njfqsy000auh2sczstdtif" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cj6nk22pc000dgk2shmhpsccv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java容器-2015-06-24-java容器研究思路" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#容器的研究思路</p>
-<ul>
-<li>为什么研究容器<br><ul>
-<li>容器是JDK里的基础功能，平时使用得较多。</li>
-<li>容器相对简单，比较容易研究</li>
-<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
-</ul>
-</li>
-<li>容器是什么，要研究那些特性<ul>
-<li>容器是一段程序，是一系列的对象。</li>
-<li>作为程序，它由 数据结构+算法构成</li>
-<li>作为对象，它由 属性+方法构成</li>
-<li>作为类，它有自己的继承树</li>
-<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
-</ul>
-</li>
-<li>怎么去研究容器<ul>
-<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
-<li>如何去测试评估程序的特性</li>
-<li>程序的并发性能</li>
-<li>程序的极限性能</li>
-</ul>
-</li>
-</ul>
-<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
-<ul>
-<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
-<li>set<br><br>  HashSet, TreeSet</li>
-<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cj6njfqt3000cuh2sf4zy45e8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java容器-2015-06-24-linkedlist" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java容器/">java容器</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">LinkedList浅析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
-</ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
-<blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
-</blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
-}
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
-
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" data-id="cj6njfqt5000fuh2sn9g9juzl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -1541,7 +1258,7 @@ public int indexOf(E e, int index) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/" data-id="cj6njfqt6000huh2sxl5fvse9" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/" data-id="cj6nk22ph000ggk2smjzu7ko2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
@@ -1553,9 +1270,9 @@ public int indexOf(E e, int index) {
 
 
   
-    <article id="post-java容器-2015-06-29-vector" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java容器-2015-07-02-hashset浅析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-29-vector/" class="article-date">
+    <a href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
@@ -1571,7 +1288,7 @@ public int indexOf(E e, int index) {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">Vector浅析</a>
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">HashSet浅析</a>
     </h1>
   
 
@@ -1579,44 +1296,136 @@ public int indexOf(E e, int index) {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
-<p>Vector的类声明:     </p>
-<blockquote>
-<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
-</blockquote>
-<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
-<p>另外，查看iterator的源码</p>
-<pre><code>/**
- * Returns an iterator over the elements in this list in proper sequence.
- *
- * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
- *
- * @return an iterator over the elements in this list in proper sequence
+        <ul>
+<li>HashSet的特点与用法</li>
+<li>HashSet的数据结构</li>
+<li>HashSet的常用方法及实现</li>
+<li>TreeSet的简要说明</li>
+</ul>
+<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
+<p>以下摘取了一部分HashSet文档：   </p>
+<pre><code>...   
+
+* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
+* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
+* iteration order of the set; in particular, it does not guarantee that the
+* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
+* element.
+*
+* &lt;p&gt;This class offers constant time performance for the basic operations
+* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
+* assuming the hash function disperses the elements properly among the
+* buckets.  Iterating over this set requires time proportional to the sum of
+* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
+* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
+* buckets).  Thus, it&apos;s very important not to set the initial capacity too
+* high (or the load factor too low) if iteration performance is important.
+
+...    
+</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
+<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
+<pre><code>private transient HashMap&lt;E,Object&gt; map;
+
+// Dummy value to associate with an Object in the backing Map
+private static final Object PRESENT = new Object();
+
+/**
+ * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
+ * default initial capacity (16) and load factor (0.75).
  */
-public synchronized Iterator&lt;E&gt; iterator() {
-    return new Itr();
+public HashSet() {
+    map = new HashMap&lt;&gt;();
 }
-</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
-<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
-vector.add(&quot;abc&quot;);
-Iterator&lt;String&gt; ite = vector.iterator();
-vector.add(&quot;bcd&quot;);
-while (ite.hasNext()) {
-    System.out.println(ite.next());
+</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
+<li><p>add   </p>
+<pre><code>public boolean add(E e) {
+    return map.put(e, PRESENT)==null;
 }
+</code></pre></li>
+<li><p>remove   </p>
+<pre><code>public boolean remove(Object o) {
+    return map.remove(o)==PRESENT;
+}
+</code></pre></li>
+<li><p>contain</p>
+<pre><code>public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+</code></pre></li>
+<li><p>构造函数</p>
+<p> 没什么好说的，直接上代码</p>
+<pre><code>public HashSet(int initialCapacity, float loadFactor) {
+    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
+}
+</code></pre></li>
+</ol>
+<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
 </code></pre><p>运行结果：</p>
-<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
-    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
-    at java.util.Vector$Itr.next(Vector.java:1137)
-    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
-</code></pre>
+<blockquote>
+<p>开始时间:2647<br>开始时间:781</p>
+</blockquote>
+<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;1000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：   </p>
+<blockquote>
+<p>开始时间:1142<br>开始时间:795</p>
+</blockquote>
+<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/" data-id="cj6njfqt8000kuh2st3wi9f37" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" data-id="cj6nk22pi000igk2sm4zowqav" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vector/">vector</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -1688,7 +1497,7 @@ while (ite.hasNext()) {
           </li>
         
           <li>
-            <a href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/">HashMap浅析</a>
+            <a href="/java容器/2017/03/07/java容器-2015-06-29-vector/">Vector浅析</a>
           </li>
         
           <li>

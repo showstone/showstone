@@ -65,38 +65,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-eleme-README" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/uncategorized/2017/03/07/eleme-README/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>计划:</p>
-<ol>
-<li>先写vine框架(http, mq, service),包括用法等  </li>
-<li>再写service的实现与封装  </li>
-<li>写日志/打点等实现  </li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cj6njfqso0005uh2saak5p7i5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-软件配置-2015-07-24-maven常用镜像源" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" class="article-date">
@@ -134,10 +102,83 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cj6njfquf001kuh2sh6y54iqn" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cj6nk22r2001dgk2swd5vvio9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/镜像/">镜像</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-软件配置-2015-08-24-编译vim以支持lua" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/软件配置/">软件配置</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">编译vim以支持lua</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+<ol>
+<li><p>下载源代码</p>
+<pre><code>git clone https://github.com/vim/vim.git   
+cd vim
+</code></pre></li>
+<li><p>设置编译参数</p>
+<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
+<pre><code>./configure --with-features=huge --enable-rubyinterp \    
+--enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
+--enable-perlinterp --enable-multibyte --enable-sniff  \
+--enable-fontset --enable-cscope \    
+--disable-gui --prefix=/opt/local/vim  
+
+--with-features=huge：支持最大特性  
+--enable-rubyinterp：启用Vim对ruby的支持  
+--enable-pythoninterp：启用Vim对python的支持  
+--enable-luainterp：启用Vim对lua的支持  
+--with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
+--enable-perlinterp：启用Vim对perl的支持  
+--enable-multibyte：多字节支持 可以在Vim中输入中文  
+--enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+--enable-cscope：Vim对cscope支持  
+--disable-gui：不用编译生成图形界面版gvim  
+--prefix=/opt/local/vim：编译安装路径  
+</code></pre></li>
+<li><p>编译\安装</p>
+<pre><code>make    
+make install
+</code></pre></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" data-id="cj6nk22rh001kgk2s7tloj0yz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/">lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
 
     </footer>
   </div>
@@ -201,7 +242,7 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/eleme/2017/03/03/eleme-2017-03-03-vine/" data-id="cj6njfqs00001uh2s7it5jt9b" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/eleme/2017/03/03/eleme-2017-03-03-vine/" data-id="cj6nk22om0003gk2syl0q7o1a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netty/">netty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/soa/">soa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vine/">vine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
@@ -276,7 +317,7 @@ http://repository.jboss.org/nexus/content/groups/public
           </li>
         
           <li>
-            <a href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/">HashMap浅析</a>
+            <a href="/java容器/2017/03/07/java容器-2015-06-29-vector/">Vector浅析</a>
           </li>
         
           <li>
