@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://showstone.net/"/>
-  <updated>2017-08-22T12:11:45.000Z</updated>
+  <updated>2017-10-02T18:40:19.000Z</updated>
   <id>http://showstone.net/</id>
   
   <author>
@@ -14,6 +14,141 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NAS服务器的搭建-软件篇</title>
+    <link href="http://showstone.net/uncategorized/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
+    <id>http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/</id>
+    <published>2017-10-02T18:38:09.000Z</published>
+    <updated>2017-10-02T18:40:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="NAS服务器的搭建-软件篇"><a href="#NAS服务器的搭建-软件篇" class="headerlink" title="NAS服务器的搭建-软件篇"></a>NAS服务器的搭建-软件篇</h1><p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
+<h2 id="NAS软件功能"><a href="#NAS软件功能" class="headerlink" title="NAS软件功能"></a>NAS软件功能</h2><ul>
+<li>文件共享。如samba或者ftp</li>
+<li>下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission</li>
+<li>DLNA服务。可以在线看视频啦~</li>
+<li>iTunes媒体共享</li>
+<li>time machine等备份服务</li>
+<li>和百度云盘等公有云同步</li>
+<li>类似于百度云等云盘的私有云服务</li>
+</ul>
+<h2 id="NAS软件方案"><a href="#NAS软件方案" class="headerlink" title="NAS软件方案"></a>NAS软件方案</h2><p>NAS服务器的软件，有几种方案:</p>
+<ul>
+<li>方案一：NAS裸机安装Windows，可在虚拟机中安装Linux，群晖，软路由。推荐。Windows对硬件兼容性好，驱动普遍支持，能无需配置充分发挥显卡性能，平时可做上网机，观影机，HTPC高清电视。</li>
+<li>方案二：NAS裸机安装Linux，可在虚拟机中安装Windows，群晖，软路由。技术宅推荐。Windows还是有些缺陷的，系统及某些流氓软件会莫名其妙唤醒全部硬盘。只要能驱动，Linux多媒体不是问题。没有迅雷下载有点问题，移植的也麻烦，可以在Win虚拟机里面迅雷。</li>
+<li>方案三：NAS裸机安装群晖，可在虚拟机中安装Windows，Linux，软路由。不推荐。NAS的显卡都浪费了。NAS中集成的功能当然做得很用户友好，非常方便。但是没有的功能很多需要自己编译源码，没有Linux发行版的软件仓库方便，很鸡肋。</li>
+</ul>
+<p>注1：以上群晖都可以换成其他NAS操作系统。<br>注2：不推荐裸机安装NAS操作系统。</p>
+<p>以上内容来自：<a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></p>
+<h2 id="NAS裸机安装Linux方案"><a href="#NAS裸机安装Linux方案" class="headerlink" title="NAS裸机安装Linux方案"></a>NAS裸机安装Linux方案</h2><p>选择NAS裸机安准Linux是因为我要跑脚本，用Linux会方便很多。同时，网上说的驱动问题我没有碰到，用最新版本的系统应该可以解决这个问题，毕竟Linux对Intel的支持还是很好的。我用的是Ubuntu 17.04.</p>
+<p>对现有主流的NAS操作系统做了一个调研,发现NAS操作系统太重了，除openmeidavault外，都需要组Raid,对我而言没有必要。</p>
+<ul>
+<li><a href="http://www.how2shout.com/tools/best-free-open-source-nas-software.html" target="_blank" rel="external">http://www.how2shout.com/tools/best-free-open-source-nas-software.html</a></li>
+<li><a href="http://storageroot.com/articles/nas4free-freenas-amahi-openmediavault" target="_blank" rel="external">http://storageroot.com/articles/nas4free-freenas-amahi-openmediavault</a></li>
+</ul>
+<p>其中，freenas和nas4free，都使用了ZFS文件系统，而ZFS文件系统依赖ECC内存，同时要求8G以上内存。<br>考虑以上原因，决定不上NAS操作系统。</p>
+<h3 id="类似于百度云等云盘的私有云服务"><a href="#类似于百度云等云盘的私有云服务" class="headerlink" title="类似于百度云等云盘的私有云服务"></a>类似于百度云等云盘的私有云服务</h3><p>主流的方案有 owncloud和seafile。评测:<br><a href="https://www.zhihu.com/question/46318905" target="_blank" rel="external">https://www.zhihu.com/question/46318905</a></p>
+<p>网上对seafile的评价较高，所以选择了seafile.具体如何，等我试用一个月再说~~</p>
+<h3 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h3><p>留坑待填~~</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>留坑待填~~</p>
+<h3 id="DLNA服务"><a href="#DLNA服务" class="headerlink" title="DLNA服务"></a>DLNA服务</h3><p>留坑待填~~</p>
+<h3 id="iTunes媒体共享"><a href="#iTunes媒体共享" class="headerlink" title="iTunes媒体共享"></a>iTunes媒体共享</h3><p>留坑待填~~</p>
+<h3 id="time-machine等备份服务"><a href="#time-machine等备份服务" class="headerlink" title="time machine等备份服务"></a>time machine等备份服务</h3><p>留坑待填~~</p>
+<h3 id="和百度云盘等公有云同步"><a href="#和百度云盘等公有云同步" class="headerlink" title="和百度云盘等公有云同步"></a>和百度云盘等公有云同步</h3><p>留坑待填~~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;NAS服务器的搭建-软件篇&quot;&gt;&lt;a href=&quot;#NAS服务器的搭建-软件篇&quot; class=&quot;headerlink&quot; title=&quot;NAS服务器的搭建-软件篇&quot;&gt;&lt;/a&gt;NAS服务器的搭建-软件篇&lt;/h1&gt;&lt;p&gt;顺利装好机器，是时候试试它的威力了，开始折腾软件.&lt;
+    
+    </summary>
+    
+    
+      <category term="NAS服务器" scheme="http://showstone.net/tags/nas%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NAS服务器的搭建--硬件篇</title>
+    <link href="http://showstone.net/uncategorized/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E7%A1%AC%E4%BB%B6%E7%AF%87/"/>
+    <id>http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/</id>
+    <published>2017-10-02T18:37:59.000Z</published>
+    <updated>2017-10-02T18:39:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="NAS服务器的搭建–硬件篇"><a href="#NAS服务器的搭建–硬件篇" class="headerlink" title="NAS服务器的搭建–硬件篇"></a>NAS服务器的搭建–硬件篇</h1><h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>现在主流的硬件服务器方案，有以下几种方案：</p>
+<ul>
+<li>使用群辉等现成的NAS解决方案<br>  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用</li>
+<li>使用HP gen8等商用服务器<br>  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个很严重的问题：风扇声音太大了！！！</li>
+<li>自己组装机器<br>  其实网上已经有比较多的资料，找几篇来看看就可以了</li>
+</ul>
+<p>群晖的机器对我而言太贵了，HP gen8勉强够用，但是考虑到他的拓展性，还是选择自己组装一台机器。</p>
+<h2 id="NAS服务器的要点"><a href="#NAS服务器的要点" class="headerlink" title="NAS服务器的要点"></a>NAS服务器的要点</h2><p>NAS服务器不同于一般的机器，它有以下特点:</p>
+<ul>
+<li>7*24小时开机，要稳定</li>
+<li>盘位较多，最好是6盘位以上,一块系统盘，两块主数据盘，加一块工作盘，同时考虑到以后的拓展，预留两个盘位</li>
+<li>安静</li>
+<li>功耗低</li>
+</ul>
+<p>综合以上的特点，参考以上特点，选择自己想要的配置即可。</p>
+<h2 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h2><p>关于硬件的选择，别人已经说得很详细了，我就不在啰嗦，有兴趣的可以参考：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></li>
+</ul>
+<p>我的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cpu: intel j3455，备选的有n3160, 都是连主板一起的，399元</div><div class="line">内存: 金士顿 ddr3 1600 4g，150元</div><div class="line">机箱: 酷冷至尊特警365，165包邮</div><div class="line">电源: 鑫谷核动力-巡洋舰c5 300w 109元</div><div class="line">共823元</div></pre></td></tr></table></figure>
+<p><em>关于硬盘</em><br>硬盘需要单独拿出来说，一般建议买一块固态硬盘作为系统盘，大部分时间是没有数据操作的，这时机械硬盘可以休眠，单独使用固态硬盘即可。</p>
+<p>数据盘，也就是机械硬盘，在买的时候需要注意一点：<br><strong>不要买同一品牌、同一批次的硬盘</strong>，因为在同样的环境下，同一品牌同一批次的硬盘，可能会同时坏！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;NAS服务器的搭建–硬件篇&quot;&gt;&lt;a href=&quot;#NAS服务器的搭建–硬件篇&quot; class=&quot;headerlink&quot; title=&quot;NAS服务器的搭建–硬件篇&quot;&gt;&lt;/a&gt;NAS服务器的搭建–硬件篇&lt;/h1&gt;&lt;h2 id=&quot;方案&quot;&gt;&lt;a href=&quot;#方案&quot; cla
+    
+    </summary>
+    
+    
+      <category term="NAS服务器" scheme="http://showstone.net/tags/nas%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NAS服务器的搭建-介绍</title>
+    <link href="http://showstone.net/uncategorized/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/</id>
+    <published>2017-10-02T18:37:45.000Z</published>
+    <updated>2017-10-02T18:39:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="NAS服务器的搭建-NAS介绍"><a href="#NAS服务器的搭建-NAS介绍" class="headerlink" title="NAS服务器的搭建-NAS介绍"></a>NAS服务器的搭建-NAS介绍</h1><p>最近为了安装 huginn，在aws和 aliyun 上都尝试部署了，发现性能过差，服务很不稳定，就有了自己搭一台服务器的想法，恰好金华老师向我安利了一把 nas 服务器，在调研后，发现正好能满足我的要求。于是开始折腾，这个系统是对这次折腾的记录。</p>
+<h2 id="用NAS服务器来做什么"><a href="#用NAS服务器来做什么" class="headerlink" title="用NAS服务器来做什么"></a>用NAS服务器来做什么</h2><p>NAS服务器能做的事情很多，比如：</p>
+<p><em>文件服务</em></p>
+<ul>
+<li>私有文件云，类似于百度云盘，但是不用担心文件会忽然被和谐</li>
+<li>文件共享服务，可以把所有的文件存放在同一个地方，并在不同的设备之间共享</li>
+<li>文件备份服务，如mac的time machine,可以在连接wifi时自动开始同步</li>
+<li>灵活的文件备份策略，可以定期把文件压缩加密后存到其他公有云盘</li>
+<li>其他的服务，如远程下载功能，在公司启动下载服务后，自动在家开始下载</li>
+</ul>
+<p><em>其他服务</em></p>
+<ul>
+<li>在线工具服务</li>
+<li>脚本和爬虫服务</li>
+<li>私有git服务等其他服务</li>
+<li>开发工具服务器，如mysql、监控等服务</li>
+</ul>
+<p>再开始选择之前，想清楚自己的需求，是作为一个简单的文件服务器，还是希望有更多的灵活性。</p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>huginn，一个IFTTT工具，利用它可以做很多很酷的事情，比如在几个网站监控某件商品，当有比较优惠的活动时，会自动发送通知，再如像葡萄PT只在特定的时间开放注册。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;NAS服务器的搭建-NAS介绍&quot;&gt;&lt;a href=&quot;#NAS服务器的搭建-NAS介绍&quot; class=&quot;headerlink&quot; title=&quot;NAS服务器的搭建-NAS介绍&quot;&gt;&lt;/a&gt;NAS服务器的搭建-NAS介绍&lt;/h1&gt;&lt;p&gt;最近为了安装 huginn，在aws
+    
+    </summary>
+    
+    
+      <category term="NAS服务器" scheme="http://showstone.net/tags/nas%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>下载超大的excel</title>
@@ -264,983 +399,6 @@
       <category term="精力管理" scheme="http://showstone.net/tags/%E7%B2%BE%E5%8A%9B%E7%AE%A1%E7%90%86/"/>
     
       <category term="时间管理" scheme="http://showstone.net/tags/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vector浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-29-vector/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
-<p>Vector的类声明:     </p>
-<blockquote>
-<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
-</blockquote>
-<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
-<p>另外，查看iterator的源码</p>
-<pre><code>/**
- * Returns an iterator over the elements in this list in proper sequence.
- *
- * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
- *
- * @return an iterator over the elements in this list in proper sequence
- */
-public synchronized Iterator&lt;E&gt; iterator() {
-    return new Itr();
-}
-</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
-<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
-vector.add(&quot;abc&quot;);
-Iterator&lt;String&gt; ite = vector.iterator();
-vector.add(&quot;bcd&quot;);
-while (ite.hasNext()) {
-    System.out.println(ite.next());
-}
-</code></pre><p>运行结果：</p>
-<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
-    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
-    at java.util.Vector$Itr.next(Vector.java:1137)
-    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      vector分析
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="vector" scheme="http://showstone.net/tags/vector/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JUnit主线程退出时所有的子线程也会结束</title>
-    <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
-    <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="Java" scheme="http://showstone.net/categories/java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
-    <link href="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
-    <id>http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
-    
-    </summary>
-    
-    
-      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
-    
-      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
-    
-      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
-    
-      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
-    
-      <category term="command" scheme="http://showstone.net/tags/command/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java容器研究思路</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-java%E5%AE%B9%E5%99%A8%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>#容器的研究思路</p>
-<ul>
-<li>为什么研究容器<br><ul>
-<li>容器是JDK里的基础功能，平时使用得较多。</li>
-<li>容器相对简单，比较容易研究</li>
-<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
-</ul>
-</li>
-<li>容器是什么，要研究那些特性<ul>
-<li>容器是一段程序，是一系列的对象。</li>
-<li>作为程序，它由 数据结构+算法构成</li>
-<li>作为对象，它由 属性+方法构成</li>
-<li>作为类，它有自己的继承树</li>
-<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
-</ul>
-</li>
-<li>怎么去研究容器<ul>
-<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
-<li>如何去测试评估程序的特性</li>
-<li>程序的并发性能</li>
-<li>程序的极限性能</li>
-</ul>
-</li>
-</ul>
-<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
-<ul>
-<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
-<li>set<br><br>  HashSet, TreeSet</li>
-<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;#容器的研究思路&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;为什么研究容器&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;容器是JDK里的基础功能，平时使用得较多。&lt;/li&gt;
-&lt;li&gt;容器相对简单，比较容易研究&lt;/li&gt;
-&lt;li&gt;已经有很多人对容器进行了研究，相关资料比较齐全&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LinkedList浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-linkedlist/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
-</ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
-<blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
-</blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
-}
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
-
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;LinkedList浅析&quot;&gt;&lt;a href=&quot;#LinkedList浅析&quot; class=&quot;headerlink&quot; title=&quot;LinkedList浅析&quot;&gt;&lt;/a&gt;LinkedList浅析&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;LinkedList的作用及特点&lt;/li&gt;
-&lt;l
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="LinkedList" scheme="http://showstone.net/tags/linkedlist/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-arraylist/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>#ArrayList浅析</p>
-<ul>
-<li>ArrayList的作用、特点</li>
-<li>ArrayList的数据结构</li>
-<li>ArrayList的常用方法及实现</li>
-<li>ArrayList里需要注意的地方</li>
-</ul>
-<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
-<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
-<pre><code>默认的空数组
-/**
- * Constructs an empty list with an initial capacity of ten.
- */
-public ArrayList() {
-    super();
-    this.elementData = EMPTY_ELEMENTDATA;
-}
-
-private static final Object[] EMPTY_ELEMENTDATA = {};
-</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
-<p>加入元素之前，先确保有足够的空间</p>
-<pre><code>public boolean add(E e) {&lt;br/&gt;
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    elementData[size++] = e;
-    return true;
-}
-</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
-<pre><code>public void add(int index, E element) {
-    rangeCheckForAdd(index);
-
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    System.arraycopy(elementData, index, elementData, index + 1, size - index);
-    elementData[index] = element;
-    size++;
-}
-</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
-    Object[] a = c.toArray();
-    int numNew = a.length;
-    ensureCapacityInternal(size + numNew);  // Increments modCount
-    System.arraycopy(a, 0, elementData, size, numNew);
-    size += numNew;
-    return numNew != 0;
-}
-</code></pre><p>2.remove</p>
-<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
-<pre><code>public E remove(int index) {
-    rangeCheck(index);//简单地检查下标是否越界
-
-    modCount++;
-    E oldValue = elementData(index);
-
-    int numMoved = size - index - 1;
-    if (numMoved &gt; 0)
-        System.arraycopy(elementData, index+1, elementData, index,
-                         numMoved);
-    elementData[--size] = null; // clear to let GC do its work
-
-    return oldValue;
-}
-</code></pre><p>3.contain</p>
-<pre><code>public boolean contains(Object o) {
-    return indexOf(o) &gt;= 0;
-}
-
-public int indexOf(Object o) {
-    if (o == null) {
-        for (int i = 0; i &lt; size; i++)
-            if (elementData[i]==null)
-                return i;
-    } else {
-        for (int i = 0; i &lt; size; i++)
-            if (o.equals(elementData[i]))
-                return i;
-    }
-    return -1;
-}
-</code></pre><p>4.clone</p>
-<pre><code>public Object clone() {
-    try {
-        @SuppressWarnings(&quot;unchecked&quot;)
-            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
-        v.elementData = Arrays.copyOf(elementData, size);
-        v.modCount = 0;
-        return v;
-    } catch (CloneNotSupportedException e) {
-        // this shouldn&apos;t happen, since we are Cloneable
-        throw new InternalError();
-    }
-}
-</code></pre><p>5.iterator</p>
-<p>通过使用cursor和lastRet来进行标记</p>
-<pre><code>private class Itr implements Iterator&lt;E&gt; {
-    int cursor;       // index of next element to return
-    int lastRet = -1; // index of last element returned; -1 if no such
-    int expectedModCount = modCount;
-    ...
-}
-</code></pre><p>###ArrayList里需要注意的地方</p>
-<ul>
-<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
-</ul>
-<p>代码：</p>
-<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
-    subListRangeCheck(fromIndex, toIndex, size);
-    return new SubList(this, 0, fromIndex, toIndex);
-}
-
- private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
-    private final AbstractList&lt;E&gt; parent;
-    private final int parentOffset;
-    private final int offset;
-    int size;
-    ...
-}
-</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
-<ul>
-<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
-</ul>
-<p>代码</p>
-<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
-    return batchRemove(c, false);
-}
-
-private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
-    final Object[] elementData = this.elementData;
-    int r = 0, w = 0;
-    boolean modified = false;
-    try {
-        for (; r &lt; size; r++)
-            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
-                elementData[w++] = elementData[r];
-    } finally {
-        // Preserve behavioral compatibility with AbstractCollection,
-        // even if c.contains() throws.
-        if (r != size) {
-            System.arraycopy(elementData, r,
-                             elementData, w,
-                             size - r);
-            w += size - r;
-        }
-        if (w != size) {
-            // clear to let GC do its work
-            for (int i = w; i &lt; size; i++)
-                elementData[i] = null;
-            modCount += size - w;
-            size = w;
-            modified = true;
-        }
-    }
-    return modified;
-}
-</code></pre><ul>
-<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
-</ul>
-<blockquote>
-<p>protected transient int modCount = 0;</p>
-<p>private int size;</p>
-</blockquote>
-<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
-    long startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList();
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-    startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList(2000);
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-}
-</code></pre><p>运行结果:</p>
-<blockquote>
-<p>用时:607毫秒<br>用时:415毫秒</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;#ArrayList浅析&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ArrayList的作用、特点&lt;/li&gt;
-&lt;li&gt;ArrayList的数据结构&lt;/li&gt;
-&lt;li&gt;ArrayList的常用方法及实现&lt;/li&gt;
-&lt;li&gt;ArrayList里需要注意的地方&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;###
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="ArrayList" scheme="http://showstone.net/tags/arraylist/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CopyOnWriteArray浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-27-copyonwritearray%E6%B5%85%E6%9E%90/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>CopyOnWriteArrayList的特点与用法</li>
-<li>CopyOnWriteArrayList的数据结构</li>
-<li>CopyOnWriteArrayList的常用方法及实现</li>
-</ul>
-<h2 id="CopyOnWriteArrayList的特点与用法"><a href="#CopyOnWriteArrayList的特点与用法" class="headerlink" title="CopyOnWriteArrayList的特点与用法"></a>CopyOnWriteArrayList的特点与用法</h2><p>CopyOnWriteArrayList的数据结构和用法与ArrayList基本都相同,区别主要在于CopyOnWriteArrayList在添加和删除元素等修改集合状态的操作时，都会重新复制一个新的数组，以保证多线程下的安全性。因为每次修改数据结点都要复制整个对象数组，会比较耗时间，所以CopyOnWriteArrayList适合读多写少情况下的多线程场景，如缓存之类的。</p>
-<h2 id="CopyOnWriteArrayList的数据结构"><a href="#CopyOnWriteArrayList的数据结构" class="headerlink" title="CopyOnWriteArrayList的数据结构"></a>CopyOnWriteArrayList的数据结构</h2><p>CopyOnWriteArrayList的数据结构与ArrayList的基本一样，只是它不再有扩容之类的操作，因为每次修改都是一个新的数组。。。</p>
-<h2 id="CopyOnWriteArrayList的常用方法及实现"><a href="#CopyOnWriteArrayList的常用方法及实现" class="headerlink" title="CopyOnWriteArrayList的常用方法及实现"></a>CopyOnWriteArrayList的常用方法及实现</h2><pre><code>public class CopyOnWriteArrayList&lt;E&gt;
-    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable {
-    ...
-}
-</code></pre><p>从CopyOnWriteArrayList的类结构就可以看出，它的方法签名与ArrayList基本一致，这里就不再重复了。下面讲讲它方法的特殊实现。</p>
-<ol>
-<li><p>构造方法<br> CopyOnWriteArrayList的默认构造方法会创建一个长度为0的数组来储存数据，而不是像ArrayList那样创建一个长度为10的数组</p>
-<pre><code>/**Sets the array. */    
-final void setArray(Object[] a) {
-  array = a;
-}
-
-/**
-* Creates an empty list.
-*/
-public CopyOnWriteArrayList() {
-    setArray(new Object[0]);
-}
-</code></pre></li>
-<li><p>添加方法</p>
-<pre><code>/**
- * Appends the specified element to the end of this list.
- *
- * @param e element to be appended to this list
- * @return {@code true} (as specified by {@link Collection#add})
- */
-public boolean add(E e) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        Object[] newElements = Arrays.copyOf(elements, len + 1);
-        newElements[len] = e;
-        setArray(newElements);
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Inserts the specified element at the specified position in this
- * list. Shifts the element currently at that position (if any) and
- * any subsequent elements to the right (adds one to their indices).
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public void add(int index, E element) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        if (index &gt; len || index &lt; 0)
-            throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+
-                                                &quot;, Size: &quot;+len);
-        Object[] newElements;
-        int numMoved = len - index;
-        if (numMoved == 0)
-            newElements = Arrays.copyOf(elements, len + 1);
-        else {
-            newElements = new Object[len + 1];
-            System.arraycopy(elements, 0, newElements, 0, index);
-            System.arraycopy(elements, index, newElements, index + 1,
-                             numMoved);
-        }
-        newElements[index] = element;
-        setArray(newElements);
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>修改方法</p>
-<p>方法在进入和退出时有加锁、释放锁</p>
-<pre><code>/**
- * Replaces the element at the specified position in this list with the
- * specified element.
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public E set(int index, E element) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        E oldValue = get(elements, index);
-
-        if (oldValue != element) {
-            int len = elements.length;
-            Object[] newElements = Arrays.copyOf(elements, len);
-            newElements[index] = element;
-            setArray(newElements);
-        } else {
-            // Not quite a no-op; ensures volatile write semantics
-            setArray(elements);
-        }
-        return oldValue;
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>删除方法</p>
-<pre><code>/**
- * Removes the element at the specified position in this list.
- * Shifts any subsequent elements to the left (subtracts one from their
- * indices).  Returns the element that was removed from the list.
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public E remove(int index) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        E oldValue = get(elements, index);
-        int numMoved = len - index - 1;
-        if (numMoved == 0)
-            setArray(Arrays.copyOf(elements, len - 1));
-        else {
-            Object[] newElements = new Object[len - 1];
-            System.arraycopy(elements, 0, newElements, 0, index);
-            System.arraycopy(elements, index + 1, newElements, index,
-                             numMoved);
-            setArray(newElements);
-        }
-        return oldValue;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Removes the first occurrence of the specified element from this list,
- * if it is present.  If this list does not contain the element, it is
- * unchanged.  More formally, removes the element with the lowest index
- * {@code i} such that
- * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;
- * (if such an element exists).  Returns {@code true} if this list
- * contained the specified element (or equivalently, if this list
- * changed as a result of the call).
- *
- * @param o element to be removed from this list, if present
- * @return {@code true} if this list contained the specified element
- */
-public boolean remove(Object o) {
-    Object[] snapshot = getArray();
-    int index = indexOf(o, snapshot, 0, snapshot.length);
-    return (index &lt; 0) ? false : remove(o, snapshot, index);
-}
-
-/**
- * A version of remove(Object) using the strong hint that given
- * recent snapshot contains o at the given index.
- */
-private boolean remove(Object o, Object[] snapshot, int index) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] current = getArray();
-        int len = current.length;
-        if (snapshot != current) findIndex: {
-            int prefix = Math.min(index, len);
-            for (int i = 0; i &lt; prefix; i++) {
-                if (current[i] != snapshot[i] &amp;&amp; eq(o, current[i])) {
-                    index = i;
-                    break findIndex;
-                }
-            }
-            if (index &gt;= len)
-                return false;
-            if (current[index] == o)
-                break findIndex;
-            index = indexOf(o, current, index, len);
-            if (index &lt; 0)
-                return false;
-        }
-        Object[] newElements = new Object[len - 1];
-        System.arraycopy(current, 0, newElements, 0, index);
-        System.arraycopy(current, index + 1,
-                         newElements, index,
-                         len - index - 1);
-        setArray(newElements);
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Removes from this list all of the elements whose index is between
- * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive.
- * Shifts any succeeding elements to the left (reduces their index).
- * This call shortens the list by {@code (toIndex - fromIndex)} elements.
- * (If {@code toIndex==fromIndex}, this operation has no effect.)
- *
- * @param fromIndex index of first element to be removed
- * @param toIndex index after last element to be removed
- * @throws IndexOutOfBoundsException if fromIndex or toIndex out of range
- *         ({@code fromIndex &lt; 0 || toIndex &gt; size() || toIndex &lt; fromIndex})
- */
-void removeRange(int fromIndex, int toIndex) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-
-        if (fromIndex &lt; 0 || toIndex &gt; len || toIndex &lt; fromIndex)
-            throw new IndexOutOfBoundsException();
-        int newlen = len - (toIndex - fromIndex);
-        int numMoved = len - toIndex;
-        if (numMoved == 0)
-            setArray(Arrays.copyOf(elements, newlen));
-        else {
-            Object[] newElements = new Object[newlen];
-            System.arraycopy(elements, 0, newElements, 0, fromIndex);
-            System.arraycopy(elements, toIndex, newElements,
-                             fromIndex, numMoved);
-            setArray(newElements);
-        }
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>遍历</p>
-<p> 遍历时，直接使用内部的数组，这样可以避开多线程时的问题,类似的还有indexOf</p>
-<pre><code>public void forEach(Consumer&lt;? super E&gt; action) {
-    if (action == null) throw new NullPointerException();
-    Object[] elements = getArray();
-    int len = elements.length;
-    for (int i = 0; i &lt; len; ++i) {
-        @SuppressWarnings(&quot;unchecked&quot;) E e = (E) elements[i];
-        action.accept(e);
-    }
-}
-
-public int indexOf(E e, int index) {
-    Object[] elements = getArray();
-    return indexOf(e, elements, index, elements.length);
-}
-</code></pre></li>
-</ol>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;CopyOnWriteArrayList的特点与用法&lt;/li&gt;
-&lt;li&gt;CopyOnWriteArrayList的数据结构&lt;/li&gt;
-&lt;li&gt;CopyOnWriteArrayList的常用方法及实现&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;CopyOnWriteA
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="CopyOnWriteArray" scheme="http://showstone.net/tags/copyonwritearray/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HashSet浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-02-hashset%E6%B5%85%E6%9E%90/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>HashSet的特点与用法</li>
-<li>HashSet的数据结构</li>
-<li>HashSet的常用方法及实现</li>
-<li>TreeSet的简要说明</li>
-</ul>
-<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
-<p>以下摘取了一部分HashSet文档：   </p>
-<pre><code>...   
-
-* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
-* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
-* iteration order of the set; in particular, it does not guarantee that the
-* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
-* element.
-*
-* &lt;p&gt;This class offers constant time performance for the basic operations
-* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
-* assuming the hash function disperses the elements properly among the
-* buckets.  Iterating over this set requires time proportional to the sum of
-* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
-* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
-* buckets).  Thus, it&apos;s very important not to set the initial capacity too
-* high (or the load factor too low) if iteration performance is important.
-
-...    
-</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
-<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
-<pre><code>private transient HashMap&lt;E,Object&gt; map;
-
-// Dummy value to associate with an Object in the backing Map
-private static final Object PRESENT = new Object();
-
-/**
- * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
- * default initial capacity (16) and load factor (0.75).
- */
-public HashSet() {
-    map = new HashMap&lt;&gt;();
-}
-</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
-<li><p>add   </p>
-<pre><code>public boolean add(E e) {
-    return map.put(e, PRESENT)==null;
-}
-</code></pre></li>
-<li><p>remove   </p>
-<pre><code>public boolean remove(Object o) {
-    return map.remove(o)==PRESENT;
-}
-</code></pre></li>
-<li><p>contain</p>
-<pre><code>public boolean contains(Object o) {
-    return map.containsKey(o);
-}
-</code></pre></li>
-<li><p>构造函数</p>
-<p> 没什么好说的，直接上代码</p>
-<pre><code>public HashSet(int initialCapacity, float loadFactor) {
-    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
-}
-</code></pre></li>
-</ol>
-<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
-<pre><code>long startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-</code></pre><p>运行结果：</p>
-<blockquote>
-<p>开始时间:2647<br>开始时间:781</p>
-</blockquote>
-<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
-<pre><code>long startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    /*Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }*/
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-startTime = System.currentTimeMillis();
-for(int i=0;i&lt;1000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    /*Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }*/
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-</code></pre><p>运行结果：   </p>
-<blockquote>
-<p>开始时间:1142<br>开始时间:795</p>
-</blockquote>
-<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
-]]></content>
-    
-    <summary type="html">
-    
-      Set源码分析
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="HashSet" scheme="http://showstone.net/tags/hashset/"/>
-    
-      <category term="TreeSet" scheme="http://showstone.net/tags/treeset/"/>
     
   </entry>
   
@@ -1584,223 +742,689 @@ static final int tableSizeFor(int cap) {
   </entry>
   
   <entry>
-    <title>简洁之美 饿了么框架源码走读之vine http</title>
-    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
-    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
+    <title>java容器研究思路</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-java%E5%AE%B9%E5%99%A8%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#容器的研究思路</p>
+<ul>
+<li>为什么研究容器<br><ul>
+<li>容器是JDK里的基础功能，平时使用得较多。</li>
+<li>容器相对简单，比较容易研究</li>
+<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
+</ul>
+</li>
+<li>容器是什么，要研究那些特性<ul>
+<li>容器是一段程序，是一系列的对象。</li>
+<li>作为程序，它由 数据结构+算法构成</li>
+<li>作为对象，它由 属性+方法构成</li>
+<li>作为类，它有自己的继承树</li>
+<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
+</ul>
+</li>
+<li>怎么去研究容器<ul>
+<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
+<li>如何去测试评估程序的特性</li>
+<li>程序的并发性能</li>
+<li>程序的极限性能</li>
+</ul>
+</li>
+</ul>
+<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
+<ul>
+<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
+<li>set<br><br>  HashSet, TreeSet</li>
+<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
+</ul>
+]]></content>
     
     <summary type="html">
     
-    </summary>
-    
-      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
-    
-    
-      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
-    
-      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
-    
-      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
-    
-      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>tmux使用方法</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
-<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
-<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
-<blockquote>
-<p>brew install tmux   </p>
-</blockquote>
-<p>ubuntu </p>
-<blockquote>
-<p>sudo apt-get install tmux</p>
-</blockquote>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
-<blockquote>
-<p>tmux</p>
-</blockquote>
-<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
-c-b d 离开(detach)session
-c-b $ 重命名当前session
+      &lt;p&gt;#容器的研究思路&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么研究容器&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;容器是JDK里的基础功能，平时使用得较多。&lt;/li&gt;
+&lt;li&gt;容器相对简单，比较容易研究&lt;/li&gt;
+&lt;li&gt;已经有很多人对容器进行了研究，相关资料比较齐全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 
-tmux ls 列出会话
-tmux attach -t session 进入某个会话
-tmux -r 连接上个断开的session
-tmux new -s session -d 在后台建立会话
-</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
-c-b &amp; 关闭当前窗口  
-c-b p 切换到上一个窗口  
-c-b n 切换到下一个窗口  
-c-b , 重命名当前窗口
-c-b w 列出所有窗口
-c-b 0~9 选择0~9对应的窗口
-c-b opt+方向键 调整panel的大小(一次调整5%)
-c-b ctrl+方向键 调整panel的大小(一次调整1%)
-</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
-c-b &quot; 竖直分割窗口
-c-b h 将焦点移入左侧的panel
-c-b j 将焦点移入下方的panel
-c-b l 将焦点移入上方的panel
-c-b k 将焦点移入右方的panel
-c-b q 显示panel的编号 
-c-b o 切换到下一个panel
-c-b } 与下一个panel交换位置
-c-b { 与上一个panel交换位置
-</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
-<pre><code>c-b [ 进入复制模式
-space 选择要复制的内容
-c-b ] 粘贴
-q 退出复制模式
-</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
-<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
-<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
-<pre><code>#设置PREFIX为Ctrl-a  
-set -g prefix C-a  
-#解除Ctrl-b与PREFIX的对应关系  
-unbind C-b  
-#copy-mode将快捷键设置为vi模式  
-setw -g mode-keys vi  
-#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
-bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
-#设置终端颜色为256色  
-set -g default-terminal &quot;screen-256color&quot;  
-#开启status-bar uft-8支持  
-set -g status-utf8 on  
-#设置pan前景色  
-set -g pane-border-fg green  
-#设置pane背景色  
-set -g pane-border-bg black  
-#设置活跃pane前景色  
-set -g pane-active-border-fg white  
-#设置活跃pane背景色  
-set -g pane-active-border-bg yellow  
-#设置消息前景色  
-set -g message-fg white  
-#设置消息背景色  
-set -g message-bg black  
-#设置消息高亮显示  
-set -g message-attr bright  
-#设置status-bar颜色  
-set -g status-fg white  
-set -g status-bg black  
-#设置窗口列表颜色  
-setw -g window-status-fg cyan  
-setw -g window-status-bg default  
-setw -g window-status-attr dim  
-#设置当前窗口在status bar中的颜色  
-setw -g window-status-current-fg white  
-setw -g window-status-current-bg red  
-setw -g window-status-current-attr bright  
-#设置status bar格式  
-set -g status-left-length 40  
-set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
-set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
-set -g status-interval 60  
-set -g status-justify centre  
-#开启window事件提示  
-setw -g monitor-activity on  
-set -g visual-activity on 
-</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
-<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
-</ul>
-<blockquote>
-<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
-</blockquote>
-<ul>
-<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
-</ul>
-<blockquote>
-<p>c-b :set synchronize-panes</p>
-</blockquote>
-<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
-<ul>
-<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
-&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
     
     </summary>
     
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="software" scheme="http://showstone.net/tags/software/"/>
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
     
-      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
     
   </entry>
   
   <entry>
-    <title>rebase导致commit丢失</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <title>LinkedList浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-linkedlist/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<pre><code>mkdir rebaselost
-cd rebaselost
-git init
-echo &quot;init content&quot; &gt; a
-git commit -m &apos;init content&apos;
-git checkout -b branch1
-echo &quot;branch1 content&quot; &gt; a
-git commit -m &apos;branch1&apos;
-git checkout master
-echo &quot;new master content&quot; &gt; a
-git commit -m &apos;master content&apos;
-echo &quot;new master content2&quot; &gt; a
-git commit -m &apos;master content2&apos;
-git checkout branch1
-git rebase master
-git rebase --skip
-</code></pre><p>期望的结果是:</p>
+    <content type="html"><![CDATA[<h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
+<li>LinkedList的作用及特点</li>
+<li>LinkedList的数据结构</li>
+<li>LinkedList的常用方法</li>
+</ul>
+<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
+<li>LinkedList可作为链表或者双向队列来使用</li>
+<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
+</ul>
 <blockquote>
-<p> new master content2<br> branch1 content   </p>
+<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
 </blockquote>
-<p>实际的结果:</p>
-<blockquote>
-<p> new master content2</p>
-</blockquote>
-<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
-<blockquote>
-<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
-</blockquote>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
+<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
+<pre><code>public class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+{
+    transient int size = 0;
+
+    /**
+     * Pointer to first node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (first.prev == null &amp;&amp; first.item != null)
+     */
+    transient Node&lt;E&gt; first;
+
+    /**
+     * Pointer to last node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (last.next == null &amp;&amp; last.item != null)
+     */
+    transient Node&lt;E&gt; last;
+
+ ...
+
+}
+</code></pre><p>Node的定义</p>
+<pre><code>private static class Node&lt;E&gt; {
+    E item;
+    Node&lt;E&gt; next;
+    Node&lt;E&gt; prev;
+
+    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
+<pre><code>int size();
+boolean isEmpty();
+boolean contains(Object o);
+Iterator&lt;E&gt; iterator();
+Object[] toArray();
+&lt;T&gt; T[] toArray(T[] a);
+boolean add(E e);
+boolean remove(Object o);
+boolean containsAll(Collection&lt;?&gt; c);
+boolean addAll(Collection&lt;? extends E&gt; c);
+boolean addAll(int index, Collection&lt;? extends E&gt; c);
+boolean removeAll(Collection&lt;?&gt; c);
+boolean retainAll(Collection&lt;?&gt; c);
+default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
+default void sort(Comparator&lt;? super E&gt; c);
+void clear();
+boolean equals(Object o);
+int hashCode();
+E get(int index);
+E set(int index, E element);
+void add(int index, E element);
+E remove(int index);
+int indexOf(Object o);
+int lastIndexOf(Object o);
+ListIterator&lt;E&gt; listIterator();
+ListIterator&lt;E&gt; listIterator(int index);
+List&lt;E&gt; subList(int fromIndex, int toIndex);
+</code></pre><p>LinkedList自己的方法</p>
+<pre><code>void addFirst(E e);
+void addLast(E e);
+boolean offerFirst(E e);
+boolean offerLast(E e);
+E removeFirst();
+E removeLast();
+E pollFirst();
+E pollLast();
+E getFirst();
+E getLast();
+E peekFirst();
+E peekLast();
+boolean removeFirstOccurrence(Object o);
+boolean removeLastOccurrence(Object o);
+boolean add(E e);
+boolean offer(E e);
+E remove();
+E poll();
+E element();
+E peek();
+void push(E e);
+E pop();
+boolean remove(Object o);
+boolean contains(Object o);
+public int size();
+Iterator&lt;E&gt; iterator();
+Iterator&lt;E&gt; descendingIterator();
+</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
 ]]></content>
     
     <summary type="html">
     
-      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+      &lt;h1 id=&quot;LinkedList浅析&quot;&gt;&lt;a href=&quot;#LinkedList浅析&quot; class=&quot;headerlink&quot; title=&quot;LinkedList浅析&quot;&gt;&lt;/a&gt;LinkedList浅析&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;LinkedList的作用及特点&lt;/li&gt;
+&lt;l
     
     </summary>
     
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
     
-      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="LinkedList" scheme="http://showstone.net/tags/linkedlist/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CopyOnWriteArray浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-27-copyonwritearray%E6%B5%85%E6%9E%90/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>CopyOnWriteArrayList的特点与用法</li>
+<li>CopyOnWriteArrayList的数据结构</li>
+<li>CopyOnWriteArrayList的常用方法及实现</li>
+</ul>
+<h2 id="CopyOnWriteArrayList的特点与用法"><a href="#CopyOnWriteArrayList的特点与用法" class="headerlink" title="CopyOnWriteArrayList的特点与用法"></a>CopyOnWriteArrayList的特点与用法</h2><p>CopyOnWriteArrayList的数据结构和用法与ArrayList基本都相同,区别主要在于CopyOnWriteArrayList在添加和删除元素等修改集合状态的操作时，都会重新复制一个新的数组，以保证多线程下的安全性。因为每次修改数据结点都要复制整个对象数组，会比较耗时间，所以CopyOnWriteArrayList适合读多写少情况下的多线程场景，如缓存之类的。</p>
+<h2 id="CopyOnWriteArrayList的数据结构"><a href="#CopyOnWriteArrayList的数据结构" class="headerlink" title="CopyOnWriteArrayList的数据结构"></a>CopyOnWriteArrayList的数据结构</h2><p>CopyOnWriteArrayList的数据结构与ArrayList的基本一样，只是它不再有扩容之类的操作，因为每次修改都是一个新的数组。。。</p>
+<h2 id="CopyOnWriteArrayList的常用方法及实现"><a href="#CopyOnWriteArrayList的常用方法及实现" class="headerlink" title="CopyOnWriteArrayList的常用方法及实现"></a>CopyOnWriteArrayList的常用方法及实现</h2><pre><code>public class CopyOnWriteArrayList&lt;E&gt;
+    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable {
+    ...
+}
+</code></pre><p>从CopyOnWriteArrayList的类结构就可以看出，它的方法签名与ArrayList基本一致，这里就不再重复了。下面讲讲它方法的特殊实现。</p>
+<ol>
+<li><p>构造方法<br> CopyOnWriteArrayList的默认构造方法会创建一个长度为0的数组来储存数据，而不是像ArrayList那样创建一个长度为10的数组</p>
+<pre><code>/**Sets the array. */    
+final void setArray(Object[] a) {
+  array = a;
+}
+
+/**
+* Creates an empty list.
+*/
+public CopyOnWriteArrayList() {
+    setArray(new Object[0]);
+}
+</code></pre></li>
+<li><p>添加方法</p>
+<pre><code>/**
+ * Appends the specified element to the end of this list.
+ *
+ * @param e element to be appended to this list
+ * @return {@code true} (as specified by {@link Collection#add})
+ */
+public boolean add(E e) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        Object[] newElements = Arrays.copyOf(elements, len + 1);
+        newElements[len] = e;
+        setArray(newElements);
+        return true;
+    } finally {
+        lock.unlock();
+    }
+}
+
+/**
+ * Inserts the specified element at the specified position in this
+ * list. Shifts the element currently at that position (if any) and
+ * any subsequent elements to the right (adds one to their indices).
+ *
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public void add(int index, E element) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        if (index &gt; len || index &lt; 0)
+            throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+
+                                                &quot;, Size: &quot;+len);
+        Object[] newElements;
+        int numMoved = len - index;
+        if (numMoved == 0)
+            newElements = Arrays.copyOf(elements, len + 1);
+        else {
+            newElements = new Object[len + 1];
+            System.arraycopy(elements, 0, newElements, 0, index);
+            System.arraycopy(elements, index, newElements, index + 1,
+                             numMoved);
+        }
+        newElements[index] = element;
+        setArray(newElements);
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre></li>
+<li><p>修改方法</p>
+<p>方法在进入和退出时有加锁、释放锁</p>
+<pre><code>/**
+ * Replaces the element at the specified position in this list with the
+ * specified element.
+ *
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public E set(int index, E element) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        E oldValue = get(elements, index);
+
+        if (oldValue != element) {
+            int len = elements.length;
+            Object[] newElements = Arrays.copyOf(elements, len);
+            newElements[index] = element;
+            setArray(newElements);
+        } else {
+            // Not quite a no-op; ensures volatile write semantics
+            setArray(elements);
+        }
+        return oldValue;
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre></li>
+<li><p>删除方法</p>
+<pre><code>/**
+ * Removes the element at the specified position in this list.
+ * Shifts any subsequent elements to the left (subtracts one from their
+ * indices).  Returns the element that was removed from the list.
+ *
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public E remove(int index) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        E oldValue = get(elements, index);
+        int numMoved = len - index - 1;
+        if (numMoved == 0)
+            setArray(Arrays.copyOf(elements, len - 1));
+        else {
+            Object[] newElements = new Object[len - 1];
+            System.arraycopy(elements, 0, newElements, 0, index);
+            System.arraycopy(elements, index + 1, newElements, index,
+                             numMoved);
+            setArray(newElements);
+        }
+        return oldValue;
+    } finally {
+        lock.unlock();
+    }
+}
+
+/**
+ * Removes the first occurrence of the specified element from this list,
+ * if it is present.  If this list does not contain the element, it is
+ * unchanged.  More formally, removes the element with the lowest index
+ * {@code i} such that
+ * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;
+ * (if such an element exists).  Returns {@code true} if this list
+ * contained the specified element (or equivalently, if this list
+ * changed as a result of the call).
+ *
+ * @param o element to be removed from this list, if present
+ * @return {@code true} if this list contained the specified element
+ */
+public boolean remove(Object o) {
+    Object[] snapshot = getArray();
+    int index = indexOf(o, snapshot, 0, snapshot.length);
+    return (index &lt; 0) ? false : remove(o, snapshot, index);
+}
+
+/**
+ * A version of remove(Object) using the strong hint that given
+ * recent snapshot contains o at the given index.
+ */
+private boolean remove(Object o, Object[] snapshot, int index) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] current = getArray();
+        int len = current.length;
+        if (snapshot != current) findIndex: {
+            int prefix = Math.min(index, len);
+            for (int i = 0; i &lt; prefix; i++) {
+                if (current[i] != snapshot[i] &amp;&amp; eq(o, current[i])) {
+                    index = i;
+                    break findIndex;
+                }
+            }
+            if (index &gt;= len)
+                return false;
+            if (current[index] == o)
+                break findIndex;
+            index = indexOf(o, current, index, len);
+            if (index &lt; 0)
+                return false;
+        }
+        Object[] newElements = new Object[len - 1];
+        System.arraycopy(current, 0, newElements, 0, index);
+        System.arraycopy(current, index + 1,
+                         newElements, index,
+                         len - index - 1);
+        setArray(newElements);
+        return true;
+    } finally {
+        lock.unlock();
+    }
+}
+
+/**
+ * Removes from this list all of the elements whose index is between
+ * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive.
+ * Shifts any succeeding elements to the left (reduces their index).
+ * This call shortens the list by {@code (toIndex - fromIndex)} elements.
+ * (If {@code toIndex==fromIndex}, this operation has no effect.)
+ *
+ * @param fromIndex index of first element to be removed
+ * @param toIndex index after last element to be removed
+ * @throws IndexOutOfBoundsException if fromIndex or toIndex out of range
+ *         ({@code fromIndex &lt; 0 || toIndex &gt; size() || toIndex &lt; fromIndex})
+ */
+void removeRange(int fromIndex, int toIndex) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+
+        if (fromIndex &lt; 0 || toIndex &gt; len || toIndex &lt; fromIndex)
+            throw new IndexOutOfBoundsException();
+        int newlen = len - (toIndex - fromIndex);
+        int numMoved = len - toIndex;
+        if (numMoved == 0)
+            setArray(Arrays.copyOf(elements, newlen));
+        else {
+            Object[] newElements = new Object[newlen];
+            System.arraycopy(elements, 0, newElements, 0, fromIndex);
+            System.arraycopy(elements, toIndex, newElements,
+                             fromIndex, numMoved);
+            setArray(newElements);
+        }
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre></li>
+<li><p>遍历</p>
+<p> 遍历时，直接使用内部的数组，这样可以避开多线程时的问题,类似的还有indexOf</p>
+<pre><code>public void forEach(Consumer&lt;? super E&gt; action) {
+    if (action == null) throw new NullPointerException();
+    Object[] elements = getArray();
+    int len = elements.length;
+    for (int i = 0; i &lt; len; ++i) {
+        @SuppressWarnings(&quot;unchecked&quot;) E e = (E) elements[i];
+        action.accept(e);
+    }
+}
+
+public int indexOf(E e, int index) {
+    Object[] elements = getArray();
+    return indexOf(e, elements, index, elements.length);
+}
+</code></pre></li>
+</ol>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;CopyOnWriteArrayList的特点与用法&lt;/li&gt;
+&lt;li&gt;CopyOnWriteArrayList的数据结构&lt;/li&gt;
+&lt;li&gt;CopyOnWriteArrayList的常用方法及实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;CopyOnWriteA
+    
+    </summary>
+    
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
+    
+    
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
+    
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="CopyOnWriteArray" scheme="http://showstone.net/tags/copyonwritearray/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vector浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-29-vector/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
+<p>Vector的类声明:     </p>
+<blockquote>
+<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
+</blockquote>
+<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
+<p>另外，查看iterator的源码</p>
+<pre><code>/**
+ * Returns an iterator over the elements in this list in proper sequence.
+ *
+ * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
+ *
+ * @return an iterator over the elements in this list in proper sequence
+ */
+public synchronized Iterator&lt;E&gt; iterator() {
+    return new Itr();
+}
+</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
+<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
+vector.add(&quot;abc&quot;);
+Iterator&lt;String&gt; ite = vector.iterator();
+vector.add(&quot;bcd&quot;);
+while (ite.hasNext()) {
+    System.out.println(ite.next());
+}
+</code></pre><p>运行结果：</p>
+<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
+    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
+    at java.util.Vector$Itr.next(Vector.java:1137)
+    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      vector分析
+    
+    </summary>
+    
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
+    
+    
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
+    
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="vector" scheme="http://showstone.net/tags/vector/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HashSet浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-02-hashset%E6%B5%85%E6%9E%90/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>HashSet的特点与用法</li>
+<li>HashSet的数据结构</li>
+<li>HashSet的常用方法及实现</li>
+<li>TreeSet的简要说明</li>
+</ul>
+<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
+<p>以下摘取了一部分HashSet文档：   </p>
+<pre><code>...   
+
+* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
+* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
+* iteration order of the set; in particular, it does not guarantee that the
+* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
+* element.
+*
+* &lt;p&gt;This class offers constant time performance for the basic operations
+* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
+* assuming the hash function disperses the elements properly among the
+* buckets.  Iterating over this set requires time proportional to the sum of
+* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
+* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
+* buckets).  Thus, it&apos;s very important not to set the initial capacity too
+* high (or the load factor too low) if iteration performance is important.
+
+...    
+</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
+<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
+<pre><code>private transient HashMap&lt;E,Object&gt; map;
+
+// Dummy value to associate with an Object in the backing Map
+private static final Object PRESENT = new Object();
+
+/**
+ * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
+ * default initial capacity (16) and load factor (0.75).
+ */
+public HashSet() {
+    map = new HashMap&lt;&gt;();
+}
+</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
+<li><p>add   </p>
+<pre><code>public boolean add(E e) {
+    return map.put(e, PRESENT)==null;
+}
+</code></pre></li>
+<li><p>remove   </p>
+<pre><code>public boolean remove(Object o) {
+    return map.remove(o)==PRESENT;
+}
+</code></pre></li>
+<li><p>contain</p>
+<pre><code>public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+</code></pre></li>
+<li><p>构造函数</p>
+<p> 没什么好说的，直接上代码</p>
+<pre><code>public HashSet(int initialCapacity, float loadFactor) {
+    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
+}
+</code></pre></li>
+</ol>
+<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：</p>
+<blockquote>
+<p>开始时间:2647<br>开始时间:781</p>
+</blockquote>
+<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;1000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：   </p>
+<blockquote>
+<p>开始时间:1142<br>开始时间:795</p>
+</blockquote>
+<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Set源码分析
+    
+    </summary>
+    
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
+    
+    
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
+    
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="HashSet" scheme="http://showstone.net/tags/hashset/"/>
+    
+      <category term="TreeSet" scheme="http://showstone.net/tags/treeset/"/>
     
   </entry>
   
@@ -2094,6 +1718,91 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   </entry>
   
   <entry>
+    <title></title>
+    <link href="http://showstone.net/uncategorized/2017/03/07/eleme-README/"/>
+    <id>http://showstone.net/uncategorized/2017/03/07/eleme-README/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>计划:</p>
+<ol>
+<li>先写vine框架(http, mq, service),包括用法等  </li>
+<li>再写service的实现与封装  </li>
+<li>写日志/打点等实现  </li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;计划:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先写vine框架(http, mq, service),包括用法等  &lt;/li&gt;
+&lt;li&gt;再写service的实现与封装  &lt;/li&gt;
+&lt;li&gt;写日志/打点等实现  &lt;/li&gt;
+&lt;/ol&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>rebase导致commit丢失</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
+<pre><code>mkdir rebaselost
+cd rebaselost
+git init
+echo &quot;init content&quot; &gt; a
+git commit -m &apos;init content&apos;
+git checkout -b branch1
+echo &quot;branch1 content&quot; &gt; a
+git commit -m &apos;branch1&apos;
+git checkout master
+echo &quot;new master content&quot; &gt; a
+git commit -m &apos;master content&apos;
+echo &quot;new master content2&quot; &gt; a
+git commit -m &apos;master content2&apos;
+git checkout branch1
+git rebase master
+git rebase --skip
+</code></pre><p>期望的结果是:</p>
+<blockquote>
+<p> new master content2<br> branch1 content   </p>
+</blockquote>
+<p>实际的结果:</p>
+<blockquote>
+<p> new master content2</p>
+</blockquote>
+<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
+<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
+<blockquote>
+<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
+</blockquote>
+<p>要避免丢失,在冲突时编辑冲突即可</p>
+]]></content>
+    
+    <summary type="html">
+    
+      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
+    
+      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+    
+  </entry>
+  
+  <entry>
     <title>实用git命令</title>
     <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
@@ -2145,32 +1854,140 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://showstone.net/uncategorized/2017/03/07/eleme-README/"/>
-    <id>http://showstone.net/uncategorized/2017/03/07/eleme-README/</id>
+    <title>tmux使用方法</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>计划:</p>
-<ol>
-<li>先写vine框架(http, mq, service),包括用法等  </li>
-<li>再写service的实现与封装  </li>
-<li>写日志/打点等实现  </li>
-</ol>
+    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
+<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
+<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
+<blockquote>
+<p>brew install tmux   </p>
+</blockquote>
+<p>ubuntu </p>
+<blockquote>
+<p>sudo apt-get install tmux</p>
+</blockquote>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
+<blockquote>
+<p>tmux</p>
+</blockquote>
+<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
+c-b d 离开(detach)session
+c-b $ 重命名当前session
+
+tmux ls 列出会话
+tmux attach -t session 进入某个会话
+tmux -r 连接上个断开的session
+tmux new -s session -d 在后台建立会话
+</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
+c-b &amp; 关闭当前窗口  
+c-b p 切换到上一个窗口  
+c-b n 切换到下一个窗口  
+c-b , 重命名当前窗口
+c-b w 列出所有窗口
+c-b 0~9 选择0~9对应的窗口
+c-b opt+方向键 调整panel的大小(一次调整5%)
+c-b ctrl+方向键 调整panel的大小(一次调整1%)
+</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
+c-b &quot; 竖直分割窗口
+c-b h 将焦点移入左侧的panel
+c-b j 将焦点移入下方的panel
+c-b l 将焦点移入上方的panel
+c-b k 将焦点移入右方的panel
+c-b q 显示panel的编号 
+c-b o 切换到下一个panel
+c-b } 与下一个panel交换位置
+c-b { 与上一个panel交换位置
+</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
+<pre><code>c-b [ 进入复制模式
+space 选择要复制的内容
+c-b ] 粘贴
+q 退出复制模式
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
+<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
+<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
+<pre><code>#设置PREFIX为Ctrl-a  
+set -g prefix C-a  
+#解除Ctrl-b与PREFIX的对应关系  
+unbind C-b  
+#copy-mode将快捷键设置为vi模式  
+setw -g mode-keys vi  
+#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
+bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
+#设置终端颜色为256色  
+set -g default-terminal &quot;screen-256color&quot;  
+#开启status-bar uft-8支持  
+set -g status-utf8 on  
+#设置pan前景色  
+set -g pane-border-fg green  
+#设置pane背景色  
+set -g pane-border-bg black  
+#设置活跃pane前景色  
+set -g pane-active-border-fg white  
+#设置活跃pane背景色  
+set -g pane-active-border-bg yellow  
+#设置消息前景色  
+set -g message-fg white  
+#设置消息背景色  
+set -g message-bg black  
+#设置消息高亮显示  
+set -g message-attr bright  
+#设置status-bar颜色  
+set -g status-fg white  
+set -g status-bg black  
+#设置窗口列表颜色  
+setw -g window-status-fg cyan  
+setw -g window-status-bg default  
+setw -g window-status-attr dim  
+#设置当前窗口在status bar中的颜色  
+setw -g window-status-current-fg white  
+setw -g window-status-current-bg red  
+setw -g window-status-current-attr bright  
+#设置status bar格式  
+set -g status-left-length 40  
+set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
+set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
+set -g status-interval 60  
+set -g status-justify centre  
+#开启window事件提示  
+setw -g monitor-activity on  
+set -g visual-activity on 
+</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
+<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+</ul>
+<blockquote>
+<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+</blockquote>
+<ul>
+<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+</ul>
+<blockquote>
+<p>c-b :set synchronize-panes</p>
+</blockquote>
+<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<ul>
+<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;计划:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;先写vine框架(http, mq, service),包括用法等  &lt;/li&gt;
-&lt;li&gt;再写service的实现与封装  &lt;/li&gt;
-&lt;li&gt;写日志/打点等实现  &lt;/li&gt;
-&lt;/ol&gt;
-
+      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
+&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
     
     </summary>
     
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="software" scheme="http://showstone.net/tags/software/"/>
+    
+      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
     
   </entry>
   
@@ -2270,6 +2087,65 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
       <category term="linux" scheme="http://showstone.net/tags/linux/"/>
     
       <category term="top" scheme="http://showstone.net/tags/top/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编译vim以支持lua</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+<ol>
+<li><p>下载源代码</p>
+<pre><code>git clone https://github.com/vim/vim.git   
+cd vim
+</code></pre></li>
+<li><p>设置编译参数</p>
+<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
+<pre><code>./configure --with-features=huge --enable-rubyinterp \    
+--enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
+--enable-perlinterp --enable-multibyte --enable-sniff  \
+--enable-fontset --enable-cscope \    
+--disable-gui --prefix=/opt/local/vim  
+
+--with-features=huge：支持最大特性  
+--enable-rubyinterp：启用Vim对ruby的支持  
+--enable-pythoninterp：启用Vim对python的支持  
+--enable-luainterp：启用Vim对lua的支持  
+--with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
+--enable-perlinterp：启用Vim对perl的支持  
+--enable-multibyte：多字节支持 可以在Vim中输入中文  
+--enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+--enable-cscope：Vim对cscope支持  
+--disable-gui：不用编译生成图形界面版gvim  
+--prefix=/opt/local/vim：编译安装路径  
+</code></pre></li>
+<li><p>编译\安装</p>
+<pre><code>make    
+make install
+</code></pre></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      编译vim以支持lua
+    
+    </summary>
+    
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
+    
+      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
+    
+      <category term="python" scheme="http://showstone.net/tags/python/"/>
     
   </entry>
   
