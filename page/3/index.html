@@ -87,7 +87,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cj8tp2v5k0005xb2satcsmco1" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cj9bmln3s0005do2ssa54upqk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -156,7 +156,7 @@ redis&gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cj8tp2v5m0006xb2sv9vtr8u1" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cj9bmln3u0006do2smsf2dfmq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forward/">forward</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
@@ -198,7 +198,7 @@ redis&gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj8tp2v5n0007xb2s8vy2r2aq" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj9bmln3x0007do2srtqctl4o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,9 +208,9 @@ redis&gt;
 
 
   
-    <article id="post-java容器-2015-06-24-linkedlist" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java容器-2015-06-24-arraylist" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" class="article-date">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
@@ -226,7 +226,7 @@ redis&gt;
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">LinkedList浅析</a>
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/">ArrayList浅析</a>
     </h1>
   
 
@@ -234,119 +234,194 @@ redis&gt;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
+        <p>#ArrayList浅析</p>
+<ul>
+<li>ArrayList的作用、特点</li>
+<li>ArrayList的数据结构</li>
+<li>ArrayList的常用方法及实现</li>
+<li>ArrayList里需要注意的地方</li>
 </ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
-<blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
-</blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
+<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
+<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
+<pre><code>默认的空数组
+/**
+ * Constructs an empty list with an initial capacity of ten.
+ */
+public ArrayList() {
+    super();
+    this.elementData = EMPTY_ELEMENTDATA;
 }
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
 
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
+private static final Object[] EMPTY_ELEMENTDATA = {};
+</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
+<p>加入元素之前，先确保有足够的空间</p>
+<pre><code>public boolean add(E e) {&lt;br/&gt;
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}
+</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
+<pre><code>public void add(int index, E element) {
+    rangeCheckForAdd(index);
+
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    System.arraycopy(elementData, index, elementData, index + 1, size - index);
+    elementData[index] = element;
+    size++;
+}
+</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
+    Object[] a = c.toArray();
+    int numNew = a.length;
+    ensureCapacityInternal(size + numNew);  // Increments modCount
+    System.arraycopy(a, 0, elementData, size, numNew);
+    size += numNew;
+    return numNew != 0;
+}
+</code></pre><p>2.remove</p>
+<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
+<pre><code>public E remove(int index) {
+    rangeCheck(index);//简单地检查下标是否越界
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}
+</code></pre><p>3.contain</p>
+<pre><code>public boolean contains(Object o) {
+    return indexOf(o) &gt;= 0;
+}
+
+public int indexOf(Object o) {
+    if (o == null) {
+        for (int i = 0; i &lt; size; i++)
+            if (elementData[i]==null)
+                return i;
+    } else {
+        for (int i = 0; i &lt; size; i++)
+            if (o.equals(elementData[i]))
+                return i;
+    }
+    return -1;
+}
+</code></pre><p>4.clone</p>
+<pre><code>public Object clone() {
+    try {
+        @SuppressWarnings(&quot;unchecked&quot;)
+            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
+        v.elementData = Arrays.copyOf(elementData, size);
+        v.modCount = 0;
+        return v;
+    } catch (CloneNotSupportedException e) {
+        // this shouldn&apos;t happen, since we are Cloneable
+        throw new InternalError();
     }
 }
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
+</code></pre><p>5.iterator</p>
+<p>通过使用cursor和lastRet来进行标记</p>
+<pre><code>private class Itr implements Iterator&lt;E&gt; {
+    int cursor;       // index of next element to return
+    int lastRet = -1; // index of last element returned; -1 if no such
+    int expectedModCount = modCount;
+    ...
+}
+</code></pre><p>###ArrayList里需要注意的地方</p>
+<ul>
+<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
+</ul>
+<p>代码：</p>
+<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
+    subListRangeCheck(fromIndex, toIndex, size);
+    return new SubList(this, 0, fromIndex, toIndex);
+}
+
+ private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
+    private final AbstractList&lt;E&gt; parent;
+    private final int parentOffset;
+    private final int offset;
+    int size;
+    ...
+}
+</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
+<ul>
+<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
+</ul>
+<p>代码</p>
+<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
+    return batchRemove(c, false);
+}
+
+private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+    final Object[] elementData = this.elementData;
+    int r = 0, w = 0;
+    boolean modified = false;
+    try {
+        for (; r &lt; size; r++)
+            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
+                elementData[w++] = elementData[r];
+    } finally {
+        // Preserve behavioral compatibility with AbstractCollection,
+        // even if c.contains() throws.
+        if (r != size) {
+            System.arraycopy(elementData, r,
+                             elementData, w,
+                             size - r);
+            w += size - r;
+        }
+        if (w != size) {
+            // clear to let GC do its work
+            for (int i = w; i &lt; size; i++)
+                elementData[i] = null;
+            modCount += size - w;
+            size = w;
+            modified = true;
+        }
+    }
+    return modified;
+}
+</code></pre><ul>
+<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
+</ul>
+<blockquote>
+<p>protected transient int modCount = 0;</p>
+<p>private int size;</p>
+</blockquote>
+<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
+    long startTime = System.currentTimeMillis();
+    for(int i=0;i&lt;100000;i++){
+        ArrayList list = new ArrayList();
+        for(int num=0;num&lt;1000;num++){
+            list.add(&quot;object&quot;);
+        }
+    }
+    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
+    startTime = System.currentTimeMillis();
+    for(int i=0;i&lt;100000;i++){
+        ArrayList list = new ArrayList(2000);
+        for(int num=0;num&lt;1000;num++){
+            list.add(&quot;object&quot;);
+        }
+    }
+    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
+}
+</code></pre><p>运行结果:</p>
+<blockquote>
+<p>用时:607毫秒<br>用时:415毫秒</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" data-id="cj8tp2v5r000axb2snefecz8n" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cj9bmln40000ado2sq1vbbt5d" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
 
     </footer>
   </div>
@@ -355,9 +430,81 @@ Iterator&lt;E&gt; descendingIterator();
 
 
   
-    <article id="post-软件配置-2015-08-24-编译vim以支持lua" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java容器-2015-06-24-java容器研究思路" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" class="article-date">
+    <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java容器/">java容器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">java容器研究思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#容器的研究思路</p>
+<ul>
+<li>为什么研究容器<br><ul>
+<li>容器是JDK里的基础功能，平时使用得较多。</li>
+<li>容器相对简单，比较容易研究</li>
+<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
+</ul>
+</li>
+<li>容器是什么，要研究那些特性<ul>
+<li>容器是一段程序，是一系列的对象。</li>
+<li>作为程序，它由 数据结构+算法构成</li>
+<li>作为对象，它由 属性+方法构成</li>
+<li>作为类，它有自己的继承树</li>
+<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
+</ul>
+</li>
+<li>怎么去研究容器<ul>
+<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
+<li>如何去测试评估程序的特性</li>
+<li>程序的并发性能</li>
+<li>程序的极限性能</li>
+</ul>
+</li>
+</ul>
+<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
+<ul>
+<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
+<li>set<br><br>  HashSet, TreeSet</li>
+<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cj9bmln45000cdo2s5nrfbltv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-软件配置-2015-07-24-maven常用镜像源" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" class="article-date">
   <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
 </a>
     
@@ -373,7 +520,7 @@ Iterator&lt;E&gt; descendingIterator();
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">编译vim以支持lua</a>
+      <a class="article-title" href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/">maven常用镜像源</a>
     </h1>
   
 
@@ -381,45 +528,21 @@ Iterator&lt;E&gt; descendingIterator();
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
-<ol>
-<li><p>下载源代码</p>
-<pre><code>git clone https://github.com/vim/vim.git   
-cd vim
-</code></pre></li>
-<li><p>设置编译参数</p>
-<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
-<pre><code>./configure --with-features=huge --enable-rubyinterp \    
---enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
---enable-perlinterp --enable-multibyte --enable-sniff  \
---enable-fontset --enable-cscope \    
---disable-gui --prefix=/opt/local/vim  
-
---with-features=huge：支持最大特性  
---enable-rubyinterp：启用Vim对ruby的支持  
---enable-pythoninterp：启用Vim对python的支持  
---enable-luainterp：启用Vim对lua的支持  
---with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
---enable-perlinterp：启用Vim对perl的支持  
---enable-multibyte：多字节支持 可以在Vim中输入中文  
---enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
---enable-cscope：Vim对cscope支持  
---disable-gui：不用编译生成图形界面版gvim  
---prefix=/opt/local/vim：编译安装路径  
-</code></pre></li>
-<li><p>编译\安装</p>
-<pre><code>make    
-make install
-</code></pre></li>
-</ol>
+        <p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
+<p>nexus镜像:</p>
+<pre><code>http://uk.maven.org/maven2/
+http://repo2.maven.org/maven2/
+http://mirrors.ibiblio.org/pub/mirrors/maven2/
+http://repository.jboss.org/nexus/content/groups/public
+</code></pre><p>以上内容均收集于互联网</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" data-id="cj8tp2v7n001vxb2sq4zk753r" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cj9bmln60001xdo2s90o17vkq" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/">lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/镜像/">镜像</a></li></ul>
 
     </footer>
   </div>
@@ -483,7 +606,7 @@ make install
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/eleme/2017/03/03/eleme-2017-03-03-vine/" data-id="cj8tp2v5c0002xb2sgfvwjvwb" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/eleme/2017/03/03/eleme-2017-03-03-vine/" data-id="cj9bmln3k0002do2sn4tjamja" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netty/">netty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/soa/">soa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vine/">vine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
@@ -518,7 +641,7 @@ make install
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nas服务器/">NAS服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eleme/">eleme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forward/">forward</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rebase/">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soa/">soa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/">software</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/top/">top</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vine/">vine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下载/">下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/克制/">克制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用/">实用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/导出/">导出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间管理/">时间管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/精力管理/">精力管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结构/">结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/走读/">走读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/超大excel/">超大excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copyonwritearray/">CopyOnWriteArray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashmap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashset/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedhashmap/">LinkedHashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linkedlist/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatsis/">MyBatsis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nas服务器/">NAS服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/treeset/">TreeSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eleme/">eleme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forward/">forward</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rebase/">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soa/">soa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/">software</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/top/">top</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu-打印服务器-cups/">ubuntu, 打印服务器, cups</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vine/">vine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下载/">下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/克制/">克制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用/">实用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/导出/">导出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间管理/">时间管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简洁之美/">简洁之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/精力管理/">精力管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结构/">结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/走读/">走读</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/超大excel/">超大excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/饿了么/">饿了么</a></li></ul>
     </div>
   </div>
 
@@ -528,7 +651,7 @@ make install
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/arraylist/" style="font-size: 10px;">ArrayList</a> <a href="/tags/copyonwritearray/" style="font-size: 10px;">CopyOnWriteArray</a> <a href="/tags/hashmap/" style="font-size: 10px;">HashMap</a> <a href="/tags/hashset/" style="font-size: 10px;">HashSet</a> <a href="/tags/jedisdataexception/" style="font-size: 10px;">JedisDataException</a> <a href="/tags/linkedhashmap/" style="font-size: 10px;">LinkedHashMap</a> <a href="/tags/linkedlist/" style="font-size: 10px;">LinkedList</a> <a href="/tags/mybatsis/" style="font-size: 10px;">MyBatsis</a> <a href="/tags/nas服务器/" style="font-size: 16.67px;">NAS服务器</a> <a href="/tags/proxy/" style="font-size: 10px;">Proxy</a> <a href="/tags/treeset/" style="font-size: 10px;">TreeSet</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/eleme/" style="font-size: 10px;">eleme</a> <a href="/tags/forward/" style="font-size: 10px;">forward</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/soa/" style="font-size: 10px;">soa</a> <a href="/tags/software/" style="font-size: 13.33px;">software</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/top/" style="font-size: 10px;">top</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vine/" style="font-size: 10px;">vine</a> <a href="/tags/下载/" style="font-size: 10px;">下载</a> <a href="/tags/克制/" style="font-size: 10px;">克制</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/实用/" style="font-size: 10px;">实用</a> <a href="/tags/容器/" style="font-size: 20px;">容器</a> <a href="/tags/导出/" style="font-size: 10px;">导出</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/时间管理/" style="font-size: 10px;">时间管理</a> <a href="/tags/框架/" style="font-size: 13.33px;">框架</a> <a href="/tags/源码/" style="font-size: 16.67px;">源码</a> <a href="/tags/简洁之美/" style="font-size: 10px;">简洁之美</a> <a href="/tags/精力管理/" style="font-size: 10px;">精力管理</a> <a href="/tags/结构/" style="font-size: 10px;">结构</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/走读/" style="font-size: 10px;">走读</a> <a href="/tags/超大excel/" style="font-size: 10px;">超大excel</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/软件配置/" style="font-size: 10px;">软件配置</a> <a href="/tags/镜像/" style="font-size: 10px;">镜像</a> <a href="/tags/饿了么/" style="font-size: 10px;">饿了么</a>
+      <a href="/tags/arraylist/" style="font-size: 10px;">ArrayList</a> <a href="/tags/copyonwritearray/" style="font-size: 10px;">CopyOnWriteArray</a> <a href="/tags/hashmap/" style="font-size: 10px;">HashMap</a> <a href="/tags/hashset/" style="font-size: 10px;">HashSet</a> <a href="/tags/jedisdataexception/" style="font-size: 10px;">JedisDataException</a> <a href="/tags/linkedhashmap/" style="font-size: 10px;">LinkedHashMap</a> <a href="/tags/linkedlist/" style="font-size: 10px;">LinkedList</a> <a href="/tags/mybatsis/" style="font-size: 10px;">MyBatsis</a> <a href="/tags/nas服务器/" style="font-size: 16.67px;">NAS服务器</a> <a href="/tags/proxy/" style="font-size: 10px;">Proxy</a> <a href="/tags/treeset/" style="font-size: 10px;">TreeSet</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/eleme/" style="font-size: 10px;">eleme</a> <a href="/tags/forward/" style="font-size: 10px;">forward</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/netty/" style="font-size: 10px;">netty</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/soa/" style="font-size: 10px;">soa</a> <a href="/tags/software/" style="font-size: 13.33px;">software</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/top/" style="font-size: 10px;">top</a> <a href="/tags/ubuntu-打印服务器-cups/" style="font-size: 10px;">ubuntu, 打印服务器, cups</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vine/" style="font-size: 10px;">vine</a> <a href="/tags/下载/" style="font-size: 10px;">下载</a> <a href="/tags/克制/" style="font-size: 10px;">克制</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/实用/" style="font-size: 10px;">实用</a> <a href="/tags/容器/" style="font-size: 20px;">容器</a> <a href="/tags/导出/" style="font-size: 10px;">导出</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/时间管理/" style="font-size: 10px;">时间管理</a> <a href="/tags/框架/" style="font-size: 13.33px;">框架</a> <a href="/tags/源码/" style="font-size: 16.67px;">源码</a> <a href="/tags/简洁之美/" style="font-size: 10px;">简洁之美</a> <a href="/tags/精力管理/" style="font-size: 10px;">精力管理</a> <a href="/tags/结构/" style="font-size: 10px;">结构</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/走读/" style="font-size: 10px;">走读</a> <a href="/tags/超大excel/" style="font-size: 10px;">超大excel</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/软件配置/" style="font-size: 10px;">软件配置</a> <a href="/tags/镜像/" style="font-size: 10px;">镜像</a> <a href="/tags/饿了么/" style="font-size: 10px;">饿了么</a>
     </div>
   </div>
 
@@ -550,6 +673,10 @@ make install
       <ul>
         
           <li>
+            <a href="/uncategorized/2017/10/29/工具-2017-10-29-ubuntu下打印服务器的安装配置与使用教程/">ubuntu下打印服务器的安装配置与使用教程</a>
+          </li>
+        
+          <li>
             <a href="/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/">NAS服务器的搭建-软件篇</a>
           </li>
         
@@ -563,10 +690,6 @@ make install
         
           <li>
             <a href="/小功能/2017/08/22/小功能-2017-08-22-下载超大的excel/">下载超大的excel</a>
-          </li>
-        
-          <li>
-            <a href="/java/2017/07/23/三瓜两爪-2017-07-23-克制/"> 克制</a>
           </li>
         
       </ul>
