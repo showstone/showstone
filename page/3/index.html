@@ -65,109 +65,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-eleme-README" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/uncategorized/2017/03/07/eleme-README/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>计划:</p>
-<ol>
-<li>先写vine框架(http, mq, service),包括用法等  </li>
-<li>再写service的实现与封装  </li>
-<li>写日志/打点等实现  </li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cj9bmln3s0005do2ssa54upqk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-2016-03-17-记一次redis报错JedisDataException" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" class="article-date">
-  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cj9bmln3u0006do2smsf2dfmq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forward/">forward</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-java-2015-10-31-junit退出时所有的子线程也会退出" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" class="article-date">
@@ -198,7 +95,39 @@ redis&gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj9bmln3x0007do2srtqctl4o" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" data-id="cj9bmngli0005kk2sy5atdog4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-eleme-README" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/uncategorized/2017/03/07/eleme-README/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>计划:</p>
+<ol>
+<li>先写vine框架(http, mq, service),包括用法等  </li>
+<li>再写service的实现与封装  </li>
+<li>写日志/打点等实现  </li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/eleme-README/" data-id="cj9bmnglw0006kk2stlqqhjvo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -418,7 +347,7 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cj9bmln40000ado2sq1vbbt5d" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/" data-id="cj9bmngm80007kk2s9nw5hwnt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arraylist/">ArrayList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
@@ -490,7 +419,7 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cj9bmln45000cdo2s5nrfbltv" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" data-id="cj9bmngmm000akk2swwtm639u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
@@ -539,10 +468,81 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cj9bmln60001xdo2s90o17vkq" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" data-id="cj9bmngpv001rkk2sd9wl864f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件配置/">软件配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/镜像/">镜像</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-2016-03-17-记一次redis报错JedisDataException" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" class="article-date">
+  <time datetime="2017-03-07T08:20:00.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://showstone.net/uncategorized/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" data-id="cj9bmngmt000ckk2swnaei0r8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jedisdataexception/">JedisDataException</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forward/">forward</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
 
     </footer>
   </div>
@@ -606,7 +606,7 @@ http://repository.jboss.org/nexus/content/groups/public
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://showstone.net/eleme/2017/03/03/eleme-2017-03-03-vine/" data-id="cj9bmln3k0002do2sn4tjamja" class="article-share-link">Share</a>
+      <a data-url="http://showstone.net/eleme/2017/03/03/eleme-2017-03-03-vine/" data-id="cj9bmngkj0001kk2syw9hc2zd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netty/">netty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/soa/">soa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vine/">vine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>

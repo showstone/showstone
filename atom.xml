@@ -68,10 +68,9 @@
     <link href="http://showstone.net/uncategorized/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
     <id>http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/</id>
     <published>2017-10-02T18:38:09.000Z</published>
-    <updated>2017-10-16T04:42:57.000Z</updated>
+    <updated>2017-10-28T17:55:20.000Z</updated>
     
     <content type="html"><![CDATA[<p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
-<h1 id="NAS服务器的搭建-软件篇"><a href="#NAS服务器的搭建-软件篇" class="headerlink" title="NAS服务器的搭建-软件篇"></a>NAS服务器的搭建-软件篇</h1><p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
 <h2 id="NAS软件功能"><a href="#NAS软件功能" class="headerlink" title="NAS软件功能"></a>NAS软件功能</h2><ul>
 <li>外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊</li>
 <li>文件共享。如samba或者ftp</li>
@@ -119,7 +118,8 @@
     <summary type="html">
     
       &lt;p&gt;顺利装好机器，是时候试试它的威力了，开始折腾软件.&lt;/p&gt;
-&lt;h1 id=&quot;NAS服务器的搭建-软件篇&quot;&gt;&lt;a href=&quot;#NAS服务器的搭建-软件篇&quot; class=&quot;headerlink&quot; title=&quot;NAS服务器的搭建-软件篇&quot;&gt;&lt;/a&gt;NAS服务器的搭建-软件篇&lt;
+&lt;h2 id=&quot;NAS软件功能&quot;&gt;&lt;a href=&quot;#NAS软件功能&quot; class=&quot;headerlink&quot; title=&quot;NAS软件功能&quot;&gt;&lt;/a&gt;NAS软件功能&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;外网访问。这么牛逼的东
     
     </summary>
     
@@ -466,41 +466,252 @@
   </entry>
   
   <entry>
-    <title>mybatis结构分析</title>
-    <link href="http://showstone.net/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/2017/03/07/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2015-07-23-mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/</id>
+    <title>LinkedHashMap浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-19-treemap/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
     <content type="html"><![CDATA[<ul>
-<li>JDBC方式的几个缺点</li>
-<li>MyBatis的解决方法</li>
-<li><p>MyBatis的结构框架</p>
-<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
+<li>LinkedHashMap的特点</li>
+<li>LinkedHashMap的数据结构</li>
+<li>LinkedHashMap的常用方法及实现</li>
+</ul>
+<h2 id="LinkedHashMap的特点"><a href="#LinkedHashMap的特点" class="headerlink" title="LinkedHashMap的特点"></a>LinkedHashMap的特点</h2><ul>
+<li>LinkedHashMap继承于HashMap，拥有HashMap的所有特点</li>
+<li><p>LinkedHashMap可以保证元素的顺序，支持插入或者访问的顺序，这是通过在构造时提供accessOrder参数来进行控制</p>
+<pre><code>/**
+ * Constructs an empty &lt;tt&gt;LinkedHashMap&lt;/tt&gt; instance with the
+ * specified initial capacity, load factor and ordering mode.
+ *
+ * @param  initialCapacity the initial capacity
+ * @param  loadFactor      the load factor
+ * @param  accessOrder     the ordering mode - &lt;tt&gt;true&lt;/tt&gt; for
+ *         access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order
+ * @throws IllegalArgumentException if the initial capacity is negative
+ *         or the load factor is nonpositive
+ */
+public LinkedHashMap(int initialCapacity,
+                     float loadFactor,
+                     boolean accessOrder) {
+    super(initialCapacity, loadFactor);
+    this.accessOrder = accessOrder;
+}
+</code></pre></li>
+<li><p>因为LinkedHashMap支持访问顺序，所以它可以很方便地用来实现LRU算法</p>
 </li>
 </ul>
-]]></content>
+<h2 id="LinkedHashMap的数据结构"><a href="#LinkedHashMap的数据结构" class="headerlink" title="LinkedHashMap的数据结构"></a>LinkedHashMap的数据结构</h2><p>LinkedHashMap除了使用HashMap的数据-链表来储存数据之外，还提供一个单独的链接来储存节点的顺序。同时，通过参数accessOrder来决定是使用访问顺序还是插入顺序</p>
+<pre><code>/**
+ * HashMap.Node subclass for normal LinkedHashMap entries.
+ */
+static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
+    Entry&lt;K,V&gt; before, after;
+    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
+        super(hash, key, value, next);
+    }
+}
+
+private static final long serialVersionUID = 3801124242820219131L;
+
+/**
+ * The head (eldest) of the doubly linked list.
+ */
+transient LinkedHashMap.Entry&lt;K,V&gt; head;
+
+/**
+ * The tail (youngest) of the doubly linked list.
+ */
+transient LinkedHashMap.Entry&lt;K,V&gt; tail;
+
+/**
+ * The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;
+ * for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.
+ *
+ * @serial
+ */
+final boolean accessOrder;
+</code></pre><h2 id="LinkedHashMap的常用方法及实现"><a href="#LinkedHashMap的常用方法及实现" class="headerlink" title="LinkedHashMap的常用方法及实现"></a>LinkedHashMap的常用方法及实现</h2><p>HashMap在实现时就已经为子类的拓展留下了很多的接口，如afterNodeAccess、afterNodeInsertion等等。LinkedHashMap通过重写这些方法，来保存元素的顺序</p>
+<ol>
+<li><p>putVal</p>
+<p> HashMap:</p>
+<pre><code>final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+               boolean evict) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&lt;K,V&gt; e; K k;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre><p> LinkedHashmap:</p>
+<pre><code>void afterNodeInsertion(boolean evict) { // possibly remove eldest
+    LinkedHashMap.Entry&lt;K,V&gt; first;
+    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) {
+        K key = first.key;
+        removeNode(hash(key), key, null, false, true);
+    }
+}
+</code></pre></li>
+<li><p>get</p>
+<pre><code>public V get(Object key) {
+    Node&lt;K,V&gt; e;
+    if ((e = getNode(hash(key), key)) == null)
+        return null;
+    if (accessOrder)
+        afterNodeAccess(e);
+    return e.value;
+}   
+
+void afterNodeAccess(Node&lt;K,V&gt; e) { // move node to last
+    LinkedHashMap.Entry&lt;K,V&gt; last;
+    if (accessOrder &amp;&amp; (last = tail) != e) {
+        LinkedHashMap.Entry&lt;K,V&gt; p =
+            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+        p.after = null;
+        if (b == null)
+            head = a;
+        else
+            b.after = a;
+        if (a != null)
+            a.before = b;
+        else
+            last = b;
+        if (last == null)
+            head = p;
+        else {
+            p.before = last;
+            last.after = p;
+        }
+        tail = p;
+        ++modCount;
+    }
+}
+</code></pre></li>
+<li><p>remove</p>
+</li>
+</ol>
+<p>HashMap</p>
+<pre><code>/**
+ * Implements Map.remove and related methods
+ *
+ * @param hash hash for key
+ * @param key the key
+ * @param value the value to match if matchValue, else ignored
+ * @param matchValue if true only remove if value is equal
+ * @param movable if false do not move other nodes while removing
+ * @return the node, or null if none
+ */
+final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
+                           boolean matchValue, boolean movable) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (p = tab[index = (n - 1) &amp; hash]) != null) {
+        Node&lt;K,V&gt; node = null, e; K k; V v;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            node = p;
+        else if ((e = p.next) != null) {
+            if (p instanceof TreeNode)
+                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
+            else {
+                do {
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key ||
+                         (key != null &amp;&amp; key.equals(k)))) {
+                        node = e;
+                        break;
+                    }
+                    p = e;
+                } while ((e = e.next) != null);
+            }
+        }
+        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
+                             (value != null &amp;&amp; value.equals(v)))) {
+            if (node instanceof TreeNode)
+                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
+            else if (node == p)
+                tab[index] = node.next;
+            else
+                p.next = node.next;
+            ++modCount;
+            --size;
+            afterNodeRemoval(node);
+            return node;
+        }
+    }
+    return null;
+}
+</code></pre><p>LinkedHashMap:</p>
+<pre><code>void afterNodeRemoval(Node&lt;K,V&gt; e) { // unlink
+    LinkedHashMap.Entry&lt;K,V&gt; p =
+        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+    p.before = p.after = null;
+    if (b == null)
+        head = a;
+    else
+        b.after = a;
+    if (a == null)
+        tail = b;
+    else
+        a.before = b;
+}
+</code></pre>]]></content>
     
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;JDBC方式的几个缺点&lt;/li&gt;
-&lt;li&gt;MyBatis的解决方法&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;MyBatis的结构框架&lt;/p&gt;
-&lt;h2 id=&quot;JDBC方式的几个缺点&quot;&gt;&lt;a href=&quot;#JDBC方式的几个缺点&quot; class=&quot;headerlink&quot; title
+&lt;li&gt;LinkedHashMap的特点&lt;/li&gt;
+&lt;li&gt;LinkedHashMap的数据结构&lt;/li&gt;
+&lt;li&gt;LinkedHashMap的常用方法及实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;LinkedHashMap的特点&quot;&gt;&lt;a href=&quot;#LinkedHa
     
     </summary>
     
-      <category term="Mybatis源码分析" scheme="http://showstone.net/categories/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+      <category term="Java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
     
     
       <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
     
-      <category term="MyBatsis" scheme="http://showstone.net/tags/mybatsis/"/>
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
     
-      <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
     
-      <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
+      <category term="LinkedHashMap" scheme="http://showstone.net/tags/linkedhashmap/"/>
     
   </entry>
   
@@ -924,156 +1135,6 @@ public int indexOf(E e, int index) {
   </entry>
   
   <entry>
-    <title>HashSet浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-02-hashset%E6%B5%85%E6%9E%90/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>HashSet的特点与用法</li>
-<li>HashSet的数据结构</li>
-<li>HashSet的常用方法及实现</li>
-<li>TreeSet的简要说明</li>
-</ul>
-<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
-<p>以下摘取了一部分HashSet文档：   </p>
-<pre><code>...   
-
-* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
-* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
-* iteration order of the set; in particular, it does not guarantee that the
-* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
-* element.
-*
-* &lt;p&gt;This class offers constant time performance for the basic operations
-* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
-* assuming the hash function disperses the elements properly among the
-* buckets.  Iterating over this set requires time proportional to the sum of
-* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
-* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
-* buckets).  Thus, it&apos;s very important not to set the initial capacity too
-* high (or the load factor too low) if iteration performance is important.
-
-...    
-</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
-<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
-<pre><code>private transient HashMap&lt;E,Object&gt; map;
-
-// Dummy value to associate with an Object in the backing Map
-private static final Object PRESENT = new Object();
-
-/**
- * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
- * default initial capacity (16) and load factor (0.75).
- */
-public HashSet() {
-    map = new HashMap&lt;&gt;();
-}
-</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
-<li><p>add   </p>
-<pre><code>public boolean add(E e) {
-    return map.put(e, PRESENT)==null;
-}
-</code></pre></li>
-<li><p>remove   </p>
-<pre><code>public boolean remove(Object o) {
-    return map.remove(o)==PRESENT;
-}
-</code></pre></li>
-<li><p>contain</p>
-<pre><code>public boolean contains(Object o) {
-    return map.containsKey(o);
-}
-</code></pre></li>
-<li><p>构造函数</p>
-<p> 没什么好说的，直接上代码</p>
-<pre><code>public HashSet(int initialCapacity, float loadFactor) {
-    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
-}
-</code></pre></li>
-</ol>
-<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
-<pre><code>long startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-</code></pre><p>运行结果：</p>
-<blockquote>
-<p>开始时间:2647<br>开始时间:781</p>
-</blockquote>
-<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
-<pre><code>long startTime = System.currentTimeMillis();
-for(int i=0;i&lt;10000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    /*Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }*/
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-startTime = System.currentTimeMillis();
-for(int i=0;i&lt;1000;i++){
-    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
-    for(int j=0;j&lt;1000;j++){
-        set.add(j+&quot;&quot;);
-    }
-    /*Iterator&lt;String&gt; ite = set.iterator();
-    while(ite.hasNext()){
-        ite.next();
-    }*/
-}
-System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
-</code></pre><p>运行结果：   </p>
-<blockquote>
-<p>开始时间:1142<br>开始时间:795</p>
-</blockquote>
-<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
-]]></content>
-    
-    <summary type="html">
-    
-      Set源码分析
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="HashSet" scheme="http://showstone.net/tags/hashset/"/>
-    
-      <category term="TreeSet" scheme="http://showstone.net/tags/treeset/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vector浅析</title>
     <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-29-vector/"/>
     <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/</id>
@@ -1469,311 +1530,152 @@ static final int tableSizeFor(int cap) {
   </entry>
   
   <entry>
-    <title>LinkedHashMap浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-19-treemap/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/</id>
+    <title>HashSet浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-02-hashset%E6%B5%85%E6%9E%90/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
     <content type="html"><![CDATA[<ul>
-<li>LinkedHashMap的特点</li>
-<li>LinkedHashMap的数据结构</li>
-<li>LinkedHashMap的常用方法及实现</li>
+<li>HashSet的特点与用法</li>
+<li>HashSet的数据结构</li>
+<li>HashSet的常用方法及实现</li>
+<li>TreeSet的简要说明</li>
 </ul>
-<h2 id="LinkedHashMap的特点"><a href="#LinkedHashMap的特点" class="headerlink" title="LinkedHashMap的特点"></a>LinkedHashMap的特点</h2><ul>
-<li>LinkedHashMap继承于HashMap，拥有HashMap的所有特点</li>
-<li><p>LinkedHashMap可以保证元素的顺序，支持插入或者访问的顺序，这是通过在构造时提供accessOrder参数来进行控制</p>
-<pre><code>/**
- * Constructs an empty &lt;tt&gt;LinkedHashMap&lt;/tt&gt; instance with the
- * specified initial capacity, load factor and ordering mode.
- *
- * @param  initialCapacity the initial capacity
- * @param  loadFactor      the load factor
- * @param  accessOrder     the ordering mode - &lt;tt&gt;true&lt;/tt&gt; for
- *         access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order
- * @throws IllegalArgumentException if the initial capacity is negative
- *         or the load factor is nonpositive
- */
-public LinkedHashMap(int initialCapacity,
-                     float loadFactor,
-                     boolean accessOrder) {
-    super(initialCapacity, loadFactor);
-    this.accessOrder = accessOrder;
-}
-</code></pre></li>
-<li><p>因为LinkedHashMap支持访问顺序，所以它可以很方便地用来实现LRU算法</p>
-</li>
-</ul>
-<h2 id="LinkedHashMap的数据结构"><a href="#LinkedHashMap的数据结构" class="headerlink" title="LinkedHashMap的数据结构"></a>LinkedHashMap的数据结构</h2><p>LinkedHashMap除了使用HashMap的数据-链表来储存数据之外，还提供一个单独的链接来储存节点的顺序。同时，通过参数accessOrder来决定是使用访问顺序还是插入顺序</p>
-<pre><code>/**
- * HashMap.Node subclass for normal LinkedHashMap entries.
- */
-static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
-    Entry&lt;K,V&gt; before, after;
-    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
-        super(hash, key, value, next);
-    }
-}
+<h2 id="HashSet的特点与用法"><a href="#HashSet的特点与用法" class="headerlink" title="HashSet的特点与用法"></a>HashSet的特点与用法</h2><p>HashSet是一个没有重复元素的集合，其内部元素也没有顺序。<br>它可以放入空元素。<br>它不是线程安全的。<br>它内部是基于HashMap实现的。</p>
+<p>以下摘取了一部分HashSet文档：   </p>
+<pre><code>...   
 
-private static final long serialVersionUID = 3801124242820219131L;
+* This class implements the &lt;tt&gt;Set&lt;/tt&gt; interface, backed by a hash table
+* (actually a &lt;tt&gt;HashMap&lt;/tt&gt; instance).  It makes no guarantees as to the
+* iteration order of the set; in particular, it does not guarantee that the
+* order will remain constant over time.  This class permits the &lt;tt&gt;null&lt;/tt&gt;
+* element.
+*
+* &lt;p&gt;This class offers constant time performance for the basic operations
+* (&lt;tt&gt;add&lt;/tt&gt;, &lt;tt&gt;remove&lt;/tt&gt;, &lt;tt&gt;contains&lt;/tt&gt; and &lt;tt&gt;size&lt;/tt&gt;),
+* assuming the hash function disperses the elements properly among the
+* buckets.  Iterating over this set requires time proportional to the sum of
+* the &lt;tt&gt;HashSet&lt;/tt&gt; instance&apos;s size (the number of elements) plus the
+* &quot;capacity&quot; of the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of
+* buckets).  Thus, it&apos;s very important not to set the initial capacity too
+* high (or the load factor too low) if iteration performance is important.
+
+...    
+</code></pre><p>如果要遍历元素，则需要注意容器的大小，因为遍历的时间复杂度是容器的实际大小X容器的初始化大小。（测试一有代码和测试结果。）</p>
+<h1 id="HashSet的数据结构"><a href="#HashSet的数据结构" class="headerlink" title="HashSet的数据结构"></a>HashSet的数据结构</h1><p>HashSet内部使用HashMap来存储数据，新加入的元素会作为key储存到set当中。value部分由一个默认的object元素来进行填充。</p>
+<pre><code>private transient HashMap&lt;E,Object&gt; map;
+
+// Dummy value to associate with an Object in the backing Map
+private static final Object PRESENT = new Object();
 
 /**
- * The head (eldest) of the doubly linked list.
+ * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has
+ * default initial capacity (16) and load factor (0.75).
  */
-transient LinkedHashMap.Entry&lt;K,V&gt; head;
-
-/**
- * The tail (youngest) of the doubly linked list.
- */
-transient LinkedHashMap.Entry&lt;K,V&gt; tail;
-
-/**
- * The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;
- * for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.
- *
- * @serial
- */
-final boolean accessOrder;
-</code></pre><h2 id="LinkedHashMap的常用方法及实现"><a href="#LinkedHashMap的常用方法及实现" class="headerlink" title="LinkedHashMap的常用方法及实现"></a>LinkedHashMap的常用方法及实现</h2><p>HashMap在实现时就已经为子类的拓展留下了很多的接口，如afterNodeAccess、afterNodeInsertion等等。LinkedHashMap通过重写这些方法，来保存元素的顺序</p>
-<ol>
-<li><p>putVal</p>
-<p> HashMap:</p>
-<pre><code>final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-               boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)
-        n = (tab = resize()).length;
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
-                    break;
-                }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
-            }
-        }
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
-        }
-    }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
-    return null;
+public HashSet() {
+    map = new HashMap&lt;&gt;();
 }
-</code></pre><p> LinkedHashmap:</p>
-<pre><code>void afterNodeInsertion(boolean evict) { // possibly remove eldest
-    LinkedHashMap.Entry&lt;K,V&gt; first;
-    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) {
-        K key = first.key;
-        removeNode(hash(key), key, null, false, true);
-    }
+</code></pre><h1 id="HashSet的常用方法"><a href="#HashSet的常用方法" class="headerlink" title="HashSet的常用方法"></a>HashSet的常用方法</h1><ol>
+<li><p>add   </p>
+<pre><code>public boolean add(E e) {
+    return map.put(e, PRESENT)==null;
 }
 </code></pre></li>
-<li><p>get</p>
-<pre><code>public V get(Object key) {
-    Node&lt;K,V&gt; e;
-    if ((e = getNode(hash(key), key)) == null)
-        return null;
-    if (accessOrder)
-        afterNodeAccess(e);
-    return e.value;
-}   
-
-void afterNodeAccess(Node&lt;K,V&gt; e) { // move node to last
-    LinkedHashMap.Entry&lt;K,V&gt; last;
-    if (accessOrder &amp;&amp; (last = tail) != e) {
-        LinkedHashMap.Entry&lt;K,V&gt; p =
-            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
-        p.after = null;
-        if (b == null)
-            head = a;
-        else
-            b.after = a;
-        if (a != null)
-            a.before = b;
-        else
-            last = b;
-        if (last == null)
-            head = p;
-        else {
-            p.before = last;
-            last.after = p;
-        }
-        tail = p;
-        ++modCount;
-    }
+<li><p>remove   </p>
+<pre><code>public boolean remove(Object o) {
+    return map.remove(o)==PRESENT;
 }
 </code></pre></li>
-<li><p>remove</p>
-</li>
+<li><p>contain</p>
+<pre><code>public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+</code></pre></li>
+<li><p>构造函数</p>
+<p> 没什么好说的，直接上代码</p>
+<pre><code>public HashSet(int initialCapacity, float loadFactor) {
+    map = new HashMap&lt;&gt;(initialCapacity, loadFactor);
+}
+</code></pre></li>
 </ol>
-<p>HashMap</p>
-<pre><code>/**
- * Implements Map.remove and related methods
- *
- * @param hash hash for key
- * @param key the key
- * @param value the value to match if matchValue, else ignored
- * @param matchValue if true only remove if value is equal
- * @param movable if false do not move other nodes while removing
- * @return the node, or null if none
- */
-final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
-                           boolean matchValue, boolean movable) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (p = tab[index = (n - 1) &amp; hash]) != null) {
-        Node&lt;K,V&gt; node = null, e; K k; V v;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            node = p;
-        else if ((e = p.next) != null) {
-            if (p instanceof TreeNode)
-                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
-            else {
-                do {
-                    if (e.hash == hash &amp;&amp;
-                        ((k = e.key) == key ||
-                         (key != null &amp;&amp; key.equals(k)))) {
-                        node = e;
-                        break;
-                    }
-                    p = e;
-                } while ((e = e.next) != null);
-            }
-        }
-        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
-                             (value != null &amp;&amp; value.equals(v)))) {
-            if (node instanceof TreeNode)
-                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
-            else if (node == p)
-                tab[index] = node.next;
-            else
-                p.next = node.next;
-            ++modCount;
-            --size;
-            afterNodeRemoval(node);
-            return node;
-        }
+<h2 id="附一-元素遍历的测试"><a href="#附一-元素遍历的测试" class="headerlink" title="附一 元素遍历的测试"></a>附一 元素遍历的测试</h2><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1.1"></a>测试1.1</h3><p>首先，测试当一个集合包含1000个元素时，集合初始容量为10000和100000时的性能。</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
     }
-    return null;
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
 }
-</code></pre><p>LinkedHashMap:</p>
-<pre><code>void afterNodeRemoval(Node&lt;K,V&gt; e) { // unlink
-    LinkedHashMap.Entry&lt;K,V&gt; p =
-        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
-    p.before = p.after = null;
-    if (b == null)
-        head = a;
-    else
-        b.after = a;
-    if (a == null)
-        tail = b;
-    else
-        a.before = b;
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }
 }
-</code></pre>]]></content>
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：</p>
+<blockquote>
+<p>开始时间:2647<br>开始时间:781</p>
+</blockquote>
+<h3 id="测试1-2"><a href="#测试1-2" class="headerlink" title="测试1.2"></a>测试1.2</h3><p>为了消除元素初始化时，不同容量大小引起的误差，去掉遍历，测试运行的时间</p>
+<pre><code>long startTime = System.currentTimeMillis();
+for(int i=0;i&lt;10000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(100000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+startTime = System.currentTimeMillis();
+for(int i=0;i&lt;1000;i++){
+    HashSet&lt;String&gt; set = new HashSet&lt;String&gt;(1000);
+    for(int j=0;j&lt;1000;j++){
+        set.add(j+&quot;&quot;);
+    }
+    /*Iterator&lt;String&gt; ite = set.iterator();
+    while(ite.hasNext()){
+        ite.next();
+    }*/
+}
+System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTime));
+</code></pre><p>运行结果：   </p>
+<blockquote>
+<p>开始时间:1142<br>开始时间:795</p>
+</blockquote>
+<h2 id="TreeSet的简要说明"><a href="#TreeSet的简要说明" class="headerlink" title="TreeSet的简要说明"></a>TreeSet的简要说明</h2><p>TreeSet的实现除了委托的数据结构是TreeMap外，其他的操作与HashSet基本类似</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;ul&gt;
-&lt;li&gt;LinkedHashMap的特点&lt;/li&gt;
-&lt;li&gt;LinkedHashMap的数据结构&lt;/li&gt;
-&lt;li&gt;LinkedHashMap的常用方法及实现&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;LinkedHashMap的特点&quot;&gt;&lt;a href=&quot;#LinkedHa
+      Set源码分析
     
     </summary>
     
-      <category term="Java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
     
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
     
       <category term="java" scheme="http://showstone.net/tags/java/"/>
     
       <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
     
-      <category term="LinkedHashMap" scheme="http://showstone.net/tags/linkedhashmap/"/>
+      <category term="HashSet" scheme="http://showstone.net/tags/hashset/"/>
     
-  </entry>
-  
-  <entry>
-    <title>编译vim以支持lua</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
-<ol>
-<li><p>下载源代码</p>
-<pre><code>git clone https://github.com/vim/vim.git   
-cd vim
-</code></pre></li>
-<li><p>设置编译参数</p>
-<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
-<pre><code>./configure --with-features=huge --enable-rubyinterp \    
---enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
---enable-perlinterp --enable-multibyte --enable-sniff  \
---enable-fontset --enable-cscope \    
---disable-gui --prefix=/opt/local/vim  
-
---with-features=huge：支持最大特性  
---enable-rubyinterp：启用Vim对ruby的支持  
---enable-pythoninterp：启用Vim对python的支持  
---enable-luainterp：启用Vim对lua的支持  
---with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
---enable-perlinterp：启用Vim对perl的支持  
---enable-multibyte：多字节支持 可以在Vim中输入中文  
---enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
---enable-cscope：Vim对cscope支持  
---disable-gui：不用编译生成图形界面版gvim  
---prefix=/opt/local/vim：编译安装路径  
-</code></pre></li>
-<li><p>编译\安装</p>
-<pre><code>make    
-make install
-</code></pre></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      编译vim以支持lua
-    
-    </summary>
-    
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
-    
-      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
-    
-      <category term="python" scheme="http://showstone.net/tags/python/"/>
+      <category term="TreeSet" scheme="http://showstone.net/tags/treeset/"/>
     
   </entry>
   
@@ -1829,6 +1731,73 @@ git rebase --skip
       <category term="git" scheme="http://showstone.net/tags/git/"/>
     
       <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>简洁之美 饿了么框架源码走读之vine http</title>
+    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
+    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
+    
+    
+      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
+    
+      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
+    
+      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis结构分析</title>
+    <link href="http://showstone.net/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/2017/03/07/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2015-07-23-mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>JDBC方式的几个缺点</li>
+<li>MyBatis的解决方法</li>
+<li><p>MyBatis的结构框架</p>
+<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;JDBC方式的几个缺点&lt;/li&gt;
+&lt;li&gt;MyBatis的解决方法&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MyBatis的结构框架&lt;/p&gt;
+&lt;h2 id=&quot;JDBC方式的几个缺点&quot;&gt;&lt;a href=&quot;#JDBC方式的几个缺点&quot; class=&quot;headerlink&quot; title
+    
+    </summary>
+    
+      <category term="Mybatis源码分析" scheme="http://showstone.net/categories/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="MyBatsis" scheme="http://showstone.net/tags/mybatsis/"/>
+    
+      <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
@@ -1971,57 +1940,6 @@ set -g visual-activity on
   </entry>
   
   <entry>
-    <title>常用linux命令</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2016-01-18-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
-<p>需要学习的软件分为以下几类:</p>
-<p>系统状态查看类:</p>
-<ul>
-<li>top</li>
-<li>htop</li>
-<li>iostat</li>
-<li>memstat和free</li>
-<li>mpstat</li>
-<li>netstat</li>
-<li>nmon</li>
-<li>pmap</li>
-<li>ps和pstree</li>
-<li>sar</li>
-<li>strace</li>
-<li>tcpdump</li>
-<li>uptime</li>
-<li>vmstat</li>
-<li>wireshark</li>
-<li>du</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.&lt;/p&gt;
-&lt;p&gt;需要学习的软件分为以下几类:&lt;/p&gt;
-&lt;p&gt;系统状态查看类:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;top&lt;/li&gt;
-&lt;li&gt;htop&lt;/li&gt;
-&lt;li&gt;
-    
-    </summary>
-    
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
-    
-    
-      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
-    
-      <category term="软件" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
     <title>实用git命令</title>
     <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
@@ -2069,6 +1987,57 @@ set -g visual-activity on
       <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
     
       <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用linux命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-18-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
+<p>需要学习的软件分为以下几类:</p>
+<p>系统状态查看类:</p>
+<ul>
+<li>top</li>
+<li>htop</li>
+<li>iostat</li>
+<li>memstat和free</li>
+<li>mpstat</li>
+<li>netstat</li>
+<li>nmon</li>
+<li>pmap</li>
+<li>ps和pstree</li>
+<li>sar</li>
+<li>strace</li>
+<li>tcpdump</li>
+<li>uptime</li>
+<li>vmstat</li>
+<li>wireshark</li>
+<li>du</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.&lt;/p&gt;
+&lt;p&gt;需要学习的软件分为以下几类:&lt;/p&gt;
+&lt;p&gt;系统状态查看类:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;top&lt;/li&gt;
+&lt;li&gt;htop&lt;/li&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
+    
+      <category term="软件" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
@@ -2121,30 +2090,61 @@ set -g visual-activity on
   </entry>
   
   <entry>
-    <title>简洁之美 饿了么框架源码走读之vine http</title>
-    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
-    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
+    <title>编译vim以支持lua</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
+    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+<ol>
+<li><p>下载源代码</p>
+<pre><code>git clone https://github.com/vim/vim.git   
+cd vim
+</code></pre></li>
+<li><p>设置编译参数</p>
+<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
+<pre><code>./configure --with-features=huge --enable-rubyinterp \    
+--enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
+--enable-perlinterp --enable-multibyte --enable-sniff  \
+--enable-fontset --enable-cscope \    
+--disable-gui --prefix=/opt/local/vim  
+
+--with-features=huge：支持最大特性  
+--enable-rubyinterp：启用Vim对ruby的支持  
+--enable-pythoninterp：启用Vim对python的支持  
+--enable-luainterp：启用Vim对lua的支持  
+--with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
+--enable-perlinterp：启用Vim对perl的支持  
+--enable-multibyte：多字节支持 可以在Vim中输入中文  
+--enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+--enable-cscope：Vim对cscope支持  
+--disable-gui：不用编译生成图形界面版gvim  
+--prefix=/opt/local/vim：编译安装路径  
+</code></pre></li>
+<li><p>编译\安装</p>
+<pre><code>make    
+make install
+</code></pre></li>
+</ol>
+]]></content>
+    
     <summary type="html">
+    
+      编译vim以支持lua
     
     </summary>
     
-      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
+      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
     
-      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
+      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
     
-      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
+      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
     
-      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
+      <category term="python" scheme="http://showstone.net/tags/python/"/>
     
   </entry>
   
