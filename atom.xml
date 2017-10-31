@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://showstone.net/"/>
-  <updated>2017-10-28T17:53:04.000Z</updated>
+  <updated>2017-10-31T05:08:59.000Z</updated>
   <id>http://showstone.net/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>a</title>
+    <link href="http://showstone.net/uncategorized/2017/10/31/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%89%BE%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E4%BF%A1%E6%81%AF-2017-10-31-%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%89%BE%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E4%BF%A1%E6%81%AF/"/>
+    <id>http://showstone.net/uncategorized/2017/10/31/如何快速找到想要的信息-2017-10-31-如何快速找到想要的信息/</id>
+    <published>2017-10-31T05:05:21.000Z</published>
+    <updated>2017-10-31T05:08:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="如何快速找到想要的信息"><a href="#如何快速找到想要的信息" class="headerlink" title="如何快速找到想要的信息"></a>如何快速找到想要的信息</h1><p>我们在一个信息爆炸的时代，互联网给我们带来丰富信息的同时，也造成了很大的负担，如何在网上快速准确的找到想要的信息，是一个很重要的技巧。</p>
+<p>常见的信息来源有：</p>
+<ul>
+<li>搜索引擎等通用搜索</li>
+<li>stack over flow等专业领域知识</li>
+<li>知乎、搜狗（用于查询微信公众号的内容）等封闭社区</li>
+</ul>
+<p>下面两类，主要在于平时的积累，这里重点说说搜索引擎：</p>
+<h2 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h2><p>搜索引擎处于互联网的中心，连接了各种信息。使用时，可以从一个点出发，然后不断缩小范围，最终找到想要的信息。</p>
+<p>以查询“天龙八部”的出处背景为例：<br>直接输入“天龙八部”会是这样：<br><img src="http://7xqf9w.com1.z0.glb.clouddn.com/15094236205724.jpg" alt=""></p>
+<p>如果知道“天龙八部”与佛教相关，可以输入“天龙八部 佛教”：<br><img src="http://7xqf9w.com1.z0.glb.clouddn.com/15094237342672.jpg" alt=""></p>
+<p>如果不知道与佛教相关，则可以先了解它的背景：<br><img src="http://7xqf9w.com1.z0.glb.clouddn.com/15094240222029.jpg" alt=""></p>
+<h3 id="常见的拓展信息"><a href="#常见的拓展信息" class="headerlink" title="常见的拓展信息"></a>常见的拓展信息</h3><ul>
+<li>本身的描述，如apple可能是水果，也可能是科技公司</li>
+<li>背景信息，如历史时间段、行业等</li>
+<li>相关信息，如一个人的学校、籍贯等</li>
+</ul>
+<h3 id="搜索引擎的功能"><a href="#搜索引擎的功能" class="headerlink" title="搜索引擎的功能"></a>搜索引擎的功能</h3><p>google支持以下功能的搜索：<br><img src="http://7xqf9w.com1.z0.glb.clouddn.com/15093574576046.jpg" alt=""></p>
+<ul>
+<li>查询多个关键词，以空格分开</li>
+<li>查询短语，用英文的引号（“”）分开</li>
+<li>查询任意一个词,用 OR 分开</li>
+<li>排除某个词，用  - 分开</li>
+<li>数字范围，用 .. 表示</li>
+</ul>
+<p>同时，还可以对搜索的结果做一些限制：</p>
+<ul>
+<li>时间范围</li>
+<li>特定网站</li>
+<li>在页面的特定位置，如title、页眉、正文等，甚至是url、链接</li>
+<li>资源的类型，如pdf、ppt、word等</li>
+</ul>
+<p>其他技巧：</p>
+<ul>
+<li>通配符  “*”</li>
+<li>搜索缓存<br>在相应网址前加上“cache:”</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;如何快速找到想要的信息&quot;&gt;&lt;a href=&quot;#如何快速找到想要的信息&quot; class=&quot;headerlink&quot; title=&quot;如何快速找到想要的信息&quot;&gt;&lt;/a&gt;如何快速找到想要的信息&lt;/h1&gt;&lt;p&gt;我们在一个信息爆炸的时代，互联网给我们带来丰富信息的同时，也造成了很
+    
+    </summary>
+    
+    
+      <category term="搜索引擎" scheme="http://showstone.net/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"/>
+    
+      <category term="查询信息" scheme="http://showstone.net/tags/%E6%9F%A5%E8%AF%A2%E4%BF%A1%E6%81%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>ubuntu下打印服务器的安装配置与使用教程</title>
@@ -466,671 +525,57 @@
   </entry>
   
   <entry>
-    <title>LinkedHashMap浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-19-treemap/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/</id>
+    <title>rebase导致commit丢失</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<ul>
-<li>LinkedHashMap的特点</li>
-<li>LinkedHashMap的数据结构</li>
-<li>LinkedHashMap的常用方法及实现</li>
-</ul>
-<h2 id="LinkedHashMap的特点"><a href="#LinkedHashMap的特点" class="headerlink" title="LinkedHashMap的特点"></a>LinkedHashMap的特点</h2><ul>
-<li>LinkedHashMap继承于HashMap，拥有HashMap的所有特点</li>
-<li><p>LinkedHashMap可以保证元素的顺序，支持插入或者访问的顺序，这是通过在构造时提供accessOrder参数来进行控制</p>
-<pre><code>/**
- * Constructs an empty &lt;tt&gt;LinkedHashMap&lt;/tt&gt; instance with the
- * specified initial capacity, load factor and ordering mode.
- *
- * @param  initialCapacity the initial capacity
- * @param  loadFactor      the load factor
- * @param  accessOrder     the ordering mode - &lt;tt&gt;true&lt;/tt&gt; for
- *         access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order
- * @throws IllegalArgumentException if the initial capacity is negative
- *         or the load factor is nonpositive
- */
-public LinkedHashMap(int initialCapacity,
-                     float loadFactor,
-                     boolean accessOrder) {
-    super(initialCapacity, loadFactor);
-    this.accessOrder = accessOrder;
-}
-</code></pre></li>
-<li><p>因为LinkedHashMap支持访问顺序，所以它可以很方便地用来实现LRU算法</p>
-</li>
-</ul>
-<h2 id="LinkedHashMap的数据结构"><a href="#LinkedHashMap的数据结构" class="headerlink" title="LinkedHashMap的数据结构"></a>LinkedHashMap的数据结构</h2><p>LinkedHashMap除了使用HashMap的数据-链表来储存数据之外，还提供一个单独的链接来储存节点的顺序。同时，通过参数accessOrder来决定是使用访问顺序还是插入顺序</p>
-<pre><code>/**
- * HashMap.Node subclass for normal LinkedHashMap entries.
- */
-static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
-    Entry&lt;K,V&gt; before, after;
-    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
-        super(hash, key, value, next);
-    }
-}
-
-private static final long serialVersionUID = 3801124242820219131L;
-
-/**
- * The head (eldest) of the doubly linked list.
- */
-transient LinkedHashMap.Entry&lt;K,V&gt; head;
-
-/**
- * The tail (youngest) of the doubly linked list.
- */
-transient LinkedHashMap.Entry&lt;K,V&gt; tail;
-
-/**
- * The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;
- * for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.
- *
- * @serial
- */
-final boolean accessOrder;
-</code></pre><h2 id="LinkedHashMap的常用方法及实现"><a href="#LinkedHashMap的常用方法及实现" class="headerlink" title="LinkedHashMap的常用方法及实现"></a>LinkedHashMap的常用方法及实现</h2><p>HashMap在实现时就已经为子类的拓展留下了很多的接口，如afterNodeAccess、afterNodeInsertion等等。LinkedHashMap通过重写这些方法，来保存元素的顺序</p>
-<ol>
-<li><p>putVal</p>
-<p> HashMap:</p>
-<pre><code>final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-               boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)
-        n = (tab = resize()).length;
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
-                    break;
-                }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
-            }
-        }
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
-        }
-    }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
-    return null;
-}
-</code></pre><p> LinkedHashmap:</p>
-<pre><code>void afterNodeInsertion(boolean evict) { // possibly remove eldest
-    LinkedHashMap.Entry&lt;K,V&gt; first;
-    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) {
-        K key = first.key;
-        removeNode(hash(key), key, null, false, true);
-    }
-}
-</code></pre></li>
-<li><p>get</p>
-<pre><code>public V get(Object key) {
-    Node&lt;K,V&gt; e;
-    if ((e = getNode(hash(key), key)) == null)
-        return null;
-    if (accessOrder)
-        afterNodeAccess(e);
-    return e.value;
-}   
-
-void afterNodeAccess(Node&lt;K,V&gt; e) { // move node to last
-    LinkedHashMap.Entry&lt;K,V&gt; last;
-    if (accessOrder &amp;&amp; (last = tail) != e) {
-        LinkedHashMap.Entry&lt;K,V&gt; p =
-            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
-        p.after = null;
-        if (b == null)
-            head = a;
-        else
-            b.after = a;
-        if (a != null)
-            a.before = b;
-        else
-            last = b;
-        if (last == null)
-            head = p;
-        else {
-            p.before = last;
-            last.after = p;
-        }
-        tail = p;
-        ++modCount;
-    }
-}
-</code></pre></li>
-<li><p>remove</p>
-</li>
-</ol>
-<p>HashMap</p>
-<pre><code>/**
- * Implements Map.remove and related methods
- *
- * @param hash hash for key
- * @param key the key
- * @param value the value to match if matchValue, else ignored
- * @param matchValue if true only remove if value is equal
- * @param movable if false do not move other nodes while removing
- * @return the node, or null if none
- */
-final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
-                           boolean matchValue, boolean movable) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (p = tab[index = (n - 1) &amp; hash]) != null) {
-        Node&lt;K,V&gt; node = null, e; K k; V v;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            node = p;
-        else if ((e = p.next) != null) {
-            if (p instanceof TreeNode)
-                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
-            else {
-                do {
-                    if (e.hash == hash &amp;&amp;
-                        ((k = e.key) == key ||
-                         (key != null &amp;&amp; key.equals(k)))) {
-                        node = e;
-                        break;
-                    }
-                    p = e;
-                } while ((e = e.next) != null);
-            }
-        }
-        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
-                             (value != null &amp;&amp; value.equals(v)))) {
-            if (node instanceof TreeNode)
-                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
-            else if (node == p)
-                tab[index] = node.next;
-            else
-                p.next = node.next;
-            ++modCount;
-            --size;
-            afterNodeRemoval(node);
-            return node;
-        }
-    }
-    return null;
-}
-</code></pre><p>LinkedHashMap:</p>
-<pre><code>void afterNodeRemoval(Node&lt;K,V&gt; e) { // unlink
-    LinkedHashMap.Entry&lt;K,V&gt; p =
-        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
-    p.before = p.after = null;
-    if (b == null)
-        head = a;
-    else
-        b.after = a;
-    if (a == null)
-        tail = b;
-    else
-        a.before = b;
-}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;LinkedHashMap的特点&lt;/li&gt;
-&lt;li&gt;LinkedHashMap的数据结构&lt;/li&gt;
-&lt;li&gt;LinkedHashMap的常用方法及实现&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;LinkedHashMap的特点&quot;&gt;&lt;a href=&quot;#LinkedHa
-    
-    </summary>
-    
-      <category term="Java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="LinkedHashMap" scheme="http://showstone.net/tags/linkedhashmap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LinkedList浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-linkedlist/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
-</ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
+    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
+<pre><code>mkdir rebaselost
+cd rebaselost
+git init
+echo &quot;init content&quot; &gt; a
+git commit -m &apos;init content&apos;
+git checkout -b branch1
+echo &quot;branch1 content&quot; &gt; a
+git commit -m &apos;branch1&apos;
+git checkout master
+echo &quot;new master content&quot; &gt; a
+git commit -m &apos;master content&apos;
+echo &quot;new master content2&quot; &gt; a
+git commit -m &apos;master content2&apos;
+git checkout branch1
+git rebase master
+git rebase --skip
+</code></pre><p>期望的结果是:</p>
 <blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
+<p> new master content2<br> branch1 content   </p>
 </blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
-}
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
-
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
+<p>实际的结果:</p>
+<blockquote>
+<p> new master content2</p>
+</blockquote>
+<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
+<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
+<blockquote>
+<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
+</blockquote>
+<p>要避免丢失,在冲突时编辑冲突即可</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;LinkedList浅析&quot;&gt;&lt;a href=&quot;#LinkedList浅析&quot; class=&quot;headerlink&quot; title=&quot;LinkedList浅析&quot;&gt;&lt;/a&gt;LinkedList浅析&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;LinkedList的作用及特点&lt;/li&gt;
-&lt;l
+      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
     
     </summary>
     
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
     
     
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
     
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="LinkedList" scheme="http://showstone.net/tags/linkedlist/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CopyOnWriteArray浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-27-copyonwritearray%E6%B5%85%E6%9E%90/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>CopyOnWriteArrayList的特点与用法</li>
-<li>CopyOnWriteArrayList的数据结构</li>
-<li>CopyOnWriteArrayList的常用方法及实现</li>
-</ul>
-<h2 id="CopyOnWriteArrayList的特点与用法"><a href="#CopyOnWriteArrayList的特点与用法" class="headerlink" title="CopyOnWriteArrayList的特点与用法"></a>CopyOnWriteArrayList的特点与用法</h2><p>CopyOnWriteArrayList的数据结构和用法与ArrayList基本都相同,区别主要在于CopyOnWriteArrayList在添加和删除元素等修改集合状态的操作时，都会重新复制一个新的数组，以保证多线程下的安全性。因为每次修改数据结点都要复制整个对象数组，会比较耗时间，所以CopyOnWriteArrayList适合读多写少情况下的多线程场景，如缓存之类的。</p>
-<h2 id="CopyOnWriteArrayList的数据结构"><a href="#CopyOnWriteArrayList的数据结构" class="headerlink" title="CopyOnWriteArrayList的数据结构"></a>CopyOnWriteArrayList的数据结构</h2><p>CopyOnWriteArrayList的数据结构与ArrayList的基本一样，只是它不再有扩容之类的操作，因为每次修改都是一个新的数组。。。</p>
-<h2 id="CopyOnWriteArrayList的常用方法及实现"><a href="#CopyOnWriteArrayList的常用方法及实现" class="headerlink" title="CopyOnWriteArrayList的常用方法及实现"></a>CopyOnWriteArrayList的常用方法及实现</h2><pre><code>public class CopyOnWriteArrayList&lt;E&gt;
-    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable {
-    ...
-}
-</code></pre><p>从CopyOnWriteArrayList的类结构就可以看出，它的方法签名与ArrayList基本一致，这里就不再重复了。下面讲讲它方法的特殊实现。</p>
-<ol>
-<li><p>构造方法<br> CopyOnWriteArrayList的默认构造方法会创建一个长度为0的数组来储存数据，而不是像ArrayList那样创建一个长度为10的数组</p>
-<pre><code>/**Sets the array. */    
-final void setArray(Object[] a) {
-  array = a;
-}
-
-/**
-* Creates an empty list.
-*/
-public CopyOnWriteArrayList() {
-    setArray(new Object[0]);
-}
-</code></pre></li>
-<li><p>添加方法</p>
-<pre><code>/**
- * Appends the specified element to the end of this list.
- *
- * @param e element to be appended to this list
- * @return {@code true} (as specified by {@link Collection#add})
- */
-public boolean add(E e) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        Object[] newElements = Arrays.copyOf(elements, len + 1);
-        newElements[len] = e;
-        setArray(newElements);
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Inserts the specified element at the specified position in this
- * list. Shifts the element currently at that position (if any) and
- * any subsequent elements to the right (adds one to their indices).
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public void add(int index, E element) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        if (index &gt; len || index &lt; 0)
-            throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+
-                                                &quot;, Size: &quot;+len);
-        Object[] newElements;
-        int numMoved = len - index;
-        if (numMoved == 0)
-            newElements = Arrays.copyOf(elements, len + 1);
-        else {
-            newElements = new Object[len + 1];
-            System.arraycopy(elements, 0, newElements, 0, index);
-            System.arraycopy(elements, index, newElements, index + 1,
-                             numMoved);
-        }
-        newElements[index] = element;
-        setArray(newElements);
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>修改方法</p>
-<p>方法在进入和退出时有加锁、释放锁</p>
-<pre><code>/**
- * Replaces the element at the specified position in this list with the
- * specified element.
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public E set(int index, E element) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        E oldValue = get(elements, index);
-
-        if (oldValue != element) {
-            int len = elements.length;
-            Object[] newElements = Arrays.copyOf(elements, len);
-            newElements[index] = element;
-            setArray(newElements);
-        } else {
-            // Not quite a no-op; ensures volatile write semantics
-            setArray(elements);
-        }
-        return oldValue;
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>删除方法</p>
-<pre><code>/**
- * Removes the element at the specified position in this list.
- * Shifts any subsequent elements to the left (subtracts one from their
- * indices).  Returns the element that was removed from the list.
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public E remove(int index) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        E oldValue = get(elements, index);
-        int numMoved = len - index - 1;
-        if (numMoved == 0)
-            setArray(Arrays.copyOf(elements, len - 1));
-        else {
-            Object[] newElements = new Object[len - 1];
-            System.arraycopy(elements, 0, newElements, 0, index);
-            System.arraycopy(elements, index + 1, newElements, index,
-                             numMoved);
-            setArray(newElements);
-        }
-        return oldValue;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Removes the first occurrence of the specified element from this list,
- * if it is present.  If this list does not contain the element, it is
- * unchanged.  More formally, removes the element with the lowest index
- * {@code i} such that
- * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;
- * (if such an element exists).  Returns {@code true} if this list
- * contained the specified element (or equivalently, if this list
- * changed as a result of the call).
- *
- * @param o element to be removed from this list, if present
- * @return {@code true} if this list contained the specified element
- */
-public boolean remove(Object o) {
-    Object[] snapshot = getArray();
-    int index = indexOf(o, snapshot, 0, snapshot.length);
-    return (index &lt; 0) ? false : remove(o, snapshot, index);
-}
-
-/**
- * A version of remove(Object) using the strong hint that given
- * recent snapshot contains o at the given index.
- */
-private boolean remove(Object o, Object[] snapshot, int index) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] current = getArray();
-        int len = current.length;
-        if (snapshot != current) findIndex: {
-            int prefix = Math.min(index, len);
-            for (int i = 0; i &lt; prefix; i++) {
-                if (current[i] != snapshot[i] &amp;&amp; eq(o, current[i])) {
-                    index = i;
-                    break findIndex;
-                }
-            }
-            if (index &gt;= len)
-                return false;
-            if (current[index] == o)
-                break findIndex;
-            index = indexOf(o, current, index, len);
-            if (index &lt; 0)
-                return false;
-        }
-        Object[] newElements = new Object[len - 1];
-        System.arraycopy(current, 0, newElements, 0, index);
-        System.arraycopy(current, index + 1,
-                         newElements, index,
-                         len - index - 1);
-        setArray(newElements);
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Removes from this list all of the elements whose index is between
- * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive.
- * Shifts any succeeding elements to the left (reduces their index).
- * This call shortens the list by {@code (toIndex - fromIndex)} elements.
- * (If {@code toIndex==fromIndex}, this operation has no effect.)
- *
- * @param fromIndex index of first element to be removed
- * @param toIndex index after last element to be removed
- * @throws IndexOutOfBoundsException if fromIndex or toIndex out of range
- *         ({@code fromIndex &lt; 0 || toIndex &gt; size() || toIndex &lt; fromIndex})
- */
-void removeRange(int fromIndex, int toIndex) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-
-        if (fromIndex &lt; 0 || toIndex &gt; len || toIndex &lt; fromIndex)
-            throw new IndexOutOfBoundsException();
-        int newlen = len - (toIndex - fromIndex);
-        int numMoved = len - toIndex;
-        if (numMoved == 0)
-            setArray(Arrays.copyOf(elements, newlen));
-        else {
-            Object[] newElements = new Object[newlen];
-            System.arraycopy(elements, 0, newElements, 0, fromIndex);
-            System.arraycopy(elements, toIndex, newElements,
-                             fromIndex, numMoved);
-            setArray(newElements);
-        }
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>遍历</p>
-<p> 遍历时，直接使用内部的数组，这样可以避开多线程时的问题,类似的还有indexOf</p>
-<pre><code>public void forEach(Consumer&lt;? super E&gt; action) {
-    if (action == null) throw new NullPointerException();
-    Object[] elements = getArray();
-    int len = elements.length;
-    for (int i = 0; i &lt; len; ++i) {
-        @SuppressWarnings(&quot;unchecked&quot;) E e = (E) elements[i];
-        action.accept(e);
-    }
-}
-
-public int indexOf(E e, int index) {
-    Object[] elements = getArray();
-    return indexOf(e, elements, index, elements.length);
-}
-</code></pre></li>
-</ol>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;CopyOnWriteArrayList的特点与用法&lt;/li&gt;
-&lt;li&gt;CopyOnWriteArrayList的数据结构&lt;/li&gt;
-&lt;li&gt;CopyOnWriteArrayList的常用方法及实现&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;CopyOnWriteA
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="CopyOnWriteArray" scheme="http://showstone.net/tags/copyonwritearray/"/>
+      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
     
   </entry>
   
@@ -1680,85 +1125,288 @@ System.out.println(&quot;开始时间:&quot;+(System.currentTimeMillis()-startTi
   </entry>
   
   <entry>
-    <title>rebase导致commit丢失</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <title>CopyOnWriteArray浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-27-copyonwritearray%E6%B5%85%E6%9E%90/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<pre><code>mkdir rebaselost
-cd rebaselost
-git init
-echo &quot;init content&quot; &gt; a
-git commit -m &apos;init content&apos;
-git checkout -b branch1
-echo &quot;branch1 content&quot; &gt; a
-git commit -m &apos;branch1&apos;
-git checkout master
-echo &quot;new master content&quot; &gt; a
-git commit -m &apos;master content&apos;
-echo &quot;new master content2&quot; &gt; a
-git commit -m &apos;master content2&apos;
-git checkout branch1
-git rebase master
-git rebase --skip
-</code></pre><p>期望的结果是:</p>
-<blockquote>
-<p> new master content2<br> branch1 content   </p>
-</blockquote>
-<p>实际的结果:</p>
-<blockquote>
-<p> new master content2</p>
-</blockquote>
-<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
-<blockquote>
-<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
-</blockquote>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
+    <content type="html"><![CDATA[<ul>
+<li>CopyOnWriteArrayList的特点与用法</li>
+<li>CopyOnWriteArrayList的数据结构</li>
+<li>CopyOnWriteArrayList的常用方法及实现</li>
+</ul>
+<h2 id="CopyOnWriteArrayList的特点与用法"><a href="#CopyOnWriteArrayList的特点与用法" class="headerlink" title="CopyOnWriteArrayList的特点与用法"></a>CopyOnWriteArrayList的特点与用法</h2><p>CopyOnWriteArrayList的数据结构和用法与ArrayList基本都相同,区别主要在于CopyOnWriteArrayList在添加和删除元素等修改集合状态的操作时，都会重新复制一个新的数组，以保证多线程下的安全性。因为每次修改数据结点都要复制整个对象数组，会比较耗时间，所以CopyOnWriteArrayList适合读多写少情况下的多线程场景，如缓存之类的。</p>
+<h2 id="CopyOnWriteArrayList的数据结构"><a href="#CopyOnWriteArrayList的数据结构" class="headerlink" title="CopyOnWriteArrayList的数据结构"></a>CopyOnWriteArrayList的数据结构</h2><p>CopyOnWriteArrayList的数据结构与ArrayList的基本一样，只是它不再有扩容之类的操作，因为每次修改都是一个新的数组。。。</p>
+<h2 id="CopyOnWriteArrayList的常用方法及实现"><a href="#CopyOnWriteArrayList的常用方法及实现" class="headerlink" title="CopyOnWriteArrayList的常用方法及实现"></a>CopyOnWriteArrayList的常用方法及实现</h2><pre><code>public class CopyOnWriteArrayList&lt;E&gt;
+    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable {
+    ...
+}
+</code></pre><p>从CopyOnWriteArrayList的类结构就可以看出，它的方法签名与ArrayList基本一致，这里就不再重复了。下面讲讲它方法的特殊实现。</p>
+<ol>
+<li><p>构造方法<br> CopyOnWriteArrayList的默认构造方法会创建一个长度为0的数组来储存数据，而不是像ArrayList那样创建一个长度为10的数组</p>
+<pre><code>/**Sets the array. */    
+final void setArray(Object[] a) {
+  array = a;
+}
+
+/**
+* Creates an empty list.
+*/
+public CopyOnWriteArrayList() {
+    setArray(new Object[0]);
+}
+</code></pre></li>
+<li><p>添加方法</p>
+<pre><code>/**
+ * Appends the specified element to the end of this list.
+ *
+ * @param e element to be appended to this list
+ * @return {@code true} (as specified by {@link Collection#add})
+ */
+public boolean add(E e) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        Object[] newElements = Arrays.copyOf(elements, len + 1);
+        newElements[len] = e;
+        setArray(newElements);
+        return true;
+    } finally {
+        lock.unlock();
+    }
+}
+
+/**
+ * Inserts the specified element at the specified position in this
+ * list. Shifts the element currently at that position (if any) and
+ * any subsequent elements to the right (adds one to their indices).
+ *
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public void add(int index, E element) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        if (index &gt; len || index &lt; 0)
+            throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+
+                                                &quot;, Size: &quot;+len);
+        Object[] newElements;
+        int numMoved = len - index;
+        if (numMoved == 0)
+            newElements = Arrays.copyOf(elements, len + 1);
+        else {
+            newElements = new Object[len + 1];
+            System.arraycopy(elements, 0, newElements, 0, index);
+            System.arraycopy(elements, index, newElements, index + 1,
+                             numMoved);
+        }
+        newElements[index] = element;
+        setArray(newElements);
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre></li>
+<li><p>修改方法</p>
+<p>方法在进入和退出时有加锁、释放锁</p>
+<pre><code>/**
+ * Replaces the element at the specified position in this list with the
+ * specified element.
+ *
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public E set(int index, E element) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        E oldValue = get(elements, index);
+
+        if (oldValue != element) {
+            int len = elements.length;
+            Object[] newElements = Arrays.copyOf(elements, len);
+            newElements[index] = element;
+            setArray(newElements);
+        } else {
+            // Not quite a no-op; ensures volatile write semantics
+            setArray(elements);
+        }
+        return oldValue;
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre></li>
+<li><p>删除方法</p>
+<pre><code>/**
+ * Removes the element at the specified position in this list.
+ * Shifts any subsequent elements to the left (subtracts one from their
+ * indices).  Returns the element that was removed from the list.
+ *
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */
+public E remove(int index) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        E oldValue = get(elements, index);
+        int numMoved = len - index - 1;
+        if (numMoved == 0)
+            setArray(Arrays.copyOf(elements, len - 1));
+        else {
+            Object[] newElements = new Object[len - 1];
+            System.arraycopy(elements, 0, newElements, 0, index);
+            System.arraycopy(elements, index + 1, newElements, index,
+                             numMoved);
+            setArray(newElements);
+        }
+        return oldValue;
+    } finally {
+        lock.unlock();
+    }
+}
+
+/**
+ * Removes the first occurrence of the specified element from this list,
+ * if it is present.  If this list does not contain the element, it is
+ * unchanged.  More formally, removes the element with the lowest index
+ * {@code i} such that
+ * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;
+ * (if such an element exists).  Returns {@code true} if this list
+ * contained the specified element (or equivalently, if this list
+ * changed as a result of the call).
+ *
+ * @param o element to be removed from this list, if present
+ * @return {@code true} if this list contained the specified element
+ */
+public boolean remove(Object o) {
+    Object[] snapshot = getArray();
+    int index = indexOf(o, snapshot, 0, snapshot.length);
+    return (index &lt; 0) ? false : remove(o, snapshot, index);
+}
+
+/**
+ * A version of remove(Object) using the strong hint that given
+ * recent snapshot contains o at the given index.
+ */
+private boolean remove(Object o, Object[] snapshot, int index) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] current = getArray();
+        int len = current.length;
+        if (snapshot != current) findIndex: {
+            int prefix = Math.min(index, len);
+            for (int i = 0; i &lt; prefix; i++) {
+                if (current[i] != snapshot[i] &amp;&amp; eq(o, current[i])) {
+                    index = i;
+                    break findIndex;
+                }
+            }
+            if (index &gt;= len)
+                return false;
+            if (current[index] == o)
+                break findIndex;
+            index = indexOf(o, current, index, len);
+            if (index &lt; 0)
+                return false;
+        }
+        Object[] newElements = new Object[len - 1];
+        System.arraycopy(current, 0, newElements, 0, index);
+        System.arraycopy(current, index + 1,
+                         newElements, index,
+                         len - index - 1);
+        setArray(newElements);
+        return true;
+    } finally {
+        lock.unlock();
+    }
+}
+
+/**
+ * Removes from this list all of the elements whose index is between
+ * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive.
+ * Shifts any succeeding elements to the left (reduces their index).
+ * This call shortens the list by {@code (toIndex - fromIndex)} elements.
+ * (If {@code toIndex==fromIndex}, this operation has no effect.)
+ *
+ * @param fromIndex index of first element to be removed
+ * @param toIndex index after last element to be removed
+ * @throws IndexOutOfBoundsException if fromIndex or toIndex out of range
+ *         ({@code fromIndex &lt; 0 || toIndex &gt; size() || toIndex &lt; fromIndex})
+ */
+void removeRange(int fromIndex, int toIndex) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+
+        if (fromIndex &lt; 0 || toIndex &gt; len || toIndex &lt; fromIndex)
+            throw new IndexOutOfBoundsException();
+        int newlen = len - (toIndex - fromIndex);
+        int numMoved = len - toIndex;
+        if (numMoved == 0)
+            setArray(Arrays.copyOf(elements, newlen));
+        else {
+            Object[] newElements = new Object[newlen];
+            System.arraycopy(elements, 0, newElements, 0, fromIndex);
+            System.arraycopy(elements, toIndex, newElements,
+                             fromIndex, numMoved);
+            setArray(newElements);
+        }
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre></li>
+<li><p>遍历</p>
+<p> 遍历时，直接使用内部的数组，这样可以避开多线程时的问题,类似的还有indexOf</p>
+<pre><code>public void forEach(Consumer&lt;? super E&gt; action) {
+    if (action == null) throw new NullPointerException();
+    Object[] elements = getArray();
+    int len = elements.length;
+    for (int i = 0; i &lt; len; ++i) {
+        @SuppressWarnings(&quot;unchecked&quot;) E e = (E) elements[i];
+        action.accept(e);
+    }
+}
+
+public int indexOf(E e, int index) {
+    Object[] elements = getArray();
+    return indexOf(e, elements, index, elements.length);
+}
+</code></pre></li>
+</ol>
+<hr>
 ]]></content>
     
     <summary type="html">
     
-      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+      &lt;ul&gt;
+&lt;li&gt;CopyOnWriteArrayList的特点与用法&lt;/li&gt;
+&lt;li&gt;CopyOnWriteArrayList的数据结构&lt;/li&gt;
+&lt;li&gt;CopyOnWriteArrayList的常用方法及实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;CopyOnWriteA
     
     </summary>
     
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
+      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
     
-      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
     
-  </entry>
-  
-  <entry>
-    <title>简洁之美 饿了么框架源码走读之vine http</title>
-    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
-    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
-    
-    
-      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
-    
-      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
-    
-      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
+      <category term="CopyOnWriteArray" scheme="http://showstone.net/tags/copyonwritearray/"/>
     
   </entry>
   
@@ -1798,6 +1446,292 @@ git rebase --skip
       <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
     
       <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LinkedHashMap浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-19-treemap/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>LinkedHashMap的特点</li>
+<li>LinkedHashMap的数据结构</li>
+<li>LinkedHashMap的常用方法及实现</li>
+</ul>
+<h2 id="LinkedHashMap的特点"><a href="#LinkedHashMap的特点" class="headerlink" title="LinkedHashMap的特点"></a>LinkedHashMap的特点</h2><ul>
+<li>LinkedHashMap继承于HashMap，拥有HashMap的所有特点</li>
+<li><p>LinkedHashMap可以保证元素的顺序，支持插入或者访问的顺序，这是通过在构造时提供accessOrder参数来进行控制</p>
+<pre><code>/**
+ * Constructs an empty &lt;tt&gt;LinkedHashMap&lt;/tt&gt; instance with the
+ * specified initial capacity, load factor and ordering mode.
+ *
+ * @param  initialCapacity the initial capacity
+ * @param  loadFactor      the load factor
+ * @param  accessOrder     the ordering mode - &lt;tt&gt;true&lt;/tt&gt; for
+ *         access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order
+ * @throws IllegalArgumentException if the initial capacity is negative
+ *         or the load factor is nonpositive
+ */
+public LinkedHashMap(int initialCapacity,
+                     float loadFactor,
+                     boolean accessOrder) {
+    super(initialCapacity, loadFactor);
+    this.accessOrder = accessOrder;
+}
+</code></pre></li>
+<li><p>因为LinkedHashMap支持访问顺序，所以它可以很方便地用来实现LRU算法</p>
+</li>
+</ul>
+<h2 id="LinkedHashMap的数据结构"><a href="#LinkedHashMap的数据结构" class="headerlink" title="LinkedHashMap的数据结构"></a>LinkedHashMap的数据结构</h2><p>LinkedHashMap除了使用HashMap的数据-链表来储存数据之外，还提供一个单独的链接来储存节点的顺序。同时，通过参数accessOrder来决定是使用访问顺序还是插入顺序</p>
+<pre><code>/**
+ * HashMap.Node subclass for normal LinkedHashMap entries.
+ */
+static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
+    Entry&lt;K,V&gt; before, after;
+    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
+        super(hash, key, value, next);
+    }
+}
+
+private static final long serialVersionUID = 3801124242820219131L;
+
+/**
+ * The head (eldest) of the doubly linked list.
+ */
+transient LinkedHashMap.Entry&lt;K,V&gt; head;
+
+/**
+ * The tail (youngest) of the doubly linked list.
+ */
+transient LinkedHashMap.Entry&lt;K,V&gt; tail;
+
+/**
+ * The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;
+ * for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.
+ *
+ * @serial
+ */
+final boolean accessOrder;
+</code></pre><h2 id="LinkedHashMap的常用方法及实现"><a href="#LinkedHashMap的常用方法及实现" class="headerlink" title="LinkedHashMap的常用方法及实现"></a>LinkedHashMap的常用方法及实现</h2><p>HashMap在实现时就已经为子类的拓展留下了很多的接口，如afterNodeAccess、afterNodeInsertion等等。LinkedHashMap通过重写这些方法，来保存元素的顺序</p>
+<ol>
+<li><p>putVal</p>
+<p> HashMap:</p>
+<pre><code>final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+               boolean evict) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&lt;K,V&gt; e; K k;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre><p> LinkedHashmap:</p>
+<pre><code>void afterNodeInsertion(boolean evict) { // possibly remove eldest
+    LinkedHashMap.Entry&lt;K,V&gt; first;
+    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) {
+        K key = first.key;
+        removeNode(hash(key), key, null, false, true);
+    }
+}
+</code></pre></li>
+<li><p>get</p>
+<pre><code>public V get(Object key) {
+    Node&lt;K,V&gt; e;
+    if ((e = getNode(hash(key), key)) == null)
+        return null;
+    if (accessOrder)
+        afterNodeAccess(e);
+    return e.value;
+}   
+
+void afterNodeAccess(Node&lt;K,V&gt; e) { // move node to last
+    LinkedHashMap.Entry&lt;K,V&gt; last;
+    if (accessOrder &amp;&amp; (last = tail) != e) {
+        LinkedHashMap.Entry&lt;K,V&gt; p =
+            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+        p.after = null;
+        if (b == null)
+            head = a;
+        else
+            b.after = a;
+        if (a != null)
+            a.before = b;
+        else
+            last = b;
+        if (last == null)
+            head = p;
+        else {
+            p.before = last;
+            last.after = p;
+        }
+        tail = p;
+        ++modCount;
+    }
+}
+</code></pre></li>
+<li><p>remove</p>
+</li>
+</ol>
+<p>HashMap</p>
+<pre><code>/**
+ * Implements Map.remove and related methods
+ *
+ * @param hash hash for key
+ * @param key the key
+ * @param value the value to match if matchValue, else ignored
+ * @param matchValue if true only remove if value is equal
+ * @param movable if false do not move other nodes while removing
+ * @return the node, or null if none
+ */
+final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
+                           boolean matchValue, boolean movable) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (p = tab[index = (n - 1) &amp; hash]) != null) {
+        Node&lt;K,V&gt; node = null, e; K k; V v;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            node = p;
+        else if ((e = p.next) != null) {
+            if (p instanceof TreeNode)
+                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
+            else {
+                do {
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key ||
+                         (key != null &amp;&amp; key.equals(k)))) {
+                        node = e;
+                        break;
+                    }
+                    p = e;
+                } while ((e = e.next) != null);
+            }
+        }
+        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
+                             (value != null &amp;&amp; value.equals(v)))) {
+            if (node instanceof TreeNode)
+                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
+            else if (node == p)
+                tab[index] = node.next;
+            else
+                p.next = node.next;
+            ++modCount;
+            --size;
+            afterNodeRemoval(node);
+            return node;
+        }
+    }
+    return null;
+}
+</code></pre><p>LinkedHashMap:</p>
+<pre><code>void afterNodeRemoval(Node&lt;K,V&gt; e) { // unlink
+    LinkedHashMap.Entry&lt;K,V&gt; p =
+        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+    p.before = p.after = null;
+    if (b == null)
+        head = a;
+    else
+        b.after = a;
+    if (a == null)
+        tail = b;
+    else
+        a.before = b;
+}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;LinkedHashMap的特点&lt;/li&gt;
+&lt;li&gt;LinkedHashMap的数据结构&lt;/li&gt;
+&lt;li&gt;LinkedHashMap的常用方法及实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;LinkedHashMap的特点&quot;&gt;&lt;a href=&quot;#LinkedHa
+    
+    </summary>
+    
+      <category term="Java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
+    
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="java" scheme="http://showstone.net/tags/java/"/>
+    
+      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="LinkedHashMap" scheme="http://showstone.net/tags/linkedhashmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>maven常用镜像源</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
+<p>nexus镜像:</p>
+<pre><code>http://uk.maven.org/maven2/
+http://repo2.maven.org/maven2/
+http://mirrors.ibiblio.org/pub/mirrors/maven2/
+http://repository.jboss.org/nexus/content/groups/public
+</code></pre><p>以上内容均收集于互联网</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
+&lt;p&gt;nexus镜像:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
+http://repo2.maven.org/
+    
+    </summary>
+    
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
+    
+      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
+    
+      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
@@ -2090,61 +2024,30 @@ set -g visual-activity on
   </entry>
   
   <entry>
-    <title>编译vim以支持lua</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
+    <title>简洁之美 饿了么框架源码走读之vine http</title>
+    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
+    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
-<ol>
-<li><p>下载源代码</p>
-<pre><code>git clone https://github.com/vim/vim.git   
-cd vim
-</code></pre></li>
-<li><p>设置编译参数</p>
-<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
-<pre><code>./configure --with-features=huge --enable-rubyinterp \    
---enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
---enable-perlinterp --enable-multibyte --enable-sniff  \
---enable-fontset --enable-cscope \    
---disable-gui --prefix=/opt/local/vim  
-
---with-features=huge：支持最大特性  
---enable-rubyinterp：启用Vim对ruby的支持  
---enable-pythoninterp：启用Vim对python的支持  
---enable-luainterp：启用Vim对lua的支持  
---with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
---enable-perlinterp：启用Vim对perl的支持  
---enable-multibyte：多字节支持 可以在Vim中输入中文  
---enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
---enable-cscope：Vim对cscope支持  
---disable-gui：不用编译生成图形界面版gvim  
---prefix=/opt/local/vim：编译安装路径  
-</code></pre></li>
-<li><p>编译\安装</p>
-<pre><code>make    
-make install
-</code></pre></li>
-</ol>
-]]></content>
-    
     <summary type="html">
-    
-      编译vim以支持lua
     
     </summary>
     
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
     
     
-      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
+      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
     
-      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
+      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
     
-      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
+      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
     
-      <category term="python" scheme="http://showstone.net/tags/python/"/>
+      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
     
   </entry>
   
