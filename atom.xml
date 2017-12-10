@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://showstone.net/"/>
-  <updated>2017-10-31T05:10:57.000Z</updated>
+  <updated>2017-12-10T18:46:29.841Z</updated>
   <id>http://showstone.net/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nas服务器的外网访问配置</title>
+    <link href="http://showstone.net/uncategorized/2017/12/11/%E5%B7%A5%E5%85%B7-2017-12-11/"/>
+    <id>http://showstone.net/uncategorized/2017/12/11/工具-2017-12-11/</id>
+    <published>2017-12-10T18:11:45.000Z</published>
+    <updated>2017-12-10T18:46:29.841Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前使用花生壳的DDNS实现了Nas服务的外网访问，可以在公司访问家里的timeMachine.瞬间觉得自己的数据安全了很多。<br>可惜好景不长。没多久就发现家里的文件没有通过samba访问。于是开始折腾Nas系统，发现官方推荐上https，同时为了统一访问体验，决定上子域名。以下是折腾的记录。</p>
+<h2 id="子域名的两种方案"><a href="#子域名的两种方案" class="headerlink" title="子域名的两种方案"></a>子域名的两种方案</h2><p>查找资料后发现，要实现子域名的DDNS,有两种方案:</p>
+<ol>
+<li>购买花生壳的付费二级域名，然后在二级域名的基础上使用三级域名。优点是简单、方便、便宜。可以不用备案。</li>
+<li>自己购买顶级的域名，然后通过脚本更新DNS记录。优点是掌控度高。</li>
+</ol>
+<h2 id="买花生壳的付费二级域名"><a href="#买花生壳的付费二级域名" class="headerlink" title="买花生壳的付费二级域名"></a>买花生壳的付费二级域名</h2><p>比较过两种方案后，我决定还是买花生壳的付费二级域名。反正是给自己用的，输入域名的机会不多，长几个短几个字母问题不大。</p>
+<p>首先购买</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前使用花生壳的DDNS实现了Nas服务的外网访问，可以在公司访问家里的timeMachine.瞬间觉得自己的数据安全了很多。&lt;br&gt;可惜好景不长。没多久就发现家里的文件没有通过samba访问。于是开始折腾Nas系统，发现官方推荐上https，同时为了统一访问体验，决定上子
+    
+    </summary>
+    
+    
+      <category term="nas" scheme="http://showstone.net/tags/nas/"/>
+    
+      <category term="外网" scheme="http://showstone.net/tags/%E5%A4%96%E7%BD%91/"/>
+    
+      <category term="多个子域名" scheme="http://showstone.net/tags/%E5%A4%9A%E4%B8%AA%E5%AD%90%E5%9F%9F%E5%90%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>如何快速找到想要的信息</title>
@@ -131,7 +163,7 @@
     <link href="http://showstone.net/uncategorized/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
     <id>http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/</id>
     <published>2017-10-02T18:38:09.000Z</published>
-    <updated>2017-10-28T17:55:20.000Z</updated>
+    <updated>2017-12-10T18:30:46.838Z</updated>
     
     <content type="html"><![CDATA[<p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
 <h2 id="NAS软件功能"><a href="#NAS软件功能" class="headerlink" title="NAS软件功能"></a>NAS软件功能</h2><ul>
@@ -281,7 +313,7 @@
     <link href="http://showstone.net/%E5%B0%8F%E5%8A%9F%E8%83%BD/2017/08/22/%E5%B0%8F%E5%8A%9F%E8%83%BD-2017-08-22-%E4%B8%8B%E8%BD%BD%E8%B6%85%E5%A4%A7%E7%9A%84excel/"/>
     <id>http://showstone.net/小功能/2017/08/22/小功能-2017-08-22-下载超大的excel/</id>
     <published>2017-08-22T10:42:31.000Z</published>
-    <updated>2017-08-22T12:11:45.000Z</updated>
+    <updated>2017-12-10T18:46:13.901Z</updated>
     
     <content type="html"><![CDATA[<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>通过 POI的SXSSFWorkbook，使用操作系统的临时文件来作为缓存，可以生成超大的excel 文件（我自己测试到500W,就没往下测了）。</p>
 <p>记得使用压缩。关键代码</p>
@@ -529,48 +561,40 @@
   </entry>
   
   <entry>
-    <title>rebase导致commit丢失</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <title>实用git命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<pre><code>mkdir rebaselost
-cd rebaselost
-git init
-echo &quot;init content&quot; &gt; a
-git commit -m &apos;init content&apos;
-git checkout -b branch1
-echo &quot;branch1 content&quot; &gt; a
-git commit -m &apos;branch1&apos;
-git checkout master
-echo &quot;new master content&quot; &gt; a
-git commit -m &apos;master content&apos;
-echo &quot;new master content2&quot; &gt; a
-git commit -m &apos;master content2&apos;
-git checkout branch1
-git rebase master
-git rebase --skip
-</code></pre><p>期望的结果是:</p>
+    <content type="html"><![CDATA[<ul>
+<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
+</ul>
 <blockquote>
-<p> new master content2<br> branch1 content   </p>
+<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
 </blockquote>
-<p>实际的结果:</p>
+<ul>
+<li>合并多次提交记录</li>
+</ul>
 <blockquote>
-<p> new master content2</p>
+<p> git rebase -i HEAD~2</p>
 </blockquote>
-<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
+<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
+<ul>
+<li>找回删除的分支</li>
+</ul>
 <blockquote>
-<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
+<p>git checkout new_branch_name commit_id</p>
 </blockquote>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
 ]]></content>
     
     <summary type="html">
     
-      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+      &lt;ul&gt;
+&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
     
     </summary>
     
@@ -579,293 +603,11 @@ git rebase --skip
     
       <category term="git" scheme="http://showstone.net/tags/git/"/>
     
-      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
     
-  </entry>
-  
-  <entry>
-    <title>CopyOnWriteArray浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-27-copyonwritearray%E6%B5%85%E6%9E%90/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-27-copyonwritearray浅析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
+      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
     
-    <content type="html"><![CDATA[<ul>
-<li>CopyOnWriteArrayList的特点与用法</li>
-<li>CopyOnWriteArrayList的数据结构</li>
-<li>CopyOnWriteArrayList的常用方法及实现</li>
-</ul>
-<h2 id="CopyOnWriteArrayList的特点与用法"><a href="#CopyOnWriteArrayList的特点与用法" class="headerlink" title="CopyOnWriteArrayList的特点与用法"></a>CopyOnWriteArrayList的特点与用法</h2><p>CopyOnWriteArrayList的数据结构和用法与ArrayList基本都相同,区别主要在于CopyOnWriteArrayList在添加和删除元素等修改集合状态的操作时，都会重新复制一个新的数组，以保证多线程下的安全性。因为每次修改数据结点都要复制整个对象数组，会比较耗时间，所以CopyOnWriteArrayList适合读多写少情况下的多线程场景，如缓存之类的。</p>
-<h2 id="CopyOnWriteArrayList的数据结构"><a href="#CopyOnWriteArrayList的数据结构" class="headerlink" title="CopyOnWriteArrayList的数据结构"></a>CopyOnWriteArrayList的数据结构</h2><p>CopyOnWriteArrayList的数据结构与ArrayList的基本一样，只是它不再有扩容之类的操作，因为每次修改都是一个新的数组。。。</p>
-<h2 id="CopyOnWriteArrayList的常用方法及实现"><a href="#CopyOnWriteArrayList的常用方法及实现" class="headerlink" title="CopyOnWriteArrayList的常用方法及实现"></a>CopyOnWriteArrayList的常用方法及实现</h2><pre><code>public class CopyOnWriteArrayList&lt;E&gt;
-    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable {
-    ...
-}
-</code></pre><p>从CopyOnWriteArrayList的类结构就可以看出，它的方法签名与ArrayList基本一致，这里就不再重复了。下面讲讲它方法的特殊实现。</p>
-<ol>
-<li><p>构造方法<br> CopyOnWriteArrayList的默认构造方法会创建一个长度为0的数组来储存数据，而不是像ArrayList那样创建一个长度为10的数组</p>
-<pre><code>/**Sets the array. */    
-final void setArray(Object[] a) {
-  array = a;
-}
-
-/**
-* Creates an empty list.
-*/
-public CopyOnWriteArrayList() {
-    setArray(new Object[0]);
-}
-</code></pre></li>
-<li><p>添加方法</p>
-<pre><code>/**
- * Appends the specified element to the end of this list.
- *
- * @param e element to be appended to this list
- * @return {@code true} (as specified by {@link Collection#add})
- */
-public boolean add(E e) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        Object[] newElements = Arrays.copyOf(elements, len + 1);
-        newElements[len] = e;
-        setArray(newElements);
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Inserts the specified element at the specified position in this
- * list. Shifts the element currently at that position (if any) and
- * any subsequent elements to the right (adds one to their indices).
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public void add(int index, E element) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        if (index &gt; len || index &lt; 0)
-            throw new IndexOutOfBoundsException(&quot;Index: &quot;+index+
-                                                &quot;, Size: &quot;+len);
-        Object[] newElements;
-        int numMoved = len - index;
-        if (numMoved == 0)
-            newElements = Arrays.copyOf(elements, len + 1);
-        else {
-            newElements = new Object[len + 1];
-            System.arraycopy(elements, 0, newElements, 0, index);
-            System.arraycopy(elements, index, newElements, index + 1,
-                             numMoved);
-        }
-        newElements[index] = element;
-        setArray(newElements);
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>修改方法</p>
-<p>方法在进入和退出时有加锁、释放锁</p>
-<pre><code>/**
- * Replaces the element at the specified position in this list with the
- * specified element.
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public E set(int index, E element) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        E oldValue = get(elements, index);
-
-        if (oldValue != element) {
-            int len = elements.length;
-            Object[] newElements = Arrays.copyOf(elements, len);
-            newElements[index] = element;
-            setArray(newElements);
-        } else {
-            // Not quite a no-op; ensures volatile write semantics
-            setArray(elements);
-        }
-        return oldValue;
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>删除方法</p>
-<pre><code>/**
- * Removes the element at the specified position in this list.
- * Shifts any subsequent elements to the left (subtracts one from their
- * indices).  Returns the element that was removed from the list.
- *
- * @throws IndexOutOfBoundsException {@inheritDoc}
- */
-public E remove(int index) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-        E oldValue = get(elements, index);
-        int numMoved = len - index - 1;
-        if (numMoved == 0)
-            setArray(Arrays.copyOf(elements, len - 1));
-        else {
-            Object[] newElements = new Object[len - 1];
-            System.arraycopy(elements, 0, newElements, 0, index);
-            System.arraycopy(elements, index + 1, newElements, index,
-                             numMoved);
-            setArray(newElements);
-        }
-        return oldValue;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Removes the first occurrence of the specified element from this list,
- * if it is present.  If this list does not contain the element, it is
- * unchanged.  More formally, removes the element with the lowest index
- * {@code i} such that
- * &lt;tt&gt;(o==null&amp;nbsp;?&amp;nbsp;get(i)==null&amp;nbsp;:&amp;nbsp;o.equals(get(i)))&lt;/tt&gt;
- * (if such an element exists).  Returns {@code true} if this list
- * contained the specified element (or equivalently, if this list
- * changed as a result of the call).
- *
- * @param o element to be removed from this list, if present
- * @return {@code true} if this list contained the specified element
- */
-public boolean remove(Object o) {
-    Object[] snapshot = getArray();
-    int index = indexOf(o, snapshot, 0, snapshot.length);
-    return (index &lt; 0) ? false : remove(o, snapshot, index);
-}
-
-/**
- * A version of remove(Object) using the strong hint that given
- * recent snapshot contains o at the given index.
- */
-private boolean remove(Object o, Object[] snapshot, int index) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] current = getArray();
-        int len = current.length;
-        if (snapshot != current) findIndex: {
-            int prefix = Math.min(index, len);
-            for (int i = 0; i &lt; prefix; i++) {
-                if (current[i] != snapshot[i] &amp;&amp; eq(o, current[i])) {
-                    index = i;
-                    break findIndex;
-                }
-            }
-            if (index &gt;= len)
-                return false;
-            if (current[index] == o)
-                break findIndex;
-            index = indexOf(o, current, index, len);
-            if (index &lt; 0)
-                return false;
-        }
-        Object[] newElements = new Object[len - 1];
-        System.arraycopy(current, 0, newElements, 0, index);
-        System.arraycopy(current, index + 1,
-                         newElements, index,
-                         len - index - 1);
-        setArray(newElements);
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-
-/**
- * Removes from this list all of the elements whose index is between
- * {@code fromIndex}, inclusive, and {@code toIndex}, exclusive.
- * Shifts any succeeding elements to the left (reduces their index).
- * This call shortens the list by {@code (toIndex - fromIndex)} elements.
- * (If {@code toIndex==fromIndex}, this operation has no effect.)
- *
- * @param fromIndex index of first element to be removed
- * @param toIndex index after last element to be removed
- * @throws IndexOutOfBoundsException if fromIndex or toIndex out of range
- *         ({@code fromIndex &lt; 0 || toIndex &gt; size() || toIndex &lt; fromIndex})
- */
-void removeRange(int fromIndex, int toIndex) {
-    final ReentrantLock lock = this.lock;
-    lock.lock();
-    try {
-        Object[] elements = getArray();
-        int len = elements.length;
-
-        if (fromIndex &lt; 0 || toIndex &gt; len || toIndex &lt; fromIndex)
-            throw new IndexOutOfBoundsException();
-        int newlen = len - (toIndex - fromIndex);
-        int numMoved = len - toIndex;
-        if (numMoved == 0)
-            setArray(Arrays.copyOf(elements, newlen));
-        else {
-            Object[] newElements = new Object[newlen];
-            System.arraycopy(elements, 0, newElements, 0, fromIndex);
-            System.arraycopy(elements, toIndex, newElements,
-                             fromIndex, numMoved);
-            setArray(newElements);
-        }
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></li>
-<li><p>遍历</p>
-<p> 遍历时，直接使用内部的数组，这样可以避开多线程时的问题,类似的还有indexOf</p>
-<pre><code>public void forEach(Consumer&lt;? super E&gt; action) {
-    if (action == null) throw new NullPointerException();
-    Object[] elements = getArray();
-    int len = elements.length;
-    for (int i = 0; i &lt; len; ++i) {
-        @SuppressWarnings(&quot;unchecked&quot;) E e = (E) elements[i];
-        action.accept(e);
-    }
-}
-
-public int indexOf(E e, int index) {
-    Object[] elements = getArray();
-    return indexOf(e, elements, index, elements.length);
-}
-</code></pre></li>
-</ol>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;CopyOnWriteArrayList的特点与用法&lt;/li&gt;
-&lt;li&gt;CopyOnWriteArrayList的数据结构&lt;/li&gt;
-&lt;li&gt;CopyOnWriteArrayList的常用方法及实现&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;CopyOnWriteA
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="CopyOnWriteArray" scheme="http://showstone.net/tags/copyonwritearray/"/>
+      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
     
   </entry>
   
@@ -1415,6 +1157,61 @@ static final int tableSizeFor(int cap) {
   </entry>
   
   <entry>
+    <title>rebase导致commit丢失</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
+<pre><code>mkdir rebaselost
+cd rebaselost
+git init
+echo &quot;init content&quot; &gt; a
+git commit -m &apos;init content&apos;
+git checkout -b branch1
+echo &quot;branch1 content&quot; &gt; a
+git commit -m &apos;branch1&apos;
+git checkout master
+echo &quot;new master content&quot; &gt; a
+git commit -m &apos;master content&apos;
+echo &quot;new master content2&quot; &gt; a
+git commit -m &apos;master content2&apos;
+git checkout branch1
+git rebase master
+git rebase --skip
+</code></pre><p>期望的结果是:</p>
+<blockquote>
+<p> new master content2<br> branch1 content   </p>
+</blockquote>
+<p>实际的结果:</p>
+<blockquote>
+<p> new master content2</p>
+</blockquote>
+<p>问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失.</p>
+<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
+<blockquote>
+<p>$ git reflog<br>fa0f628 HEAD@{0}: rebase: branch1<br>465b616 HEAD@{1}: rebase: checkout master<br>d0350f9 HEAD@{2}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{3}: checkout: moving from master to branch1<br>465b616 HEAD@{4}: commit: new master status2<br>7f50104 HEAD@{5}: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master<br>d1fe9ed HEAD@{6}: rebase: branch1<br>7f50104 HEAD@{7}: rebase: checkout master<br>d0350f9 HEAD@{8}: checkout: moving from branch1 to d0350f9<br>7f50104 HEAD@{9}: rebase finished: returning to refs/heads/branch1<br>7f50104 HEAD@{10}: rebase: checkout master<br>d0350f9 HEAD@{11}: checkout: moving from master to branch1<br>7f50104 HEAD@{12}: commit: master content<br>4fe1cf4 HEAD@{13}: checkout: moving from branch1 to master<br>d0350f9 HEAD@{14}: commit: branch1<br>4fe1cf4 HEAD@{15}: checkout: moving from master to branch1<br>4fe1cf4 HEAD@{16}: commit (initial): init content<br>$ git checkout d0350f9</p>
+</blockquote>
+<p>要避免丢失,在冲突时编辑冲突即可</p>
+]]></content>
+    
+    <summary type="html">
+    
+      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
+    
+      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LinkedHashMap浅析</title>
     <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-19-treemap/"/>
     <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-19-treemap/</id>
@@ -1665,48 +1462,9 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   </entry>
   
   <entry>
-    <title>mybatis结构分析</title>
-    <link href="http://showstone.net/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/2017/03/07/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2015-07-23-mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>JDBC方式的几个缺点</li>
-<li>MyBatis的解决方法</li>
-<li><p>MyBatis的结构框架</p>
-<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;JDBC方式的几个缺点&lt;/li&gt;
-&lt;li&gt;MyBatis的解决方法&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;MyBatis的结构框架&lt;/p&gt;
-&lt;h2 id=&quot;JDBC方式的几个缺点&quot;&gt;&lt;a href=&quot;#JDBC方式的几个缺点&quot; class=&quot;headerlink&quot; title
-    
-    </summary>
-    
-      <category term="Mybatis源码分析" scheme="http://showstone.net/categories/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="MyBatsis" scheme="http://showstone.net/tags/mybatsis/"/>
-    
-      <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>简洁之美 饿了么框架源码走读之vine http</title>
-    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
-    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
+    <title>JUnit主线程退出时所有的子线程也会结束</title>
+    <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
+    <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
@@ -1714,20 +1472,8 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
     
     </summary>
     
-      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
+      <category term="Java" scheme="http://showstone.net/categories/java/"/>
     
-    
-      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
-    
-      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
-    
-      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
-    
-      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
-    
-      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
     
   </entry>
   
@@ -1870,57 +1616,6 @@ set -g visual-activity on
   </entry>
   
   <entry>
-    <title>实用git命令</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
-</ul>
-<blockquote>
-<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
-</blockquote>
-<ul>
-<li>合并多次提交记录</li>
-</ul>
-<blockquote>
-<p> git rebase -i HEAD~2</p>
-</blockquote>
-<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
-<ul>
-<li>找回删除的分支</li>
-</ul>
-<blockquote>
-<p>git checkout new_branch_name commit_id</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
-    
-    </summary>
-    
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
-    
-    
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
-    
-      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
-    
-      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
-    
-      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>常用linux命令</title>
     <link href="http://showstone.net/software/2017/03/07/software-2016-01-18-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4/"/>
     <id>http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/</id>
@@ -2020,61 +1715,60 @@ set -g visual-activity on
   </entry>
   
   <entry>
-    <title>编译vim以支持lua</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
+    <title>简洁之美 饿了么框架源码走读之vine http</title>
+    <link href="http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/"/>
+    <id>http://showstone.net/eleme/2017/03/07/eleme-2016-01-12-vine-http/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="eleme" scheme="http://showstone.net/categories/eleme/"/>
+    
+    
+      <category term="简洁之美" scheme="http://showstone.net/tags/%E7%AE%80%E6%B4%81%E4%B9%8B%E7%BE%8E/"/>
+    
+      <category term="eleme" scheme="http://showstone.net/tags/eleme/"/>
+    
+      <category term="饿了么" scheme="http://showstone.net/tags/%E9%A5%BF%E4%BA%86%E4%B9%88/"/>
+    
+      <category term="框架" scheme="http://showstone.net/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="走读" scheme="http://showstone.net/tags/%E8%B5%B0%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://showstone.net/uncategorized/2017/03/07/eleme-README/"/>
+    <id>http://showstone.net/uncategorized/2017/03/07/eleme-README/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>计划:</p>
 <ol>
-<li><p>下载源代码</p>
-<pre><code>git clone https://github.com/vim/vim.git   
-cd vim
-</code></pre></li>
-<li><p>设置编译参数</p>
-<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
-<pre><code>./configure --with-features=huge --enable-rubyinterp \    
---enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
---enable-perlinterp --enable-multibyte --enable-sniff  \
---enable-fontset --enable-cscope \    
---disable-gui --prefix=/opt/local/vim  
-
---with-features=huge：支持最大特性  
---enable-rubyinterp：启用Vim对ruby的支持  
---enable-pythoninterp：启用Vim对python的支持  
---enable-luainterp：启用Vim对lua的支持  
---with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
---enable-perlinterp：启用Vim对perl的支持  
---enable-multibyte：多字节支持 可以在Vim中输入中文  
---enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
---enable-cscope：Vim对cscope支持  
---disable-gui：不用编译生成图形界面版gvim  
---prefix=/opt/local/vim：编译安装路径  
-</code></pre></li>
-<li><p>编译\安装</p>
-<pre><code>make    
-make install
-</code></pre></li>
+<li>先写vine框架(http, mq, service),包括用法等  </li>
+<li>再写service的实现与封装  </li>
+<li>写日志/打点等实现  </li>
 </ol>
 ]]></content>
     
     <summary type="html">
     
-      编译vim以支持lua
+      &lt;p&gt;计划:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先写vine框架(http, mq, service),包括用法等  &lt;/li&gt;
+&lt;li&gt;再写service的实现与封装  &lt;/li&gt;
+&lt;li&gt;写日志/打点等实现  &lt;/li&gt;
+&lt;/ol&gt;
+
     
     </summary>
     
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
-    
-      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
-    
-      <category term="python" scheme="http://showstone.net/tags/python/"/>
     
   </entry>
   
