@@ -8,37 +8,45 @@ tags: [git, rebase]
 
 提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:
 
-  > mkdir rebaselost
-  > cd rebaselost
-  > git init
-  > echo "init content" > a
-  > git commit -m 'init content'
-  > git checkout -b branch1
-  > echo "branch1 content" > a
-  > git commit -m 'branch1'
-  > git checkout master
-  > echo "new master content" > a
-  > git commit -m 'master content'
-  > echo "new master content2" > a
-  > git commit -m 'master content2'
-  > git checkout branch1
-  > git rebase master
-  > git rebase --skip
+```shell
+ mkdir rebaselost
+ cd rebaselost
+ git init
+ echo "init content"  a
+ git commit -m 'init content'
+ git checkout -b branch1
+ echo "branch1 content"  a
+ git commit -m 'branch1'
+ git checkout master
+ echo "new master content"  a
+ git commit -m 'master content'
+ echo "new master content2"  a
+ git commit -m 'master content2'
+ git checkout branch1
+ git rebase master
+ git rebase --skip
+```
 
 期望的结果是:
 
-  > new master content2  
+```
+  new master content2  
   branch1 content   
+```
 
 实际的结果:
 
-  > new master content2
+```
+  new master content2
+```
 
-问题出在 rebase里的 --skip 参数,加了这个参数后,原来的提交记录会丢失.
+_ 问题出在 rebase里的 --skip 参数,加了这个参数后,原来的提交记录会丢失. _
 
 要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回
 
-  > git reflog 
+```shell
+git reflog 
+```
 
 操作结果:
 
@@ -62,7 +70,10 @@ tags: [git, rebase]
  4fe1cf4 HEAD@{16}: commit (initial): init content  
 ```
 
-  > git checkout d0350f9
+找回提交:
+```
+  git checkout d0350f9
+```
 
 
 要避免丢失,在冲突时编辑冲突即可
