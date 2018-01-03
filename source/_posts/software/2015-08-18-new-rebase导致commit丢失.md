@@ -27,18 +27,18 @@ tags: [git, rebase]
 
 期望的结果是:
 
->  new master content2  
->  branch1 content   
+  > new master content2  
+  branch1 content   
 
 实际的结果:
 
->  new master content2
+  > new master content2
 
 问题出在 rebase里的 --skip 参数,加了这个参数后,原来的提交记录会丢失.
 
 要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回
 
-> $ git reflog 
+  > git reflog 
 
 操作结果:
 
@@ -62,7 +62,7 @@ tags: [git, rebase]
  4fe1cf4 HEAD@{16}: commit (initial): init content  
 ```
 
-> $ git checkout d0350f9
+  > git checkout d0350f9
 
 
 要避免丢失,在冲突时编辑冲突即可
