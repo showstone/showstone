@@ -671,62 +671,6 @@
   </entry>
   
   <entry>
-    <title>Vector浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-29-vector/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Vector与ArrayList很像，主要区别在于Vector是线程安全的。</p>
-<p>Vector的类声明:     </p>
-<blockquote>
-<p>* </p><p>As of the Java 2 platform v1.2, this class was retrofitted to<br>* implement the {@link List} interface, making it a member of the<br>* <a href="{@docRoot}/../technotes/guides/collections/index.html"><br>* Java Collections Framework</a>.  Unlike the new collection<br>* implementations, {@code Vector} is synchronized.  If a thread-safe<br>* implementation is not needed, it is recommended to use {@link<br>* ArrayList} in place of {@code Vector}.  </p>
-</blockquote>
-<p>阅读源码后发现，Vector是通过给所有的外部类加上synchronized来实现线程安全的。这种实现方式很简单，但由于synchronized是对this加锁，所以当需要同时一个对象的多个方法时，效率就会很低。</p>
-<p>另外，查看iterator的源码</p>
-<pre><code>/**
- * Returns an iterator over the elements in this list in proper sequence.
- *
- * &lt;p&gt;The returned iterator is &lt;a href=&quot;#fail-fast&quot;&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.
- *
- * @return an iterator over the elements in this list in proper sequence
- */
-public synchronized Iterator&lt;E&gt; iterator() {
-    return new Itr();
-}
-</code></pre><p>可以发现，在返回遍历对象后，就已经退出了锁，如果修改了对象之后，再去遍历，则会抛出ConcurrentModificationException异常.   </p>
-<pre><code>Vector&lt;String&gt; vector = new Vector&lt;String&gt;();
-vector.add(&quot;abc&quot;);
-Iterator&lt;String&gt; ite = vector.iterator();
-vector.add(&quot;bcd&quot;);
-while (ite.hasNext()) {
-    System.out.println(ite.next());
-}
-</code></pre><p>运行结果：</p>
-<pre><code>Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
-    at java.util.Vector$Itr.checkForComodification(Vector.java:1184)
-    at java.util.Vector$Itr.next(Vector.java:1137)
-    at com.showstone.containerresearch.list.VectorResearch.main(VectorResearch.java:14)
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      vector分析
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="vector" scheme="http://showstone.net/tags/vector/"/>
-    
-  </entry>
-  
-  <entry>
     <title>HashSet浅析</title>
     <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-02-hashset%E6%B5%85%E6%9E%90/"/>
     <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/</id>
@@ -1462,6 +1406,45 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
       <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
     
       <category term="LinkedHashMap" scheme="http://showstone.net/tags/linkedhashmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis结构分析</title>
+    <link href="http://showstone.net/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/2017/03/07/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2015-07-23-mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>JDBC方式的几个缺点</li>
+<li>MyBatis的解决方法</li>
+<li><p>MyBatis的结构框架</p>
+<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;JDBC方式的几个缺点&lt;/li&gt;
+&lt;li&gt;MyBatis的解决方法&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MyBatis的结构框架&lt;/p&gt;
+&lt;h2 id=&quot;JDBC方式的几个缺点&quot;&gt;&lt;a href=&quot;#JDBC方式的几个缺点&quot; class=&quot;headerlink&quot; title
+    
+    </summary>
+    
+      <category term="Mybatis源码分析" scheme="http://showstone.net/categories/mybatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+    
+      <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="MyBatsis" scheme="http://showstone.net/tags/mybatsis/"/>
+    
+      <category term="结构" scheme="http://showstone.net/tags/%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="设计" scheme="http://showstone.net/tags/%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
