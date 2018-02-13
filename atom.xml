@@ -606,6 +606,144 @@
   </entry>
   
   <entry>
+    <title>tmux使用方法</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
+<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
+<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
+<blockquote>
+<p>brew install tmux   </p>
+</blockquote>
+<p>ubuntu </p>
+<blockquote>
+<p>sudo apt-get install tmux</p>
+</blockquote>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
+<blockquote>
+<p>tmux</p>
+</blockquote>
+<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
+c-b d 离开(detach)session
+c-b $ 重命名当前session
+
+tmux ls 列出会话
+tmux attach -t session 进入某个会话
+tmux -r 连接上个断开的session
+tmux new -s session -d 在后台建立会话
+</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
+c-b &amp; 关闭当前窗口  
+c-b p 切换到上一个窗口  
+c-b n 切换到下一个窗口  
+c-b , 重命名当前窗口
+c-b w 列出所有窗口
+c-b 0~9 选择0~9对应的窗口
+c-b opt+方向键 调整panel的大小(一次调整5%)
+c-b ctrl+方向键 调整panel的大小(一次调整1%)
+</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
+c-b &quot; 竖直分割窗口
+c-b h 将焦点移入左侧的panel
+c-b j 将焦点移入下方的panel
+c-b l 将焦点移入上方的panel
+c-b k 将焦点移入右方的panel
+c-b q 显示panel的编号 
+c-b o 切换到下一个panel
+c-b } 与下一个panel交换位置
+c-b { 与上一个panel交换位置
+</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
+<pre><code>c-b [ 进入复制模式
+space 选择要复制的内容
+c-b ] 粘贴
+q 退出复制模式
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
+<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
+<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
+<pre><code>#设置PREFIX为Ctrl-a  
+set -g prefix C-a  
+#解除Ctrl-b与PREFIX的对应关系  
+unbind C-b  
+#copy-mode将快捷键设置为vi模式  
+setw -g mode-keys vi  
+#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
+bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
+#设置终端颜色为256色  
+set -g default-terminal &quot;screen-256color&quot;  
+#开启status-bar uft-8支持  
+set -g status-utf8 on  
+#设置pan前景色  
+set -g pane-border-fg green  
+#设置pane背景色  
+set -g pane-border-bg black  
+#设置活跃pane前景色  
+set -g pane-active-border-fg white  
+#设置活跃pane背景色  
+set -g pane-active-border-bg yellow  
+#设置消息前景色  
+set -g message-fg white  
+#设置消息背景色  
+set -g message-bg black  
+#设置消息高亮显示  
+set -g message-attr bright  
+#设置status-bar颜色  
+set -g status-fg white  
+set -g status-bg black  
+#设置窗口列表颜色  
+setw -g window-status-fg cyan  
+setw -g window-status-bg default  
+setw -g window-status-attr dim  
+#设置当前窗口在status bar中的颜色  
+setw -g window-status-current-fg white  
+setw -g window-status-current-bg red  
+setw -g window-status-current-attr bright  
+#设置status bar格式  
+set -g status-left-length 40  
+set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
+set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
+set -g status-interval 60  
+set -g status-justify centre  
+#开启window事件提示  
+setw -g monitor-activity on  
+set -g visual-activity on 
+</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
+<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+</ul>
+<blockquote>
+<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+</blockquote>
+<ul>
+<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+</ul>
+<blockquote>
+<p>c-b :set synchronize-panes</p>
+</blockquote>
+<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<ul>
+<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
+&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="software" scheme="http://showstone.net/tags/software/"/>
+    
+      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HashMap浅析</title>
     <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-05-hashmap/"/>
     <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/</id>
@@ -1271,199 +1409,116 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   </entry>
   
   <entry>
-    <title>tmux使用方法</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
+    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
+    <link href="http://showstone.net/java/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
+    <id>http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2018-02-13T05:13:09.224Z</updated>
+    
+    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://showstone.net/categories/java/"/>
+    
+    
+      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
+    
+      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
+    
+      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
+    
+      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
+    
+      <category term="command" scheme="http://showstone.net/tags/command/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>实用git命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
-<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
-<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
-<blockquote>
-<p>brew install tmux   </p>
-</blockquote>
-<p>ubuntu </p>
-<blockquote>
-<p>sudo apt-get install tmux</p>
-</blockquote>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
-<blockquote>
-<p>tmux</p>
-</blockquote>
-<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
-c-b d 离开(detach)session
-c-b $ 重命名当前session
-
-tmux ls 列出会话
-tmux attach -t session 进入某个会话
-tmux -r 连接上个断开的session
-tmux new -s session -d 在后台建立会话
-</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
-c-b &amp; 关闭当前窗口  
-c-b p 切换到上一个窗口  
-c-b n 切换到下一个窗口  
-c-b , 重命名当前窗口
-c-b w 列出所有窗口
-c-b 0~9 选择0~9对应的窗口
-c-b opt+方向键 调整panel的大小(一次调整5%)
-c-b ctrl+方向键 调整panel的大小(一次调整1%)
-</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
-c-b &quot; 竖直分割窗口
-c-b h 将焦点移入左侧的panel
-c-b j 将焦点移入下方的panel
-c-b l 将焦点移入上方的panel
-c-b k 将焦点移入右方的panel
-c-b q 显示panel的编号 
-c-b o 切换到下一个panel
-c-b } 与下一个panel交换位置
-c-b { 与上一个panel交换位置
-</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
-<pre><code>c-b [ 进入复制模式
-space 选择要复制的内容
-c-b ] 粘贴
-q 退出复制模式
-</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
-<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
-<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
-<pre><code>#设置PREFIX为Ctrl-a  
-set -g prefix C-a  
-#解除Ctrl-b与PREFIX的对应关系  
-unbind C-b  
-#copy-mode将快捷键设置为vi模式  
-setw -g mode-keys vi  
-#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
-bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
-#设置终端颜色为256色  
-set -g default-terminal &quot;screen-256color&quot;  
-#开启status-bar uft-8支持  
-set -g status-utf8 on  
-#设置pan前景色  
-set -g pane-border-fg green  
-#设置pane背景色  
-set -g pane-border-bg black  
-#设置活跃pane前景色  
-set -g pane-active-border-fg white  
-#设置活跃pane背景色  
-set -g pane-active-border-bg yellow  
-#设置消息前景色  
-set -g message-fg white  
-#设置消息背景色  
-set -g message-bg black  
-#设置消息高亮显示  
-set -g message-attr bright  
-#设置status-bar颜色  
-set -g status-fg white  
-set -g status-bg black  
-#设置窗口列表颜色  
-setw -g window-status-fg cyan  
-setw -g window-status-bg default  
-setw -g window-status-attr dim  
-#设置当前窗口在status bar中的颜色  
-setw -g window-status-current-fg white  
-setw -g window-status-current-bg red  
-setw -g window-status-current-attr bright  
-#设置status bar格式  
-set -g status-left-length 40  
-set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
-set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
-set -g status-interval 60  
-set -g status-justify centre  
-#开启window事件提示  
-setw -g monitor-activity on  
-set -g visual-activity on 
-</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
-<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+    <content type="html"><![CDATA[<ul>
+<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
 </ul>
 <blockquote>
-<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
 </blockquote>
 <ul>
-<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+<li>合并多次提交记录</li>
 </ul>
 <blockquote>
-<p>c-b :set synchronize-panes</p>
+<p> git rebase -i HEAD~2</p>
 </blockquote>
-<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
 <ul>
-<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+<li>找回删除的分支</li>
 </ul>
+<blockquote>
+<p>git checkout new_branch_name commit_id</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
-&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
+      &lt;ul&gt;
+&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
     
     </summary>
     
       <category term="software" scheme="http://showstone.net/categories/software/"/>
     
     
-      <category term="software" scheme="http://showstone.net/tags/software/"/>
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
     
-      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
+      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
     
-  </entry>
-  
-  <entry>
-    <title>编译vim以支持lua</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
+      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
     
-    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
-<ol>
-<li><p>下载源代码</p>
-<pre><code>git clone https://github.com/vim/vim.git   
-cd vim
-</code></pre></li>
-<li><p>设置编译参数</p>
-<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
-<pre><code>./configure --with-features=huge --enable-rubyinterp \    
---enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
---enable-perlinterp --enable-multibyte --enable-sniff  \
---enable-fontset --enable-cscope \    
---disable-gui --prefix=/opt/local/vim  
-
---with-features=huge：支持最大特性  
---enable-rubyinterp：启用Vim对ruby的支持  
---enable-pythoninterp：启用Vim对python的支持  
---enable-luainterp：启用Vim对lua的支持  
---with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
---enable-perlinterp：启用Vim对perl的支持  
---enable-multibyte：多字节支持 可以在Vim中输入中文  
---enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
---enable-cscope：Vim对cscope支持  
---disable-gui：不用编译生成图形界面版gvim  
---prefix=/opt/local/vim：编译安装路径  
-</code></pre></li>
-<li><p>编译\安装</p>
-<pre><code>make    
-make install
-</code></pre></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      编译vim以支持lua
-    
-    </summary>
-    
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
-    
-      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
-    
-      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
-    
-      <category term="python" scheme="http://showstone.net/tags/python/"/>
+      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
     
   </entry>
   
@@ -1567,219 +1622,6 @@ make install
   </entry>
   
   <entry>
-    <title>ArrayList浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-arraylist/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>#ArrayList浅析</p>
-<ul>
-<li>ArrayList的作用、特点</li>
-<li>ArrayList的数据结构</li>
-<li>ArrayList的常用方法及实现</li>
-<li>ArrayList里需要注意的地方</li>
-</ul>
-<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
-<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
-<pre><code>默认的空数组
-/**
- * Constructs an empty list with an initial capacity of ten.
- */
-public ArrayList() {
-    super();
-    this.elementData = EMPTY_ELEMENTDATA;
-}
-
-private static final Object[] EMPTY_ELEMENTDATA = {};
-</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
-<p>加入元素之前，先确保有足够的空间</p>
-<pre><code>public boolean add(E e) {&lt;br/&gt;
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    elementData[size++] = e;
-    return true;
-}
-</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
-<pre><code>public void add(int index, E element) {
-    rangeCheckForAdd(index);
-
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    System.arraycopy(elementData, index, elementData, index + 1, size - index);
-    elementData[index] = element;
-    size++;
-}
-</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
-    Object[] a = c.toArray();
-    int numNew = a.length;
-    ensureCapacityInternal(size + numNew);  // Increments modCount
-    System.arraycopy(a, 0, elementData, size, numNew);
-    size += numNew;
-    return numNew != 0;
-}
-</code></pre><p>2.remove</p>
-<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
-<pre><code>public E remove(int index) {
-    rangeCheck(index);//简单地检查下标是否越界
-
-    modCount++;
-    E oldValue = elementData(index);
-
-    int numMoved = size - index - 1;
-    if (numMoved &gt; 0)
-        System.arraycopy(elementData, index+1, elementData, index,
-                         numMoved);
-    elementData[--size] = null; // clear to let GC do its work
-
-    return oldValue;
-}
-</code></pre><p>3.contain</p>
-<pre><code>public boolean contains(Object o) {
-    return indexOf(o) &gt;= 0;
-}
-
-public int indexOf(Object o) {
-    if (o == null) {
-        for (int i = 0; i &lt; size; i++)
-            if (elementData[i]==null)
-                return i;
-    } else {
-        for (int i = 0; i &lt; size; i++)
-            if (o.equals(elementData[i]))
-                return i;
-    }
-    return -1;
-}
-</code></pre><p>4.clone</p>
-<pre><code>public Object clone() {
-    try {
-        @SuppressWarnings(&quot;unchecked&quot;)
-            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
-        v.elementData = Arrays.copyOf(elementData, size);
-        v.modCount = 0;
-        return v;
-    } catch (CloneNotSupportedException e) {
-        // this shouldn&apos;t happen, since we are Cloneable
-        throw new InternalError();
-    }
-}
-</code></pre><p>5.iterator</p>
-<p>通过使用cursor和lastRet来进行标记</p>
-<pre><code>private class Itr implements Iterator&lt;E&gt; {
-    int cursor;       // index of next element to return
-    int lastRet = -1; // index of last element returned; -1 if no such
-    int expectedModCount = modCount;
-    ...
-}
-</code></pre><p>###ArrayList里需要注意的地方</p>
-<ul>
-<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
-</ul>
-<p>代码：</p>
-<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
-    subListRangeCheck(fromIndex, toIndex, size);
-    return new SubList(this, 0, fromIndex, toIndex);
-}
-
- private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
-    private final AbstractList&lt;E&gt; parent;
-    private final int parentOffset;
-    private final int offset;
-    int size;
-    ...
-}
-</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
-<ul>
-<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
-</ul>
-<p>代码</p>
-<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
-    return batchRemove(c, false);
-}
-
-private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
-    final Object[] elementData = this.elementData;
-    int r = 0, w = 0;
-    boolean modified = false;
-    try {
-        for (; r &lt; size; r++)
-            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
-                elementData[w++] = elementData[r];
-    } finally {
-        // Preserve behavioral compatibility with AbstractCollection,
-        // even if c.contains() throws.
-        if (r != size) {
-            System.arraycopy(elementData, r,
-                             elementData, w,
-                             size - r);
-            w += size - r;
-        }
-        if (w != size) {
-            // clear to let GC do its work
-            for (int i = w; i &lt; size; i++)
-                elementData[i] = null;
-            modCount += size - w;
-            size = w;
-            modified = true;
-        }
-    }
-    return modified;
-}
-</code></pre><ul>
-<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
-</ul>
-<blockquote>
-<p>protected transient int modCount = 0;</p>
-<p>private int size;</p>
-</blockquote>
-<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
-    long startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList();
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-    startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList(2000);
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-}
-</code></pre><p>运行结果:</p>
-<blockquote>
-<p>用时:607毫秒<br>用时:415毫秒</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;#ArrayList浅析&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ArrayList的作用、特点&lt;/li&gt;
-&lt;li&gt;ArrayList的数据结构&lt;/li&gt;
-&lt;li&gt;ArrayList的常用方法及实现&lt;/li&gt;
-&lt;li&gt;ArrayList里需要注意的地方&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;###
-    
-    </summary>
-    
-      <category term="java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="ArrayList" scheme="http://showstone.net/tags/arraylist/"/>
-    
-  </entry>
-  
-  <entry>
     <title>JUnit主线程退出时所有的子线程也会结束</title>
     <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
     <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
@@ -1796,65 +1638,38 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
   </entry>
   
   <entry>
-    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
-    <link href="http://showstone.net/java/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
-    <id>http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
+    <title>maven常用镜像源</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
     <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2018-02-13T05:13:09.224Z</updated>
+    <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
+<p>nexus镜像:</p>
+<pre><code>http://uk.maven.org/maven2/
+http://repo2.maven.org/maven2/
+http://mirrors.ibiblio.org/pub/mirrors/maven2/
+http://repository.jboss.org/nexus/content/groups/public
+</code></pre><p>以上内容均收集于互联网</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
+      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
+&lt;p&gt;nexus镜像:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
+http://repo2.maven.org/
     
     </summary>
     
-      <category term="JAVA" scheme="http://showstone.net/categories/java/"/>
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
+      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
     
-      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
+      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
     
-      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
-    
-      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
-    
-      <category term="command" scheme="http://showstone.net/tags/command/"/>
+      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   

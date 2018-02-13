@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NAS服务器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="听风的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+NAS软件功能
+外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
+文件共享。如samba或者ftp
+下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission
+DLNA服务。可以在线看视频啦~
+iTunes媒体共享
+time machine等备份服务
+和百度云盘等公有云同步
+类似于Onedrive(强烈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAS服务器的搭建-软件篇">
+<meta property="og:url" content="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/index.html">
+<meta property="og:site_name" content="听风的博客">
+<meta property="og:description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+NAS软件功能
+外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
+文件共享。如samba或者ftp
+下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission
+DLNA服务。可以在线看视频啦~
+iTunes媒体共享
+time machine等备份服务
+和百度云盘等公有云同步
+类似于Onedrive(强烈">
+<meta property="og:updated_time" content="2018-02-09T16:02:12.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NAS服务器的搭建-软件篇">
+<meta name="twitter:description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+NAS软件功能
+外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
+文件共享。如samba或者ftp
+下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission
+DLNA服务。可以在线看视频啦~
+iTunes媒体共享
+time machine等备份服务
+和百度云盘等公有云同步
+类似于Onedrive(强烈">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/"/>
+
+
+
+
+
+  <title>NAS服务器的搭建-软件篇 | 听风的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3f82c96c411fc76dd2a11abd27157116";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">听风的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">行走，辨思，记录</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NAS服务器的搭建-软件篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:38:09+08:00">
+                2017-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
+<h2 id="NAS软件功能"><a href="#NAS软件功能" class="headerlink" title="NAS软件功能"></a>NAS软件功能</h2><ul>
+<li>外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊</li>
+<li>文件共享。如samba或者ftp</li>
+<li>下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission</li>
+<li>DLNA服务。可以在线看视频啦~</li>
+<li>iTunes媒体共享</li>
+<li>time machine等备份服务</li>
+<li>和百度云盘等公有云同步</li>
+<li>类似于Onedrive(强烈建议不要用百度云，很容易丢文件)等云盘的私有云服务</li>
+</ul>
+<h2 id="外网访问配置"><a href="#外网访问配置" class="headerlink" title="外网访问配置"></a>外网访问配置</h2><p>根据是否有公网ip，可以采用不同的方案。<br>我用的是电信光纤，是有公网ip的，这个具体和运营商有关，可以打客服电话，说要装监控，需要外网访问，看他怎么说。</p>
+<h3 id="有公网Ip"><a href="#有公网Ip" class="headerlink" title="有公网Ip"></a>有公网Ip</h3><p>这种方案需要做端口映射。<br>首先找电信改成桥接模式，或者让电信给一个能做端口映射的光猫。<br>然后在路由器上设置端口映射或DMZ。<br>现在已经可以在公网上访问本机了，但是每次拨号ip都会变，最好能有一个域名，能通过这个域名知道现在的ip–这个就是DDNS服务了，大部分人用的都是花生壳的。具体方式请自行google</p>
+<h3 id="没有公网ip"><a href="#没有公网ip" class="headerlink" title="没有公网ip"></a>没有公网ip</h3><p>可以使用内网穿透。网上评价很差，不建议使用。具体使用方式请自行google</p>
+<h2 id="NAS软件方案"><a href="#NAS软件方案" class="headerlink" title="NAS软件方案"></a>NAS软件方案</h2><p>NAS服务器的软件，有几种方案:</p>
+<ul>
+<li>方案一：NAS裸机安装Windows，可在虚拟机中安装Linux，群晖，软路由。推荐。Windows对硬件兼容性好，驱动普遍支持，能无需配置充分发挥显卡性能，平时可做上网机，观影机，HTPC高清电视。</li>
+<li>方案二：NAS裸机安装Linux，可在虚拟机中安装Windows，群晖，软路由。技术宅推荐。Windows还是有些缺陷的，系统及某些流氓软件会莫名其妙唤醒全部硬盘。只要能驱动，Linux多媒体不是问题。没有迅雷下载有点问题，移植的也麻烦，可以在Win虚拟机里面迅雷。</li>
+<li>方案三：NAS裸机安装群晖，可在虚拟机中安装Windows，Linux，软路由。不推荐。NAS的显卡都浪费了。NAS中集成的功能当然做得很用户友好，非常方便。但是没有的功能很多需要自己编译源码，没有Linux发行版的软件仓库方便，很鸡肋。</li>
+</ul>
+<p>注1：以上群晖都可以换成其他NAS操作系统。<br>注2：不推荐裸机安装NAS操作系统。</p>
+<p>以上内容来自：<a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></p>
+<h2 id="NAS裸机安装Linux方案"><a href="#NAS裸机安装Linux方案" class="headerlink" title="NAS裸机安装Linux方案"></a>NAS裸机安装Linux方案</h2><p>选择NAS裸机安准Linux是因为我要跑脚本，用Linux会方便很多。同时，网上说的驱动问题我没有碰到，用最新版本的系统应该可以解决这个问题，毕竟Linux对Intel的支持还是很好的。我用的是Ubuntu 17.04.</p>
+<p>对现有主流的NAS操作系统做了一个调研,发现NAS操作系统太重了，除openmeidavault外，都需要组Raid,对我而言没有必要。</p>
+<ul>
+<li><a href="http://www.how2shout.com/tools/best-free-open-source-nas-software.html" target="_blank" rel="external">http://www.how2shout.com/tools/best-free-open-source-nas-software.html</a></li>
+<li><a href="http://storageroot.com/articles/nas4free-freenas-amahi-openmediavault" target="_blank" rel="external">http://storageroot.com/articles/nas4free-freenas-amahi-openmediavault</a></li>
+</ul>
+<p>其中，freenas和nas4free，都使用了ZFS文件系统，而ZFS文件系统依赖ECC内存，同时要求8G以上内存。<br>考虑以上原因，决定不上NAS操作系统。</p>
+<h3 id="类似于百度云等云盘的私有云服务"><a href="#类似于百度云等云盘的私有云服务" class="headerlink" title="类似于百度云等云盘的私有云服务"></a>类似于百度云等云盘的私有云服务</h3><p>主流的方案有 owncloud和seafile。评测:<br><a href="https://www.zhihu.com/question/46318905" target="_blank" rel="external">https://www.zhihu.com/question/46318905</a></p>
+<p>网上对seafile的评价较高，所以选择了seafile.具体如何，等我试用一个月再说~~</p>
+<h3 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h3><ul>
+<li>ftp/sftp文件协议。使用不方便，pass</li>
+<li>SMB协议。操作方便，速度很快，推荐使用。但是由于电信封了 SMB 协议的端口，所以可能内网访问。</li>
+<li>各种私有云方案如 Seafile 和 NextCloud。比较下来，两种系统比较相似，但最终还是选择了 NextCloud，因为 NextCloud 是把你上传的文件原样保存的，这样一是方便容灾，如果系统崩溃了，至少文件还在；二是可以导入本地文件，不用存多个备份。像我原来就有很多文件的情况下，就非常方便了，尤其是同时使用多种文件服务的时候。</li>
+</ul>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>留坑待填~~</p>
+<h3 id="DLNA服务"><a href="#DLNA服务" class="headerlink" title="DLNA服务"></a>DLNA服务</h3><p>留坑待填~~</p>
+<h3 id="iTunes媒体共享"><a href="#iTunes媒体共享" class="headerlink" title="iTunes媒体共享"></a>iTunes媒体共享</h3><p>查下来，基本都是用 Vine 来模拟 windows，考虑到稳定性，没有意思。</p>
+<h3 id="time-machine等备份服务"><a href="#time-machine等备份服务" class="headerlink" title="time machine等备份服务"></a>time machine等备份服务</h3><h4 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h4><ul>
+<li>Netatalk。它是AFP协议的开源实现</li>
+<li>Avahi。它是Apple’s Zeroconf 协议的开源实现<br>安装使用方式请自行百度。<br><strong><em>　注意文件的权限，建议可以先设成777，等没问题后再恢复　 </em></strong></li>
+</ul>
+<h3 id="和Onedrive等公有云同步"><a href="#和Onedrive等公有云同步" class="headerlink" title="和Onedrive等公有云同步"></a>和Onedrive等公有云同步</h3><p>电信封了 SMB、http、https 的端口，导致要在公网直接访问家里的文件，只能走修改端口后的 http 协议，比较不安全。而且受限于网速，访问速度十分不理想。</p>
+<p>一种解决方案是把文件同步到公有文件服务上，如 Onedrive(强烈建议不要用百度云盘，一是容易被封号，导致文件丢失，而且限速很严重）,我的30M 宽带下载能打满，一般家用是够了。</p>
+<p>有人开发了 Linux 下Onedrive的客户端，使用十分方案，具体请访问 <a href="https://github.com/skilion/onedrive" target="_blank" rel="external">skilion/onedrive</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nas服务器/" rel="tag"># NAS服务器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/" rel="next" title="NAS服务器的搭建--硬件篇">
+                <i class="fa fa-chevron-left"></i> NAS服务器的搭建--硬件篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/uncategorized/2017/10/29/工具-2017-10-29-ubuntu下打印服务器的安装配置与使用教程/" rel="prev" title="ubuntu下打印服务器的安装配置与使用教程">
+                ubuntu下打印服务器的安装配置与使用教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shicheng Yuan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS软件功能"><span class="nav-number">1.</span> <span class="nav-text">NAS软件功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外网访问配置"><span class="nav-number">2.</span> <span class="nav-text">外网访问配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有公网Ip"><span class="nav-number">2.1.</span> <span class="nav-text">有公网Ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有公网ip"><span class="nav-number">2.2.</span> <span class="nav-text">没有公网ip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS软件方案"><span class="nav-number">3.</span> <span class="nav-text">NAS软件方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS裸机安装Linux方案"><span class="nav-number">4.</span> <span class="nav-text">NAS裸机安装Linux方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于百度云等云盘的私有云服务"><span class="nav-number">4.1.</span> <span class="nav-text">类似于百度云等云盘的私有云服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件共享"><span class="nav-number">4.2.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">4.3.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLNA服务"><span class="nav-number">4.4.</span> <span class="nav-text">DLNA服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iTunes媒体共享"><span class="nav-number">4.5.</span> <span class="nav-text">iTunes媒体共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time-machine等备份服务"><span class="nav-number">4.6.</span> <span class="nav-text">time machine等备份服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-number">4.6.1.</span> <span class="nav-text">mac</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和Onedrive等公有云同步"><span class="nav-number">4.7.</span> <span class="nav-text">和Onedrive等公有云同步</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shicheng Yuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

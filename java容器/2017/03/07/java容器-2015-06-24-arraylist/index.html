@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,容器,ArrayList," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="听风的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="#ArrayList浅析
+
+ArrayList的作用、特点
+ArrayList的数据结构
+ArrayList的常用方法及实现
+ArrayList里需要注意的地方
+
+###ArrayList的作用、特点ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList浅析">
+<meta property="og:url" content="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/index.html">
+<meta property="og:site_name" content="听风的博客">
+<meta property="og:description" content="#ArrayList浅析
+
+ArrayList的作用、特点
+ArrayList的数据结构
+ArrayList的常用方法及实现
+ArrayList里需要注意的地方
+
+###ArrayList的作用、特点ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一">
+<meta property="og:updated_time" content="2017-03-07T08:20:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ArrayList浅析">
+<meta name="twitter:description" content="#ArrayList浅析
+
+ArrayList的作用、特点
+ArrayList的数据结构
+ArrayList的常用方法及实现
+ArrayList里需要注意的地方
+
+###ArrayList的作用、特点ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/"/>
+
+
+
+
+
+  <title>ArrayList浅析 | 听风的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3f82c96c411fc76dd2a11abd27157116";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">听风的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">行走，辨思，记录</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ArrayList浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java容器/" itemprop="url" rel="index">
+                    <span itemprop="name">java容器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#ArrayList浅析</p>
+<ul>
+<li>ArrayList的作用、特点</li>
+<li>ArrayList的数据结构</li>
+<li>ArrayList的常用方法及实现</li>
+<li>ArrayList里需要注意的地方</li>
+</ul>
+<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
+<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
+<pre><code>默认的空数组
+/**
+ * Constructs an empty list with an initial capacity of ten.
+ */
+public ArrayList() {
+    super();
+    this.elementData = EMPTY_ELEMENTDATA;
+}
+
+private static final Object[] EMPTY_ELEMENTDATA = {};
+</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
+<p>加入元素之前，先确保有足够的空间</p>
+<pre><code>public boolean add(E e) {&lt;br/&gt;
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}
+</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
+<pre><code>public void add(int index, E element) {
+    rangeCheckForAdd(index);
+
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    System.arraycopy(elementData, index, elementData, index + 1, size - index);
+    elementData[index] = element;
+    size++;
+}
+</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
+    Object[] a = c.toArray();
+    int numNew = a.length;
+    ensureCapacityInternal(size + numNew);  // Increments modCount
+    System.arraycopy(a, 0, elementData, size, numNew);
+    size += numNew;
+    return numNew != 0;
+}
+</code></pre><p>2.remove</p>
+<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
+<pre><code>public E remove(int index) {
+    rangeCheck(index);//简单地检查下标是否越界
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}
+</code></pre><p>3.contain</p>
+<pre><code>public boolean contains(Object o) {
+    return indexOf(o) &gt;= 0;
+}
+
+public int indexOf(Object o) {
+    if (o == null) {
+        for (int i = 0; i &lt; size; i++)
+            if (elementData[i]==null)
+                return i;
+    } else {
+        for (int i = 0; i &lt; size; i++)
+            if (o.equals(elementData[i]))
+                return i;
+    }
+    return -1;
+}
+</code></pre><p>4.clone</p>
+<pre><code>public Object clone() {
+    try {
+        @SuppressWarnings(&quot;unchecked&quot;)
+            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
+        v.elementData = Arrays.copyOf(elementData, size);
+        v.modCount = 0;
+        return v;
+    } catch (CloneNotSupportedException e) {
+        // this shouldn&apos;t happen, since we are Cloneable
+        throw new InternalError();
+    }
+}
+</code></pre><p>5.iterator</p>
+<p>通过使用cursor和lastRet来进行标记</p>
+<pre><code>private class Itr implements Iterator&lt;E&gt; {
+    int cursor;       // index of next element to return
+    int lastRet = -1; // index of last element returned; -1 if no such
+    int expectedModCount = modCount;
+    ...
+}
+</code></pre><p>###ArrayList里需要注意的地方</p>
+<ul>
+<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
+</ul>
+<p>代码：</p>
+<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
+    subListRangeCheck(fromIndex, toIndex, size);
+    return new SubList(this, 0, fromIndex, toIndex);
+}
+
+ private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
+    private final AbstractList&lt;E&gt; parent;
+    private final int parentOffset;
+    private final int offset;
+    int size;
+    ...
+}
+</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
+<ul>
+<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
+</ul>
+<p>代码</p>
+<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
+    return batchRemove(c, false);
+}
+
+private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+    final Object[] elementData = this.elementData;
+    int r = 0, w = 0;
+    boolean modified = false;
+    try {
+        for (; r &lt; size; r++)
+            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
+                elementData[w++] = elementData[r];
+    } finally {
+        // Preserve behavioral compatibility with AbstractCollection,
+        // even if c.contains() throws.
+        if (r != size) {
+            System.arraycopy(elementData, r,
+                             elementData, w,
+                             size - r);
+            w += size - r;
+        }
+        if (w != size) {
+            // clear to let GC do its work
+            for (int i = w; i &lt; size; i++)
+                elementData[i] = null;
+            modCount += size - w;
+            size = w;
+            modified = true;
+        }
+    }
+    return modified;
+}
+</code></pre><ul>
+<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
+</ul>
+<blockquote>
+<p>protected transient int modCount = 0;</p>
+<p>private int size;</p>
+</blockquote>
+<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
+    long startTime = System.currentTimeMillis();
+    for(int i=0;i&lt;100000;i++){
+        ArrayList list = new ArrayList();
+        for(int num=0;num&lt;1000;num++){
+            list.add(&quot;object&quot;);
+        }
+    }
+    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
+    startTime = System.currentTimeMillis();
+    for(int i=0;i&lt;100000;i++){
+        ArrayList list = new ArrayList(2000);
+        for(int num=0;num&lt;1000;num++){
+            list.add(&quot;object&quot;);
+        }
+    }
+    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
+}
+</code></pre><p>运行结果:</p>
+<blockquote>
+<p>用时:607毫秒<br>用时:415毫秒</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/容器/" rel="tag"># 容器</a>
+          
+            <a href="/tags/arraylist/" rel="tag"># ArrayList</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" rel="next" title="java容器研究思路">
+                <i class="fa fa-chevron-left"></i> java容器研究思路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" rel="prev" title="maven常用镜像源">
+                maven常用镜像源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shicheng Yuan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll"><span class="nav-number">1.</span> <span class="nav-text">addAll</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以下是测试指定容器大小和让容器自动扩张比较的代码"><span class="nav-number"></span> <span class="nav-text">以下是测试指定容器大小和让容器自动扩张比较的代码</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shicheng Yuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
