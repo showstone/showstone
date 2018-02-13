@@ -2,7 +2,7 @@
 layout: post
 title: "java8里lambda里的 this 为什么会指向 lamdba 所在的外部类"
 description: ""
-category: 
+category: JAVA
 tags: [java8,lambda,this]
 ---
 
