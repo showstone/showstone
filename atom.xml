@@ -606,140 +606,53 @@
   </entry>
   
   <entry>
-    <title>tmux使用方法</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
+    <title>实用git命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
-<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
-<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
-<blockquote>
-<p>brew install tmux   </p>
-</blockquote>
-<p>ubuntu </p>
-<blockquote>
-<p>sudo apt-get install tmux</p>
-</blockquote>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
-<blockquote>
-<p>tmux</p>
-</blockquote>
-<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
-c-b d 离开(detach)session
-c-b $ 重命名当前session
-
-tmux ls 列出会话
-tmux attach -t session 进入某个会话
-tmux -r 连接上个断开的session
-tmux new -s session -d 在后台建立会话
-</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
-c-b &amp; 关闭当前窗口  
-c-b p 切换到上一个窗口  
-c-b n 切换到下一个窗口  
-c-b , 重命名当前窗口
-c-b w 列出所有窗口
-c-b 0~9 选择0~9对应的窗口
-c-b opt+方向键 调整panel的大小(一次调整5%)
-c-b ctrl+方向键 调整panel的大小(一次调整1%)
-</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
-c-b &quot; 竖直分割窗口
-c-b h 将焦点移入左侧的panel
-c-b j 将焦点移入下方的panel
-c-b l 将焦点移入上方的panel
-c-b k 将焦点移入右方的panel
-c-b q 显示panel的编号 
-c-b o 切换到下一个panel
-c-b } 与下一个panel交换位置
-c-b { 与上一个panel交换位置
-</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
-<pre><code>c-b [ 进入复制模式
-space 选择要复制的内容
-c-b ] 粘贴
-q 退出复制模式
-</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
-<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
-<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
-<pre><code>#设置PREFIX为Ctrl-a  
-set -g prefix C-a  
-#解除Ctrl-b与PREFIX的对应关系  
-unbind C-b  
-#copy-mode将快捷键设置为vi模式  
-setw -g mode-keys vi  
-#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
-bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
-#设置终端颜色为256色  
-set -g default-terminal &quot;screen-256color&quot;  
-#开启status-bar uft-8支持  
-set -g status-utf8 on  
-#设置pan前景色  
-set -g pane-border-fg green  
-#设置pane背景色  
-set -g pane-border-bg black  
-#设置活跃pane前景色  
-set -g pane-active-border-fg white  
-#设置活跃pane背景色  
-set -g pane-active-border-bg yellow  
-#设置消息前景色  
-set -g message-fg white  
-#设置消息背景色  
-set -g message-bg black  
-#设置消息高亮显示  
-set -g message-attr bright  
-#设置status-bar颜色  
-set -g status-fg white  
-set -g status-bg black  
-#设置窗口列表颜色  
-setw -g window-status-fg cyan  
-setw -g window-status-bg default  
-setw -g window-status-attr dim  
-#设置当前窗口在status bar中的颜色  
-setw -g window-status-current-fg white  
-setw -g window-status-current-bg red  
-setw -g window-status-current-attr bright  
-#设置status bar格式  
-set -g status-left-length 40  
-set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
-set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
-set -g status-interval 60  
-set -g status-justify centre  
-#开启window事件提示  
-setw -g monitor-activity on  
-set -g visual-activity on 
-</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
-<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+    <content type="html"><![CDATA[<ul>
+<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
 </ul>
 <blockquote>
-<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
 </blockquote>
 <ul>
-<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+<li>合并多次提交记录</li>
 </ul>
 <blockquote>
-<p>c-b :set synchronize-panes</p>
+<p> git rebase -i HEAD~2</p>
 </blockquote>
-<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
 <ul>
-<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+<li>找回删除的分支</li>
 </ul>
+<blockquote>
+<p>git checkout new_branch_name commit_id</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
-&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
+      &lt;ul&gt;
+&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
     
     </summary>
     
       <category term="software" scheme="http://showstone.net/categories/software/"/>
     
     
-      <category term="software" scheme="http://showstone.net/tags/software/"/>
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
     
-      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
+      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
+    
+      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
     
   </entry>
   
@@ -1409,116 +1322,176 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   </entry>
   
   <entry>
-    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
-    <link href="http://showstone.net/java/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
-    <id>http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2018-02-13T05:13:09.224Z</updated>
-    
-    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
-    
-    </summary>
-    
-      <category term="JAVA" scheme="http://showstone.net/categories/java/"/>
-    
-    
-      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
-    
-      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
-    
-      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
-    
-      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
-    
-      <category term="command" scheme="http://showstone.net/tags/command/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>实用git命令</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
+    <title>maven常用镜像源</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<ul>
-<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
-</ul>
-<blockquote>
-<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
-</blockquote>
-<ul>
-<li>合并多次提交记录</li>
-</ul>
-<blockquote>
-<p> git rebase -i HEAD~2</p>
-</blockquote>
-<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
-<ul>
-<li>找回删除的分支</li>
-</ul>
-<blockquote>
-<p>git checkout new_branch_name commit_id</p>
-</blockquote>
+    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
+<p>nexus镜像:</p>
+<pre><code>http://uk.maven.org/maven2/
+http://repo2.maven.org/maven2/
+http://mirrors.ibiblio.org/pub/mirrors/maven2/
+http://repository.jboss.org/nexus/content/groups/public
+</code></pre><p>以上内容均收集于互联网</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;ul&gt;
-&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
+      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
+&lt;p&gt;nexus镜像:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
+http://repo2.maven.org/
+    
+    </summary>
+    
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
+    
+      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
+    
+      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tmux使用方法</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
+<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
+<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
+<blockquote>
+<p>brew install tmux   </p>
+</blockquote>
+<p>ubuntu </p>
+<blockquote>
+<p>sudo apt-get install tmux</p>
+</blockquote>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
+<blockquote>
+<p>tmux</p>
+</blockquote>
+<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
+c-b d 离开(detach)session
+c-b $ 重命名当前session
+
+tmux ls 列出会话
+tmux attach -t session 进入某个会话
+tmux -r 连接上个断开的session
+tmux new -s session -d 在后台建立会话
+</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
+c-b &amp; 关闭当前窗口  
+c-b p 切换到上一个窗口  
+c-b n 切换到下一个窗口  
+c-b , 重命名当前窗口
+c-b w 列出所有窗口
+c-b 0~9 选择0~9对应的窗口
+c-b opt+方向键 调整panel的大小(一次调整5%)
+c-b ctrl+方向键 调整panel的大小(一次调整1%)
+</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
+c-b &quot; 竖直分割窗口
+c-b h 将焦点移入左侧的panel
+c-b j 将焦点移入下方的panel
+c-b l 将焦点移入上方的panel
+c-b k 将焦点移入右方的panel
+c-b q 显示panel的编号 
+c-b o 切换到下一个panel
+c-b } 与下一个panel交换位置
+c-b { 与上一个panel交换位置
+</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
+<pre><code>c-b [ 进入复制模式
+space 选择要复制的内容
+c-b ] 粘贴
+q 退出复制模式
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
+<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
+<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
+<pre><code>#设置PREFIX为Ctrl-a  
+set -g prefix C-a  
+#解除Ctrl-b与PREFIX的对应关系  
+unbind C-b  
+#copy-mode将快捷键设置为vi模式  
+setw -g mode-keys vi  
+#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
+bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
+#设置终端颜色为256色  
+set -g default-terminal &quot;screen-256color&quot;  
+#开启status-bar uft-8支持  
+set -g status-utf8 on  
+#设置pan前景色  
+set -g pane-border-fg green  
+#设置pane背景色  
+set -g pane-border-bg black  
+#设置活跃pane前景色  
+set -g pane-active-border-fg white  
+#设置活跃pane背景色  
+set -g pane-active-border-bg yellow  
+#设置消息前景色  
+set -g message-fg white  
+#设置消息背景色  
+set -g message-bg black  
+#设置消息高亮显示  
+set -g message-attr bright  
+#设置status-bar颜色  
+set -g status-fg white  
+set -g status-bg black  
+#设置窗口列表颜色  
+setw -g window-status-fg cyan  
+setw -g window-status-bg default  
+setw -g window-status-attr dim  
+#设置当前窗口在status bar中的颜色  
+setw -g window-status-current-fg white  
+setw -g window-status-current-bg red  
+setw -g window-status-current-attr bright  
+#设置status bar格式  
+set -g status-left-length 40  
+set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
+set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
+set -g status-interval 60  
+set -g status-justify centre  
+#开启window事件提示  
+setw -g monitor-activity on  
+set -g visual-activity on 
+</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
+<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+</ul>
+<blockquote>
+<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+</blockquote>
+<ul>
+<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+</ul>
+<blockquote>
+<p>c-b :set synchronize-panes</p>
+</blockquote>
+<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<ul>
+<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
+&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
     
     </summary>
     
       <category term="software" scheme="http://showstone.net/categories/software/"/>
     
     
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
+      <category term="software" scheme="http://showstone.net/tags/software/"/>
     
-      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
-    
-      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
-    
-      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
+      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
     
   </entry>
   
@@ -1622,6 +1595,69 @@ redis&gt;
   </entry>
   
   <entry>
+    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
+    <link href="http://showstone.net/java/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
+    <id>http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2018-02-13T05:13:09.224Z</updated>
+    
+    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://showstone.net/categories/java/"/>
+    
+    
+      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
+    
+      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
+    
+      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
+    
+      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
+    
+      <category term="command" scheme="http://showstone.net/tags/command/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JUnit主线程退出时所有的子线程也会结束</title>
     <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
     <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
@@ -1634,42 +1670,6 @@ redis&gt;
     
       <category term="Java" scheme="http://showstone.net/categories/java/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>maven常用镜像源</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
-<p>nexus镜像:</p>
-<pre><code>http://uk.maven.org/maven2/
-http://repo2.maven.org/maven2/
-http://mirrors.ibiblio.org/pub/mirrors/maven2/
-http://repository.jboss.org/nexus/content/groups/public
-</code></pre><p>以上内容均收集于互联网</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
-&lt;p&gt;nexus镜像:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
-http://repo2.maven.org/
-    
-    </summary>
-    
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
-    
-      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
-    
-      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
