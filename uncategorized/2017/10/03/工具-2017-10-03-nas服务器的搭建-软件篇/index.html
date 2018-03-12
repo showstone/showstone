@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="NAS服务器," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -82,42 +82,39 @@
 
 
 <meta name="description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+所有功能都建议使用 docker，方便在系统崩溃后重装
 NAS软件功能
 外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
 文件共享。如samba或者ftp
 下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission
 DLNA服务。可以在线看视频啦~
 iTunes媒体共享
-time machine等备份服务
-和百度云盘等公有云同步
-类似于Onedrive(强烈">
+time machine等备份服">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NAS服务器的搭建-软件篇">
+<meta property="og:title" content="听风的博客">
 <meta property="og:url" content="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/index.html">
 <meta property="og:site_name" content="听风的博客">
 <meta property="og:description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+所有功能都建议使用 docker，方便在系统崩溃后重装
 NAS软件功能
 外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
 文件共享。如samba或者ftp
 下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission
 DLNA服务。可以在线看视频啦~
 iTunes媒体共享
-time machine等备份服务
-和百度云盘等公有云同步
-类似于Onedrive(强烈">
-<meta property="og:updated_time" content="2018-02-09T16:02:12.217Z">
+time machine等备份服">
+<meta property="og:updated_time" content="2018-03-12T04:42:04.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NAS服务器的搭建-软件篇">
+<meta name="twitter:title" content="听风的博客">
 <meta name="twitter:description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+所有功能都建议使用 docker，方便在系统崩溃后重装
 NAS软件功能
 外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
 文件共享。如samba或者ftp
 下载。要支持远程下载，http下载有aria2,bt/pt下载有transmission
 DLNA服务。可以在线看视频啦~
 iTunes媒体共享
-time machine等备份服务
-和百度云盘等公有云同步
-类似于Onedrive(强烈">
+time machine等备份服">
 
 
 
@@ -153,7 +150,7 @@ time machine等备份服务
 
 
 
-  <title>NAS服务器的搭建-软件篇 | 听风的博客</title>
+  <title> | 听风的博客</title>
   
 
 
@@ -287,7 +284,7 @@ time machine等备份服务
 
         
         
-          <h1 class="post-title" itemprop="name headline">NAS服务器的搭建-软件篇</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -338,6 +335,7 @@ time machine等备份服务
 
       
         <p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
+<p><strong>所有功能都建议使用 docker，方便在系统崩溃后重装</strong></p>
 <h2 id="NAS软件功能"><a href="#NAS软件功能" class="headerlink" title="NAS软件功能"></a>NAS软件功能</h2><ul>
 <li>外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊</li>
 <li>文件共享。如samba或者ftp</li>
@@ -366,8 +364,15 @@ time machine等备份服务
 <li><a href="http://storageroot.com/articles/nas4free-freenas-amahi-openmediavault" target="_blank" rel="external">http://storageroot.com/articles/nas4free-freenas-amahi-openmediavault</a></li>
 </ul>
 <p>其中，freenas和nas4free，都使用了ZFS文件系统，而ZFS文件系统依赖ECC内存，同时要求8G以上内存。<br>考虑以上原因，决定不上NAS操作系统。</p>
-<h3 id="类似于百度云等云盘的私有云服务"><a href="#类似于百度云等云盘的私有云服务" class="headerlink" title="类似于百度云等云盘的私有云服务"></a>类似于百度云等云盘的私有云服务</h3><p>主流的方案有 owncloud和seafile。评测:<br><a href="https://www.zhihu.com/question/46318905" target="_blank" rel="external">https://www.zhihu.com/question/46318905</a></p>
-<p>网上对seafile的评价较高，所以选择了seafile.具体如何，等我试用一个月再说~~</p>
+<h3 id="类似于百度云等云盘的私有云服务"><a href="#类似于百度云等云盘的私有云服务" class="headerlink" title="类似于百度云等云盘的私有云服务"></a>类似于百度云等云盘的私有云服务</h3><p><strong>现在80/443端口都被封，出于安全考虑，不建议使用私有云。文件同步可能使用微软的 onedrive，速度快，更安全。</strong></p>
+<p>主流的方案有 owncloud和seafile。评测:<br><a href="https://www.zhihu.com/question/46318905" target="_blank" rel="external">https://www.zhihu.com/question/46318905</a></p>
+<p>试用之后发现 seafile挺好用的,有以下优点：</p>
+<ul>
+<li>文件以其实际格式存储，很安全，如果系统崩溃了也不怕</li>
+<li>基础功能稳定，速度挺快的</li>
+<li>有各种实用的工具，如果文件服务器上已经有大量文件了，可以直接导入到系统中，不需要重新上传</li>
+<li>扩展插件多，可以发挥想象力来做出各种功能</li>
+</ul>
 <h3 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h3><ul>
 <li>ftp/sftp文件协议。使用不方便，pass</li>
 <li>SMB协议。操作方便，速度很快，推荐使用。但是由于电信封了 SMB 协议的端口，所以可能内网访问。</li>
@@ -397,12 +402,6 @@ time machine等备份服务
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/nas服务器/" rel="tag"># NAS服务器</a>
-          
-        </div>
       
 
       
