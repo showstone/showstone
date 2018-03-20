@@ -240,6 +240,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2018/03/20/python-2018-03-20-python-依赖管理简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/2018/03/20/python-2018-03-20-python-依赖管理简介/" itemprop="url">python 依赖管理简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T16:18:05+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>python 虽然好用，但是项目一多，依赖的管理就是个大问题了，新项目已经全在用 python3，而老项目都是 pthon2，更蛋疼的是，不同项目之间还可能依赖了同一个库的不同版本！我们试着解决这个问题:</p>
+<h2 id="pip-解决项目的全局依赖问题"><a href="#pip-解决项目的全局依赖问题" class="headerlink" title="pip: 解决项目的全局依赖问题"></a>pip: 解决项目的全局依赖问题</h2><p>最开始的时候，我们都是手动安装库，而库可能还有依赖的库，这样最终会形成一张树的依赖结构。解决这个问题，我们可以使用 pip。</p>
+<p>它主要解决包的问题，包括安装、更新、删除等。<br>简介: <a href="https://pip.pypa.io/en/stable/quickstart/" target="_blank" rel="external">https://pip.pypa.io/en/stable/quickstart/</a><br>安装: <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="external">https://pip.pypa.io/en/stable/installing/</a></p>
+<h2 id="virtualenv-解决不同项目间使用同一依赖不同版本的问题"><a href="#virtualenv-解决不同项目间使用同一依赖不同版本的问题" class="headerlink" title="virtualenv: 解决不同项目间使用同一依赖不同版本的问题"></a>virtualenv: 解决不同项目间使用同一依赖不同版本的问题</h2><p>pip 可以帮助我们方便地安装项目需要的依赖，不过随着项目的变多，我们可能会在不同的项目里使用同一个库的不同版本，甚至python 的不同版本，这时，需要一个新的工具来解决这个问题: virtualenv。</p>
+<p>它可以帮助我们创建一个虚拟、独立的依赖环境，以保证每个项目可以使用指定的依赖，包括 python、第三方库等。</p>
+<p><a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="external">virtualenv官网</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">virtualenv简介</a></p>
+<h2 id="conda-解决非python依赖的问题，以及简单统一的操作方式"><a href="#conda-解决非python依赖的问题，以及简单统一的操作方式" class="headerlink" title="conda: 解决非python依赖的问题，以及简单统一的操作方式"></a>conda: 解决非python依赖的问题，以及简单统一的操作方式</h2><p>pip 和 virtualenv的组合，可以解决绝大部分 python的依赖管理问题，但是，随着项目的发展，我们可能需要非 python 的依赖，来解决现有问题。</p>
+<p>conda 作为一个打包工具和安装程序，可以帮助我们解决主流的开发环境和依赖的问题，除 python 外，它还支持：R, Ruby, Lua, Scala, Java, JavaScript, C/C++, FORTRAN等语言。一定程度上，可以把它看着 pip 和 virtualenv 的结合（实际上，pip 和 conda 是互补的关系，因为 pip 可以安装一部分 conda 不能安装的依赖）。</p>
+<p><a href="https://www.anaconda.com/what-is-anaconda/" target="_blank" rel="external">官网</a> (很卡，不推荐，建议使用下面的镜像)<br><a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">国内镜像</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>virtualenv和conda都是通过修改 shell 里的环境变量来达到修改环境的目的，基本原理类似。<br>不同的项目可以用不同的工具，不要求全，适合才是最好的。<br>Pycharm 对以上工具都有很好的支持，善用工具可以极大提高效率。  </p>
+<p>以下是参考资料:<br><a href="https://zhuanlan.zhihu.com/p/32925500" target="_blank" rel="external">Anaconda介绍、安装及使用教程</a><br><a href="http://python.jobbole.com/85588/" target="_blank" rel="external">Anacodna之conda与 virtualenv对比使用教程，创建虚拟环境</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2018/02/13/java-2018-02-13-java8里lambda里的-this-为什么会指向-lamdba-所在的外部类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1745,260 +1875,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/software/2017/03/07/software-2015-12-26-tmux使用方法/" itemprop="url">tmux使用方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/software/" itemprop="url" rel="index">
-                    <span itemprop="name">software</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
-<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
-<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
-<blockquote>
-<p>brew install tmux   </p>
-</blockquote>
-<p>ubuntu </p>
-<blockquote>
-<p>sudo apt-get install tmux</p>
-</blockquote>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
-<blockquote>
-<p>tmux</p>
-</blockquote>
-<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
-c-b d 离开(detach)session
-c-b $ 重命名当前session
-
-tmux ls 列出会话
-tmux attach -t session 进入某个会话
-tmux -r 连接上个断开的session
-tmux new -s session -d 在后台建立会话
-</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
-c-b &amp; 关闭当前窗口  
-c-b p 切换到上一个窗口  
-c-b n 切换到下一个窗口  
-c-b , 重命名当前窗口
-c-b w 列出所有窗口
-c-b 0~9 选择0~9对应的窗口
-c-b opt+方向键 调整panel的大小(一次调整5%)
-c-b ctrl+方向键 调整panel的大小(一次调整1%)
-</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
-c-b &quot; 竖直分割窗口
-c-b h 将焦点移入左侧的panel
-c-b j 将焦点移入下方的panel
-c-b l 将焦点移入上方的panel
-c-b k 将焦点移入右方的panel
-c-b q 显示panel的编号 
-c-b o 切换到下一个panel
-c-b } 与下一个panel交换位置
-c-b { 与上一个panel交换位置
-</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
-<pre><code>c-b [ 进入复制模式
-space 选择要复制的内容
-c-b ] 粘贴
-q 退出复制模式
-</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
-<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
-<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
-<pre><code>#设置PREFIX为Ctrl-a  
-set -g prefix C-a  
-#解除Ctrl-b与PREFIX的对应关系  
-unbind C-b  
-#copy-mode将快捷键设置为vi模式  
-setw -g mode-keys vi  
-#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
-bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
-#设置终端颜色为256色  
-set -g default-terminal &quot;screen-256color&quot;  
-#开启status-bar uft-8支持  
-set -g status-utf8 on  
-#设置pan前景色  
-set -g pane-border-fg green  
-#设置pane背景色  
-set -g pane-border-bg black  
-#设置活跃pane前景色  
-set -g pane-active-border-fg white  
-#设置活跃pane背景色  
-set -g pane-active-border-bg yellow  
-#设置消息前景色  
-set -g message-fg white  
-#设置消息背景色  
-set -g message-bg black  
-#设置消息高亮显示  
-set -g message-attr bright  
-#设置status-bar颜色  
-set -g status-fg white  
-set -g status-bg black  
-#设置窗口列表颜色  
-setw -g window-status-fg cyan  
-setw -g window-status-bg default  
-setw -g window-status-attr dim  
-#设置当前窗口在status bar中的颜色  
-setw -g window-status-current-fg white  
-setw -g window-status-current-bg red  
-setw -g window-status-current-attr bright  
-#设置status bar格式  
-set -g status-left-length 40  
-set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
-set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
-set -g status-interval 60  
-set -g status-justify centre  
-#开启window事件提示  
-setw -g monitor-activity on  
-set -g visual-activity on 
-</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
-<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
-</ul>
-<blockquote>
-<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
-</blockquote>
-<ul>
-<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
-</ul>
-<blockquote>
-<p>c-b :set synchronize-panes</p>
-</blockquote>
-<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
-<ul>
-<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2049,7 +1925,7 @@ set -g visual-activity on
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2071,7 +1947,7 @@ set -g visual-activity on
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

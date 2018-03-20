@@ -240,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -259,7 +259,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/" itemprop="url">HashMap浅析</a></h1>
+                <a class="post-title-link" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" itemprop="url">rebase导致commit丢失</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java容器/" itemprop="url" rel="index">
-                    <span itemprop="name">Java容器</span>
+                  <a href="/categories/software/" itemprop="url" rel="index">
+                    <span itemprop="name">software</span>
                   </a>
                 </span>
 
@@ -332,10 +332,10 @@
 
       
         
-          简要分析了HashMap的特点、数据结构,并对源码作了简要分析
+          rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/java容器/2017/03/07/java容器-2015-07-05-hashmap/">
+            <a class="btn" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
               阅读全文 &raquo;
             </a>
           </div>
@@ -892,7 +892,7 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -911,7 +911,322 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" itemprop="url">rebase导致commit丢失</a></h1>
+                <a class="post-title-link" href="/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" itemprop="url">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" itemprop="url">JUnit主线程退出时所有的子线程也会结束</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/software/2017/03/07/software-2015-12-26-tmux使用方法/" itemprop="url">tmux使用方法</a></h1>
         
 
         <div class="post-meta">
@@ -984,160 +1299,120 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
 
       
         
-          rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" itemprop="url">maven常用镜像源</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件配置/" itemprop="url" rel="index">
-                    <span itemprop="name">软件配置</span>
-                  </a>
-                </span>
+            <p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
+<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
+<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
+<blockquote>
+<p>brew install tmux   </p>
+</blockquote>
+<p>ubuntu </p>
+<blockquote>
+<p>sudo apt-get install tmux</p>
+</blockquote>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
+<blockquote>
+<p>tmux</p>
+</blockquote>
+<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
+c-b d 离开(detach)session
+c-b $ 重命名当前session
 
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
-<p>nexus镜像:</p>
-<pre><code>http://uk.maven.org/maven2/
-http://repo2.maven.org/maven2/
-http://mirrors.ibiblio.org/pub/mirrors/maven2/
-http://repository.jboss.org/nexus/content/groups/public
-</code></pre><p>以上内容均收集于互联网</p>
+tmux ls 列出会话
+tmux attach -t session 进入某个会话
+tmux -r 连接上个断开的session
+tmux new -s session -d 在后台建立会话
+</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
+c-b &amp; 关闭当前窗口  
+c-b p 切换到上一个窗口  
+c-b n 切换到下一个窗口  
+c-b , 重命名当前窗口
+c-b w 列出所有窗口
+c-b 0~9 选择0~9对应的窗口
+c-b opt+方向键 调整panel的大小(一次调整5%)
+c-b ctrl+方向键 调整panel的大小(一次调整1%)
+</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
+c-b &quot; 竖直分割窗口
+c-b h 将焦点移入左侧的panel
+c-b j 将焦点移入下方的panel
+c-b l 将焦点移入上方的panel
+c-b k 将焦点移入右方的panel
+c-b q 显示panel的编号 
+c-b o 切换到下一个panel
+c-b } 与下一个panel交换位置
+c-b { 与上一个panel交换位置
+</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
+<pre><code>c-b [ 进入复制模式
+space 选择要复制的内容
+c-b ] 粘贴
+q 退出复制模式
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
+<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
+<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
+<pre><code>#设置PREFIX为Ctrl-a  
+set -g prefix C-a  
+#解除Ctrl-b与PREFIX的对应关系  
+unbind C-b  
+#copy-mode将快捷键设置为vi模式  
+setw -g mode-keys vi  
+#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
+bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
+#设置终端颜色为256色  
+set -g default-terminal &quot;screen-256color&quot;  
+#开启status-bar uft-8支持  
+set -g status-utf8 on  
+#设置pan前景色  
+set -g pane-border-fg green  
+#设置pane背景色  
+set -g pane-border-bg black  
+#设置活跃pane前景色  
+set -g pane-active-border-fg white  
+#设置活跃pane背景色  
+set -g pane-active-border-bg yellow  
+#设置消息前景色  
+set -g message-fg white  
+#设置消息背景色  
+set -g message-bg black  
+#设置消息高亮显示  
+set -g message-attr bright  
+#设置status-bar颜色  
+set -g status-fg white  
+set -g status-bg black  
+#设置窗口列表颜色  
+setw -g window-status-fg cyan  
+setw -g window-status-bg default  
+setw -g window-status-attr dim  
+#设置当前窗口在status bar中的颜色  
+setw -g window-status-current-fg white  
+setw -g window-status-current-bg red  
+setw -g window-status-current-attr bright  
+#设置status bar格式  
+set -g status-left-length 40  
+set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
+set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
+set -g status-interval 60  
+set -g status-justify centre  
+#开启window事件提示  
+setw -g monitor-activity on  
+set -g visual-activity on 
+</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
+<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+</ul>
+<blockquote>
+<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+</blockquote>
+<ul>
+<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+</ul>
+<blockquote>
+<p>c-b :set synchronize-panes</p>
+</blockquote>
+<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<ul>
+<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+</ul>
 
           
         
@@ -1670,7 +1945,7 @@ http://repository.jboss.org/nexus/content/groups/public
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1689,7 +1964,7 @@ http://repository.jboss.org/nexus/content/groups/public
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" itemprop="url">JUnit主线程退出时所有的子线程也会结束</a></h1>
+                <a class="post-title-link" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" itemprop="url">编译vim以支持lua</a></h1>
         
 
         <div class="post-meta">
@@ -1724,8 +1999,8 @@ http://repository.jboss.org/nexus/content/groups/public
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/软件配置/" itemprop="url" rel="index">
+                    <span itemprop="name">软件配置</span>
                   </a>
                 </span>
 
@@ -1762,183 +2037,14 @@ http://repository.jboss.org/nexus/content/groups/public
 
       
         
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" itemprop="url">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>
-          
+          编译vim以支持lua
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2022,7 +2128,7 @@ redis&gt;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2044,7 +2150,7 @@ redis&gt;
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

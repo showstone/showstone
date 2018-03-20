@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://showstone.net/"/>
-  <updated>2018-02-13T05:13:04.359Z</updated>
+  <updated>2018-03-20T08:56:15.958Z</updated>
   <id>http://showstone.net/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python 依赖管理简介</title>
+    <link href="http://showstone.net/uncategorized/2018/03/20/python-2018-03-20-python-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%AE%80%E4%BB%8B/"/>
+    <id>http://showstone.net/uncategorized/2018/03/20/python-2018-03-20-python-依赖管理简介/</id>
+    <published>2018-03-20T08:18:05.000Z</published>
+    <updated>2018-03-20T08:56:15.958Z</updated>
+    
+    <content type="html"><![CDATA[<p>python 虽然好用，但是项目一多，依赖的管理就是个大问题了，新项目已经全在用 python3，而老项目都是 pthon2，更蛋疼的是，不同项目之间还可能依赖了同一个库的不同版本！我们试着解决这个问题:</p>
+<h2 id="pip-解决项目的全局依赖问题"><a href="#pip-解决项目的全局依赖问题" class="headerlink" title="pip: 解决项目的全局依赖问题"></a>pip: 解决项目的全局依赖问题</h2><p>最开始的时候，我们都是手动安装库，而库可能还有依赖的库，这样最终会形成一张树的依赖结构。解决这个问题，我们可以使用 pip。</p>
+<p>它主要解决包的问题，包括安装、更新、删除等。<br>简介: <a href="https://pip.pypa.io/en/stable/quickstart/" target="_blank" rel="external">https://pip.pypa.io/en/stable/quickstart/</a><br>安装: <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="external">https://pip.pypa.io/en/stable/installing/</a></p>
+<h2 id="virtualenv-解决不同项目间使用同一依赖不同版本的问题"><a href="#virtualenv-解决不同项目间使用同一依赖不同版本的问题" class="headerlink" title="virtualenv: 解决不同项目间使用同一依赖不同版本的问题"></a>virtualenv: 解决不同项目间使用同一依赖不同版本的问题</h2><p>pip 可以帮助我们方便地安装项目需要的依赖，不过随着项目的变多，我们可能会在不同的项目里使用同一个库的不同版本，甚至python 的不同版本，这时，需要一个新的工具来解决这个问题: virtualenv。</p>
+<p>它可以帮助我们创建一个虚拟、独立的依赖环境，以保证每个项目可以使用指定的依赖，包括 python、第三方库等。</p>
+<p><a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="external">virtualenv官网</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">virtualenv简介</a></p>
+<h2 id="conda-解决非python依赖的问题，以及简单统一的操作方式"><a href="#conda-解决非python依赖的问题，以及简单统一的操作方式" class="headerlink" title="conda: 解决非python依赖的问题，以及简单统一的操作方式"></a>conda: 解决非python依赖的问题，以及简单统一的操作方式</h2><p>pip 和 virtualenv的组合，可以解决绝大部分 python的依赖管理问题，但是，随着项目的发展，我们可能需要非 python 的依赖，来解决现有问题。</p>
+<p>conda 作为一个打包工具和安装程序，可以帮助我们解决主流的开发环境和依赖的问题，除 python 外，它还支持：R, Ruby, Lua, Scala, Java, JavaScript, C/C++, FORTRAN等语言。一定程度上，可以把它看着 pip 和 virtualenv 的结合（实际上，pip 和 conda 是互补的关系，因为 pip 可以安装一部分 conda 不能安装的依赖）。</p>
+<p><a href="https://www.anaconda.com/what-is-anaconda/" target="_blank" rel="external">官网</a> (很卡，不推荐，建议使用下面的镜像)<br><a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">国内镜像</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>virtualenv和conda都是通过修改 shell 里的环境变量来达到修改环境的目的，基本原理类似。<br>不同的项目可以用不同的工具，不要求全，适合才是最好的。<br>Pycharm 对以上工具都有很好的支持，善用工具可以极大提高效率。  </p>
+<p>以下是参考资料:<br><a href="https://zhuanlan.zhihu.com/p/32925500" target="_blank" rel="external">Anaconda介绍、安装及使用教程</a><br><a href="http://python.jobbole.com/85588/" target="_blank" rel="external">Anacodna之conda与 virtualenv对比使用教程，创建虚拟环境</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;python 虽然好用，但是项目一多，依赖的管理就是个大问题了，新项目已经全在用 python3，而老项目都是 pthon2，更蛋疼的是，不同项目之间还可能依赖了同一个库的不同版本！我们试着解决这个问题:&lt;/p&gt;
+&lt;h2 id=&quot;pip-解决项目的全局依赖问题&quot;&gt;&lt;a hr
+    
+    </summary>
+    
+    
+      <category term="python" scheme="http://showstone.net/tags/python/"/>
+    
+      <category term="依赖管理" scheme="http://showstone.net/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="conda" scheme="http://showstone.net/tags/conda/"/>
+    
+      <category term="virtualenv" scheme="http://showstone.net/tags/virtualenv/"/>
+    
+      <category term="conda virtualenv 区别" scheme="http://showstone.net/tags/conda-virtualenv-%E5%8C%BA%E5%88%AB/"/>
+    
+      <category term="conda virtualenv 比较" scheme="http://showstone.net/tags/conda-virtualenv-%E6%AF%94%E8%BE%83/"/>
+    
+  </entry>
   
   <entry>
     <title>java8里lambda里的 this 为什么会指向 lamdba 所在的外部类</title>
@@ -612,479 +654,39 @@
   </entry>
   
   <entry>
-    <title>tmux使用方法</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
+    <title>rebase导致commit丢失</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
     <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
+    <updated>2018-01-03T10:20:36.610Z</updated>
     
-    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
-<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
-<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
-<blockquote>
-<p>brew install tmux   </p>
-</blockquote>
-<p>ubuntu </p>
-<blockquote>
-<p>sudo apt-get install tmux</p>
-</blockquote>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
-<blockquote>
-<p>tmux</p>
-</blockquote>
-<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
-c-b d 离开(detach)session
-c-b $ 重命名当前session
-
-tmux ls 列出会话
-tmux attach -t session 进入某个会话
-tmux -r 连接上个断开的session
-tmux new -s session -d 在后台建立会话
-</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
-c-b &amp; 关闭当前窗口  
-c-b p 切换到上一个窗口  
-c-b n 切换到下一个窗口  
-c-b , 重命名当前窗口
-c-b w 列出所有窗口
-c-b 0~9 选择0~9对应的窗口
-c-b opt+方向键 调整panel的大小(一次调整5%)
-c-b ctrl+方向键 调整panel的大小(一次调整1%)
-</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
-c-b &quot; 竖直分割窗口
-c-b h 将焦点移入左侧的panel
-c-b j 将焦点移入下方的panel
-c-b l 将焦点移入上方的panel
-c-b k 将焦点移入右方的panel
-c-b q 显示panel的编号 
-c-b o 切换到下一个panel
-c-b } 与下一个panel交换位置
-c-b { 与上一个panel交换位置
-</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
-<pre><code>c-b [ 进入复制模式
-space 选择要复制的内容
-c-b ] 粘贴
-q 退出复制模式
-</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
-<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
-<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
-<pre><code>#设置PREFIX为Ctrl-a  
-set -g prefix C-a  
-#解除Ctrl-b与PREFIX的对应关系  
-unbind C-b  
-#copy-mode将快捷键设置为vi模式  
-setw -g mode-keys vi  
-#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
-bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
-#设置终端颜色为256色  
-set -g default-terminal &quot;screen-256color&quot;  
-#开启status-bar uft-8支持  
-set -g status-utf8 on  
-#设置pan前景色  
-set -g pane-border-fg green  
-#设置pane背景色  
-set -g pane-border-bg black  
-#设置活跃pane前景色  
-set -g pane-active-border-fg white  
-#设置活跃pane背景色  
-set -g pane-active-border-bg yellow  
-#设置消息前景色  
-set -g message-fg white  
-#设置消息背景色  
-set -g message-bg black  
-#设置消息高亮显示  
-set -g message-attr bright  
-#设置status-bar颜色  
-set -g status-fg white  
-set -g status-bg black  
-#设置窗口列表颜色  
-setw -g window-status-fg cyan  
-setw -g window-status-bg default  
-setw -g window-status-attr dim  
-#设置当前窗口在status bar中的颜色  
-setw -g window-status-current-fg white  
-setw -g window-status-current-bg red  
-setw -g window-status-current-attr bright  
-#设置status bar格式  
-set -g status-left-length 40  
-set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
-set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
-set -g status-interval 60  
-set -g status-justify centre  
-#开启window事件提示  
-setw -g monitor-activity on  
-set -g visual-activity on 
-</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
-<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
-</ul>
-<blockquote>
-<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
-</blockquote>
-<ul>
-<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
-</ul>
-<blockquote>
-<p>c-b :set synchronize-panes</p>
-</blockquote>
-<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
-<ul>
-<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
-</ul>
+    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mkdir rebaselost</div><div class="line">cd rebaselost</div><div class="line">git init</div><div class="line">echo &quot;init content&quot;  a</div><div class="line">git commit -m &apos;init content&apos;</div><div class="line">git checkout -b branch1</div><div class="line">echo &quot;branch1 content&quot;  a</div><div class="line">git commit -m &apos;branch1&apos;</div><div class="line">git checkout master</div><div class="line">echo &quot;new master content&quot;  a</div><div class="line">git commit -m &apos;master content&apos;</div><div class="line">echo &quot;new master content2&quot;  a</div><div class="line">git commit -m &apos;master content2&apos;</div><div class="line">git checkout branch1</div><div class="line">git rebase master</div><div class="line">git rebase --skip</div></pre></td></tr></table></figure>
+<p>期望的结果是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">new master content2  </div><div class="line">branch1 content</div></pre></td></tr></table></figure>
+<p>实际的结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new master content2</div></pre></td></tr></table></figure>
+<p><em> 问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失. </em></p>
+<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
+<p>操作结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fa0f628 HEAD@&#123;0&#125;: rebase: branch1    </div><div class="line">465b616 HEAD@&#123;1&#125;: rebase: checkout master    </div><div class="line">d0350f9 HEAD@&#123;2&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;3&#125;: checkout: moving from master to branch1</div><div class="line">465b616 HEAD@&#123;4&#125;: commit: new master status2  </div><div class="line">7f50104 HEAD@&#123;5&#125;: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master  </div><div class="line">d1fe9ed HEAD@&#123;6&#125;: rebase: branch1  </div><div class="line">7f50104 HEAD@&#123;7&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;8&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;9&#125;: rebase finished: returning to refs/heads/branch1  </div><div class="line">7f50104 HEAD@&#123;10&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;11&#125;: checkout: moving from master to branch1  </div><div class="line">7f50104 HEAD@&#123;12&#125;: commit: master content  </div><div class="line">4fe1cf4 HEAD@&#123;13&#125;: checkout: moving from branch1 to master  </div><div class="line">d0350f9 HEAD@&#123;14&#125;: commit: branch1  </div><div class="line">4fe1cf4 HEAD@&#123;15&#125;: checkout: moving from master to branch1  </div><div class="line">4fe1cf4 HEAD@&#123;16&#125;: commit (initial): init content</div></pre></td></tr></table></figure>
+<p>找回提交:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout d0350f9</div></pre></td></tr></table></figure></p>
+<p>要避免丢失,在冲突时编辑冲突即可</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
-&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
+      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
     
     </summary>
     
       <category term="software" scheme="http://showstone.net/categories/software/"/>
     
     
-      <category term="software" scheme="http://showstone.net/tags/software/"/>
+      <category term="git" scheme="http://showstone.net/tags/git/"/>
     
-      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HashMap浅析</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-07-05-hashmap/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>HashMap的特点</li>
-<li>HashMap的数据结构</li>
-<li>HashMap的常用方法及实现</li>
-</ul>
-<h2 id="HashMap的特点"><a href="#HashMap的特点" class="headerlink" title="HashMap的特点"></a>HashMap的特点</h2><ul>
-<li>HashMap内不存在相同的key(hashcode相等且key.equal()为true)</li>
-<li>HashMap的get、put等方法的基本为1（实际上初到hashcode值相同的key数目以及capacity等的影响）</li>
-<li>HashMap的遍历时间受capacity以及实际上的key/value对数目的影响</li>
-</ul>
-<h2 id="HashMap的数据结构"><a href="#HashMap的数据结构" class="headerlink" title="HashMap的数据结构"></a>HashMap的数据结构</h2><p>HashMap的数据保存在一个元素是链表的数组里。</p>
-<p><img src="/img/hashmap_structure.png" alt="HashMap的数据结构"><br>HashMap的数据结构(图片来自<a href="http://www.cnblogs.com/chenssy/p/3521565.html" target="_blank" rel="external">树上月</a>)   </p>
-<h2 id="HashMap的常用方法及实现"><a href="#HashMap的常用方法及实现" class="headerlink" title="HashMap的常用方法及实现"></a>HashMap的常用方法及实现</h2><p>HashMap里有以下几个参数比较重要</p>
-<pre><code>transient Node&lt;K,V&gt;[] table; //实际保存数据节点的位置
-transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
-transient int size; //key/map节点的数目
-transient int modCount;//修改map结构的次数,如put,remove等操作
-int threshold;//节点的大小
-final float loadFactor;//负载因子，当size大于 thre
-</code></pre><p>内部的数据结构:</p>
-<pre><code>static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-    final int hash;
-    final K key;
-    V value;
-    Node&lt;K,V&gt; next;
-
-    Node(int hash, K key, V value, Node&lt;K,V&gt; next) {
-        this.hash = hash;
-        this.key = key;
-        this.value = value;
-        this.next = next;
-    }
-
-    public final K getKey()        { return key; }
-    public final V getValue()      { return value; }
-    public final String toString() { return key + &quot;=&quot; + value; }
-
-    public final int hashCode() {
-        return Objects.hashCode(key) ^ Objects.hashCode(value);
-    }
-
-    public final V setValue(V newValue) {
-        V oldValue = value;
-        value = newValue;
-        return oldValue;
-    }
-
-    public final boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (o instanceof Map.Entry) {
-            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
-            if (Objects.equals(key, e.getKey()) &amp;&amp;
-                Objects.equals(value, e.getValue()))
-                return true;
-        }
-        return false;
-    }
-}
-</code></pre><ol>
-<li><p>putVal()</p>
-<pre><code>/**
- * Implements Map.put and related methods
- *
- * @param hash hash for key
- * @param key the key
- * @param value the value to put
- * @param onlyIfAbsent if true, don&apos;t change existing value
- * @param evict if false, the table is in creation mode.
- * @return previous value, or null if none
- */
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-               boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)//第一次添加元素
-        n = (tab = resize()).length;
-    // 通过(n-1) &amp; hash来给获取元素应该放在那一个链表中,这里是一个很好的设计
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    //当链表下的元素过多(&gt;8)时，会把链表变成红黑树,以优化查询效率
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
-                    break;
-                }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
-            }
-        }
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
-        }
-    }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
-    return null;
-}
-</code></pre></li>
-</ol>
-<pre><code>&lt;b&gt;(n - 1) &amp; hash 来计算应该放置的节点&lt;/b&gt;   
-  首先，通过n一般是2的m次方，如8,16,32之类的，这时n-1后的值会是类似于 0..111 的值，通过求模，即可算出其应该于的位置。而且效率很高
-
-
-&lt;b&gt;treeifyBin(tab, hash)&lt;/b&gt;   
-  Java8针对链表中节点过多的情况进行了优化：当节点的数目大于等于 TREEIFY_THRESHOLD(8)时，会把链表换成树。当节点的数目小于UNTREEIFY_THRESHOLD(6)时，又会变回成链表。其中，链表到树会在put等添加节点时触发，而从树到链表只会在调用resize()时检查.
-</code></pre><ol>
-<li><p>remove()</p>
-<pre><code>final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
-                           boolean matchValue, boolean movable) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (p = tab[index = (n - 1) &amp; hash]) != null) {
-        Node&lt;K,V&gt; node = null, e; K k; V v;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            node = p;
-        else if ((e = p.next) != null) {
-            if (p instanceof TreeNode)
-                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
-            else {
-                do {
-                    if (e.hash == hash &amp;&amp;
-                        ((k = e.key) == key ||
-                         (key != null &amp;&amp; key.equals(k)))) {
-                        node = e;
-                        break;
-                    }
-                    p = e;
-                } while ((e = e.next) != null);
-            }
-        }
-        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
-                             (value != null &amp;&amp; value.equals(v)))) {
-            if (node instanceof TreeNode)
-                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
-            else if (node == p)
-                tab[index] = node.next;
-            else
-                p.next = node.next;
-            ++modCount;
-            --size;
-            afterNodeRemoval(node);
-            return node;
-        }
-    }
-    return null;
-}
-</code></pre></li>
-<li><p>get</p>
-<pre><code>final Node&lt;K,V&gt; getNode(int hash, Object key) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
-    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
-        (first = tab[(n - 1) &amp; hash]) != null) {
-        if (first.hash == hash &amp;&amp; // always check first node
-            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
-            return first;
-        if ((e = first.next) != null) {
-            if (first instanceof TreeNode)
-                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
-            do {
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    return e;
-            } while ((e = e.next) != null);
-        }
-    }
-    return null;
-}
-</code></pre></li>
-<li><p>resize</p>
-<pre><code>final Node&lt;K,V&gt;[] resize() {
-    Node&lt;K,V&gt;[] oldTab = table;
-    int oldCap = (oldTab == null) ? 0 : oldTab.length;
-    int oldThr = threshold;
-    int newCap, newThr = 0;
-    if (oldCap &gt; 0) {
-        if (oldCap &gt;= MAXIMUM_CAPACITY) {
-            threshold = Integer.MAX_VALUE;
-            return oldTab;
-        }
-        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
-                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
-            newThr = oldThr &lt;&lt; 1; // double threshold
-    }
-    else if (oldThr &gt; 0) // initial capacity was placed in threshold
-        newCap = oldThr;
-    else {               // zero initial threshold signifies using defaults
-        newCap = DEFAULT_INITIAL_CAPACITY;
-        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
-    }
-    if (newThr == 0) {
-        float ft = (float)newCap * loadFactor;
-        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
-                  (int)ft : Integer.MAX_VALUE);
-    }
-    threshold = newThr;
-    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
-        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
-    table = newTab;
-    if (oldTab != null) {
-        for (int j = 0; j &lt; oldCap; ++j) {
-            Node&lt;K,V&gt; e;
-            if ((e = oldTab[j]) != null) {
-                oldTab[j] = null;
-                if (e.next == null)
-                    newTab[e.hash &amp; (newCap - 1)] = e;
-                else if (e instanceof TreeNode)
-                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
-                else { // preserve order
-                    Node&lt;K,V&gt; loHead = null, loTail = null;
-                    Node&lt;K,V&gt; hiHead = null, hiTail = null;
-                    Node&lt;K,V&gt; next;
-                    do {
-                        next = e.next;
-                        if ((e.hash &amp; oldCap) == 0) {
-                            if (loTail == null)
-                                loHead = e;
-                            else
-                                loTail.next = e;
-                            loTail = e;
-                        }
-                        else {
-                            if (hiTail == null)
-                                hiHead = e;
-                            else
-                                hiTail.next = e;
-                            hiTail = e;
-                        }
-                    } while ((e = next) != null);
-                    if (loTail != null) {
-                        loTail.next = null;
-                        newTab[j] = loHead;
-                    }
-                    if (hiTail != null) {
-                        hiTail.next = null;
-                        newTab[j + oldCap] = hiHead;
-                    }
-                }
-            }
-        }
-    }
-    return newTab;
-}
-</code></pre></li>
-</ol>
-<h2 id="相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化"><a href="#相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化" class="headerlink" title="相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化"></a>相对以前的东西来说，HashMap太过复杂，还有以下内容需要细化</h2><ul>
-<li><p>HashMap遍历时间为容器的初始容量加上真实的键值对</p>
-<pre><code>* &lt;p&gt;This implementation provides constant-time performance for the basic
-* operations (&lt;tt&gt;get&lt;/tt&gt; and &lt;tt&gt;put&lt;/tt&gt;), assuming the hash function
-* disperses the elements properly among the buckets.  Iteration over
-* collection views requires time proportional to the &quot;capacity&quot; of the
-* &lt;tt&gt;HashMap&lt;/tt&gt; instance (the number of buckets) plus its size (the number
-* of key-value mappings).  Thus, it&apos;s very important not to set the initial
-* capacity too high (or the load factor too low) if iteration performance is
-* important.
-</code></pre></li>
-<li><p>hashcode为何要左移16位</p>
-<pre><code>/**
- * Computes key.hashCode() and spreads (XORs) higher bits of hash
- * to lower.  Because the table uses power-of-two masking, sets of
- * hashes that vary only in bits above the current mask will
- * always collide. (Among known examples are sets of Float keys
- * holding consecutive whole numbers in small tables.)  So we
- * apply a transform that spreads the impact of higher bits
- * downward. There is a tradeoff between speed, utility, and
- * quality of bit-spreading. Because many common sets of hashes
- * are already reasonably distributed (so don&apos;t benefit from
- * spreading), and because we use trees to handle large sets of
- * collisions in bins, we just XOR some shifted bits in the
- * cheapest possible way to reduce systematic lossage, as well as
- * to incorporate impact of the highest bits that would otherwise
- * never be used in index calculations because of table bounds.
- */
-static final int hash(Object key) {
-    int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
-}
-</code></pre></li>
-<li><p>大于某个数的最小2的n次方的数</p>
-<pre><code>/**
- * Returns a power of two size for the given target capacity.
- */
-static final int tableSizeFor(int cap) {
-    int n = cap - 1;
-    n |= n &gt;&gt;&gt; 1;
-    n |= n &gt;&gt;&gt; 2;
-    n |= n &gt;&gt;&gt; 4;
-    n |= n &gt;&gt;&gt; 8;
-    n |= n &gt;&gt;&gt; 16;
-    return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
-}
-</code></pre></li>
-<li><p>红黑树的实现</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      简要分析了HashMap的特点、数据结构,并对源码作了简要分析
-    
-    </summary>
-    
-      <category term="Java容器" scheme="http://showstone.net/categories/java%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="java" scheme="http://showstone.net/tags/java/"/>
-    
-      <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="HashMap" scheme="http://showstone.net/tags/hashmap/"/>
+      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
     
   </entry>
   
@@ -1378,75 +980,219 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
   </entry>
   
   <entry>
-    <title>rebase导致commit丢失</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
+    <link href="http://showstone.net/java/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
+    <id>http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
     <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2018-01-03T10:20:36.610Z</updated>
+    <updated>2018-02-13T05:13:09.224Z</updated>
     
-    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mkdir rebaselost</div><div class="line">cd rebaselost</div><div class="line">git init</div><div class="line">echo &quot;init content&quot;  a</div><div class="line">git commit -m &apos;init content&apos;</div><div class="line">git checkout -b branch1</div><div class="line">echo &quot;branch1 content&quot;  a</div><div class="line">git commit -m &apos;branch1&apos;</div><div class="line">git checkout master</div><div class="line">echo &quot;new master content&quot;  a</div><div class="line">git commit -m &apos;master content&apos;</div><div class="line">echo &quot;new master content2&quot;  a</div><div class="line">git commit -m &apos;master content2&apos;</div><div class="line">git checkout branch1</div><div class="line">git rebase master</div><div class="line">git rebase --skip</div></pre></td></tr></table></figure>
-<p>期望的结果是:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">new master content2  </div><div class="line">branch1 content</div></pre></td></tr></table></figure>
-<p>实际的结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new master content2</div></pre></td></tr></table></figure>
-<p><em> 问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失. </em></p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
-<p>操作结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fa0f628 HEAD@&#123;0&#125;: rebase: branch1    </div><div class="line">465b616 HEAD@&#123;1&#125;: rebase: checkout master    </div><div class="line">d0350f9 HEAD@&#123;2&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;3&#125;: checkout: moving from master to branch1</div><div class="line">465b616 HEAD@&#123;4&#125;: commit: new master status2  </div><div class="line">7f50104 HEAD@&#123;5&#125;: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master  </div><div class="line">d1fe9ed HEAD@&#123;6&#125;: rebase: branch1  </div><div class="line">7f50104 HEAD@&#123;7&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;8&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;9&#125;: rebase finished: returning to refs/heads/branch1  </div><div class="line">7f50104 HEAD@&#123;10&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;11&#125;: checkout: moving from master to branch1  </div><div class="line">7f50104 HEAD@&#123;12&#125;: commit: master content  </div><div class="line">4fe1cf4 HEAD@&#123;13&#125;: checkout: moving from branch1 to master  </div><div class="line">d0350f9 HEAD@&#123;14&#125;: commit: branch1  </div><div class="line">4fe1cf4 HEAD@&#123;15&#125;: checkout: moving from master to branch1  </div><div class="line">4fe1cf4 HEAD@&#123;16&#125;: commit (initial): init content</div></pre></td></tr></table></figure>
-<p>找回提交:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout d0350f9</div></pre></td></tr></table></figure></p>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
+    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://showstone.net/categories/java/"/>
+    
+    
+      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
+    
+      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
+    
+      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
+    
+      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
+    
+      <category term="command" scheme="http://showstone.net/tags/command/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JUnit主线程退出时所有的子线程也会结束</title>
+    <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
+    <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Java" scheme="http://showstone.net/categories/java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>tmux使用方法</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
+<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
+<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
+<blockquote>
+<p>brew install tmux   </p>
+</blockquote>
+<p>ubuntu </p>
+<blockquote>
+<p>sudo apt-get install tmux</p>
+</blockquote>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
+<blockquote>
+<p>tmux</p>
+</blockquote>
+<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
+c-b d 离开(detach)session
+c-b $ 重命名当前session
+
+tmux ls 列出会话
+tmux attach -t session 进入某个会话
+tmux -r 连接上个断开的session
+tmux new -s session -d 在后台建立会话
+</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
+c-b &amp; 关闭当前窗口  
+c-b p 切换到上一个窗口  
+c-b n 切换到下一个窗口  
+c-b , 重命名当前窗口
+c-b w 列出所有窗口
+c-b 0~9 选择0~9对应的窗口
+c-b opt+方向键 调整panel的大小(一次调整5%)
+c-b ctrl+方向键 调整panel的大小(一次调整1%)
+</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
+c-b &quot; 竖直分割窗口
+c-b h 将焦点移入左侧的panel
+c-b j 将焦点移入下方的panel
+c-b l 将焦点移入上方的panel
+c-b k 将焦点移入右方的panel
+c-b q 显示panel的编号 
+c-b o 切换到下一个panel
+c-b } 与下一个panel交换位置
+c-b { 与上一个panel交换位置
+</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
+<pre><code>c-b [ 进入复制模式
+space 选择要复制的内容
+c-b ] 粘贴
+q 退出复制模式
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
+<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
+<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
+<pre><code>#设置PREFIX为Ctrl-a  
+set -g prefix C-a  
+#解除Ctrl-b与PREFIX的对应关系  
+unbind C-b  
+#copy-mode将快捷键设置为vi模式  
+setw -g mode-keys vi  
+#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
+bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
+#设置终端颜色为256色  
+set -g default-terminal &quot;screen-256color&quot;  
+#开启status-bar uft-8支持  
+set -g status-utf8 on  
+#设置pan前景色  
+set -g pane-border-fg green  
+#设置pane背景色  
+set -g pane-border-bg black  
+#设置活跃pane前景色  
+set -g pane-active-border-fg white  
+#设置活跃pane背景色  
+set -g pane-active-border-bg yellow  
+#设置消息前景色  
+set -g message-fg white  
+#设置消息背景色  
+set -g message-bg black  
+#设置消息高亮显示  
+set -g message-attr bright  
+#设置status-bar颜色  
+set -g status-fg white  
+set -g status-bg black  
+#设置窗口列表颜色  
+setw -g window-status-fg cyan  
+setw -g window-status-bg default  
+setw -g window-status-attr dim  
+#设置当前窗口在status bar中的颜色  
+setw -g window-status-current-fg white  
+setw -g window-status-current-bg red  
+setw -g window-status-current-attr bright  
+#设置status bar格式  
+set -g status-left-length 40  
+set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
+set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
+set -g status-interval 60  
+set -g status-justify centre  
+#开启window事件提示  
+setw -g monitor-activity on  
+set -g visual-activity on 
+</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
+<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
+</ul>
+<blockquote>
+<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
+</blockquote>
+<ul>
+<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
+</ul>
+<blockquote>
+<p>c-b :set synchronize-panes</p>
+</blockquote>
+<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
+<ul>
+<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+      &lt;p&gt;tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.&lt;/p&gt;
+&lt;h2 id=&quot;tmux结构&quot;&gt;&lt;a href=&quot;#tmux结构&quot; class=&quot;headerlink&quot; title=&quot;tmux
     
     </summary>
     
       <category term="software" scheme="http://showstone.net/categories/software/"/>
     
     
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
+      <category term="software" scheme="http://showstone.net/tags/software/"/>
     
-      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>maven常用镜像源</title>
-    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-07-24-maven%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/"/>
-    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
-<p>nexus镜像:</p>
-<pre><code>http://uk.maven.org/maven2/
-http://repo2.maven.org/maven2/
-http://mirrors.ibiblio.org/pub/mirrors/maven2/
-http://repository.jboss.org/nexus/content/groups/public
-</code></pre><p>以上内容均收集于互联网</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。&lt;/p&gt;
-&lt;p&gt;nexus镜像:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;http://uk.maven.org/maven2/
-http://repo2.maven.org/
-    
-    </summary>
-    
-      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="maven" scheme="http://showstone.net/tags/maven/"/>
-    
-      <category term="镜像" scheme="http://showstone.net/tags/%E9%95%9C%E5%83%8F/"/>
-    
-      <category term="软件配置" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+      <category term="tmux" scheme="http://showstone.net/tags/tmux/"/>
     
   </entry>
   
@@ -1601,81 +1347,61 @@ http://repo2.maven.org/
   </entry>
   
   <entry>
-    <title>JUnit主线程退出时所有的子线程也会结束</title>
-    <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
-    <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
+    <title>编译vim以支持lua</title>
+    <link href="http://showstone.net/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/2017/03/07/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE-2015-08-24-%E7%BC%96%E8%AF%91vim%E4%BB%A5%E6%94%AF%E6%8C%81lua/"/>
+    <id>http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="Java" scheme="http://showstone.net/categories/java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>记一次redis报错JedisDataException: ERR Proxy fail to forward command</title>
-    <link href="http://showstone.net/java/2017/03/07/java-2016-03-17-%E8%AE%B0%E4%B8%80%E6%AC%A1redis%E6%8A%A5%E9%94%99JedisDataException/"/>
-    <id>http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2018-02-13T05:13:09.224Z</updated>
-    
-    <content type="html"><![CDATA[<p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
+    <content type="html"><![CDATA[<p>通过brew install vim安装vim后,发现其不支持lua,导致有一部分插件没法使用,于是想自己重新编译一个vim.</p>
+<ol>
+<li><p>下载源代码</p>
+<pre><code>git clone https://github.com/vim/vim.git   
+cd vim
+</code></pre></li>
+<li><p>设置编译参数</p>
+<p> 如果要添加python/lua等的支持,需要保证其在vi的默认路径里,或者需要手动指定,否则该语言的特性支持就会失效</p>
+<pre><code>./configure --with-features=huge --enable-rubyinterp \    
+--enable-pythoninterp --enable-luainterp --with-lua-prefix=/usr/local/ 
+--enable-perlinterp --enable-multibyte --enable-sniff  \
+--enable-fontset --enable-cscope \    
+--disable-gui --prefix=/opt/local/vim  
 
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>]]></content>
+--with-features=huge：支持最大特性  
+--enable-rubyinterp：启用Vim对ruby的支持  
+--enable-pythoninterp：启用Vim对python的支持  
+--enable-luainterp：启用Vim对lua的支持  
+--with-lua-prefix:指定lua的安装路径,默认为$LUA_PREFIX或者/usr 
+--enable-perlinterp：启用Vim对perl的支持  
+--enable-multibyte：多字节支持 可以在Vim中输入中文  
+--enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+--enable-cscope：Vim对cscope支持  
+--disable-gui：不用编译生成图形界面版gvim  
+--prefix=/opt/local/vim：编译安装路径  
+</code></pre></li>
+<li><p>编译\安装</p>
+<pre><code>make    
+make install
+</code></pre></li>
+</ol>
+]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to 
+      编译vim以支持lua
     
     </summary>
     
-      <category term="JAVA" scheme="http://showstone.net/categories/java/"/>
+      <category term="软件配置" scheme="http://showstone.net/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="redis" scheme="http://showstone.net/tags/redis/"/>
+      <category term="python" scheme="http://showstone.net/tags/python/"/>
     
-      <category term="JedisDataException" scheme="http://showstone.net/tags/jedisdataexception/"/>
+      <category term="vim" scheme="http://showstone.net/tags/vim/"/>
     
-      <category term="Proxy" scheme="http://showstone.net/tags/proxy/"/>
+      <category term="编译" scheme="http://showstone.net/tags/%E7%BC%96%E8%AF%91/"/>
     
-      <category term="forward" scheme="http://showstone.net/tags/forward/"/>
-    
-      <category term="command" scheme="http://showstone.net/tags/command/"/>
+      <category term="lua" scheme="http://showstone.net/tags/lua/"/>
     
   </entry>
   
