@@ -316,7 +316,6 @@
 <p>它主要解决包的问题，包括安装、更新、删除等。<br>简介: <a href="https://pip.pypa.io/en/stable/quickstart/" target="_blank" rel="external">https://pip.pypa.io/en/stable/quickstart/</a><br>安装: <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="external">https://pip.pypa.io/en/stable/installing/</a></p>
 <h2 id="virtualenv-解决不同项目间使用同一依赖不同版本的问题"><a href="#virtualenv-解决不同项目间使用同一依赖不同版本的问题" class="headerlink" title="virtualenv: 解决不同项目间使用同一依赖不同版本的问题"></a>virtualenv: 解决不同项目间使用同一依赖不同版本的问题</h2><p>pip 可以帮助我们方便地安装项目需要的依赖，不过随着项目的变多，我们可能会在不同的项目里使用同一个库的不同版本，甚至python 的不同版本，这时，需要一个新的工具来解决这个问题: virtualenv。</p>
 <p>它可以帮助我们创建一个虚拟、独立的依赖环境，以保证每个项目可以使用指定的依赖，包括 python、第三方库等。</p>
-<p><a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="external">virtualenv官网</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">virtualenv简介</a></p>
 <h2 id="conda-解决非python依赖的问题，以及简单统一的操作方式"><a href="#conda-解决非python依赖的问题，以及简单统一的操作方式" class="headerlink" title="conda: 解决非python依赖的问题，以及简单统一的操作方式"></a>conda: 解决非python依赖的问题，以及简单统一的操作方式</h2><p>pip 和 virtualenv的组合，可以解决绝大部分 python的依赖管理问题，但是，随着项目的发展，我们可能需要非 python 的依赖，来解决现有问题。</p>
 <p>conda 作为一个打包工具和安装程序，可以帮助我们解决主流的开发环境和依赖的问题，除 python 外，它还支持：R, Ruby, Lua, Scala, Java, JavaScript, C/C++, FORTRAN等语言。一定程度上，可以把它看着 pip 和 virtualenv 的结合（实际上，pip 和 conda 是互补的关系，因为 pip 可以安装一部分 conda 不能安装的依赖）。</p>
 <p><a href="https://www.anaconda.com/what-is-anaconda/" target="_blank" rel="external">官网</a> (很卡，不推荐，建议使用下面的镜像)<br><a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">国内镜像</a></p>
@@ -1025,6 +1024,8 @@
         
           
             <p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
+<p>最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.</p>
+<hr>
 <p><strong>所有功能都建议使用 docker，方便在系统崩溃后重装</strong></p>
 <h2 id="NAS软件功能"><a href="#NAS软件功能" class="headerlink" title="NAS软件功能"></a>NAS软件功能</h2><ul>
 <li>外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊</li>

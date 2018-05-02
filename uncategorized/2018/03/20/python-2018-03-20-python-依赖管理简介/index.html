@@ -91,7 +91,7 @@ pip: 解决项目的全局依赖问题最开始的时候，我们都是手动安
 <meta property="og:description" content="python 虽然好用，但是项目一多，依赖的管理就是个大问题了，新项目已经全在用 python3，而老项目都是 pthon2，更蛋疼的是，不同项目之间还可能依赖了同一个库的不同版本！我们试着解决这个问题:
 pip: 解决项目的全局依赖问题最开始的时候，我们都是手动安装库，而库可能还有依赖的库，这样最终会形成一张树的依赖结构。解决这个问题，我们可以使用 pip。
 它主要解决包的问题，包括安装、更新、">
-<meta property="og:updated_time" content="2018-03-20T08:56:15.958Z">
+<meta property="og:updated_time" content="2018-03-20T08:59:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 依赖管理简介">
 <meta name="twitter:description" content="python 虽然好用，但是项目一多，依赖的管理就是个大问题了，新项目已经全在用 python3，而老项目都是 pthon2，更蛋疼的是，不同项目之间还可能依赖了同一个库的不同版本！我们试着解决这个问题:
@@ -321,7 +321,6 @@ pip: 解决项目的全局依赖问题最开始的时候，我们都是手动安
 <p>它主要解决包的问题，包括安装、更新、删除等。<br>简介: <a href="https://pip.pypa.io/en/stable/quickstart/" target="_blank" rel="external">https://pip.pypa.io/en/stable/quickstart/</a><br>安装: <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="external">https://pip.pypa.io/en/stable/installing/</a></p>
 <h2 id="virtualenv-解决不同项目间使用同一依赖不同版本的问题"><a href="#virtualenv-解决不同项目间使用同一依赖不同版本的问题" class="headerlink" title="virtualenv: 解决不同项目间使用同一依赖不同版本的问题"></a>virtualenv: 解决不同项目间使用同一依赖不同版本的问题</h2><p>pip 可以帮助我们方便地安装项目需要的依赖，不过随着项目的变多，我们可能会在不同的项目里使用同一个库的不同版本，甚至python 的不同版本，这时，需要一个新的工具来解决这个问题: virtualenv。</p>
 <p>它可以帮助我们创建一个虚拟、独立的依赖环境，以保证每个项目可以使用指定的依赖，包括 python、第三方库等。</p>
-<p><a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="external">virtualenv官网</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">virtualenv简介</a></p>
 <h2 id="conda-解决非python依赖的问题，以及简单统一的操作方式"><a href="#conda-解决非python依赖的问题，以及简单统一的操作方式" class="headerlink" title="conda: 解决非python依赖的问题，以及简单统一的操作方式"></a>conda: 解决非python依赖的问题，以及简单统一的操作方式</h2><p>pip 和 virtualenv的组合，可以解决绝大部分 python的依赖管理问题，但是，随着项目的发展，我们可能需要非 python 的依赖，来解决现有问题。</p>
 <p>conda 作为一个打包工具和安装程序，可以帮助我们解决主流的开发环境和依赖的问题，除 python 外，它还支持：R, Ruby, Lua, Scala, Java, JavaScript, C/C++, FORTRAN等语言。一定程度上，可以把它看着 pip 和 virtualenv 的结合（实际上，pip 和 conda 是互补的关系，因为 pip 可以安装一部分 conda 不能安装的依赖）。</p>
 <p><a href="https://www.anaconda.com/what-is-anaconda/" target="_blank" rel="external">官网</a> (很卡，不推荐，建议使用下面的镜像)<br><a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">国内镜像</a></p>

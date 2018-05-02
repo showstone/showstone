@@ -240,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-arraylist/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -259,7 +259,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-24-arraylist/" itemprop="url">ArrayList浅析</a></h1>
+                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-29-vector/" itemprop="url">Vector浅析</a></h1>
         
 
         <div class="post-meta">
@@ -332,189 +332,14 @@
 
       
         
-          
-            <p>#ArrayList浅析</p>
-<ul>
-<li>ArrayList的作用、特点</li>
-<li>ArrayList的数据结构</li>
-<li>ArrayList的常用方法及实现</li>
-<li>ArrayList里需要注意的地方</li>
-</ul>
-<p>###ArrayList的作用、特点<br>ArrayList实现了List接口，常用操作有add,remove,get,size。其内部的数据采用数组进行存储。因此随机读写的速度很快，但删除、添加等操作相对会消耗比较多的时间，因为会有相关的一系列节点移动。</p>
-<p>###ArrayList的数据结构<br>ArrayList内部以数组的形式存储数据。默认的是一个空数组，当添加数据后，会扩充为一个长度为10的数组。</p>
-<pre><code>默认的空数组
-/**
- * Constructs an empty list with an initial capacity of ten.
- */
-public ArrayList() {
-    super();
-    this.elementData = EMPTY_ELEMENTDATA;
-}
-
-private static final Object[] EMPTY_ELEMENTDATA = {};
-</code></pre><p>###ArrayList的常用方法及其实现<br>1.add()</p>
-<p>加入元素之前，先确保有足够的空间</p>
-<pre><code>public boolean add(E e) {&lt;br/&gt;
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    elementData[size++] = e;
-    return true;
-}
-</code></pre><p>指定位置加入元素时，之后所有的元素都需要后移</p>
-<pre><code>public void add(int index, E element) {
-    rangeCheckForAdd(index);
-
-    ensureCapacityInternal(size + 1);  // Increments modCount!!
-    System.arraycopy(elementData, index, elementData, index + 1, size - index);
-    elementData[index] = element;
-    size++;
-}
-</code></pre><h4 id="addAll"><a href="#addAll" class="headerlink" title="addAll"></a>addAll</h4><pre><code>public boolean addAll(Collection&lt;? extends E&gt; c) {
-    Object[] a = c.toArray();
-    int numNew = a.length;
-    ensureCapacityInternal(size + numNew);  // Increments modCount
-    System.arraycopy(a, 0, elementData, size, numNew);
-    size += numNew;
-    return numNew != 0;
-}
-</code></pre><p>2.remove</p>
-<p>删除之前，先检查是否越界,同时也有大量的元素移动操作</p>
-<pre><code>public E remove(int index) {
-    rangeCheck(index);//简单地检查下标是否越界
-
-    modCount++;
-    E oldValue = elementData(index);
-
-    int numMoved = size - index - 1;
-    if (numMoved &gt; 0)
-        System.arraycopy(elementData, index+1, elementData, index,
-                         numMoved);
-    elementData[--size] = null; // clear to let GC do its work
-
-    return oldValue;
-}
-</code></pre><p>3.contain</p>
-<pre><code>public boolean contains(Object o) {
-    return indexOf(o) &gt;= 0;
-}
-
-public int indexOf(Object o) {
-    if (o == null) {
-        for (int i = 0; i &lt; size; i++)
-            if (elementData[i]==null)
-                return i;
-    } else {
-        for (int i = 0; i &lt; size; i++)
-            if (o.equals(elementData[i]))
-                return i;
-    }
-    return -1;
-}
-</code></pre><p>4.clone</p>
-<pre><code>public Object clone() {
-    try {
-        @SuppressWarnings(&quot;unchecked&quot;)
-            ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();
-        v.elementData = Arrays.copyOf(elementData, size);
-        v.modCount = 0;
-        return v;
-    } catch (CloneNotSupportedException e) {
-        // this shouldn&apos;t happen, since we are Cloneable
-        throw new InternalError();
-    }
-}
-</code></pre><p>5.iterator</p>
-<p>通过使用cursor和lastRet来进行标记</p>
-<pre><code>private class Itr implements Iterator&lt;E&gt; {
-    int cursor;       // index of next element to return
-    int lastRet = -1; // index of last element returned; -1 if no such
-    int expectedModCount = modCount;
-    ...
-}
-</code></pre><p>###ArrayList里需要注意的地方</p>
-<ul>
-<li>sublist并没有创建一个新的ArrayList,只是加了一个下标的起点</li>
-</ul>
-<p>代码：</p>
-<pre><code>public List&lt;E&gt; subList(int fromIndex, int toIndex) {
-    subListRangeCheck(fromIndex, toIndex, size);
-    return new SubList(this, 0, fromIndex, toIndex);
-}
-
- private class SubList extends AbstractList&lt;E&gt; implements RandomAccess {
-    private final AbstractList&lt;E&gt; parent;
-    private final int parentOffset;
-    private final int offset;
-    int size;
-    ...
-}
-</code></pre><p>所以在原来的List或者Sublist里的操作，都会影响到另一个list</p>
-<ul>
-<li>因为ArrayList是基于数组的，所以当添加的元素超过原来的数组大小时，它需要先创建一个新的数组，并把原来的元素复制过去。这在一定程序上会影响程序的性能。类似的操作有删除，根据上面的实现代码可以知道，每删除一个元素就会对它后面的元素进行移动。可以把那些需要删除的参数用一个list保存下来，然后用removeAll来一次全部删除。</li>
-</ul>
-<p>代码</p>
-<pre><code>public boolean removeAll(Collection&lt;?&gt; c) {
-    return batchRemove(c, false);
-}
-
-private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
-    final Object[] elementData = this.elementData;
-    int r = 0, w = 0;
-    boolean modified = false;
-    try {
-        for (; r &lt; size; r++)
-            if (c.contains(elementData[r]) == complement)//这是一个比较巧妙的实现，值得学习
-                elementData[w++] = elementData[r];
-    } finally {
-        // Preserve behavioral compatibility with AbstractCollection,
-        // even if c.contains() throws.
-        if (r != size) {
-            System.arraycopy(elementData, r,
-                             elementData, w,
-                             size - r);
-            w += size - r;
-        }
-        if (w != size) {
-            // clear to let GC do its work
-            for (int i = w; i &lt; size; i++)
-                elementData[i] = null;
-            modCount += size - w;
-            size = w;
-            modified = true;
-        }
-    }
-    return modified;
-}
-</code></pre><ul>
-<li>ArrayList里只定义了size和elementData两个元素,其他的都来自于父类AbstractList</li>
-</ul>
-<blockquote>
-<p>protected transient int modCount = 0;</p>
-<p>private int size;</p>
-</blockquote>
-<h3 id="以下是测试指定容器大小和让容器自动扩张比较的代码"><a href="#以下是测试指定容器大小和让容器自动扩张比较的代码" class="headerlink" title="以下是测试指定容器大小和让容器自动扩张比较的代码"></a>以下是测试指定容器大小和让容器自动扩张比较的代码</h3><pre><code>public static void main(String[] args) {
-    long startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList();
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-    startTime = System.currentTimeMillis();
-    for(int i=0;i&lt;100000;i++){
-        ArrayList list = new ArrayList(2000);
-        for(int num=0;num&lt;1000;num++){
-            list.add(&quot;object&quot;);
-        }
-    }
-    System.out.println(&quot;用时:&quot;+ (System.currentTimeMillis()-startTime)+&quot;毫秒&quot;);
-}
-</code></pre><p>运行结果:</p>
-<blockquote>
-<p>用时:607毫秒<br>用时:415毫秒</p>
-</blockquote>
-
-          
+          vector分析
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -561,7 +386,7 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -580,7 +405,7 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" itemprop="url">java容器研究思路</a></h1>
+                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" itemprop="url">HashSet浅析</a></h1>
         
 
         <div class="post-meta">
@@ -653,36 +478,159 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
 
       
         
+          Set源码分析
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/mybatis源码分析/2017/03/07/mybatis源码分析-2015-07-23-mybatis源码分析/" itemprop="url">mybatis结构分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-            <p>#容器的研究思路</p>
-<ul>
-<li>为什么研究容器<br><ul>
-<li>容器是JDK里的基础功能，平时使用得较多。</li>
-<li>容器相对简单，比较容易研究</li>
-<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
-</ul>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis源码分析/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis源码分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>JDBC方式的几个缺点</li>
+<li>MyBatis的解决方法</li>
+<li><p>MyBatis的结构框架</p>
+<h2 id="JDBC方式的几个缺点"><a href="#JDBC方式的几个缺点" class="headerlink" title="JDBC方式的几个缺点"></a>JDBC方式的几个缺点</h2><p>  所有用</p>
 </li>
-<li>容器是什么，要研究那些特性<ul>
-<li>容器是一段程序，是一系列的对象。</li>
-<li>作为程序，它由 数据结构+算法构成</li>
-<li>作为对象，它由 属性+方法构成</li>
-<li>作为类，它有自己的继承树</li>
-<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
-</ul>
-</li>
-<li>怎么去研究容器<ul>
-<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
-<li>如何去测试评估程序的特性</li>
-<li>程序的并发性能</li>
-<li>程序的极限性能</li>
-</ul>
-</li>
-</ul>
-<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
-<ul>
-<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
-<li>set<br><br>  HashSet, TreeSet</li>
-<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
 </ul>
 
           
@@ -732,7 +680,7 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -751,7 +699,7 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" itemprop="url">LinkedList浅析</a></h1>
+                <a class="post-title-link" href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" itemprop="url">maven常用镜像源</a></h1>
         
 
         <div class="post-meta">
@@ -786,8 +734,8 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java容器/" itemprop="url" rel="index">
-                    <span itemprop="name">java容器</span>
+                  <a href="/categories/软件配置/" itemprop="url" rel="index">
+                    <span itemprop="name">软件配置</span>
                   </a>
                 </span>
 
@@ -825,113 +773,161 @@ private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
       
         
           
-            <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
-</ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
-<blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
-</blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
-}
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
-
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
+            <p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
+<p>nexus镜像:</p>
+<pre><code>http://uk.maven.org/maven2/
+http://repo2.maven.org/maven2/
+http://mirrors.ibiblio.org/pub/mirrors/maven2/
+http://repository.jboss.org/nexus/content/groups/public
+</code></pre><p>以上内容均收集于互联网</p>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/" itemprop="url">编译vim以支持lua</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件配置/" itemprop="url" rel="index">
+                    <span itemprop="name">软件配置</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          编译vim以支持lua
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/软件配置/2017/03/07/软件配置-2015-08-24-编译vim以支持lua/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1374,298 +1370,6 @@ public int indexOf(E e, int index) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-29-vector/" itemprop="url">Vector浅析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java容器/" itemprop="url" rel="index">
-                    <span itemprop="name">java容器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          vector分析
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/" itemprop="url">HashSet浅析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java容器/" itemprop="url" rel="index">
-                    <span itemprop="name">java容器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          Set源码分析
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/java容器/2017/03/07/java容器-2015-07-02-hashset浅析/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-07-05-hashmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1812,7 +1516,7 @@ public int indexOf(E e, int index) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1831,7 +1535,7 @@ public int indexOf(E e, int index) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/" itemprop="url">maven常用镜像源</a></h1>
+                <a class="post-title-link" href="/software/2017/03/07/software-2016-01-18-常用linux命令/" itemprop="url">常用linux命令</a></h1>
         
 
         <div class="post-meta">
@@ -1866,8 +1570,8 @@ public int indexOf(E e, int index) {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件配置/" itemprop="url" rel="index">
-                    <span itemprop="name">软件配置</span>
+                  <a href="/categories/software/" itemprop="url" rel="index">
+                    <span itemprop="name">software</span>
                   </a>
                 </span>
 
@@ -1905,13 +1609,27 @@ public int indexOf(E e, int index) {
       
         
           
-            <p>这阵linux的虚拟机老出问题，nexus的代理都配了三四次了，每次都去网上找不方便，干脆记下来，以备后用。</p>
-<p>nexus镜像:</p>
-<pre><code>http://uk.maven.org/maven2/
-http://repo2.maven.org/maven2/
-http://mirrors.ibiblio.org/pub/mirrors/maven2/
-http://repository.jboss.org/nexus/content/groups/public
-</code></pre><p>以上内容均收集于互联网</p>
+            <p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
+<p>需要学习的软件分为以下几类:</p>
+<p>系统状态查看类:</p>
+<ul>
+<li>top</li>
+<li>htop</li>
+<li>iostat</li>
+<li>memstat和free</li>
+<li>mpstat</li>
+<li>netstat</li>
+<li>nmon</li>
+<li>pmap</li>
+<li>ps和pstree</li>
+<li>sar</li>
+<li>strace</li>
+<li>tcpdump</li>
+<li>uptime</li>
+<li>vmstat</li>
+<li>wireshark</li>
+<li>du</li>
+</ul>
 
           
         
