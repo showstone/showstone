@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://showstone.net/"/>
-  <updated>2018-03-20T08:59:38.000Z</updated>
+  <updated>2018-05-19T11:41:44.000Z</updated>
   <id>http://showstone.net/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>“Keyboard Maestro介绍“</title>
+    <link href="http://showstone.net/%E5%B7%A5%E5%85%B7/2018/05/19/software-2018-05-19-Keyboard-Maestro%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://showstone.net/工具/2018/05/19/software-2018-05-19-Keyboard-Maestro介绍/</id>
+    <published>2018-05-19T11:38:15.000Z</published>
+    <updated>2018-05-19T11:41:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>很早以前就听说了Mac上的神器 Keyboard Maestro，据说可以极大提高工作的效率，趁着今天周末试了一下，发现果然牛逼，可以有效提高效率。以下是记录:</p>
+<h2 id="Keyboard-Maestro的作用"><a href="#Keyboard-Maestro的作用" class="headerlink" title="Keyboard Maestro的作用"></a>Keyboard Maestro的作用</h2><p>根据官网的介绍:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Keyboard Maestro Is The Leading Software For Macos Automation.</div></pre></td></tr></table></figure></p>
+<p>和Mac上有一个自带的Automator比较类似，但是在易用性与功能的强大上比Automator强大很多。</p>
+<p>我主要用它来做:</p>
+<ul>
+<li>批量打开常用的程序，如邮件、微信、开发工具等</li>
+<li>简化经常重复的操作，如清除剪贴板里内容的格式、格式化json字符串等</li>
+<li>自动化根据条件做的一些事情，如果连上家里的wiki，则自动打开时光机进行同步</li>
+</ul>
+<h2 id="Keyboard-maestro的功能"><a href="#Keyboard-maestro的功能" class="headerlink" title="Keyboard maestro的功能"></a>Keyboard maestro的功能</h2><p>它主要的工作流程是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">触发-&gt;做一些事情</div></pre></td></tr></table></figure>
+<p>触发可以是快捷键或者输入的某个事件，然后开始做一系列的事情。它的触发器类型和可以做的事情非常多，具体可以看附的介绍资料以及官方文档。</p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a href="https://sspai.com/post/39495" target="_blank" rel="external">我如何用 Keyboard Maestro 替代 TextExpander - 少数派</a><br><a href="https://sspai.com/post/36442#fn2" target="_blank" rel="external">Keyboard Maestro 入门指南 - 少数派</a><br><a href="https://www.keyboardmaestro.com/" target="_blank" rel="external">Keyboard Maestro 官网</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      “”
+    
+    </summary>
+    
+      <category term="工具" scheme="http://showstone.net/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Keyboard Maestro" scheme="http://showstone.net/tags/keyboard-maestro/"/>
+    
+      <category term="automator" scheme="http://showstone.net/tags/automator/"/>
+    
+  </entry>
   
   <entry>
     <title>python 依赖管理简介</title>
@@ -719,43 +756,6 @@ redis&gt;
   </entry>
   
   <entry>
-    <title>rebase导致commit丢失</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2018-01-03T10:20:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mkdir rebaselost</div><div class="line">cd rebaselost</div><div class="line">git init</div><div class="line">echo &quot;init content&quot;  a</div><div class="line">git commit -m &apos;init content&apos;</div><div class="line">git checkout -b branch1</div><div class="line">echo &quot;branch1 content&quot;  a</div><div class="line">git commit -m &apos;branch1&apos;</div><div class="line">git checkout master</div><div class="line">echo &quot;new master content&quot;  a</div><div class="line">git commit -m &apos;master content&apos;</div><div class="line">echo &quot;new master content2&quot;  a</div><div class="line">git commit -m &apos;master content2&apos;</div><div class="line">git checkout branch1</div><div class="line">git rebase master</div><div class="line">git rebase --skip</div></pre></td></tr></table></figure>
-<p>期望的结果是:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">new master content2  </div><div class="line">branch1 content</div></pre></td></tr></table></figure>
-<p>实际的结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new master content2</div></pre></td></tr></table></figure>
-<p><em> 问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失. </em></p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
-<p>操作结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fa0f628 HEAD@&#123;0&#125;: rebase: branch1    </div><div class="line">465b616 HEAD@&#123;1&#125;: rebase: checkout master    </div><div class="line">d0350f9 HEAD@&#123;2&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;3&#125;: checkout: moving from master to branch1</div><div class="line">465b616 HEAD@&#123;4&#125;: commit: new master status2  </div><div class="line">7f50104 HEAD@&#123;5&#125;: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master  </div><div class="line">d1fe9ed HEAD@&#123;6&#125;: rebase: branch1  </div><div class="line">7f50104 HEAD@&#123;7&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;8&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;9&#125;: rebase finished: returning to refs/heads/branch1  </div><div class="line">7f50104 HEAD@&#123;10&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;11&#125;: checkout: moving from master to branch1  </div><div class="line">7f50104 HEAD@&#123;12&#125;: commit: master content  </div><div class="line">4fe1cf4 HEAD@&#123;13&#125;: checkout: moving from branch1 to master  </div><div class="line">d0350f9 HEAD@&#123;14&#125;: commit: branch1  </div><div class="line">4fe1cf4 HEAD@&#123;15&#125;: checkout: moving from master to branch1  </div><div class="line">4fe1cf4 HEAD@&#123;16&#125;: commit (initial): init content</div></pre></td></tr></table></figure>
-<p>找回提交:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout d0350f9</div></pre></td></tr></table></figure></p>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
-]]></content>
-    
-    <summary type="html">
-    
-      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
-    
-    </summary>
-    
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
-    
-    
-      <category term="git" scheme="http://showstone.net/tags/git/"/>
-    
-      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
-    
-  </entry>
-  
-  <entry>
     <title>tmux使用方法</title>
     <link href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/</id>
@@ -941,6 +941,57 @@ set -g visual-activity on
       <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
     
       <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用linux命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-18-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/</id>
+    <published>2017-03-07T08:20:00.000Z</published>
+    <updated>2017-03-07T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
+<p>需要学习的软件分为以下几类:</p>
+<p>系统状态查看类:</p>
+<ul>
+<li>top</li>
+<li>htop</li>
+<li>iostat</li>
+<li>memstat和free</li>
+<li>mpstat</li>
+<li>netstat</li>
+<li>nmon</li>
+<li>pmap</li>
+<li>ps和pstree</li>
+<li>sar</li>
+<li>strace</li>
+<li>tcpdump</li>
+<li>uptime</li>
+<li>vmstat</li>
+<li>wireshark</li>
+<li>du</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.&lt;/p&gt;
+&lt;p&gt;需要学习的软件分为以下几类:&lt;/p&gt;
+&lt;p&gt;系统状态查看类:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;top&lt;/li&gt;
+&lt;li&gt;htop&lt;/li&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
+    
+    
+      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
+    
+      <category term="软件" scheme="http://showstone.net/tags/%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
@@ -1191,54 +1242,6 @@ final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
       <category term="源码" scheme="http://showstone.net/tags/%E6%BA%90%E7%A0%81/"/>
     
       <category term="LinkedHashMap" scheme="http://showstone.net/tags/linkedhashmap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>top命令详解</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/</id>
-    <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2017-03-07T08:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
-<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
-<p>下面进行正题</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
-       [-F | -f]
-       [-h]
-       [-i &lt;interval&gt;]
-       [-l &lt;samples&gt;]
-       [-ncols &lt;columns&gt;]
-       [-o &lt;key&gt;] [-O &lt;skey&gt;]
-       [-R | -r]
-       [-S]
-       [-s &lt;delay&gt;]
-       [-n &lt;nprocs&gt;]
-       [-stats &lt;keys&gt;]
-       [-pid &lt;processid&gt;]
-       [-user &lt;username&gt;]
-       [-U &lt;username&gt;]
-       [-u]
-</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h2&gt;&lt;p&gt;最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.&lt;/p&gt;
-&lt;p&gt;需要用到的工具有:&lt;br&gt;系统资源:
-    
-    </summary>
-    
-      <category term="software" scheme="http://showstone.net/categories/software/"/>
-    
-    
-      <category term="software" scheme="http://showstone.net/tags/software/"/>
-    
-      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
-    
-      <category term="top" scheme="http://showstone.net/tags/top/"/>
     
   </entry>
   

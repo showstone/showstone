@@ -680,6 +680,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" itemprop="url">rebase导致commit丢失</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/software/" itemprop="url" rel="index">
+                    <span itemprop="name">software</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://showstone.net/软件配置/2017/03/07/软件配置-2015-07-24-maven常用镜像源/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1516,7 +1662,7 @@ public int indexOf(E e, int index) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1535,7 +1681,7 @@ public int indexOf(E e, int index) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/software/2017/03/07/software-2016-01-18-常用linux命令/" itemprop="url">常用linux命令</a></h1>
+                <a class="post-title-link" href="/software/2017/03/07/software-2016-03-24-new-top命令详解/" itemprop="url">top命令详解</a></h1>
         
 
         <div class="post-meta">
@@ -1609,27 +1755,27 @@ public int indexOf(E e, int index) {
       
         
           
-            <p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
-<p>需要学习的软件分为以下几类:</p>
-<p>系统状态查看类:</p>
-<ul>
-<li>top</li>
-<li>htop</li>
-<li>iostat</li>
-<li>memstat和free</li>
-<li>mpstat</li>
-<li>netstat</li>
-<li>nmon</li>
-<li>pmap</li>
-<li>ps和pstree</li>
-<li>sar</li>
-<li>strace</li>
-<li>tcpdump</li>
-<li>uptime</li>
-<li>vmstat</li>
-<li>wireshark</li>
-<li>du</li>
-</ul>
+            <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
+<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
+<p>下面进行正题</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
+       [-F | -f]
+       [-h]
+       [-i &lt;interval&gt;]
+       [-l &lt;samples&gt;]
+       [-ncols &lt;columns&gt;]
+       [-o &lt;key&gt;] [-O &lt;skey&gt;]
+       [-R | -r]
+       [-S]
+       [-s &lt;delay&gt;]
+       [-n &lt;nprocs&gt;]
+       [-stats &lt;keys&gt;]
+       [-pid &lt;processid&gt;]
+       [-user &lt;username&gt;]
+       [-U &lt;username&gt;]
+       [-u]
+</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
 
           
         
@@ -1861,7 +2007,7 @@ public int indexOf(E e, int index) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1872,7 +2018,7 @@ public int indexOf(E e, int index) {
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1883,7 +2029,7 @@ public int indexOf(E e, int index) {
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
