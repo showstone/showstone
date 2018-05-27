@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式,命令模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="听风的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="命令模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令模式推导及应用场景浅析">
+<meta property="og:url" content="http://showstone.net/设计模式/2018/05/24/设计模式-2018-05-24-命令模式推导及应用场景浅析/index.html">
+<meta property="og:site_name" content="听风的博客">
+<meta property="og:description" content="命令模式">
+<meta property="og:image" content="http://showstone.net/media/command_pattern_class1.png">
+<meta property="og:image" content="http://showstone.net/media/command_pattern_class2.png">
+<meta property="og:image" content="http://showstone.net/media/command_pattern_diagram.png">
+<meta property="og:updated_time" content="2018-05-27T13:45:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="命令模式推导及应用场景浅析">
+<meta name="twitter:description" content="命令模式">
+<meta name="twitter:image" content="http://showstone.net/media/command_pattern_class1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://showstone.net/设计模式/2018/05/24/设计模式-2018-05-24-命令模式推导及应用场景浅析/"/>
+
+
+
+
+
+  <title>命令模式推导及应用场景浅析 | 听风的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3f82c96c411fc76dd2a11abd27157116";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">听风的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">行走，辨思，记录</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/设计模式/2018/05/24/设计模式-2018-05-24-命令模式推导及应用场景浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">命令模式推导及应用场景浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T13:48:08+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  命令模式
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>前阵子在做一个东西时，用到了命令模式的变种，当时有些细节记不清了，于是去网上找了一些资料，结果越看越迷糊。最后索性自己重新推导了一次，在对推导过程作记录后，就有了这篇文章。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用word时，如果做错了某步操作，我们可以进行”撤销”,恢复到操作之前的状态。尽管每种操作都不一样，但是却神奇地能用同样的方式“撤销”。这是怎么做到的呢？</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>从上面的描述，我们可以知道，word能做到这些功能:</p>
+<ul>
+<li>以同样的方式表示所有可以撤销的操作</li>
+<li>记录所有可以撤销的操作</li>
+</ul>
+<p>由此，可以得到以下结构:<br><img src="media/command_pattern_class1.png" alt="command_pattern_class1"></p>
+<p>仔细看看，好像有个问题: 命令的定义应该是通用的，如输入一段文字，但是我们撤消的是在某个地方输入的一段文字，所以还要加上命令执行的上下文，这里我们用Receiver来指代。更新后的类图:<br><img src="media/command_pattern_class2.png" alt="command_pattern_class2"></p>
+<h2 id="模式的理解"><a href="#模式的理解" class="headerlink" title="模式的理解"></a>模式的理解</h2><p>要理解命令模式，除了从它的应用场景推导之外，也可以从它的定义帮助理解:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">命令一般应用于政府机构中。当某政府首脑发出命令时，一般不会由该首脑直接面对执行的人，而是通过类似国务院等机构发出。这里的国务院等机构就是命令模式里的Invoker，负责记录和执行。</div><div class="line"></div><div class="line">命令里，一般会说清楚，要谁来做什么，所以，事实上命令(这里的命令不同于上面类图里的command)是由receiver和command两部分组成。</div><div class="line"></div><div class="line">每过一段时间，都有人事上的一些变动，为第一次人事变动，都创建一种命令模板是不可能的，于是，政府对于主要的命令都规则了一个模板，每次需要的时间，只要把对应的人和职位变动内容填上去就可以了，这就是我们的command。</div></pre></td></tr></table></figure></p>
+<h2 id="命令模式的类图"><a href="#命令模式的类图" class="headerlink" title="命令模式的类图"></a>命令模式的类图</h2><p>这部分网上的资料很多，我就不重复写了，以下内容摘自<a href="https://blog.csdn.net/zhengzhb/article/details/7550895" target="_blank" rel="external">博客</a><br><img src="media/command_pattern_diagram.png" alt="command_pattern_diagra"></p>
+<h2 id="适合场景与优缺点"><a href="#适合场景与优缺点" class="headerlink" title="适合场景与优缺点"></a>适合场景与优缺点</h2><p>命令模式有以下优点:</p>
+<ol>
+<li>命令和实际的执行者分离，实际的操作都是通过invoker以及receiver去执行的</li>
+<li>屏蔽了底层的复杂实现，对外提供了统一的表现</li>
+<li>可以记录操作的历史记录</li>
+<li>拓展性好，一方面，可以很方便地添加新的命令，如在word中添加插入html功能；另一方面，也可以把命令迁移到另一种场景下，如把word中的命令迁移到excel中</li>
+<li>用户使用上，用户通过组合一些命令，可以实现宏的功能，效率更高</li>
+</ol>
+<p>缺点:</p>
+<ul>
+<li>代码冗余较多。每个命令，需要同时修改好几个地方，维护较复杂</li>
+</ul>
+<p>由其优缺点，可以得出其适用场景:</p>
+<ul>
+<li>编辑软件，如word,excel中，但是由于撤销依赖于当前状态，所以如果应用的状态无法完整保存，那么不应该提供撤销功能</li>
+<li>由第一点，可以用于workflow、oa系统等软件中，用于定义流程、功能节点</li>
+<li>由第三点，可以用于需要审计的系统中，用于审计</li>
+<li>shell中，用于对资源进行封装</li>
+<li>第五点在很多文本编辑器中都有体现</li>
+</ul>
+<p>不适用的场景:</p>
+<ul>
+<li>功能足够简单。如果功能本身比较简单，则不建议引入命令模式，它会带来更多的复杂性，以及更高的开发成本</li>
+<li>命令的意义不清晰或经常变化。命令模式在解耦命令的发出者与执行者的同时，也让命令发出者与执行者的联系不那么清晰，如果修改了命令的意义，要全面修改命令的调用者，会比较难</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+            <a href="/tags/命令模式/" rel="tag"># 命令模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/工具/2018/05/19/software-2018-05-19-Keyboard-Maestro介绍/" rel="next" title="Keyboard Maestro介绍">
+                <i class="fa fa-chevron-left"></i> Keyboard Maestro介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shicheng Yuan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序"><span class="nav-number">1.</span> <span class="nav-text">序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式的理解"><span class="nav-number">4.</span> <span class="nav-text">模式的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式的类图"><span class="nav-number">5.</span> <span class="nav-text">命令模式的类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适合场景与优缺点"><span class="nav-number">6.</span> <span class="nav-text">适合场景与优缺点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shicheng Yuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
