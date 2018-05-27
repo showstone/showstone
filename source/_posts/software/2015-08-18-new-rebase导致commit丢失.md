@@ -5,7 +5,7 @@ description: "rebase操作不当导致commit丢失,rebase操作不当导致提�
 category: software
 tags: [git, rebase]
 ---
-
+\\工具
 提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:
 
 ```shell
