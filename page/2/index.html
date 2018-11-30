@@ -1243,7 +1243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1262,7 +1262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-29-vector/" itemprop="url">Vector浅析</a></h1>
+                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/" itemprop="url">java容器研究思路</a></h1>
         
 
         <div class="post-meta">
@@ -1335,14 +1335,39 @@
 
       
         
-          vector分析
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>#容器的研究思路</p>
+<ul>
+<li>为什么研究容器<br><ul>
+<li>容器是JDK里的基础功能，平时使用得较多。</li>
+<li>容器相对简单，比较容易研究</li>
+<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
+</ul>
+</li>
+<li>容器是什么，要研究那些特性<ul>
+<li>容器是一段程序，是一系列的对象。</li>
+<li>作为程序，它由 数据结构+算法构成</li>
+<li>作为对象，它由 属性+方法构成</li>
+<li>作为类，它有自己的继承树</li>
+<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
+</ul>
+</li>
+<li>怎么去研究容器<ul>
+<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
+<li>如何去测试评估程序的特性</li>
+<li>程序的并发性能</li>
+<li>程序的极限性能</li>
+</ul>
+</li>
+</ul>
+<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
+<ul>
+<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
+<li>set<br><br>  HashSet, TreeSet</li>
+<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
+</ul>
+
+          
         
       
     </div>
@@ -1389,7 +1414,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1408,7 +1433,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/software/2017/03/07/software-2016-01-18-常用linux命令/" itemprop="url">常用linux命令</a></h1>
+                <a class="post-title-link" href="/software/2017/03/07/software-2016-03-24-new-top命令详解/" itemprop="url">top命令详解</a></h1>
         
 
         <div class="post-meta">
@@ -1482,27 +1507,27 @@
       
         
           
-            <p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
-<p>需要学习的软件分为以下几类:</p>
-<p>系统状态查看类:</p>
-<ul>
-<li>top</li>
-<li>htop</li>
-<li>iostat</li>
-<li>memstat和free</li>
-<li>mpstat</li>
-<li>netstat</li>
-<li>nmon</li>
-<li>pmap</li>
-<li>ps和pstree</li>
-<li>sar</li>
-<li>strace</li>
-<li>tcpdump</li>
-<li>uptime</li>
-<li>vmstat</li>
-<li>wireshark</li>
-<li>du</li>
-</ul>
+            <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
+<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
+<p>下面进行正题</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
+       [-F | -f]
+       [-h]
+       [-i &lt;interval&gt;]
+       [-l &lt;samples&gt;]
+       [-ncols &lt;columns&gt;]
+       [-o &lt;key&gt;] [-O &lt;skey&gt;]
+       [-R | -r]
+       [-S]
+       [-s &lt;delay&gt;]
+       [-n &lt;nprocs&gt;]
+       [-stats &lt;keys&gt;]
+       [-pid &lt;processid&gt;]
+       [-user &lt;username&gt;]
+       [-U &lt;username&gt;]
+       [-u]
+</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
 
           
         
@@ -1551,7 +1576,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1570,7 +1595,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" itemprop="url">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a></h1>
+                <a class="post-title-link" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" itemprop="url">JUnit主线程退出时所有的子线程也会结束</a></h1>
         
 
         <div class="post-meta">
@@ -1606,7 +1631,7 @@
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -1644,41 +1669,154 @@
       
         
           
-            <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
-<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
-<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
-<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
-  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
-  at redis.clients.jedis.Protocol.process(Protocol.java:138)
-  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
-  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
-  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
-  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
-</code></pre><p>通过命令行直接操作:</p>
-<blockquote>
-<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
-</blockquote>
-<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
-<pre><code>MGET key [key ...]
-
-Available since 1.0.0.
-Time complexity: O(N) where N is the number of keys to retrieve.
-Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
-
-Return value
-Array reply: list of values at the specified keys.
-Examples
-redis&gt; SET key1 &quot;Hello&quot;
-OK
-redis&gt; SET key2 &quot;World&quot;
-OK
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
-redis&gt; 
-</code></pre>
+            
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" itemprop="url">rebase导致commit丢失</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/software/" itemprop="url" rel="index">
+                    <span itemprop="name">software</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1872,152 +2010,6 @@ redis&gt;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" itemprop="url">rebase导致commit丢失</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T16:20:00+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/software/" itemprop="url" rel="index">
-                    <span itemprop="name">software</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2090,7 +2082,7 @@ redis&gt;
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
