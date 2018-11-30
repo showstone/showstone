@@ -81,31 +81,25 @@
 
 
 
-<meta name="description" content="最近为了安装 huginn，在aws和 aliyun 上都尝试部署了，发现性能过差，服务很不稳定，就有了自己搭一台服务器的想法，恰好金华老师向我安利了一把 nas 服务器，在调研后，发现正好能满足我的要求。于是开始折腾，这个系统是对这次折腾的记录。
-用NAS服务器来做什么NAS服务器能做的事情很多，比如：
-文件服务
+<meta name="description" content="方案现在主流的硬件服务器方案，有以下几种方案：
 
-私有文件云，类似于百度云盘，但是不用担心文件会忽然被和谐
-文件共享服务，可以把所">
+使用群辉等现成的NAS解决方案  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用
+使用HP gen8等商用服务器  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NAS服务器的搭建-介绍">
-<meta property="og:url" content="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/index.html">
+<meta property="og:title" content="NAS服务器的搭建--硬件篇">
+<meta property="og:url" content="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/index.html">
 <meta property="og:site_name" content="听风的博客">
-<meta property="og:description" content="最近为了安装 huginn，在aws和 aliyun 上都尝试部署了，发现性能过差，服务很不稳定，就有了自己搭一台服务器的想法，恰好金华老师向我安利了一把 nas 服务器，在调研后，发现正好能满足我的要求。于是开始折腾，这个系统是对这次折腾的记录。
-用NAS服务器来做什么NAS服务器能做的事情很多，比如：
-文件服务
+<meta property="og:description" content="方案现在主流的硬件服务器方案，有以下几种方案：
 
-私有文件云，类似于百度云盘，但是不用担心文件会忽然被和谐
-文件共享服务，可以把所">
-<meta property="og:updated_time" content="2017-10-02T18:48:23.000Z">
+使用群辉等现成的NAS解决方案  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用
+使用HP gen8等商用服务器  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个">
+<meta property="og:updated_time" content="2018-11-30T04:43:41.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NAS服务器的搭建-介绍">
-<meta name="twitter:description" content="最近为了安装 huginn，在aws和 aliyun 上都尝试部署了，发现性能过差，服务很不稳定，就有了自己搭一台服务器的想法，恰好金华老师向我安利了一把 nas 服务器，在调研后，发现正好能满足我的要求。于是开始折腾，这个系统是对这次折腾的记录。
-用NAS服务器来做什么NAS服务器能做的事情很多，比如：
-文件服务
+<meta name="twitter:title" content="NAS服务器的搭建--硬件篇">
+<meta name="twitter:description" content="方案现在主流的硬件服务器方案，有以下几种方案：
 
-私有文件云，类似于百度云盘，但是不用担心文件会忽然被和谐
-文件共享服务，可以把所">
+使用群辉等现成的NAS解决方案  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用
+使用HP gen8等商用服务器  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个">
 
 
 
@@ -135,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/"/>
+  <link rel="canonical" href="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/"/>
 
 
 
 
 
-  <title>NAS服务器的搭建-介绍 | 听风的博客</title>
+  <title>NAS服务器的搭建--硬件篇 | 听风的博客</title>
   
 
 
@@ -258,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -275,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">NAS服务器的搭建-介绍</h1>
+          <h1 class="post-title" itemprop="name headline">NAS服务器的搭建--硬件篇</h1>
         
 
         <div class="post-meta">
@@ -287,7 +281,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:37:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:37:59+08:00">
                 2017-10-03
               </time>
             
@@ -297,6 +291,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -325,25 +341,29 @@
       
 
       
-        <p>最近为了安装 huginn，在aws和 aliyun 上都尝试部署了，发现性能过差，服务很不稳定，就有了自己搭一台服务器的想法，恰好金华老师向我安利了一把 nas 服务器，在调研后，发现正好能满足我的要求。于是开始折腾，这个系统是对这次折腾的记录。</p>
-<h2 id="用NAS服务器来做什么"><a href="#用NAS服务器来做什么" class="headerlink" title="用NAS服务器来做什么"></a>用NAS服务器来做什么</h2><p>NAS服务器能做的事情很多，比如：</p>
-<p><em>文件服务</em></p>
+        <h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>现在主流的硬件服务器方案，有以下几种方案：</p>
 <ul>
-<li>私有文件云，类似于百度云盘，但是不用担心文件会忽然被和谐</li>
-<li>文件共享服务，可以把所有的文件存放在同一个地方，并在不同的设备之间共享</li>
-<li>文件备份服务，如mac的time machine,可以在连接wifi时自动开始同步</li>
-<li>灵活的文件备份策略，可以定期把文件压缩加密后存到其他公有云盘</li>
-<li>其他的服务，如远程下载功能，在公司启动下载服务后，自动在家开始下载</li>
+<li>使用群辉等现成的NAS解决方案<br>  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用</li>
+<li>使用HP gen8等商用服务器<br>  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个很严重的问题：风扇声音太大了！！！</li>
+<li>自己组装机器<br>  其实网上已经有比较多的资料，找几篇来看看就可以了</li>
 </ul>
-<p><em>其他服务</em></p>
+<p>群晖的机器对我而言太贵了，HP gen8勉强够用，但是考虑到他的拓展性，还是选择自己组装一台机器。</p>
+<h2 id="NAS服务器的要点"><a href="#NAS服务器的要点" class="headerlink" title="NAS服务器的要点"></a>NAS服务器的要点</h2><p>NAS服务器不同于一般的机器，它有以下特点:</p>
 <ul>
-<li>在线工具服务</li>
-<li>脚本和爬虫服务</li>
-<li>私有git服务等其他服务</li>
-<li>开发工具服务器，如mysql、监控等服务</li>
+<li>7*24小时开机，要稳定</li>
+<li>盘位较多，最好是6盘位以上,一块系统盘，两块主数据盘，加一块工作盘，同时考虑到以后的拓展，预留两个盘位</li>
+<li>安静</li>
+<li>功耗低</li>
 </ul>
-<p>再开始选择之前，想清楚自己的需求，是作为一个简单的文件服务器，还是希望有更多的灵活性。</p>
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>huginn，一个IFTTT工具，利用它可以做很多很酷的事情，比如在几个网站监控某件商品，当有比较优惠的活动时，会自动发送通知，再如像葡萄PT只在特定的时间开放注册。</p>
+<p>综合以上的特点，参考以上特点，选择自己想要的配置即可。</p>
+<h2 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h2><p>关于硬件的选择，别人已经说得很详细了，我就不在啰嗦，有兴趣的可以参考：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></li>
+</ul>
+<p>我的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cpu: intel j3455，备选的有n3160, 都是连主板一起的，399元</div><div class="line">内存: 金士顿 ddr3 1600 4g，150元</div><div class="line">机箱: 酷冷至尊特警365，165包邮</div><div class="line">电源: 鑫谷核动力-巡洋舰c5 300w 109元</div><div class="line">共823元</div></pre></td></tr></table></figure>
+<p><em>关于硬盘</em><br>硬盘需要单独拿出来说，一般建议买一块固态硬盘作为系统盘，大部分时间是没有数据操作的，这时机械硬盘可以休眠，单独使用固态硬盘即可。</p>
+<p>数据盘，也就是机械硬盘，在买的时候需要注意一点：<br><strong>不要买同一品牌、同一批次的硬盘</strong>，因为在同样的环境下，同一品牌同一批次的硬盘，可能会同时坏！</p>
 
       
     </div>
@@ -374,8 +394,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/小功能/2017/08/22/小功能-2017-08-22-下载超大的excel/" rel="next" title="下载超大的excel">
-                <i class="fa fa-chevron-left"></i> 下载超大的excel
+              <a href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/" rel="next" title="NAS服务器的搭建--软件篇">
+                <i class="fa fa-chevron-left"></i> NAS服务器的搭建--软件篇
               </a>
             
           </div>
@@ -384,8 +404,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/" rel="prev" title="NAS服务器的搭建--硬件篇">
-                NAS服务器的搭建--硬件篇 <i class="fa fa-chevron-right"></i>
+              <a href="/工具/2017/10/29/工具-2017-10-29-ubuntu下打印服务器的安装配置与使用教程/" rel="prev" title="ubuntu下打印服务器的安装配置与使用教程">
+                ubuntu下打印服务器的安装配置与使用教程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -525,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用NAS服务器来做什么"><span class="nav-number">1.</span> <span class="nav-text">用NAS服务器来做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">2.</span> <span class="nav-text">备注</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方案"><span class="nav-number">1.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS服务器的要点"><span class="nav-number">2.</span> <span class="nav-text">NAS服务器的要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的配置"><span class="nav-number">3.</span> <span class="nav-text">我的配置</span></a></li></ol></div>
             
 
           </div>

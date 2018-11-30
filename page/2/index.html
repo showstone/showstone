@@ -240,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -259,7 +259,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/" itemprop="url">NAS服务器的搭建--硬件篇</a></h1>
         
 
         <div class="post-meta">
@@ -271,7 +271,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:38:09+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:37:59+08:00">
                 2017-10-03
               </time>
             
@@ -281,6 +281,192 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>现在主流的硬件服务器方案，有以下几种方案：</p>
+<ul>
+<li>使用群辉等现成的NAS解决方案<br>  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用</li>
+<li>使用HP gen8等商用服务器<br>  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个很严重的问题：风扇声音太大了！！！</li>
+<li>自己组装机器<br>  其实网上已经有比较多的资料，找几篇来看看就可以了</li>
+</ul>
+<p>群晖的机器对我而言太贵了，HP gen8勉强够用，但是考虑到他的拓展性，还是选择自己组装一台机器。</p>
+<h2 id="NAS服务器的要点"><a href="#NAS服务器的要点" class="headerlink" title="NAS服务器的要点"></a>NAS服务器的要点</h2><p>NAS服务器不同于一般的机器，它有以下特点:</p>
+<ul>
+<li>7*24小时开机，要稳定</li>
+<li>盘位较多，最好是6盘位以上,一块系统盘，两块主数据盘，加一块工作盘，同时考虑到以后的拓展，预留两个盘位</li>
+<li>安静</li>
+<li>功耗低</li>
+</ul>
+<p>综合以上的特点，参考以上特点，选择自己想要的配置即可。</p>
+<h2 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h2><p>关于硬件的选择，别人已经说得很详细了，我就不在啰嗦，有兴趣的可以参考：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></li>
+</ul>
+<p>我的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cpu: intel j3455，备选的有n3160, 都是连主板一起的，399元</div><div class="line">内存: 金士顿 ddr3 1600 4g，150元</div><div class="line">机箱: 酷冷至尊特警365，165包邮</div><div class="line">电源: 鑫谷核动力-巡洋舰c5 300w 109元</div><div class="line">共823元</div></pre></td></tr></table></figure>
+<p><em>关于硬盘</em><br>硬盘需要单独拿出来说，一般建议买一块固态硬盘作为系统盘，大部分时间是没有数据操作的，这时机械硬盘可以休眠，单独使用固态硬盘即可。</p>
+<p>数据盘，也就是机械硬盘，在买的时候需要注意一点：<br><strong>不要买同一品牌、同一批次的硬盘</strong>，因为在同样的环境下，同一品牌同一批次的硬盘，可能会同时坏！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/" itemprop="url">NAS服务器的搭建--软件篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:37:59+08:00">
+                2017-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -415,7 +601,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -434,149 +620,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/" itemprop="url">NAS服务器的搭建--硬件篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-03T02:37:59+08:00">
-                2017-10-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>现在主流的硬件服务器方案，有以下几种方案：</p>
-<ul>
-<li>使用群辉等现成的NAS解决方案<br>  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用</li>
-<li>使用HP gen8等商用服务器<br>  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个很严重的问题：风扇声音太大了！！！</li>
-<li>自己组装机器<br>  其实网上已经有比较多的资料，找几篇来看看就可以了</li>
-</ul>
-<p>群晖的机器对我而言太贵了，HP gen8勉强够用，但是考虑到他的拓展性，还是选择自己组装一台机器。</p>
-<h2 id="NAS服务器的要点"><a href="#NAS服务器的要点" class="headerlink" title="NAS服务器的要点"></a>NAS服务器的要点</h2><p>NAS服务器不同于一般的机器，它有以下特点:</p>
-<ul>
-<li>7*24小时开机，要稳定</li>
-<li>盘位较多，最好是6盘位以上,一块系统盘，两块主数据盘，加一块工作盘，同时考虑到以后的拓展，预留两个盘位</li>
-<li>安静</li>
-<li>功耗低</li>
-</ul>
-<p>综合以上的特点，参考以上特点，选择自己想要的配置即可。</p>
-<h2 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h2><p>关于硬件的选择，别人已经说得很详细了，我就不在啰嗦，有兴趣的可以参考：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></li>
-</ul>
-<p>我的配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cpu: intel j3455，备选的有n3160, 都是连主板一起的，399元</div><div class="line">内存: 金士顿 ddr3 1600 4g，150元</div><div class="line">机箱: 酷冷至尊特警365，165包邮</div><div class="line">电源: 鑫谷核动力-巡洋舰c5 300w 109元</div><div class="line">共823元</div></pre></td></tr></table></figure>
-<p><em>关于硬盘</em><br>硬盘需要单独拿出来说，一般建议买一块固态硬盘作为系统盘，大部分时间是没有数据操作的，这时机械硬盘可以休眠，单独使用固态硬盘即可。</p>
-<p>数据盘，也就是机械硬盘，在买的时候需要注意一点：<br><strong>不要买同一品牌、同一批次的硬盘</strong>，因为在同样的环境下，同一品牌同一批次的硬盘，可能会同时坏！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shicheng Yuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="听风的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/" itemprop="url">NAS服务器的搭建-介绍</a></h1>
+                <a class="post-title-link" href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/" itemprop="url">NAS服务器的搭建-介绍</a></h1>
         
 
         <div class="post-meta">
@@ -598,6 +642,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1177,7 +1243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java容器/2017/03/07/java容器-2015-06-29-vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1196,7 +1262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-24-linkedlist/" itemprop="url">LinkedList浅析</a></h1>
+                <a class="post-title-link" href="/java容器/2017/03/07/java容器-2015-06-29-vector/" itemprop="url">Vector浅析</a></h1>
         
 
         <div class="post-meta">
@@ -1269,114 +1335,14 @@
 
       
         
-          
-            <h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
-<li>LinkedList的作用及特点</li>
-<li>LinkedList的数据结构</li>
-<li>LinkedList的常用方法</li>
-</ul>
-<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
-<li>LinkedList可作为链表或者双向队列来使用</li>
-<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
-</ul>
-<blockquote>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
-</blockquote>
-<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
-<pre><code>public class LinkedList&lt;E&gt;
-    extends AbstractSequentialList&lt;E&gt;
-    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
-{
-    transient int size = 0;
-
-    /**
-     * Pointer to first node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (first.prev == null &amp;&amp; first.item != null)
-     */
-    transient Node&lt;E&gt; first;
-
-    /**
-     * Pointer to last node.
-     * Invariant: (first == null &amp;&amp; last == null) ||
-     *            (last.next == null &amp;&amp; last.item != null)
-     */
-    transient Node&lt;E&gt; last;
-
- ...
-
-}
-</code></pre><p>Node的定义</p>
-<pre><code>private static class Node&lt;E&gt; {
-    E item;
-    Node&lt;E&gt; next;
-    Node&lt;E&gt; prev;
-
-    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
-    }
-}
-</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
-<pre><code>int size();
-boolean isEmpty();
-boolean contains(Object o);
-Iterator&lt;E&gt; iterator();
-Object[] toArray();
-&lt;T&gt; T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection&lt;?&gt; c);
-boolean addAll(Collection&lt;? extends E&gt; c);
-boolean addAll(int index, Collection&lt;? extends E&gt; c);
-boolean removeAll(Collection&lt;?&gt; c);
-boolean retainAll(Collection&lt;?&gt; c);
-default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
-default void sort(Comparator&lt;? super E&gt; c);
-void clear();
-boolean equals(Object o);
-int hashCode();
-E get(int index);
-E set(int index, E element);
-void add(int index, E element);
-E remove(int index);
-int indexOf(Object o);
-int lastIndexOf(Object o);
-ListIterator&lt;E&gt; listIterator();
-ListIterator&lt;E&gt; listIterator(int index);
-List&lt;E&gt; subList(int fromIndex, int toIndex);
-</code></pre><p>LinkedList自己的方法</p>
-<pre><code>void addFirst(E e);
-void addLast(E e);
-boolean offerFirst(E e);
-boolean offerLast(E e);
-E removeFirst();
-E removeLast();
-E pollFirst();
-E pollLast();
-E getFirst();
-E getLast();
-E peekFirst();
-E peekLast();
-boolean removeFirstOccurrence(Object o);
-boolean removeLastOccurrence(Object o);
-boolean add(E e);
-boolean offer(E e);
-E remove();
-E poll();
-E element();
-E peek();
-void push(E e);
-E pop();
-boolean remove(Object o);
-boolean contains(Object o);
-public int size();
-Iterator&lt;E&gt; iterator();
-Iterator&lt;E&gt; descendingIterator();
-</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
-
-          
+          vector分析
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/java容器/2017/03/07/java容器-2015-06-29-vector/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1423,7 +1389,7 @@ Iterator&lt;E&gt; descendingIterator();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2016-01-18-常用linux命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1442,7 +1408,7 @@ Iterator&lt;E&gt; descendingIterator();
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/software/2017/03/07/software-2016-03-24-new-top命令详解/" itemprop="url">top命令详解</a></h1>
+                <a class="post-title-link" href="/software/2017/03/07/software-2016-01-18-常用linux命令/" itemprop="url">常用linux命令</a></h1>
         
 
         <div class="post-meta">
@@ -1516,27 +1482,27 @@ Iterator&lt;E&gt; descendingIterator();
       
         
           
-            <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
-<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
-<p>下面进行正题</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
-       [-F | -f]
-       [-h]
-       [-i &lt;interval&gt;]
-       [-l &lt;samples&gt;]
-       [-ncols &lt;columns&gt;]
-       [-o &lt;key&gt;] [-O &lt;skey&gt;]
-       [-R | -r]
-       [-S]
-       [-s &lt;delay&gt;]
-       [-n &lt;nprocs&gt;]
-       [-stats &lt;keys&gt;]
-       [-pid &lt;processid&gt;]
-       [-user &lt;username&gt;]
-       [-U &lt;username&gt;]
-       [-u]
-</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
+            <p>工作中需要用到一些linux的命令,感于自己在这些方面的不足,所以制定了一个学习计划,在这里写上几篇博客,以作记录.</p>
+<p>需要学习的软件分为以下几类:</p>
+<p>系统状态查看类:</p>
+<ul>
+<li>top</li>
+<li>htop</li>
+<li>iostat</li>
+<li>memstat和free</li>
+<li>mpstat</li>
+<li>netstat</li>
+<li>nmon</li>
+<li>pmap</li>
+<li>ps和pstree</li>
+<li>sar</li>
+<li>strace</li>
+<li>tcpdump</li>
+<li>uptime</li>
+<li>vmstat</li>
+<li>wireshark</li>
+<li>du</li>
+</ul>
 
           
         
@@ -1585,7 +1551,7 @@ Iterator&lt;E&gt; descendingIterator();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1604,7 +1570,7 @@ Iterator&lt;E&gt; descendingIterator();
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/" itemprop="url">JUnit主线程退出时所有的子线程也会结束</a></h1>
+                <a class="post-title-link" href="/java/2017/03/07/java-2016-03-17-记一次redis报错JedisDataException/" itemprop="url">记一次redis报错JedisDataException: ERR Proxy fail to forward command</a></h1>
         
 
         <div class="post-meta">
@@ -1640,7 +1606,7 @@ Iterator&lt;E&gt; descendingIterator();
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                    <span itemprop="name">JAVA</span>
                   </a>
                 </span>
 
@@ -1678,7 +1644,40 @@ Iterator&lt;E&gt; descendingIterator();
       
         
           
-            
+            <p>前几天老大要求优化redis,减少redis的读取次数,用mget来替代循环多次读取redis.线下测试没有问题,等到线上却发现大量报:redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command.</p>
+<p>google后没有发现什么有用的资料.挂上vpn连上生产环境的配置,发现程序也是正常work的.证明不是环境的问题.</p>
+<p>以Jedis的庞大用户量,应该不会是Jedis的问题,继续进行测试,最后发现当key的个数为0时,能重现问题.</p>
+<pre><code>redis.clients.jedis.exceptions.JedisDataException: ERR Proxy fail to forward command   
+  at redis.clients.jedis.Protocol.processError(Protocol.java:113)   
+  at redis.clients.jedis.Protocol.process(Protocol.java:138)
+  at redis.clients.jedis.Protocol.read(Protocol.java:192)   
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:282) 
+  at redis.clients.jedis.Connection.getBinaryMultiBulkReply(Connection.java:218)
+  at redis.clients.jedis.Connection.getMultiBulkReply(Connection.java:211)  
+</code></pre><p>通过命令行直接操作:</p>
+<blockquote>
+<p>127.0.0.1:6379&gt; mget<br>(error) ERR Proxy fail to forward command</p>
+</blockquote>
+<p>坑爹的是redis的官方文档没有关于这些内容的任何介绍:</p>
+<pre><code>MGET key [key ...]
+
+Available since 1.0.0.
+Time complexity: O(N) where N is the number of keys to retrieve.
+Returns the values of all specified keys. For every key that does not hold a string value or does not exist, the special value nil is returned. Because of this, the operation never fails.
+
+Return value
+Array reply: list of values at the specified keys.
+Examples
+redis&gt; SET key1 &quot;Hello&quot;
+OK
+redis&gt; SET key2 &quot;World&quot;
+OK
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt; 
+</code></pre>
           
         
       
@@ -1886,7 +1885,7 @@ Iterator&lt;E&gt; descendingIterator();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-12-26-tmux使用方法/">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shicheng Yuan">
@@ -1905,7 +1904,7 @@ Iterator&lt;E&gt; descendingIterator();
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/software/2017/03/07/software-2015-12-26-tmux使用方法/" itemprop="url">tmux使用方法</a></h1>
+                <a class="post-title-link" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/" itemprop="url">rebase导致commit丢失</a></h1>
         
 
         <div class="post-meta">
@@ -1978,122 +1977,14 @@ Iterator&lt;E&gt; descendingIterator();
 
       
         
-          
-            <p>tmux是一款优秀的终端复用软件,它可以在一个ssh连接中,把窗口分隔成几块,在ssh断线时,可以保存现场,尤其适用在远程ssh时使用.</p>
-<h2 id="tmux结构"><a href="#tmux结构" class="headerlink" title="tmux结构"></a>tmux结构</h2><p>tmux是典型的c/s结构,它的结构如下.<br><img src="/assets/img/tmux_structure.png" alt="tmux结构"><br>tmux由session、window、panel组成,tmux里会有许多session,每个session里又有许多个window,每个window由多个panel组成.</p>
-<p>当第一个session创建时,tmux server就开始在后台运行,直接最的一个session断开为止.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac  </p>
-<blockquote>
-<p>brew install tmux   </p>
-</blockquote>
-<p>ubuntu </p>
-<blockquote>
-<p>sudo apt-get install tmux</p>
-</blockquote>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>启动tmux</p>
-<blockquote>
-<p>tmux</p>
-</blockquote>
-<p>tmux里的所有操作都要先按一个激活键,类似于vi里的esc,默认的激活键是ctrl+b.输入ctrl+b,然后再输入?,即可查询所有的键位设置</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><pre><code>c-b s 查看/切换session
-c-b d 离开(detach)session
-c-b $ 重命名当前session
-
-tmux ls 列出会话
-tmux attach -t session 进入某个会话
-tmux -r 连接上个断开的session
-tmux new -s session -d 在后台建立会话
-</code></pre><h2 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h2><pre><code>c-b c 创建一个新窗口    
-c-b &amp; 关闭当前窗口  
-c-b p 切换到上一个窗口  
-c-b n 切换到下一个窗口  
-c-b , 重命名当前窗口
-c-b w 列出所有窗口
-c-b 0~9 选择0~9对应的窗口
-c-b opt+方向键 调整panel的大小(一次调整5%)
-c-b ctrl+方向键 调整panel的大小(一次调整1%)
-</code></pre><h2 id="panel操作"><a href="#panel操作" class="headerlink" title="panel操作"></a>panel操作</h2><pre><code>c-b % 水平分割窗口
-c-b &quot; 竖直分割窗口
-c-b h 将焦点移入左侧的panel
-c-b j 将焦点移入下方的panel
-c-b l 将焦点移入上方的panel
-c-b k 将焦点移入右方的panel
-c-b q 显示panel的编号 
-c-b o 切换到下一个panel
-c-b } 与下一个panel交换位置
-c-b { 与上一个panel交换位置
-</code></pre><h2 id="复制模式-滚屏"><a href="#复制模式-滚屏" class="headerlink" title="复制模式(滚屏)"></a>复制模式(滚屏)</h2><p>滚屏需要进入copy-mode,然后就可以用方向键来滚动屏幕,可以配置成vi快捷键的模式,非常方便</p>
-<pre><code>c-b [ 进入复制模式
-space 选择要复制的内容
-c-b ] 粘贴
-q 退出复制模式
-</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>  tmux的配置文件在~/.tmux.conf,修改后可以通过重启tmux或者source-file ~/.tmux.conf来导入配置</p>
-<p>  默认的激活键ctrl+b之间太远,有许多人建议改成ctrl+a,但这样会和emacs的快捷键冲突,所以用ctrl+w应该会更好些  </p>
-<p>  其他的配置这时就不仔细说了,可以参数网上的配置:</p>
-<pre><code>#设置PREFIX为Ctrl-a  
-set -g prefix C-a  
-#解除Ctrl-b与PREFIX的对应关系  
-unbind C-b  
-#copy-mode将快捷键设置为vi模式  
-setw -g mode-keys vi  
-#将r键设置为加载配置文件，并显示&quot;reloaded!&quot;信息  
-bind r source-file ~/.tmux.conf \; display &quot;Reloaded!&quot;  
-#设置终端颜色为256色  
-set -g default-terminal &quot;screen-256color&quot;  
-#开启status-bar uft-8支持  
-set -g status-utf8 on  
-#设置pan前景色  
-set -g pane-border-fg green  
-#设置pane背景色  
-set -g pane-border-bg black  
-#设置活跃pane前景色  
-set -g pane-active-border-fg white  
-#设置活跃pane背景色  
-set -g pane-active-border-bg yellow  
-#设置消息前景色  
-set -g message-fg white  
-#设置消息背景色  
-set -g message-bg black  
-#设置消息高亮显示  
-set -g message-attr bright  
-#设置status-bar颜色  
-set -g status-fg white  
-set -g status-bg black  
-#设置窗口列表颜色  
-setw -g window-status-fg cyan  
-setw -g window-status-bg default  
-setw -g window-status-attr dim  
-#设置当前窗口在status bar中的颜色  
-setw -g window-status-current-fg white  
-setw -g window-status-current-bg red  
-setw -g window-status-current-attr bright  
-#设置status bar格式  
-set -g status-left-length 40  
-set -g status-left &quot;#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P&quot;  
-set -g status-right &quot;#[fg=cyan]%d %b %R&quot;  
-set -g status-interval 60  
-set -g status-justify centre  
-#开启window事件提示  
-setw -g monitor-activity on  
-set -g visual-activity on 
-</code></pre><h2 id="高级功能"><a href="#高级功能" class="headerlink" title="高级功能"></a>高级功能</h2><ul>
-<li>tmux可以在启动时设置各种参数,如指定session/window的名字,或者指定启动时要执行的命令,如</li>
-</ul>
-<blockquote>
-<p>tmux new-session -s work -n mysql -d ‘mysql’</p>
-</blockquote>
-<ul>
-<li>tmux可以把同一条命令发给多个终端,比如在多台相同环境的机器上,只用输入一次命令即可,首先在一个窗口中开两个面板,并分别连到几个机器,然后执行下面的命令开/关panel的同步模式,开启后,在一个面板中的命令,也会同步输入到另一个面板中  </li>
-</ul>
-<blockquote>
-<p>c-b :set synchronize-panes</p>
-</blockquote>
-<p>要关闭同步输入,只需要再次输入这个命令就可以了  </p>
-<ul>
-<li>永不断线<br>可以在一台服务器上创建一个tmux进程,然后远程连接操作tmux,通过tmux来进行操作,这样在ssh重连之后,attach tmux就可以了<br>也可以在跳板机上搞一个tmux,再通过这个tmux来连接其他的机器.这样做的缺点是,一段时间没有操作,tmux到服务器的ssh会自动断掉</li>
-</ul>
-
-          
+          rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
