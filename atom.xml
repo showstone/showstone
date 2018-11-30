@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://showstone.net/"/>
-  <updated>2018-11-30T04:40:08.308Z</updated>
+  <updated>2018-11-30T04:42:28.204Z</updated>
   <id>http://showstone.net/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Ouath 2.0 token申请时序图</title>
-    <link href="http://showstone.net/uncategorized/2018/11/28/%E5%B0%8F%E5%8A%9F%E8%83%BD-2018-11-28-Ouath-2-0-token%E7%94%B3%E8%AF%B7%E6%97%B6%E5%BA%8F%E5%9B%BE/"/>
-    <id>http://showstone.net/uncategorized/2018/11/28/小功能-2018-11-28-Ouath-2-0-token申请时序图/</id>
+    <link href="http://showstone.net/%E5%B0%8F%E5%8A%9F%E8%83%BD/2018/11/28/%E5%B0%8F%E5%8A%9F%E8%83%BD-2018-11-28-Ouath-2-0-token%E7%94%B3%E8%AF%B7%E6%97%B6%E5%BA%8F%E5%9B%BE/"/>
+    <id>http://showstone.net/小功能/2018/11/28/小功能-2018-11-28-Ouath-2-0-token申请时序图/</id>
     <published>2018-11-27T16:25:42.000Z</published>
-    <updated>2018-11-30T04:40:08.308Z</updated>
+    <updated>2018-11-30T04:42:28.204Z</updated>
     
     <content type="html"><![CDATA[<p>在看Ouath 2.0时，发现对于申请token的两种方式—授权码模式、简化模式的时序图不太清楚，于是自己画了一次时序图，以助自己理解。同时也放在这里供参考。</p>
 <p>学习资料:<br><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="external">理解OAuth 2.0 - 阮一峰的网络日志</a><br><a href="https://tools.ietf.org/html/rfc6749#section-7" target="_blank" rel="external">OAuth 2.0 官方文档</a></p>
@@ -37,6 +37,8 @@
     
     </summary>
     
+      <category term="小功能" scheme="http://showstone.net/categories/%E5%B0%8F%E5%8A%9F%E8%83%BD/"/>
+    
     
       <category term="Ouath 2.0, token申请" scheme="http://showstone.net/tags/ouath-2-0-token%E7%94%B3%E8%AF%B7/"/>
     
@@ -44,10 +46,10 @@
   
   <entry>
     <title>记一次失败的mac平台下载工具探索</title>
-    <link href="http://showstone.net/uncategorized/2018/11/27/%E5%B7%A5%E5%85%B7-2018-11-27-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%B1%E8%B4%A5%E7%9A%84mac%E5%B9%B3%E5%8F%B0%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E6%8E%A2%E7%B4%A2/"/>
-    <id>http://showstone.net/uncategorized/2018/11/27/工具-2018-11-27-记一次失败的mac平台下载工具探索/</id>
+    <link href="http://showstone.net/%E5%B7%A5%E5%85%B7/2018/11/27/%E5%B7%A5%E5%85%B7-2018-11-27-%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%B1%E8%B4%A5%E7%9A%84mac%E5%B9%B3%E5%8F%B0%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E6%8E%A2%E7%B4%A2/"/>
+    <id>http://showstone.net/工具/2018/11/27/工具-2018-11-27-记一次失败的mac平台下载工具探索/</id>
     <published>2018-11-26T18:11:45.000Z</published>
-    <updated>2018-11-27T17:01:52.266Z</updated>
+    <updated>2018-11-30T04:42:43.020Z</updated>
     
     <content type="html"><![CDATA[<p>最近小伙伴分享了很多好照片给我，由于内容较多，是通过百度云盘分享的。而我电脑上百度云盘的下载速度平均只有50k/s, 全部文件下载完成需要上百小时，这时想起好像有工具可以加速下载，同时NAS也缺一个下载工具，正好可以把Arial用起来。</p>
 <p>说做就做，打开官网开始研究，发现其使用十分简单。考虑到需要在不同的地方使用，最好用docker的方式使用，便于分享。</p>
@@ -67,6 +69,8 @@
 &lt;p&gt;说做就做，打开官网开始
     
     </summary>
+    
+      <category term="工具" scheme="http://showstone.net/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
       <category term="nas" scheme="http://showstone.net/tags/nas/"/>
