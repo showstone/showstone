@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="交易系统," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="听风的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="扣库存的场景及问题扣库存是电商系统里一个非常基础的操作。
+在业务上，它必须要能达到：
+
+不超卖
+重试时，不出现假卖
+
+在非功能需求上，它需要做到：
+
+应对高并发的流量
+
+单件商品扣库存方案及其优化约定扣的库存数量为x
+方案一 直接更新库存
+1update sku_stock set stock = stock - x;
+由于库存检查是在服务里做的，并发现情况下，容易出现超卖。设原来的库存是5,用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扣库存的方案">
+<meta property="og:url" content="http://showstone.net/uncategorized/2018/12/07/交易型系统-2018-12-07-扣库存的方案/index.html">
+<meta property="og:site_name" content="听风的博客">
+<meta property="og:description" content="扣库存的场景及问题扣库存是电商系统里一个非常基础的操作。
+在业务上，它必须要能达到：
+
+不超卖
+重试时，不出现假卖
+
+在非功能需求上，它需要做到：
+
+应对高并发的流量
+
+单件商品扣库存方案及其优化约定扣的库存数量为x
+方案一 直接更新库存
+1update sku_stock set stock = stock - x;
+由于库存检查是在服务里做的，并发现情况下，容易出现超卖。设原来的库存是5,用户">
+<meta property="og:image" content="http://qiniu.yuanshicheng.com/2018-12-07-A123459C-0ECF-41D8-BA06-63F4E45D929F.png">
+<meta property="og:image" content="http://qiniu.yuanshicheng.com/2018-12-07-0DDDE9F0-EEEF-434B-B4D0-AE025095233D.png">
+<meta property="og:updated_time" content="2018-12-07T07:15:24.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="扣库存的方案">
+<meta name="twitter:description" content="扣库存的场景及问题扣库存是电商系统里一个非常基础的操作。
+在业务上，它必须要能达到：
+
+不超卖
+重试时，不出现假卖
+
+在非功能需求上，它需要做到：
+
+应对高并发的流量
+
+单件商品扣库存方案及其优化约定扣的库存数量为x
+方案一 直接更新库存
+1update sku_stock set stock = stock - x;
+由于库存检查是在服务里做的，并发现情况下，容易出现超卖。设原来的库存是5,用户">
+<meta name="twitter:image" content="http://qiniu.yuanshicheng.com/2018-12-07-A123459C-0ECF-41D8-BA06-63F4E45D929F.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://showstone.net/uncategorized/2018/12/07/交易型系统-2018-12-07-扣库存的方案/"/>
+
+
+
+
+
+  <title>扣库存的方案 | 听风的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3f82c96c411fc76dd2a11abd27157116";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">听风的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">行走，辨思，记录</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://showstone.net/uncategorized/2018/12/07/交易型系统-2018-12-07-扣库存的方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shicheng Yuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">扣库存的方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T15:10:19+08:00">
+                2018-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="扣库存的场景及问题"><a href="#扣库存的场景及问题" class="headerlink" title="扣库存的场景及问题"></a>扣库存的场景及问题</h2><p>扣库存是电商系统里一个非常基础的操作。</p>
+<p>在业务上，它必须要能达到：</p>
+<ul>
+<li>不超卖</li>
+<li>重试时，不出现假卖</li>
+</ul>
+<p>在非功能需求上，它需要做到：</p>
+<ul>
+<li>应对高并发的流量</li>
+</ul>
+<h2 id="单件商品扣库存方案及其优化"><a href="#单件商品扣库存方案及其优化" class="headerlink" title="单件商品扣库存方案及其优化"></a>单件商品扣库存方案及其优化</h2><p>约定扣的库存数量为x</p>
+<h3 id="方案一-直接更新库存"><a href="#方案一-直接更新库存" class="headerlink" title="方案一 直接更新库存"></a>方案一 直接更新库存</h3><p><img src="http://qiniu.yuanshicheng.com/2018-12-07-A123459C-0ECF-41D8-BA06-63F4E45D929F.png" alt="A123459C-0ECF-41D8-BA06-63F4E45D929F"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> sku_stock <span class="keyword">set</span> stock = stock - x;</div></pre></td></tr></table></figure>
+<p>由于库存检查是在服务里做的，并发现情况下，容易出现超卖。<br>设原来的库存是5,用户a扣了库存4，b扣了库存2，流程如下:</p>
+<ol>
+<li>用户a检查库存</li>
+<li>用户b检查库存</li>
+<li>用户a扣库存4</li>
+<li>用户b扣库存2</li>
+<li>最终库存为-1</li>
+</ol>
+<h3 id="方案一优化-加锁（事务）"><a href="#方案一优化-加锁（事务）" class="headerlink" title="方案一优化 加锁（事务）"></a>方案一优化 加锁（事务）</h3><p>为了解决并发修改的问题，可以通过增加锁（事务)，把并发变成串行。<br><img src="http://qiniu.yuanshicheng.com/2018-12-07-0DDDE9F0-EEEF-434B-B4D0-AE025095233D.png" alt="0DDDE9F0-EEEF-434B-B4D0-AE025095233D"></p>
+<p>这种方案可以解决并发上的问题，但是由于开启事务（锁）的时间较长，会导致严重的性能问题，同时，对于分库后的多个商品，还会存在多库事务的分布式事务问题，成本很高。</p>
+<h3 id="方案三-优化锁：减少锁的持有时间"><a href="#方案三-优化锁：减少锁的持有时间" class="headerlink" title="方案三 优化锁：减少锁的持有时间"></a>方案三 优化锁：减少锁的持有时间</h3><p>为了优化锁，一个方式是减少锁的持有时间。可以考虑在扣库存时，增加一把乐观锁</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> sku_stock <span class="keyword">set</span> stock = stock - x <span class="keyword">where</span> stock = x0;</div></pre></td></tr></table></figure>
+<h3 id="方案四-高并发下的扣库存设计"><a href="#方案四-高并发下的扣库存设计" class="headerlink" title="方案四  高并发下的扣库存设计"></a>方案四  高并发下的扣库存设计</h3><p>方案三能解决大部分场景下的扣库存问题，但当碰到秒杀、大促等场景时，由于商品库存有限，扣库存失败的概率很高，这里如果重复尝试扣库存，会对系统造成较大的压力，减少吞吐。</p>
+<p>因此需要对并发的流量进行限流。可以考虑对每个商品的并发数加队列或锁，以减少同时并发的数目失败的概率。对于特别热门的商品，还可以把一个商品拆成多个子商品，以增大并发数目。</p>
+<h3 id="扣库存的重试"><a href="#扣库存的重试" class="headerlink" title="扣库存的重试"></a>扣库存的重试</h3><p>当由于某种原因扣库存失败时，可能需要进行重试。由于扣库存不是一个幂等的操作，容易造成空卖。</p>
+<p>可以通过给每个扣库存操作增加一个token来解决这个问题。当token已经使用过时，再次请求直接忽略。</p>
+<h2 id="多件商品扣库存方案及其优化"><a href="#多件商品扣库存方案及其优化" class="headerlink" title="多件商品扣库存方案及其优化"></a>多件商品扣库存方案及其优化</h2><p>相比于单件商品的扣库存，同时扣多件商品的库存，需要考虑：</p>
+<ol>
+<li>同时有多个商品，修改、回滚的数目比较多</li>
+<li>操作商品的模式</li>
+</ol>
+<p>最简单的方案是直接把多个商品放在一个事务来实现，但是这样有几个问题：</p>
+<ol>
+<li>事务时间比较长，还容易造成死锁</li>
+<li>商品越多，扣库存失败的可能性越大</li>
+</ol>
+<p>对于第一个问题，可以把一个事务拆成多个事务，以加大系统吞吐量。这样做还有一个好处，就是这些商品可以不用在同一个库里了（mysql的事务是基于库实例实现的），从而避开了分布式事务的成本。</p>
+<p>对于第二个问题，可以使用二阶段提交，先锁定所有商品的库存，然后统一提交。避免频繁回滚。</p>
+<h2 id="从扣库存看高并发"><a href="#从扣库存看高并发" class="headerlink" title="从扣库存看高并发"></a>从扣库存看高并发</h2><p>扣库存是一个典型的业务型系统，具有以下特点：</p>
+<ol>
+<li>并发量高</li>
+<li>数据量大</li>
+<li>逻辑较轻</li>
+</ol>
+<p>它的难点主要体现在：</p>
+<ol>
+<li>大量高速交易</li>
+<li>数据的一致性</li>
+<li>应对各种业务、系统异常情况</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/交易系统/" rel="tag"># 交易系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/小功能/2018/11/28/小功能-2018-11-28-Ouath-2-0-token申请时序图/" rel="next" title="Ouath 2.0 token申请时序图">
+                <i class="fa fa-chevron-left"></i> Ouath 2.0 token申请时序图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shicheng Yuan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#扣库存的场景及问题"><span class="nav-number">1.</span> <span class="nav-text">扣库存的场景及问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单件商品扣库存方案及其优化"><span class="nav-number">2.</span> <span class="nav-text">单件商品扣库存方案及其优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一-直接更新库存"><span class="nav-number">2.1.</span> <span class="nav-text">方案一 直接更新库存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一优化-加锁（事务）"><span class="nav-number">2.2.</span> <span class="nav-text">方案一优化 加锁（事务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三-优化锁：减少锁的持有时间"><span class="nav-number">2.3.</span> <span class="nav-text">方案三 优化锁：减少锁的持有时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案四-高并发下的扣库存设计"><span class="nav-number">2.4.</span> <span class="nav-text">方案四  高并发下的扣库存设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扣库存的重试"><span class="nav-number">2.5.</span> <span class="nav-text">扣库存的重试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多件商品扣库存方案及其优化"><span class="nav-number">3.</span> <span class="nav-text">多件商品扣库存方案及其优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从扣库存看高并发"><span class="nav-number">4.</span> <span class="nav-text">从扣库存看高并发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shicheng Yuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
