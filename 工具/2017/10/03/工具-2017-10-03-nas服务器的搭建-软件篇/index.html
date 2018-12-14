@@ -82,33 +82,39 @@
 
 
 <meta name="description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+
+更新了下载方案。使用uBittorrent进行下载。
+
 最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.
 
 所有功能都建议使用 docker，方便在系统崩溃后重装
 NAS软件功能
-外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
-文件共享。如samba或者f">
+外网访问。这么牛逼的东东，光在家用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NAS服务器的搭建--软件篇">
 <meta property="og:url" content="http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/index.html">
 <meta property="og:site_name" content="听风的博客">
 <meta property="og:description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+
+更新了下载方案。使用uBittorrent进行下载。
+
 最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.
 
 所有功能都建议使用 docker，方便在系统崩溃后重装
 NAS软件功能
-外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
-文件共享。如samba或者f">
-<meta property="og:updated_time" content="2018-11-30T04:43:53.292Z">
+外网访问。这么牛逼的东东，光在家用">
+<meta property="og:updated_time" content="2018-12-14T06:27:27.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NAS服务器的搭建--软件篇">
 <meta name="twitter:description" content="顺利装好机器，是时候试试它的威力了，开始折腾软件.
+
+更新了下载方案。使用uBittorrent进行下载。
+
 最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.
 
 所有功能都建议使用 docker，方便在系统崩溃后重装
 NAS软件功能
-外网访问。这么牛逼的东东，光在家用怎么行，必须要能在公网访问啊
-文件共享。如samba或者f">
+外网访问。这么牛逼的东东，光在家用">
 
 
 
@@ -351,6 +357,9 @@ NAS软件功能
 
       
         <p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
+<hr>
+<p>更新了下载方案。使用uBittorrent进行下载。</p>
+<hr>
 <p>最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.</p>
 <hr>
 <p><strong>所有功能都建议使用 docker，方便在系统崩溃后重装</strong></p>
@@ -396,7 +405,13 @@ NAS软件功能
 <li>SMB协议。操作方便，速度很快，推荐使用。但是由于电信封了 SMB 协议的端口，所以可能内网访问。</li>
 <li>各种私有云方案如 Seafile 和 NextCloud。比较下来，两种系统比较相似，但最终还是选择了 NextCloud，因为 NextCloud 是把你上传的文件原样保存的，这样一是方便容灾，如果系统崩溃了，至少文件还在；二是可以导入本地文件，不用存多个备份。像我原来就有很多文件的情况下，就非常方便了，尤其是同时使用多种文件服务的时候。</li>
 </ul>
-<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>留坑待填~~</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>主要用于电影、美剧等大资源下载。小文件直接在mac上就下好了。</p>
+<h4 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h4><p>电影、电视一般用bt下载。主要考虑bt下载器。以前uTorrent比较多，但是近期看到一些它的负面新闻（如挖矿），同时不太稳定，于是换到qbittorrent。</p>
+<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><p>使用镜像 linuxserver/qbittorrent: <a href="https://hub.docker.com/r/linuxserver/qbittorrent" target="_blank" rel="external">https://hub.docker.com/r/linuxserver/qbittorrent</a></p>
+<p>使用很简单，大部分直接参考教程即可。以下是我的docker-compose设置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">version: &apos;2&apos;</div><div class="line">services:</div><div class="line">  nas-qbittorrent:</div><div class="line">    restart: always</div><div class="line">    image: linuxserver/qbittorrent</div><div class="line">    container_name: nas-qbittorrent</div><div class="line">    ports:</div><div class="line">      - &quot;7981:6881&quot; </div><div class="line">      - &quot;7981:6881/udp&quot;</div><div class="line">      - &quot;7980:7980&quot; </div><div class="line">    volumes:</div><div class="line">      - ./config:/config </div><div class="line">      - /mount_device/data/donwloads:/downloads</div><div class="line">    environment:</div><div class="line">      - PGID=1000</div><div class="line">      - PUID=1000</div><div class="line">      # -e UMASK_SET=&lt;022&gt;</div><div class="line">      - WEBUI_PORT=7980</div><div class="line">      - TZ=&quot;Asia/Shanghai&quot;</div></pre></td></tr></table></figure>
+<p><strong><em> 默认的WEBUI_PORT是8080,如果要改成其他的，需要把所有的8080全都改掉。否则不能工作 </em></strong></p>
+<p>qbittorrent可以很简单做到外网访问，但是考虑到安全，我没有把它暴露到外网。反正下载得不多，直接外网操作就行了。如果要远程控制下载，可以使用rss订阅搞定。</p>
 <h3 id="DLNA服务"><a href="#DLNA服务" class="headerlink" title="DLNA服务"></a>DLNA服务</h3><p>留坑待填~~</p>
 <h3 id="iTunes媒体共享"><a href="#iTunes媒体共享" class="headerlink" title="iTunes媒体共享"></a>iTunes媒体共享</h3><p>查下来，基本都是用 Vine 来模拟 windows，考虑到稳定性，没有意思。</p>
 <h3 id="time-machine等备份服务"><a href="#time-machine等备份服务" class="headerlink" title="time machine等备份服务"></a>time machine等备份服务</h3><h4 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h4><ul>
@@ -436,8 +451,8 @@ NAS软件功能
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-介绍/" rel="next" title="NAS服务器的搭建-介绍">
-                <i class="fa fa-chevron-left"></i> NAS服务器的搭建-介绍
+              <a href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/" rel="next" title="NAS服务器的搭建--硬件篇">
+                <i class="fa fa-chevron-left"></i> NAS服务器的搭建--硬件篇
               </a>
             
           </div>
@@ -446,8 +461,8 @@ NAS软件功能
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/" rel="prev" title="NAS服务器的搭建--硬件篇">
-                NAS服务器的搭建--硬件篇 <i class="fa fa-chevron-right"></i>
+              <a href="/工具/2017/10/29/工具-2017-10-29-ubuntu下打印服务器的安装配置与使用教程/" rel="prev" title="ubuntu下打印服务器的安装配置与使用教程">
+                ubuntu下打印服务器的安装配置与使用教程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +602,7 @@ NAS软件功能
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS软件功能"><span class="nav-number">1.</span> <span class="nav-text">NAS软件功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外网访问配置"><span class="nav-number">2.</span> <span class="nav-text">外网访问配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有公网Ip"><span class="nav-number">2.1.</span> <span class="nav-text">有公网Ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有公网ip"><span class="nav-number">2.2.</span> <span class="nav-text">没有公网ip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS软件方案"><span class="nav-number">3.</span> <span class="nav-text">NAS软件方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS裸机安装Linux方案"><span class="nav-number">4.</span> <span class="nav-text">NAS裸机安装Linux方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于百度云等云盘的私有云服务"><span class="nav-number">4.1.</span> <span class="nav-text">类似于百度云等云盘的私有云服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件共享"><span class="nav-number">4.2.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">4.3.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLNA服务"><span class="nav-number">4.4.</span> <span class="nav-text">DLNA服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iTunes媒体共享"><span class="nav-number">4.5.</span> <span class="nav-text">iTunes媒体共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time-machine等备份服务"><span class="nav-number">4.6.</span> <span class="nav-text">time machine等备份服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-number">4.6.1.</span> <span class="nav-text">mac</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和Onedrive等公有云同步"><span class="nav-number">4.7.</span> <span class="nav-text">和Onedrive等公有云同步</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS软件功能"><span class="nav-number">1.</span> <span class="nav-text">NAS软件功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外网访问配置"><span class="nav-number">2.</span> <span class="nav-text">外网访问配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有公网Ip"><span class="nav-number">2.1.</span> <span class="nav-text">有公网Ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有公网ip"><span class="nav-number">2.2.</span> <span class="nav-text">没有公网ip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS软件方案"><span class="nav-number">3.</span> <span class="nav-text">NAS软件方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS裸机安装Linux方案"><span class="nav-number">4.</span> <span class="nav-text">NAS裸机安装Linux方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于百度云等云盘的私有云服务"><span class="nav-number">4.1.</span> <span class="nav-text">类似于百度云等云盘的私有云服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件共享"><span class="nav-number">4.2.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">4.3.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景"><span class="nav-number">4.3.1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案"><span class="nav-number">4.3.2.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实践"><span class="nav-number">4.3.3.</span> <span class="nav-text">实践</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLNA服务"><span class="nav-number">4.4.</span> <span class="nav-text">DLNA服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iTunes媒体共享"><span class="nav-number">4.5.</span> <span class="nav-text">iTunes媒体共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time-machine等备份服务"><span class="nav-number">4.6.</span> <span class="nav-text">time machine等备份服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-number">4.6.1.</span> <span class="nav-text">mac</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和Onedrive等公有云同步"><span class="nav-number">4.7.</span> <span class="nav-text">和Onedrive等公有云同步</span></a></li></ol></li></ol></div>
             
 
           </div>

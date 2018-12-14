@@ -550,60 +550,16 @@
   </entry>
   
   <entry>
-    <title>NAS服务器的搭建--硬件篇</title>
-    <link href="http://showstone.net/%E5%B7%A5%E5%85%B7/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E7%A1%AC%E4%BB%B6%E7%AF%87/"/>
-    <id>http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/</id>
-    <published>2017-10-02T18:37:59.000Z</published>
-    <updated>2018-11-30T04:43:41.873Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>现在主流的硬件服务器方案，有以下几种方案：</p>
-<ul>
-<li>使用群辉等现成的NAS解决方案<br>  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用</li>
-<li>使用HP gen8等商用服务器<br>  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个很严重的问题：风扇声音太大了！！！</li>
-<li>自己组装机器<br>  其实网上已经有比较多的资料，找几篇来看看就可以了</li>
-</ul>
-<p>群晖的机器对我而言太贵了，HP gen8勉强够用，但是考虑到他的拓展性，还是选择自己组装一台机器。</p>
-<h2 id="NAS服务器的要点"><a href="#NAS服务器的要点" class="headerlink" title="NAS服务器的要点"></a>NAS服务器的要点</h2><p>NAS服务器不同于一般的机器，它有以下特点:</p>
-<ul>
-<li>7*24小时开机，要稳定</li>
-<li>盘位较多，最好是6盘位以上,一块系统盘，两块主数据盘，加一块工作盘，同时考虑到以后的拓展，预留两个盘位</li>
-<li>安静</li>
-<li>功耗低</li>
-</ul>
-<p>综合以上的特点，参考以上特点，选择自己想要的配置即可。</p>
-<h2 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h2><p>关于硬件的选择，别人已经说得很详细了，我就不在啰嗦，有兴趣的可以参考：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></li>
-</ul>
-<p>我的配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cpu: intel j3455，备选的有n3160, 都是连主板一起的，399元</div><div class="line">内存: 金士顿 ddr3 1600 4g，150元</div><div class="line">机箱: 酷冷至尊特警365，165包邮</div><div class="line">电源: 鑫谷核动力-巡洋舰c5 300w 109元</div><div class="line">共823元</div></pre></td></tr></table></figure>
-<p><em>关于硬盘</em><br>硬盘需要单独拿出来说，一般建议买一块固态硬盘作为系统盘，大部分时间是没有数据操作的，这时机械硬盘可以休眠，单独使用固态硬盘即可。</p>
-<p>数据盘，也就是机械硬盘，在买的时候需要注意一点：<br><strong>不要买同一品牌、同一批次的硬盘</strong>，因为在同样的环境下，同一品牌同一批次的硬盘，可能会同时坏！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;方案&quot;&gt;&lt;a href=&quot;#方案&quot; class=&quot;headerlink&quot; title=&quot;方案&quot;&gt;&lt;/a&gt;方案&lt;/h2&gt;&lt;p&gt;现在主流的硬件服务器方案，有以下几种方案：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用群辉等现成的NAS解决方案&lt;br&gt;  优点是简单易上手，对技术的要
-    
-    </summary>
-    
-      <category term="工具" scheme="http://showstone.net/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="NAS服务器" scheme="http://showstone.net/tags/nas%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>NAS服务器的搭建--软件篇</title>
     <link href="http://showstone.net/%E5%B7%A5%E5%85%B7/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
     <id>http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-软件篇/</id>
     <published>2017-10-02T18:37:59.000Z</published>
-    <updated>2018-11-30T04:43:53.292Z</updated>
+    <updated>2018-12-14T06:27:27.331Z</updated>
     
     <content type="html"><![CDATA[<p>顺利装好机器，是时候试试它的威力了，开始折腾软件.</p>
+<hr>
+<p>更新了下载方案。使用uBittorrent进行下载。</p>
+<hr>
 <p>最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.</p>
 <hr>
 <p><strong>所有功能都建议使用 docker，方便在系统崩溃后重装</strong></p>
@@ -649,7 +605,13 @@
 <li>SMB协议。操作方便，速度很快，推荐使用。但是由于电信封了 SMB 协议的端口，所以可能内网访问。</li>
 <li>各种私有云方案如 Seafile 和 NextCloud。比较下来，两种系统比较相似，但最终还是选择了 NextCloud，因为 NextCloud 是把你上传的文件原样保存的，这样一是方便容灾，如果系统崩溃了，至少文件还在；二是可以导入本地文件，不用存多个备份。像我原来就有很多文件的情况下，就非常方便了，尤其是同时使用多种文件服务的时候。</li>
 </ul>
-<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>留坑待填~~</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>主要用于电影、美剧等大资源下载。小文件直接在mac上就下好了。</p>
+<h4 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h4><p>电影、电视一般用bt下载。主要考虑bt下载器。以前uTorrent比较多，但是近期看到一些它的负面新闻（如挖矿），同时不太稳定，于是换到qbittorrent。</p>
+<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><p>使用镜像 linuxserver/qbittorrent: <a href="https://hub.docker.com/r/linuxserver/qbittorrent" target="_blank" rel="external">https://hub.docker.com/r/linuxserver/qbittorrent</a></p>
+<p>使用很简单，大部分直接参考教程即可。以下是我的docker-compose设置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">version: &apos;2&apos;</div><div class="line">services:</div><div class="line">  nas-qbittorrent:</div><div class="line">    restart: always</div><div class="line">    image: linuxserver/qbittorrent</div><div class="line">    container_name: nas-qbittorrent</div><div class="line">    ports:</div><div class="line">      - &quot;7981:6881&quot; </div><div class="line">      - &quot;7981:6881/udp&quot;</div><div class="line">      - &quot;7980:7980&quot; </div><div class="line">    volumes:</div><div class="line">      - ./config:/config </div><div class="line">      - /mount_device/data/donwloads:/downloads</div><div class="line">    environment:</div><div class="line">      - PGID=1000</div><div class="line">      - PUID=1000</div><div class="line">      # -e UMASK_SET=&lt;022&gt;</div><div class="line">      - WEBUI_PORT=7980</div><div class="line">      - TZ=&quot;Asia/Shanghai&quot;</div></pre></td></tr></table></figure>
+<p><strong><em> 默认的WEBUI_PORT是8080,如果要改成其他的，需要把所有的8080全都改掉。否则不能工作 </em></strong></p>
+<p>qbittorrent可以很简单做到外网访问，但是考虑到安全，我没有把它暴露到外网。反正下载得不多，直接外网操作就行了。如果要远程控制下载，可以使用rss订阅搞定。</p>
 <h3 id="DLNA服务"><a href="#DLNA服务" class="headerlink" title="DLNA服务"></a>DLNA服务</h3><p>留坑待填~~</p>
 <h3 id="iTunes媒体共享"><a href="#iTunes媒体共享" class="headerlink" title="iTunes媒体共享"></a>iTunes媒体共享</h3><p>查下来，基本都是用 Vine 来模拟 windows，考虑到稳定性，没有意思。</p>
 <h3 id="time-machine等备份服务"><a href="#time-machine等备份服务" class="headerlink" title="time machine等备份服务"></a>time machine等备份服务</h3><h4 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h4><ul>
@@ -664,9 +626,57 @@
     <summary type="html">
     
       &lt;p&gt;顺利装好机器，是时候试试它的威力了，开始折腾软件.&lt;/p&gt;
-&lt;p&gt;最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具的同时，还可以使用 windows 下丰富的应用，方便切换.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;
+&lt;p&gt;更新了下载方案。使用uBittorrent进行下载。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;最近试了一种方案，即用 windows作为主机，用 docker 跑以下的诸多应用，在完美使用 Linux 上的各种工具
+    
+    </summary>
+    
+      <category term="工具" scheme="http://showstone.net/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="NAS服务器" scheme="http://showstone.net/tags/nas%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NAS服务器的搭建--硬件篇</title>
+    <link href="http://showstone.net/%E5%B7%A5%E5%85%B7/2017/10/03/%E5%B7%A5%E5%85%B7-2017-10-03-nas%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA-%E7%A1%AC%E4%BB%B6%E7%AF%87/"/>
+    <id>http://showstone.net/工具/2017/10/03/工具-2017-10-03-nas服务器的搭建-硬件篇/</id>
+    <published>2017-10-02T18:37:59.000Z</published>
+    <updated>2018-11-30T04:43:41.873Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>现在主流的硬件服务器方案，有以下几种方案：</p>
+<ul>
+<li>使用群辉等现成的NAS解决方案<br>  优点是简单易上手，对技术的要求较低，有较多的资料和文档可以参考，而且插件较多，可以满足大部分的文件需求。缺点是贵，性价比很低，同时机器的性能很差，没有什么拓展能力。适合普通日常办公使用</li>
+<li>使用HP gen8等商用服务器<br>  优点是硬件比较稳定，但是它的价格也比较贵，而且拓展能力不强。在朋友那看过后，发现gen8还有一个很严重的问题：风扇声音太大了！！！</li>
+<li>自己组装机器<br>  其实网上已经有比较多的资料，找几篇来看看就可以了</li>
+</ul>
+<p>群晖的机器对我而言太贵了，HP gen8勉强够用，但是考虑到他的拓展性，还是选择自己组装一台机器。</p>
+<h2 id="NAS服务器的要点"><a href="#NAS服务器的要点" class="headerlink" title="NAS服务器的要点"></a>NAS服务器的要点</h2><p>NAS服务器不同于一般的机器，它有以下特点:</p>
+<ul>
+<li>7*24小时开机，要稳定</li>
+<li>盘位较多，最好是6盘位以上,一块系统盘，两块主数据盘，加一块工作盘，同时考虑到以后的拓展，预留两个盘位</li>
+<li>安静</li>
+<li>功耗低</li>
+</ul>
+<p>综合以上的特点，参考以上特点，选择自己想要的配置即可。</p>
+<h2 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h2><p>关于硬件的选择，别人已经说得很详细了，我就不在啰嗦，有兴趣的可以参考：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/21359049" target="_blank" rel="external">搭建家庭 NAS 服务器有什么好方案？</a></li>
+</ul>
+<p>我的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cpu: intel j3455，备选的有n3160, 都是连主板一起的，399元</div><div class="line">内存: 金士顿 ddr3 1600 4g，150元</div><div class="line">机箱: 酷冷至尊特警365，165包邮</div><div class="line">电源: 鑫谷核动力-巡洋舰c5 300w 109元</div><div class="line">共823元</div></pre></td></tr></table></figure>
+<p><em>关于硬盘</em><br>硬盘需要单独拿出来说，一般建议买一块固态硬盘作为系统盘，大部分时间是没有数据操作的，这时机械硬盘可以休眠，单独使用固态硬盘即可。</p>
+<p>数据盘，也就是机械硬盘，在买的时候需要注意一点：<br><strong>不要买同一品牌、同一批次的硬盘</strong>，因为在同样的环境下，同一品牌同一批次的硬盘，可能会同时坏！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;方案&quot;&gt;&lt;a href=&quot;#方案&quot; class=&quot;headerlink&quot; title=&quot;方案&quot;&gt;&lt;/a&gt;方案&lt;/h2&gt;&lt;p&gt;现在主流的硬件服务器方案，有以下几种方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用群辉等现成的NAS解决方案&lt;br&gt;  优点是简单易上手，对技术的要
     
     </summary>
     
@@ -972,55 +982,124 @@
   </entry>
   
   <entry>
-    <title>java容器研究思路</title>
-    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-java%E5%AE%B9%E5%99%A8%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF/"/>
-    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-java容器研究思路/</id>
+    <title>LinkedList浅析</title>
+    <link href="http://showstone.net/java%E5%AE%B9%E5%99%A8/2017/03/07/java%E5%AE%B9%E5%99%A8-2015-06-24-linkedlist/"/>
+    <id>http://showstone.net/java容器/2017/03/07/java容器-2015-06-24-linkedlist/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>#容器的研究思路</p>
-<ul>
-<li>为什么研究容器<br><ul>
-<li>容器是JDK里的基础功能，平时使用得较多。</li>
-<li>容器相对简单，比较容易研究</li>
-<li>已经有很多人对容器进行了研究，相关资料比较齐全</li>
+    <content type="html"><![CDATA[<h1 id="LinkedList浅析"><a href="#LinkedList浅析" class="headerlink" title="LinkedList浅析"></a>LinkedList浅析</h1><ul>
+<li>LinkedList的作用及特点</li>
+<li>LinkedList的数据结构</li>
+<li>LinkedList的常用方法</li>
 </ul>
-</li>
-<li>容器是什么，要研究那些特性<ul>
-<li>容器是一段程序，是一系列的对象。</li>
-<li>作为程序，它由 数据结构+算法构成</li>
-<li>作为对象，它由 属性+方法构成</li>
-<li>作为类，它有自己的继承树</li>
-<li>容器有很多的工具类，如collections、Arrays、Iterator等等</li>
+<h2 id="LinkedList的作用及特点"><a href="#LinkedList的作用及特点" class="headerlink" title="LinkedList的作用及特点"></a>LinkedList的作用及特点</h2><ul>
+<li>LinkedList可作为链表或者双向队列来使用</li>
+<li>LinkedList的数据结构是基于链表来实现的，所以在它的开头、末尾添加结点的速度会非常快</li>
 </ul>
-</li>
-<li>怎么去研究容器<ul>
-<li>评价软件的4个因素:可维护性，可靠性，移植性，效率</li>
-<li>如何去测试评估程序的特性</li>
-<li>程序的并发性能</li>
-<li>程序的极限性能</li>
-</ul>
-</li>
-</ul>
-<p>##容器的分类<br>容器分为list、set、Map等三大类</p>
-<ul>
-<li>list<br><br>  有序的数组<br>  有ArrayList,LinkedList,Vector,CopyOnwriteArrayList</li>
-<li>set<br><br>  HashSet, TreeSet</li>
-<li>Map<br><br>  HashMap,TreeMap,HashTable,LinkedHashMap,WeakHashMap</li>
-</ul>
+<blockquote>
+<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。<br>LinkedList 实现 List 接口，能对它进行队列操作。<br>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。<br>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。<br>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。<br>LinkedList 是非同步的。<br>以上内容来自于 <a href="http://www.cnblogs.com/skywang12345/p/3308807.html" title="skywang12345的博客" target="_blank" rel="external">skywang12345的博客</a>    </p>
+</blockquote>
+<h2 id="LinkedList的数据结构"><a href="#LinkedList的数据结构" class="headerlink" title="LinkedList的数据结构"></a>LinkedList的数据结构</h2><p>LinkedList的定义</p>
+<pre><code>public class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+{
+    transient int size = 0;
+
+    /**
+     * Pointer to first node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (first.prev == null &amp;&amp; first.item != null)
+     */
+    transient Node&lt;E&gt; first;
+
+    /**
+     * Pointer to last node.
+     * Invariant: (first == null &amp;&amp; last == null) ||
+     *            (last.next == null &amp;&amp; last.item != null)
+     */
+    transient Node&lt;E&gt; last;
+
+ ...
+
+}
+</code></pre><p>Node的定义</p>
+<pre><code>private static class Node&lt;E&gt; {
+    E item;
+    Node&lt;E&gt; next;
+    Node&lt;E&gt; prev;
+
+    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+</code></pre><h2 id="LinkedList的常用方法"><a href="#LinkedList的常用方法" class="headerlink" title="LinkedList的常用方法"></a>LinkedList的常用方法</h2><p>list接口定义的方法</p>
+<pre><code>int size();
+boolean isEmpty();
+boolean contains(Object o);
+Iterator&lt;E&gt; iterator();
+Object[] toArray();
+&lt;T&gt; T[] toArray(T[] a);
+boolean add(E e);
+boolean remove(Object o);
+boolean containsAll(Collection&lt;?&gt; c);
+boolean addAll(Collection&lt;? extends E&gt; c);
+boolean addAll(int index, Collection&lt;? extends E&gt; c);
+boolean removeAll(Collection&lt;?&gt; c);
+boolean retainAll(Collection&lt;?&gt; c);
+default void replaceAll(UnaryOperator&lt;E&gt; operator) ;
+default void sort(Comparator&lt;? super E&gt; c);
+void clear();
+boolean equals(Object o);
+int hashCode();
+E get(int index);
+E set(int index, E element);
+void add(int index, E element);
+E remove(int index);
+int indexOf(Object o);
+int lastIndexOf(Object o);
+ListIterator&lt;E&gt; listIterator();
+ListIterator&lt;E&gt; listIterator(int index);
+List&lt;E&gt; subList(int fromIndex, int toIndex);
+</code></pre><p>LinkedList自己的方法</p>
+<pre><code>void addFirst(E e);
+void addLast(E e);
+boolean offerFirst(E e);
+boolean offerLast(E e);
+E removeFirst();
+E removeLast();
+E pollFirst();
+E pollLast();
+E getFirst();
+E getLast();
+E peekFirst();
+E peekLast();
+boolean removeFirstOccurrence(Object o);
+boolean removeLastOccurrence(Object o);
+boolean add(E e);
+boolean offer(E e);
+E remove();
+E poll();
+E element();
+E peek();
+void push(E e);
+E pop();
+boolean remove(Object o);
+boolean contains(Object o);
+public int size();
+Iterator&lt;E&gt; iterator();
+Iterator&lt;E&gt; descendingIterator();
+</code></pre><p>总的来说，LinkedList里基本上都是这两个接口对应的方法<br>各个接口的实现，基本上都是比较正常的，这是不再重复描述</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;#容器的研究思路&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;为什么研究容器&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;容器是JDK里的基础功能，平时使用得较多。&lt;/li&gt;
-&lt;li&gt;容器相对简单，比较容易研究&lt;/li&gt;
-&lt;li&gt;已经有很多人对容器进行了研究，相关资料比较齐全&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-
+      &lt;h1 id=&quot;LinkedList浅析&quot;&gt;&lt;a href=&quot;#LinkedList浅析&quot; class=&quot;headerlink&quot; title=&quot;LinkedList浅析&quot;&gt;&lt;/a&gt;LinkedList浅析&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;LinkedList的作用及特点&lt;/li&gt;
+&lt;l
     
     </summary>
     
@@ -1031,21 +1110,55 @@
     
       <category term="容器" scheme="http://showstone.net/tags/%E5%AE%B9%E5%99%A8/"/>
     
+      <category term="LinkedList" scheme="http://showstone.net/tags/linkedlist/"/>
+    
   </entry>
   
   <entry>
-    <title>JUnit主线程退出时所有的子线程也会结束</title>
-    <link href="http://showstone.net/java/2017/03/07/java-2015-10-31-junit%E9%80%80%E5%87%BA%E6%97%B6%E6%89%80%E6%9C%89%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B9%9F%E4%BC%9A%E9%80%80%E5%87%BA/"/>
-    <id>http://showstone.net/java/2017/03/07/java-2015-10-31-junit退出时所有的子线程也会退出/</id>
+    <title>top命令详解</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-03-24-new-top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-03-24-new-top命令详解/</id>
     <published>2017-03-07T08:20:00.000Z</published>
     <updated>2017-03-07T08:20:00.000Z</updated>
     
+    <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.</p>
+<p>需要用到的工具有:<br>系统资源:top,sar,spotlight,nmon<br>网络:netstat,iostat,tcpdump,cpu,lsof,IPTraf,NetHogs,iftop<br>cpu:<br>内存:vmstat,free,<br>磁盘:iostat,iotop,  </p>
+<p>下面进行正题</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>top是一个用于查看系统信息的命令,包括cpu/内存等信息,以及进程的一些信息.</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code>top    [-a | -d | -e | -c &lt;mode&gt;]
+       [-F | -f]
+       [-h]
+       [-i &lt;interval&gt;]
+       [-l &lt;samples&gt;]
+       [-ncols &lt;columns&gt;]
+       [-o &lt;key&gt;] [-O &lt;skey&gt;]
+       [-R | -r]
+       [-S]
+       [-s &lt;delay&gt;]
+       [-n &lt;nprocs&gt;]
+       [-stats &lt;keys&gt;]
+       [-pid &lt;processid&gt;]
+       [-user &lt;username&gt;]
+       [-U &lt;username&gt;]
+       [-u]
+</code></pre><p>可以在监控界面进行一些操作,如h可以查看帮助,k可以杀死进程</p>
+]]></content>
+    
     <summary type="html">
+    
+      &lt;h2 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h2&gt;&lt;p&gt;最近学习压测的时候,需要用到一些监控工具.发现自己对于这些工具不熟,所以在这里进行一些补充学习.&lt;/p&gt;
+&lt;p&gt;需要用到的工具有:&lt;br&gt;系统资源:
     
     </summary>
     
-      <category term="Java" scheme="http://showstone.net/categories/java/"/>
+      <category term="software" scheme="http://showstone.net/categories/software/"/>
     
+    
+      <category term="software" scheme="http://showstone.net/tags/software/"/>
+    
+      <category term="linux" scheme="http://showstone.net/tags/linux/"/>
+    
+      <category term="top" scheme="http://showstone.net/tags/top/"/>
     
   </entry>
   
@@ -1101,30 +1214,40 @@
   </entry>
   
   <entry>
-    <title>rebase导致commit丢失</title>
-    <link href="http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase%E5%AF%BC%E8%87%B4commit%E4%B8%A2%E5%A4%B1/"/>
-    <id>http://showstone.net/software/2017/03/07/software-2015-08-18-new-rebase导致commit丢失/</id>
+    <title>实用git命令</title>
+    <link href="http://showstone.net/software/2017/03/07/software-2016-01-12-git%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://showstone.net/software/2017/03/07/software-2016-01-12-git实用命令/</id>
     <published>2017-03-07T08:20:00.000Z</published>
-    <updated>2018-05-19T11:15:48.000Z</updated>
+    <updated>2017-03-07T08:20:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>\工具<br>提交代码合并时,被告知有冲突,同事建议我用rebase来解决,可以保持提交历史的干净.然而我按他的建议进行操作之后,发现我的提交内容丢失了.很郁闷.以下是出错过程:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mkdir rebaselost</div><div class="line">cd rebaselost</div><div class="line">git init</div><div class="line">echo &quot;init content&quot;  a</div><div class="line">git commit -m &apos;init content&apos;</div><div class="line">git checkout -b branch1</div><div class="line">echo &quot;branch1 content&quot;  a</div><div class="line">git commit -m &apos;branch1&apos;</div><div class="line">git checkout master</div><div class="line">echo &quot;new master content&quot;  a</div><div class="line">git commit -m &apos;master content&apos;</div><div class="line">echo &quot;new master content2&quot;  a</div><div class="line">git commit -m &apos;master content2&apos;</div><div class="line">git checkout branch1</div><div class="line">git rebase master</div><div class="line">git rebase --skip</div></pre></td></tr></table></figure>
-<p>期望的结果是:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">new master content2  </div><div class="line">branch1 content</div></pre></td></tr></table></figure>
-<p>实际的结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new master content2</div></pre></td></tr></table></figure>
-<p><em> 问题出在 rebase里的 –skip 参数,加了这个参数后,原来的提交记录会丢失. </em></p>
-<p>要找回原来的提交记录,可以通过 git reflog 来查看所有的操作记录(包括被删除的commit记录),然后通过git checkout 来返回</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
-<p>操作结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fa0f628 HEAD@&#123;0&#125;: rebase: branch1    </div><div class="line">465b616 HEAD@&#123;1&#125;: rebase: checkout master    </div><div class="line">d0350f9 HEAD@&#123;2&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;3&#125;: checkout: moving from master to branch1</div><div class="line">465b616 HEAD@&#123;4&#125;: commit: new master status2  </div><div class="line">7f50104 HEAD@&#123;5&#125;: checkout: moving from d1fe9edd03c54d3b2fdfc0f7a9ea49a7459f5596 to master  </div><div class="line">d1fe9ed HEAD@&#123;6&#125;: rebase: branch1  </div><div class="line">7f50104 HEAD@&#123;7&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;8&#125;: checkout: moving from branch1 to d0350f9  </div><div class="line">7f50104 HEAD@&#123;9&#125;: rebase finished: returning to refs/heads/branch1  </div><div class="line">7f50104 HEAD@&#123;10&#125;: rebase: checkout master  </div><div class="line">d0350f9 HEAD@&#123;11&#125;: checkout: moving from master to branch1  </div><div class="line">7f50104 HEAD@&#123;12&#125;: commit: master content  </div><div class="line">4fe1cf4 HEAD@&#123;13&#125;: checkout: moving from branch1 to master  </div><div class="line">d0350f9 HEAD@&#123;14&#125;: commit: branch1  </div><div class="line">4fe1cf4 HEAD@&#123;15&#125;: checkout: moving from master to branch1  </div><div class="line">4fe1cf4 HEAD@&#123;16&#125;: commit (initial): init content</div></pre></td></tr></table></figure>
-<p>找回提交:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout d0350f9</div></pre></td></tr></table></figure></p>
-<p>要避免丢失,在冲突时编辑冲突即可</p>
+    <content type="html"><![CDATA[<ul>
+<li>删除远程没有,但本地依然存在的分支: git fetch -p origin<br>还可以解决以下报错: </li>
+</ul>
+<blockquote>
+<p> error: unable to delete ‘branch-name’: remote ref does not exist<br> error: 无法推送一些引用到 ‘git@gitserver:phplib’</p>
+</blockquote>
+<ul>
+<li>合并多次提交记录</li>
+</ul>
+<blockquote>
+<p> git rebase -i HEAD~2</p>
+</blockquote>
+<p>在合并提示里把需要的合并的提交改成squash,然后保存即可</p>
+<ul>
+<li>找回删除的分支</li>
+</ul>
+<blockquote>
+<p>git checkout new_branch_name commit_id</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      rebase操作不当导致commit丢失,rebase操作不当导致提交信息丢失
+      &lt;ul&gt;
+&lt;li&gt;删除远程没有,但本地依然存在的分支: git fetch -p origin&lt;br&gt;还可以解决以下报错: &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt; error: unable to delete ‘branch-name’: remote ref
     
     </summary>
     
@@ -1133,7 +1256,11 @@
     
       <category term="git" scheme="http://showstone.net/tags/git/"/>
     
-      <category term="rebase" scheme="http://showstone.net/tags/rebase/"/>
+      <category term="实用" scheme="http://showstone.net/tags/%E5%AE%9E%E7%94%A8/"/>
+    
+      <category term="命令" scheme="http://showstone.net/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="常用" scheme="http://showstone.net/tags/%E5%B8%B8%E7%94%A8/"/>
     
   </entry>
   
